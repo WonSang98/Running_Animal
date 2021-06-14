@@ -5,7 +5,31 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 68b57cc759112dd47986ac4335ac74d3
+  - enabled: 1
+    path: Assets/Scenes/Shop.unity
+    guid: 7883d92d870b0ea46892f12f8325d72a
+  - enabled: 1
+    path: Assets/Scenes/Character.unity
+    guid: bf9afe78d2d0ce74fb8518072f500cc0
+  - enabled: 1
+    path: Assets/Scenes/Mission.unity
+    guid: 1b26c48f25fe0014785519117cb6f160
+  - enabled: 1
+    path: Assets/Scenes/Option.unity
+    guid: 4d3b2e5f8b50e2f4dafd3bd94621d95d
+  - enabled: 1
+    path: Assets/Scenes/Play.unity
+    guid: eb8a759f3c9f1e04dacaa5dcff94ea77
+  - enabled: 1
+    path: Assets/Scenes/Select_Item.unity
+    guid: 578baa74cbe88ef4fb5059053d71a86e
+  - enabled: 1
+    path: Assets/Scenes/End_Game.unity
+    guid: bc6c6cbf163fd8f4eaa2d1ee6255e3c9
   m_configObjects: {}
