@@ -56,16 +56,19 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\DataManager1.cs" />
+    <Compile Include="Assets\Script\ScroolBackGround.cs" />
     <Compile Include="Assets\Script\LoadScene.cs" />
+    <Compile Include="Assets\Script\ShowInfo.cs" />
+    <Compile Include="Assets\Script\PlayerMove.cs" />
+    <Compile Include="Assets\Script\Character.cs" />
     <Compile Include="Assets\Script\SelectThme.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\Money.cs" />
-    <Compile Include="Assets\Script\DataManager.cs" />
-    <Compile Include="Assets\Script\ScroolBackGround.cs" />
-    <Compile Include="Assets\Script\PlayerMove.cs" />
-    <Compile Include="Assets\Script\Character.cs" />
     <Compile Include="Assets\Script\Skil.cs" />
-    <Compile Include="Assets\Script\DataManager1.cs" />
+    <Compile Include="Assets\Script\DataManager.cs" />
+    <Compile Include="Assets\Script\Data.cs" />
+    <Compile Include="Assets\Script\XmlManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -280,6 +283,9 @@
     </Reference>
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>D:\2020.3.10f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="LitJson">
+      <HintPath>Assets\Plugins\LitJson.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>

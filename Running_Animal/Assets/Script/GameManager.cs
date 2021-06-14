@@ -22,16 +22,61 @@ public class GameManager : MonoBehaviour
         };
         DontDestroyOnLoad(go);
         s_Instance = go.GetComponent<GameManager>();
+
     }
 
 
     void Awake()
     {
         Init();
+        string path = Application.persistentDataPath + "/save.xml";
+        if (System.IO.File.Exists(path)) {Load(); }
     }
 
     void Update()
     {
         
+    }
+
+    public void Save()
+    {
+        Data saveData = new Data();
+
+        saveData.Cash = Data.Cash;
+        saveData.Gold = Data.Gold;
+        saveData.Money_Forest = Data.Money_Forest;
+        saveData.Money_Desert = Data.Money_Desert;
+        saveData.Money_Arctic = Data.Money_Arctic;
+        saveData.Buy_Character = Data.Buy_Character;
+        saveData.Now_Character = Data.Now_Character;
+
+        string path = Application.persistentDataPath + "/save.xml";
+        XmlManager.XmlSave<Data>(saveData, path);
+
+        Debug.Log("SAVE!");
+        Debug.Log(path);
+    }
+
+    public void Load() 
+    {
+        Data saveData = new Data();
+        string path = Application.persistentDataPath + "/save.xml";
+        saveData = XmlManager.XmlLoad<Data>(path);
+
+        Data.Cash = saveData.Cash;
+        Data.Gold = saveData.Gold;
+        Data.Money_Forest = saveData.Money_Forest;
+        Data.Money_Desert = saveData.Money_Desert;
+        Data.Money_Arctic = saveData.Money_Arctic;
+        Data.Buy_Character = saveData.Buy_Character;
+        Data.Now_Character = saveData.Now_Character;
+
+        Debug.Log("LOAD!");
+
+    }
+
+    private void OnApplicationQuit()
+    {
+        Save();
     }
 }
