@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
         saveData.Money_Forest = Data.Money_Forest;
         saveData.Money_Desert = Data.Money_Desert;
         saveData.Money_Arctic = Data.Money_Arctic;
+        saveData.Theme = Data.Theme;
         saveData.Buy_Character = Data.Buy_Character;
         saveData.Now_Character = Data.Now_Character;
 
@@ -68,6 +69,7 @@ public class GameManager : MonoBehaviour
         Data.Money_Forest = saveData.Money_Forest;
         Data.Money_Desert = saveData.Money_Desert;
         Data.Money_Arctic = saveData.Money_Arctic;
+        Data.Theme = saveData.Theme;
         Data.Buy_Character = saveData.Buy_Character;
         Data.Now_Character = saveData.Now_Character;
 

@@ -14,29 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Plugins.meta
-    - Assets/Plugins/LitJson.dll
-    - Assets/Plugins/LitJson.dll.meta
-    - Assets/Scenes/Main.unity
-    - Assets/Script/GameManager.cs
-    - Assets/Script/ShowInfo.cs
-    - Assets/Script/ShowInfo.cs.meta
-    - Packages/AWSSDK.Core.3.7.0.32/AWSSDK.Core.3.7.0.32.nupkg
-    - Packages/AWSSDK.Core.3.7.0.32/lib/net35/AWSSDK.Core.dll
-    - Packages/AWSSDK.Core.3.7.0.32/lib/net35/AWSSDK.Core.pdb
-    - Packages/AWSSDK.Core.3.7.0.32/lib/net35/AWSSDK.Core.xml
-    - Packages/AWSSDK.Core.3.7.0.32/lib/net45/AWSSDK.Core.dll
-    - Packages/AWSSDK.Core.3.7.0.32/lib/net45/AWSSDK.Core.pdb
-    - Packages/AWSSDK.Core.3.7.0.32/lib/net45/AWSSDK.Core.xml
-    - Packages/AWSSDK.Core.3.7.0.32/lib/netcoreapp3.1/AWSSDK.Core.dll
-    - Packages/AWSSDK.Core.3.7.0.32/lib/netcoreapp3.1/AWSSDK.Core.pdb
-    - Packages/AWSSDK.Core.3.7.0.32/lib/netcoreapp3.1/AWSSDK.Core.xml
-    - Packages/AWSSDK.Core.3.7.0.32/lib/netstandard2.0/AWSSDK.Core.dll
-    - Packages/AWSSDK.Core.3.7.0.32/lib/netstandard2.0/AWSSDK.Core.pdb
-    - Packages/AWSSDK.Core.3.7.0.32/lib/netstandard2.0/AWSSDK.Core.xml
-    - Packages/AWSSDK.Core.3.7.0.32/tools/account-management.ps1
+    - Assets/Script/DataManager.cs
     - 
-    m_Values: 00000000000000000000000000000000000000000000
+    m_Values: 0101
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

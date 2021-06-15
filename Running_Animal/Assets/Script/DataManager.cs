@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[System.Serializable]
 public class DataManager 
 {
-    public enum Themes
+    public enum Themes // 게임 플레이 테마
     {
         Forest = 0,
         Desert,
         Arctic
     }
 
-    public enum Characters
+    public enum Characters // 캐릭터, enum값을 통해 prefeb instance화 할 예정.
     {
         One = 0,
         Two,

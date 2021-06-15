@@ -56,19 +56,20 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\MainManager.cs" />
     <Compile Include="Assets\Script\DataManager1.cs" />
     <Compile Include="Assets\Script\ScroolBackGround.cs" />
     <Compile Include="Assets\Script\LoadScene.cs" />
     <Compile Include="Assets\Script\ShowInfo.cs" />
     <Compile Include="Assets\Script\PlayerMove.cs" />
     <Compile Include="Assets\Script\Character.cs" />
-    <Compile Include="Assets\Script\SelectThme.cs" />
+    <Compile Include="Assets\Script\Data.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\Money.cs" />
+    <Compile Include="Assets\Script\XmlManager.cs" />
     <Compile Include="Assets\Script\Skil.cs" />
     <Compile Include="Assets\Script\DataManager.cs" />
-    <Compile Include="Assets\Script\Data.cs" />
-    <Compile Include="Assets\Script\XmlManager.cs" />
+    <Compile Include="Assets\Script\SelectCharacter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
