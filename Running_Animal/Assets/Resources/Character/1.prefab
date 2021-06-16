@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 251475881679367834}
   - component: {fileID: 7575092864310397076}
+  - component: {fileID: -2430104230774203059}
+  - component: {fileID: -6043894971371923857}
   m_Layer: 0
   m_Name: 1
   m_TagString: Untagged
@@ -82,3 +84,41 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2430104230774203059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2649558405237957321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c06beb03b02d4314ea44e9421a7f9680, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Max_Speed: 0
+  Max_Jump: 0
+  Plus_Gold: 0
+  init_Speed: 0
+  Lucky: 0
+--- !u!50 &-6043894971371923857
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2649558405237957321}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 10
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 2
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 5

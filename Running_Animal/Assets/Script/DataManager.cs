@@ -14,7 +14,8 @@ public class DataManager
     {
         One = 0,
         Two,
-        Three
+        Three,
+        Rabbit
     }
 
     // 재화 관리
@@ -26,6 +27,7 @@ public class DataManager
     // 테마 관리
     public Themes Theme = Themes.Forest;
     // 캐릭터 구매 관리
-    public bool[] Buy_Character = { true, false, false };
+    public bool[] Buy_Character = { true, false, false, false };
+    public int[] Cost_Character = { 500, 500, 500, 500 };
     public Characters Now_Character = Characters.One;
 }

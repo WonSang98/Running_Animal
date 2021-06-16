@@ -19,6 +19,7 @@ public class SelectCharacter : MonoBehaviour
         idx = (int)GameManager.Data.Now_Character;
         Show_Character = Instantiate(characters[idx]) as GameObject;
         Show_Character.transform.localPosition = Vector3.zero;
+        Show_Character.GetComponent<Rigidbody2D>().gravityScale = 0;
         show_info();
     }
 
@@ -33,6 +34,7 @@ public class SelectCharacter : MonoBehaviour
         Destroy(Show_Character);
         Show_Character = Instantiate(characters[idx]) as GameObject;
         Show_Character.transform.localPosition = Vector3.zero;
+        Show_Character.GetComponent<Rigidbody2D>().gravityScale = 0;
         show_info();
 
     }
@@ -44,6 +46,7 @@ public class SelectCharacter : MonoBehaviour
         Destroy(Show_Character);
         Show_Character = Instantiate(characters[idx]) as GameObject;
         Show_Character.transform.localPosition = Vector3.zero;
+        Show_Character.GetComponent<Rigidbody2D>().gravityScale = 0;
         show_info();
 
     }
@@ -55,15 +58,30 @@ public class SelectCharacter : MonoBehaviour
         if ((int)GameManager.Data.Now_Character == idx)
         {
             select = "이미쓰는중!";
+            GameObject.Find("UI").transform.Find("Button_Buy").gameObject.SetActive(false);
+            GameObject.Find("UI").transform.Find("Button_Select").gameObject.SetActive(true);
             GameObject.Find("UI/Button_Select").GetComponent<Button>().interactable = false;
+            GameObject.Find("UI/Button_Select/Text_Select").GetComponent<Text>().text = select;
 
         }
         else
         {
-            select = "사용할래!";
-            GameObject.Find("UI/Button_Select").GetComponent<Button>().interactable = true;
+            if(GameManager.Data.Buy_Character[idx] == true)
+            {
+                select = "사용할래!";
+                GameObject.Find("UI").transform.Find("Button_Buy").gameObject.SetActive(false);
+                GameObject.Find("UI").transform.Find("Button_Select").gameObject.SetActive(true);
+                GameObject.Find("UI/Button_Select").GetComponent<Button>().interactable = true;
+                GameObject.Find("UI/Button_Select/Text_Select").GetComponent<Text>().text = select;
+            }
+            else
+            {
+                Debug.Log("TTTTT");
+                GameObject.Find("UI").transform.Find("Button_Select").gameObject.SetActive(false);
+                GameObject.Find("UI").transform.Find("Button_Buy").gameObject.SetActive(true);
+                GameObject.Find("UI/Button_Buy/Text_Buy").GetComponent<Text>().text = "살래?";
+            }
         }
-        GameObject.Find("UI/Button_Select/Text_Select").GetComponent<Text>().text = select;
         
 
 
@@ -74,5 +92,21 @@ public class SelectCharacter : MonoBehaviour
 
         GameManager.Data.Now_Character = (DataManager.Characters)(idx);
         show_info();
+    }
+
+    public void buy()
+    {
+        if(GameManager.Data.Gold >= GameManager.Data.Cost_Character[idx])
+        {
+            GameManager.Data.Buy_Character[idx] = true;
+            GameManager.Data.Gold -= GameManager.Data.Cost_Character[idx];
+            GameObject.Find("UI").transform.Find("Button_Buy").gameObject.SetActive(false);
+            GameObject.Find("UI").transform.Find("Button_Select").gameObject.SetActive(true);
+            show_info();
+        }
+        else
+        {
+            GameObject.Find("UI/Button_Buy/Text_Buy").GetComponent<Text>().text = "사고싶어?";
+        }
     }
 }

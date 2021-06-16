@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         saveData.Money_Arctic = Data.Money_Arctic;
         saveData.Theme = Data.Theme;
         saveData.Buy_Character = Data.Buy_Character;
+        saveData.Cost_Character = Data.Cost_Character;
         saveData.Now_Character = Data.Now_Character;
 
         string path = Application.persistentDataPath + "/save.xml";
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
         Data.Money_Arctic = saveData.Money_Arctic;
         Data.Theme = saveData.Theme;
         Data.Buy_Character = saveData.Buy_Character;
+        Data.Cost_Character = saveData.Cost_Character;
         Data.Now_Character = saveData.Now_Character;
 
         Debug.Log("LOAD!");

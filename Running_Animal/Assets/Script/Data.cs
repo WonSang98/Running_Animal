@@ -14,6 +14,7 @@ public class Data
     // 테마 관리
     public DataManager.Themes Theme = DataManager.Themes.Forest;
     // 캐릭터 구매 관리
-    public bool[] Buy_Character = { false, false, false };
+    public bool[] Buy_Character = { false, false, false, false };
+    public int[] Cost_Character = { 500, 500, 500, 500 };
     public DataManager.Characters Now_Character = DataManager.Characters.One;
 }
