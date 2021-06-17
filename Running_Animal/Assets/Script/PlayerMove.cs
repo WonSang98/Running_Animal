@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
 {
     public float jump; // Jump Value
     public float down;
+    public float speed;
     // 아래의 변수 값은 GameManager에서 받아온다.
     // GameManager.Instance.Player 
     int Max_Jump; // 플레이어의 최대 가능 점프 횟수
@@ -24,7 +25,7 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        transform.Translate(-1 * speed * Time.deltaTime, 0, 0);
     }
 
     public void Jump()

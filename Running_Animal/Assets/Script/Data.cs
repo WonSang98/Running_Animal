@@ -17,4 +17,8 @@ public class Data
     public bool[] Buy_Character = { false, false, false, false };
     public int[] Cost_Character = { 500, 500, 500, 500 };
     public DataManager.Characters Now_Character = DataManager.Characters.One;
+
+    // 게임 플레이 관리
+    public DataManager.Active_Skil active = DataManager.Active_Skil.Defense;
+    public float speed = 8.0f;
 }

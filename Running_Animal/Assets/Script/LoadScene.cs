@@ -24,5 +24,8 @@ public class LoadScene : MonoBehaviour
     {
         SceneManager.LoadScene("Play");
     }
-
+    public void OnMain()
+    {
+        SceneManager.LoadScene("Main");
+    }
 }

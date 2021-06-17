@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScroolBackGround : MonoBehaviour
 {
     GameObject player;
-    public float speed = 1.0f;
+    public float speed;
     public float startPosition;
     public float endPosition;
 

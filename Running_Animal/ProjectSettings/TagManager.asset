@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tile
+  - Shield
+  - ActiveSkil
+  - God
   layers:
   - Default
   - TransparentFX
@@ -50,4 +53,7 @@ TagManager:
     locked: 0
   - name: Character
     uniqueID: 2861635991
+    locked: 0
+  - name: Skil
+    uniqueID: 3740690245
     locked: 0

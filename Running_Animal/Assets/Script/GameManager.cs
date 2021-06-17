@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour
         saveData.Buy_Character = Data.Buy_Character;
         saveData.Cost_Character = Data.Cost_Character;
         saveData.Now_Character = Data.Now_Character;
+        saveData.active = Data.active;
+        saveData.speed = Data.speed;
 
         string path = Application.persistentDataPath + "/save.xml";
         XmlManager.XmlSave<Data>(saveData, path);
@@ -74,6 +76,8 @@ public class GameManager : MonoBehaviour
         Data.Buy_Character = saveData.Buy_Character;
         Data.Cost_Character = saveData.Cost_Character;
         Data.Now_Character = saveData.Now_Character;
+        Data.active = saveData.active;
+        Data.speed = saveData.speed;
 
         Debug.Log("LOAD!");
 

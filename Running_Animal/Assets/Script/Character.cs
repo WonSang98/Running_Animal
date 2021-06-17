@@ -9,6 +9,7 @@ public class Character : MonoBehaviour
     public int Plus_Gold; // 테마별 골드 추가 수금
     public float init_Speed; // 캐릭터 초기속도
     public float Lucky; // 캐릭터 운빨
+
     
     public Character(float _max_speed, int _max_jump, int _plus_gold, float _Lucky, float _init_Speed = 8.0f)
     {

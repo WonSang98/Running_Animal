@@ -14,16 +14,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Resources/Character/0.prefab
-    - Assets/Resources/Character/1.prefab
-    - Assets/Resources/Character/2.prefab
-    - Assets/Resources/Character/3.prefab
-    - Assets/Resources/Character/3.prefab.meta
+    - Assets/Prefabs.meta
+    - Assets/Prefabs/Active_Skil.meta
+    - Assets/Resources/Active_Buttons.meta
+    - Assets/Resources/Active_Buttons/0.png
+    - Assets/Resources/Active_Buttons/0.png.meta
+    - Assets/Resources/Active_Buttons/1.png
+    - Assets/Resources/Active_Buttons/1.png.meta
+    - Assets/Resources/Active_Buttons/2.png
+    - Assets/Resources/Active_Buttons/2.png.meta
+    - Assets/Resources/Active_Skils.meta
+    - Assets/Resources/Active_Skils/0.prefab
+    - Assets/Resources/Active_Skils/0.prefab.meta
+    - Assets/Resources/Active_Skils/1.prefab
+    - Assets/Resources/Active_Skils/1.prefab.meta
+    - Assets/Resources/Active_Skils/2.prefab
+    - Assets/Resources/Active_Skils/2.prefab.meta
+    - Assets/Resources/Animation.meta
+    - Assets/Resources/Animation/Character.meta
+    - Assets/Resources/Animation/Character/Rabbit.meta
+    - Assets/Resources/Animation/Character/Rabbit/Attacked.anim
+    - Assets/Resources/Animation/Character/Rabbit/Attacked.anim.meta
+    - Assets/Resources/Animation/Character/Rabbit/Die.anim
+    - Assets/Resources/Animation/Character/Rabbit/Die.anim.meta
+    - Assets/Resources/Animation/Character/Rabbit/Down.anim
+    - Assets/Resources/Animation/Character/Rabbit/Down.anim.meta
+    - Assets/Resources/Animation/Character/Rabbit/Idle.anim
+    - Assets/Resources/Animation/Character/Rabbit/Idle.anim.meta
+    - Assets/Resources/Animation/Character/Rabbit/Jump.anim
+    - Assets/Resources/Animation/Character/Rabbit/Jump.anim.meta
+    - Assets/Resources/Animation/Character/Rabbit/Running.anim
+    - Assets/Resources/Animation/Character/Rabbit/Running.anim.meta
+    - Assets/Resources/Animation/Player 1.controller
+    - Assets/Resources/Animation/Player 1.controller.meta
+    - Assets/Resources/Image/Skil.meta
+    - Assets/Resources/Image/Skil/2.png
+    - Assets/Resources/Image/Skil/2.png.meta
+    - Assets/Resources/Square.prefab
+    - Assets/Resources/Square.prefab.meta
+    - Assets/Scenes/Character.unity
+    - Assets/Scenes/Mission.unity
+    - Assets/Scenes/Option.unity
     - Assets/Scenes/Play.unity
+    - Assets/Scenes/Shop.unity
     - Assets/Script/Character.cs
+    - Assets/Script/Data.cs
     - Assets/Script/DataManager.cs
+    - Assets/Script/GameManager.cs
+    - Assets/Script/LoadScene.cs
+    - Assets/Script/PlayerMove.cs
+    - Assets/Script/ScroolBackGround.cs
+    - Assets/Script/SkilManager.cs
+    - Assets/Script/SkilManager.cs.meta
+    - ProjectSettings/TagManager.asset
     - 
-    m_Values: 000000000000000000
+    m_Values: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
