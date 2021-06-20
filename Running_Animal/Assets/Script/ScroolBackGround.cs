@@ -11,7 +11,7 @@ public class ScroolBackGround : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player");
+        player = Resources.Load<GameObject>("Character/" + ((int)GameManager.Data.Now_Character).ToString());
         speed = player.GetComponent<Character>().init_Speed;
 
     }

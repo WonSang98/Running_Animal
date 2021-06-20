@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\MainManager.cs" />
-    <Compile Include="Assets\Script\DataManager1.cs" />
+    <Compile Include="Assets\Script\SelectSkil.cs" />
     <Compile Include="Assets\Script\ScroolBackGround.cs" />
     <Compile Include="Assets\Script\LoadScene.cs" />
     <Compile Include="Assets\Script\ShowInfo.cs" />
@@ -70,6 +70,7 @@
     <Compile Include="Assets\Script\SelectCharacter.cs" />
     <Compile Include="Assets\Script\SkilManager.cs" />
     <Compile Include="Assets\Script\DataManager.cs" />
+    <Compile Include="Assets\Script\SpawnPlayer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

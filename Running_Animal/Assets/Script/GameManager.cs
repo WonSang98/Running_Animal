@@ -53,6 +53,10 @@ public class GameManager : MonoBehaviour
         saveData.Now_Character = Data.Now_Character;
         saveData.active = Data.active;
         saveData.speed = Data.speed;
+        saveData.jump = Data.jump;
+        saveData.down = Data.down;
+        saveData.hp = Data.hp;
+
 
         string path = Application.persistentDataPath + "/save.xml";
         XmlManager.XmlSave<Data>(saveData, path);
@@ -78,6 +82,9 @@ public class GameManager : MonoBehaviour
         Data.Now_Character = saveData.Now_Character;
         Data.active = saveData.active;
         Data.speed = saveData.speed;
+        Data.jump = saveData.jump;
+        Data.down = saveData.down;
+        Data.hp = saveData.hp;
 
         Debug.Log("LOAD!");
 

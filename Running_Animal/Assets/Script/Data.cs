@@ -7,7 +7,7 @@ public class Data
 {
     // 재화 관리
     public int Cash = 100; // 캐쉬 재화
-    public int Gold = 100; // 인게임 재화
+    public int Gold = 10000; // 인게임 재화
     public int Money_Forest = 10; // 숲 테마 재화
     public int Money_Desert = 10; // 숲 테마 재화
     public int Money_Arctic = 10; // 숲 테마 재화
@@ -20,5 +20,8 @@ public class Data
 
     // 게임 플레이 관리
     public DataManager.Active_Skil active = DataManager.Active_Skil.Defense;
+    public float hp = 100.0f;
     public float speed = 8.0f;
+    public float jump = 10.0f;
+    public float down = 20.0f;
 }
