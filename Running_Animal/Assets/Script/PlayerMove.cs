@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -22,23 +23,26 @@ public class PlayerMove : MonoBehaviour
 
     void Awake()
     {
-        event_jump = GameObject.Find("UI/Button_Jump").GetComponent<EventTrigger>();
-        event_down = GameObject.Find("UI/Button_Down").GetComponent<EventTrigger>();
+        if (SceneManager.GetActiveScene().name == "Play")
+        {
+            event_jump = GameObject.Find("UI/Button_Jump").GetComponent<EventTrigger>();
+            event_down = GameObject.Find("UI/Button_Down").GetComponent<EventTrigger>();
 
-        EventTrigger.Entry entry_Jump = new EventTrigger.Entry();
-        entry_Jump.eventID = EventTriggerType.PointerDown;
-        entry_Jump.callback.AddListener((data) => { OnJump((PointerEventData)data); });
-        event_jump.triggers.Add(entry_Jump);
+            EventTrigger.Entry entry_Jump = new EventTrigger.Entry();
+            entry_Jump.eventID = EventTriggerType.PointerDown;
+            entry_Jump.callback.AddListener((data) => { OnJump((PointerEventData)data); });
+            event_jump.triggers.Add(entry_Jump);
 
-        EventTrigger.Entry entry_Down = new EventTrigger.Entry();
-        entry_Down.eventID = EventTriggerType.PointerDown;
-        entry_Down.callback.AddListener((data) => { OnDown((PointerEventData)data); });
-        event_down.triggers.Add(entry_Down);
-        // Temp識情
-        Max_Jump = 2;
-        Use_Jump = 0;
-        jump = 10.0f;
-        down = 20.0f;
+            EventTrigger.Entry entry_Down = new EventTrigger.Entry();
+            entry_Down.eventID = EventTriggerType.PointerDown;
+            entry_Down.callback.AddListener((data) => { OnDown((PointerEventData)data); });
+            event_down.triggers.Add(entry_Down);
+            // Temp識情
+            Max_Jump = 2;
+            Use_Jump = 0;
+            jump = 10.0f;
+            down = 20.0f;
+        }
     }
 
     // Update is called once per frame

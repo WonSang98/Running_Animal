@@ -26,12 +26,73 @@ public class DataManager
         Ghost, // 일정 시간 유체화 (Player colider를 끄고 일정시간 이후 다시 키기 Invoke  사용)
     }
 
-    public enum Passive_Skil // 패시브 스킬 목록
+    public enum Skil_Prologue // 패시브 스킬 서장
     {
-        None = 0,
-        Speed_Up,
-        Hp_UP,
-        Jump_Up
+        Active_Cool_Down = 0, //액티브 아이템 시간 단축
+        Jump_Up, // 점프 높이 증가
+        Jump_Down, // 점프 높이 감소
+        Down_Up, // 떨어지는 속도 증가
+        Down_Down, // 떨어지는 속도 감소
+        Speed_Up, // 속도증가
+        Speed_Down, // 속도감소
+        Damage_Down, // 피격 데미지 감소
+        Luck_Up, // 행운 상승
+        Score_Up, // 점수 획득량 추가
+        Money_UP, // 골드 획득량 추가
+
+    }
+    public enum Skil_Middle // 패시브 스킬 중장
+    {
+        Active_Cool_Down = 0, //액티브 아이템 시간 단축
+        Jump_Up, // 점프 높이 증가
+        Jump_Down, // 점프 높이 감소
+        Down_Up, // 떨어지는 속도 증가
+        Down_Down, // 떨어지는 속도 감소
+        Speed_Up, // 속도증가
+        Speed_Down, // 속도감소
+        Damage_Down, // 피격 데미지 감소
+        Luck_Up, // 행운 상승
+        Score_Up, // 점수 획득량 추가
+        Money_UP, // 골드 획득량 추가
+    }
+    public enum Skil_Final // 패시브 스킬 종장
+    {
+        Active_Cool_Down = 0, //액티브 아이템 시간 단축
+        Jump_Up, // 점프 높이 증가
+        Jump_Down, // 점프 높이 감소
+        Down_Up, // 떨어지는 속도 증가
+        Down_Down, // 떨어지는 속도 감소
+        Speed_Up, // 속도증가
+        Speed_Down, // 속도감소
+        Damage_Down, // 피격 데미지 감소
+        Luck_Up, // 행운 상승
+        Score_Up, // 점수 획득량 추가
+        Money_UP, // 골드 획득량 추가
+    }
+
+    public enum Skil_Book // 패시브 스킬 종장
+    {
+        Active_Cool_Down = 0, //액티브 아이템 시간 단축
+        Jump_Up, // 점프 높이 증가
+        Jump_Down, // 점프 높이 감소
+        Down_Up, // 떨어지는 속도 증가
+        Down_Down, // 떨어지는 속도 감소
+        Speed_Up, // 속도증가
+        Speed_Down, // 속도감소
+        Damage_Down, // 피격 데미지 감소
+        Luck_Up, // 행운 상승
+        Score_Up, // 점수 획득량 추가
+        Money_UP, // 골드 획득량 추가
+    }
+
+    public enum Skil_Scroll //패시브 스킬 두루마리
+    {
+        Revive = 0, // 사망 시 1회 부활
+        Auto_Jump, // 자동 점프 
+        Auto_Active, // 액티브 자동 사용
+        Shield_Active, // 액티브 사용 시 보호막 획득
+        God_Active, // 액티브 사용 시 일정시간 무적
+        Magnet // 자석
     }
 
 
