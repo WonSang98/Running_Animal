@@ -24,4 +24,5 @@ public class Data
     public float speed = 8.0f;
     public float jump = 10.0f;
     public float down = 20.0f;
+    public float damage = 20.0f;
 }

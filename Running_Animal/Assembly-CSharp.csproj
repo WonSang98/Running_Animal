@@ -71,6 +71,10 @@
     <Compile Include="Assets\Script\SelectCharacter.cs" />
     <Compile Include="Assets\Script\SkilManager.cs" />
     <Compile Include="Assets\Script\DataManager.cs" />
+    <Compile Include="Assets\Script\Trap.cs" />
+    <Compile Include="Assets\Script\MoveTrap.cs" />
+    <Compile Include="Assets\Script\MoveTrap_y.cs" />
+    <Compile Include="Assets\Script\MoveTrap_rotate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

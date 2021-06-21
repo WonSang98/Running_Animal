@@ -27,7 +27,7 @@ public class SkilManager : MonoBehaviour
         Show_Button.GetComponent<Image>().sprite = active_buttons[idx];
 
         //test
-        prf = Resources.Load<GameObject>("Square");
+        prf = Resources.Load<GameObject>("Item/Square");
         Instantiate(prf, GameObject.Find("BackGround").transform);
     }
 

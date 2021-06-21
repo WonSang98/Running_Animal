@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
         saveData.jump = Data.jump;
         saveData.down = Data.down;
         saveData.hp = Data.hp;
+        saveData.damage = Data.damage;
 
 
         string path = Application.persistentDataPath + "/save.xml";
@@ -85,6 +86,7 @@ public class GameManager : MonoBehaviour
         Data.jump = saveData.jump;
         Data.down = saveData.down;
         Data.hp = saveData.hp;
+        Data.damage = saveData.damage;
 
         Debug.Log("LOAD!");
 

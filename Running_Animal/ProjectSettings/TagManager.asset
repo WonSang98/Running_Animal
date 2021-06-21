@@ -8,6 +8,10 @@ TagManager:
   - Shield
   - ActiveSkil
   - God
+  - Trap_Blood
+  - Trap
+  - Trap_Stun
+  - Jump
   layers:
   - Default
   - TransparentFX
@@ -48,12 +52,18 @@ TagManager:
   - name: BackGround
     uniqueID: 3372013999
     locked: 0
+  - name: Skil
+    uniqueID: 3740690245
+    locked: 0
+  - name: Trap_OffTile
+    uniqueID: 3389244869
+    locked: 0
   - name: Tile
     uniqueID: 1601199031
     locked: 0
+  - name: Trap_OnTile
+    uniqueID: 1595912939
+    locked: 0
   - name: Character
     uniqueID: 2861635991
-    locked: 0
-  - name: Skil
-    uniqueID: 3740690245
     locked: 0
