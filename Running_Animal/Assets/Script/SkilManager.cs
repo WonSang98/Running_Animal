@@ -14,9 +14,6 @@ public class SkilManager : MonoBehaviour
     GameObject player;
     int idx; // now_skil_idx;
 
-    //test
-    GameObject prf;
-
     void Start()
     {
         player = GameObject.Find("Player");
@@ -26,9 +23,6 @@ public class SkilManager : MonoBehaviour
         Show_Button = GameObject.Find("UI/Button_Skil");
         Show_Button.GetComponent<Image>().sprite = active_buttons[idx];
 
-        //test
-        prf = Resources.Load<GameObject>("Item/Square");
-        Instantiate(prf, GameObject.Find("BackGround").transform);
     }
 
     public void Use_Skil()
@@ -61,8 +55,12 @@ public class SkilManager : MonoBehaviour
 
     public void OffDefense()
     {
-        player.tag = "Player";
-        player.transform.Find("1").gameObject.SetActive(false);
+        if (player.CompareTag("Shield"))
+        {
+            player.tag = "Player";
+            player.transform.Find("1").gameObject.SetActive(false);
+
+        }
     }
 
     // Skil Code : 2 Flash

@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour
     {
         Init();
         string path = Application.persistentDataPath + "/save.xml";
-        if (System.IO.File.Exists(path)) {Load(); }
+        if (System.IO.File.Exists(path)) {
+            Debug.Log("아아...소환되었따");
+            Load(); }
     }
 
     void Update()
@@ -51,13 +53,18 @@ public class GameManager : MonoBehaviour
         saveData.Buy_Character = Data.Buy_Character;
         saveData.Cost_Character = Data.Cost_Character;
         saveData.Now_Character = Data.Now_Character;
+        saveData.play_gold = Data.play_gold;
         saveData.active = Data.active;
         saveData.speed = Data.speed;
         saveData.jump = Data.jump;
         saveData.down = Data.down;
+        saveData.max_hp = Data.max_hp;
         saveData.hp = Data.hp;
         saveData.damage = Data.damage;
-
+        saveData.EXP = Data.EXP;
+        saveData.now_Exp = Data.now_Exp;
+        saveData.lv = Data.lv;
+        saveData.lvup = Data.lvup;
 
         string path = Application.persistentDataPath + "/save.xml";
         XmlManager.XmlSave<Data>(saveData, path);
@@ -81,13 +88,18 @@ public class GameManager : MonoBehaviour
         Data.Buy_Character = saveData.Buy_Character;
         Data.Cost_Character = saveData.Cost_Character;
         Data.Now_Character = saveData.Now_Character;
+        Data.play_gold = saveData.play_gold;
         Data.active = saveData.active;
         Data.speed = saveData.speed;
         Data.jump = saveData.jump;
         Data.down = saveData.down;
+        Data.max_hp = saveData.max_hp;
         Data.hp = saveData.hp;
         Data.damage = saveData.damage;
-
+        Data.EXP = saveData.EXP;
+        Data.now_Exp = saveData.now_Exp;
+        Data.lv = saveData.lv;
+        Data.lvup = saveData.lvup;
         Debug.Log("LOAD!");
 
     }

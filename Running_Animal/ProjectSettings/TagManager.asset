@@ -12,6 +12,10 @@ TagManager:
   - Trap
   - Trap_Stun
   - Jump
+  - Jump2
+  - Coin
+  - HP
+  - LevelUp
   layers:
   - Default
   - TransparentFX

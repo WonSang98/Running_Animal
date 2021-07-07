@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class ScroolBackGround : MonoBehaviour
 {
-    GameObject player;
-    public float speed;
     public float startPosition;
     public float endPosition;
+    public float speed;
 
     void Start()
     {
-        player = Resources.Load<GameObject>("Character/" + ((int)GameManager.Data.Now_Character).ToString());
-        speed = player.GetComponent<Character>().init_Speed;
-
+        speed = GameManager.Data.speed;
     }
 
     void Update()
     {
-        transform.Translate(-1 * speed *Time.deltaTime, 0 , 0);
+        transform.Translate(-1 * speed * Time.deltaTime, 0, 0) ;
         if(transform.position.x <= endPosition) { transform.Translate(-1 * (endPosition - startPosition), 0, 0); }
     }
 }

@@ -110,12 +110,19 @@ public class DataManager
     public Characters Now_Character = Characters.One;
 
     // 게임 플레이 관리
+    public int[] EXP = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22 }; //레벨
+    public bool lvup;
+    public int lv = 0;
+    public int now_Exp = 0;
     public Active_Skil active = Active_Skil.Defense;
+    public int play_gold = 0; // 게임 중 얻은 골드
+    public float max_hp = 100.0f;
     public float hp = 100.0f;
     public float speed = 8.0f;
     public float jump = 10.0f;
     public float down = 20.0f;
     public float damage = 20.0f;
+
 
 
 }

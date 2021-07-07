@@ -36,6 +36,7 @@ public class SelectSkil : MonoBehaviour
 
     void Start()
     {
+        GameManager.Instance.Load();
         ui = GameObject.Find("UI");
         Skil_Box[0] = GameObject.Find("UI/Button_Item0");
         Skil_Box[1] = GameObject.Find("UI/Button_Item1");

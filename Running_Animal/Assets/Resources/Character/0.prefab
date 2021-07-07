@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -4409521353737636927}
   m_Layer: 0
   m_Name: 0
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -142,8 +142,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.073497295}
-  m_Size: {x: 0.9999999, y: 1.8529985}
+  m_Offset: {x: 0.000000041629168, y: 0.1732625}
+  m_Size: {x: 0.8958963, y: 1.549363}
   m_Direction: 0
 --- !u!114 &5319859702518536545
 MonoBehaviour:
@@ -173,7 +173,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.022780985, y: -0.8834199}
+  m_Offset: {x: -0.03579396, y: -0.7576285}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -184,7 +184,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7721898, y: 0.23316026}
+  m_Size: {x: 1.1972784, y: 0.484743}
   m_EdgeRadius: 0
 --- !u!1001 &418098133180688355
 PrefabInstance:

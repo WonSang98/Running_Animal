@@ -57,24 +57,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\MainManager.cs" />
+    <Compile Include="Assets\Script\MoveTrap_y.cs" />
     <Compile Include="Assets\Script\SelectSkil.cs" />
     <Compile Include="Assets\Script\ScroolBackGround.cs" />
     <Compile Include="Assets\Script\LoadScene.cs" />
     <Compile Include="Assets\Script\ShowInfo.cs" />
+    <Compile Include="Assets\Script\MoveTrap_rotate.cs" />
     <Compile Include="Assets\Script\PlayerMove.cs" />
     <Compile Include="Assets\Script\Character.cs" />
+    <Compile Include="Assets\Script\MoveTrap.cs" />
     <Compile Include="Assets\Script\SpawnPlayer.cs" />
     <Compile Include="Assets\Script\Data.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
     <Compile Include="Assets\Script\Money.cs" />
+    <Compile Include="Assets\Script\Trap.cs" />
     <Compile Include="Assets\Script\XmlManager.cs" />
     <Compile Include="Assets\Script\SelectCharacter.cs" />
     <Compile Include="Assets\Script\SkilManager.cs" />
     <Compile Include="Assets\Script\DataManager.cs" />
-    <Compile Include="Assets\Script\Trap.cs" />
-    <Compile Include="Assets\Script\MoveTrap.cs" />
-    <Compile Include="Assets\Script\MoveTrap_y.cs" />
-    <Compile Include="Assets\Script\MoveTrap_rotate.cs" />
+    <Compile Include="Assets\Script\PlayManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
