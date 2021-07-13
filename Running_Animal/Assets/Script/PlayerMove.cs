@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
-    SkilManager sm;
+    //SkilManager sm;
     EventTrigger.Entry entry_Jump;
     EventTrigger.Entry entry_Down;
     EventTrigger event_jump;
@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour
     Button button_down;
 
 
-    GameObject jump2;
+    //GameObject jump2;
 
     public float jump; // Jump Value
     public float down;
@@ -29,6 +29,7 @@ public class PlayerMove : MonoBehaviour
 
     Text player_hp;
     Text get_coin;
+    Text Level;
 
     Color player_opacity; // 플레이어 투명도, 피격 후 깜박이기 위해 사용
 
@@ -42,6 +43,7 @@ public class PlayerMove : MonoBehaviour
 
             player_hp = GameObject.Find("UI/HP").GetComponent<Text>();
             get_coin = GameObject.Find("UI/Gold").GetComponent<Text>();
+            Level = GameObject.Find("UI/LV").GetComponent<Text>();
             get_coin.text = $"{GameManager.Data.play_gold}";
             event_jump = GameObject.Find("UI/Button_Jump").GetComponent<EventTrigger>();
             event_down = GameObject.Find("UI/Button_Down").GetComponent<EventTrigger>();
@@ -72,6 +74,7 @@ public class PlayerMove : MonoBehaviour
         {
             transform.Translate(-1 * speed * Time.deltaTime, 0, 0);
             player_hp.text = $"{GameManager.Data.hp}";
+            Level.text = $"Lv : {GameManager.Data.lv} EXP : {GameManager.Data.now_Exp} / {GameManager.Data.EXP[GameManager.Data.lv]}";
         }
             
 
@@ -81,6 +84,8 @@ public class PlayerMove : MonoBehaviour
             GameManager.Data.Gold += GameManager.Data.play_gold;
             GameManager.Data.play_gold = 0;
             GameManager.Data.speed = 8.0f; // 임시 !! 추후 캐릭터 속도로 받아 적용하도록 수정예정.
+            GameManager.Data.lv = 0;
+            GameManager.Data.now_Exp = 0;
             GameManager.Instance.Save();
             SceneManager.LoadScene("End_Game");
             GameManager.Instance.Load();

@@ -110,7 +110,7 @@ public class DataManager
     public Characters Now_Character = Characters.One;
 
     // 게임 플레이 관리
-    public int[] EXP = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22 }; //레벨
+    public int[] EXP = { 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 99999999 }; //레벨
     public bool lvup;
     public int lv = 0;
     public int now_Exp = 0;

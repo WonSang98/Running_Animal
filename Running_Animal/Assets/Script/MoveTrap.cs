@@ -18,13 +18,13 @@ public class MoveTrap : MonoBehaviour
     void Update()
     {
         transform.Translate(-1 * (speed + more_speed) * Time.deltaTime, 0, 0);
-        if (transform.position.x <= -26)
+        if (transform.position.x <= -10)
         {
             Destroy(gameObject);
             if (GameManager.Data.lv != 12)
             {
                 GameManager.Data.now_Exp += 1;
-                if (GameManager.Data.now_Exp == GameManager.Data.EXP[GameManager.Data.lv])
+                if (GameManager.Data.now_Exp >= GameManager.Data.EXP[GameManager.Data.lv])
                 {
                     GameManager.Data.lvup = true;
                 }

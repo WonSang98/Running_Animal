@@ -20,7 +20,7 @@ public class Data
 
     // 게임 플레이 관리
     public DataManager.Active_Skil active = DataManager.Active_Skil.Defense;
-    public int[] EXP = { 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22 }; //레벨업 시 필요 경험치
+    public int[] EXP = { 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 99999999 }; //레벨업 시 필요 경험치
     public bool lvup; // 레벨업 여부, true일 시 다음 장애물은 레벨업하는 장소로.
     public int lv = 0; // 현재 레벨 최대 0~12렙까지
     public int now_Exp = 0; // 현재 경험치 

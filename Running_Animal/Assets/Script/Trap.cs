@@ -60,13 +60,14 @@ public class Trap : MonoBehaviour
                 LevelUP();
             }
             else 
-            { 
-            Invoke("pattern" + idx.ToString(), 0);
-            idx++;
+            {
+                //Invoke("pattern" + idx.ToString(), 0);
+                Invoke("pattern19", 0);
+                idx++;
             }
         }
 
-        if (idx == 9)
+        if (idx == 10)
         {
             idx = 0;
             GameManager.Data.speed += 0.2f;
@@ -226,9 +227,9 @@ public class Trap : MonoBehaviour
     void pattern0() // °õµ£ »ý¼º
     {
         //trap »ý¼º
-        MakeTrap(0, new Vector3(36, -3.55f, 0));
-        MakeTrap(0, new Vector3(29, -3.55f, 0));
-        MakeTrap(0, new Vector3(22, -3.55f, 0));
+        MakeTrap(0, new Vector3(36, -3.36f, 0));
+        MakeTrap(0, new Vector3(29, -3.36f, 0));
+        MakeTrap(0, new Vector3(22, -3.36f, 0));
         // coint »ý¼º
         MakeCoin(new Vector3(11, -2.82f ,0));
         MakeCoin(new Vector3(13, -2.82f, 0));
@@ -246,23 +247,23 @@ public class Trap : MonoBehaviour
 
     void pattern1() // µÎ´õÁö »ý¼º
     {
-        MakeTrap(1, new Vector3(36, -3.66f, 0));
-        MakeTrap(1, new Vector3(30, -3.66f, 0));
-        MakeTrap(1, new Vector3(24, -3.66f, 0));
+        MakeTrap(1, new Vector3(36, -3.35f, 0));
+        MakeTrap(1, new Vector3(28, -3.35f, 0));
+        MakeTrap(1, new Vector3(20, -3.35f, 0));
     }
 
     void pattern2() // ³ª¹« »ý¼º
     {
-        MakeTrap(2, new Vector3(36, -2.6f, 0));
-        MakeTrap(2, new Vector3(30, -2.6f, 0));
-        MakeTrap(2, new Vector3(24, -2.6f, 0));
+        MakeTrap(2, new Vector3(36, -2.97f, 0));
+        MakeTrap(2, new Vector3(28, -2.97f, 0));
+        MakeTrap(2, new Vector3(20, -2.97f, 0));
     }
 
     void pattern3() // ¹Ù³ª³ª »ý¼º
     {
-        MakeTrap(3, new Vector3(36, -3.33f, 0));
-        MakeTrap(3, new Vector3(30, -3.33f, 0));
-        MakeTrap(3, new Vector3(24, -3.33f, 0));
+        MakeTrap(3, new Vector3(36, -3.16f, 0));
+        MakeTrap(3, new Vector3(28, -3.16f, 0));
+        MakeTrap(3, new Vector3(20, -3.16f, 0));
     }
 
     void pattern4() // ¹öµå½ºÆ®¶óÀÌÅ© »ý¼º
@@ -277,24 +278,130 @@ public class Trap : MonoBehaviour
 
     void pattern6() // ¸ó½ºÅÍ »ý¼º
     {
-        MakeTrap(6, new Vector3(36, -2.74f, 0));
-        MakeTrap(6, new Vector3(30, -2.74f, 0));
-        MakeTrap(6, new Vector3(24, -2.74f, 0));
+        MakeTrap(6, new Vector3(36, -2.85f, 0));
+        MakeTrap(6, new Vector3(28, -2.85f, 0));
+        MakeTrap(6, new Vector3(20, -2.85f, 0));
     }
 
     void pattern7() // µ¹¶¯ÀÌ »ý¼º
     {
-        MakeTrap(7, new Vector3(32, 1.6f, 0));
-        MakeTrap(7, new Vector3(18, 1.6f, 0));
+        MakeTrap(7, new Vector3(36, 5.7f, 0));
+        MakeTrap(7, new Vector3(21, 5.7f, 0));
     }
 
     void pattern8() // ²Ü¹ú »ý¼º
     {
-        MakeTrap(8, new Vector3(30, -0.5f, 0));
+        MakeTrap(8, new Vector3(36, 1.07f, 0));
+        MakeTrap(8, new Vector3(30, 1.07f, 0));
+        MakeTrap(8, new Vector3(24, 1.07f, 0));
+        MakeTrap(8, new Vector3(33, 3.27f, 0));
+        MakeTrap(8, new Vector3(27, 3.27f, 0));
+
     }
 
     void pattern9() // ½ºÆä¼È »ý¼º
     {
         StartCoroutine("MakeSpecial");
+    }
+
+    void pattern10() // °õµ£ + ´õÁöµÎ
+    {
+        MakeTrap(0, new Vector3(15.2f, -3.342f, 0));
+        MakeTrap(0, new Vector3(27.1f, -3.342f, 0));
+        MakeTrap(1, new Vector3(21.3f, -3.35f, 0));
+        MakeTrap(1, new Vector3(32.8f, -3.35f, 0));
+        MakeTrap(1, new Vector3(35.6f, -3.35f, 0));
+    }
+
+    void pattern11() // °õµ£ + ³ª¹«
+    {
+        MakeTrap(0, new Vector3(15.2f, -3.342f, 0));
+        MakeTrap(0, new Vector3(18.8f, -3.342f, 0));
+        MakeTrap(0, new Vector3(26.7f, -3.342f, 0));
+        MakeTrap(2, new Vector3(17, -2.97f, 0));
+        MakeTrap(2, new Vector3(24.6f, -2.97f, 0));
+        MakeTrap(2, new Vector3(33, -2.97f, 0));
+    }
+
+    void pattern12() // °õµ£ + ¹Ù³ª³ª
+    {
+        MakeTrap(0, new Vector3(21, -3.342f, 0));
+        MakeTrap(0, new Vector3(32, -3.342f, 0));
+        MakeTrap(3, new Vector3(15, -3.16f, 0));
+        MakeTrap(3, new Vector3(26, -3.16f, 0));
+        MakeTrap(3, new Vector3(37, -3.16f, 0));
+    }
+
+    void pattern13() // °õµ£ + »õ
+    {
+        MakeTrap(0, new Vector3(36, -3.342f, 0));
+        MakeTrap(0, new Vector3(29, -3.342f, 0));
+        MakeTrap(0, new Vector3(22, -3.342f, 0));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+    }
+
+    void pattern14() // °õµ£ + ÃÑ
+    {
+        MakeTrap(0, new Vector3(36, -3.342f, 0));
+        MakeTrap(0, new Vector3(29, -3.342f, 0));
+        MakeTrap(0, new Vector3(22, -3.342f, 0));
+        StartCoroutine(cotime(2, "MakeShot", 0.2f));
+    }
+
+    void pattern15() // °õµ£ + ¸ó½ºÅÍ
+    {
+        MakeTrap(0, new Vector3(13.8f, -3.342f, 0));
+        MakeTrap(0, new Vector3(15.4f, -3.342f, 0));
+        MakeTrap(0, new Vector3(17, -3.342f, 0));
+        MakeTrap(0, new Vector3(18.5f, -3.342f, 0));
+        MakeTrap(0, new Vector3(20f, -3.342f, 0));
+        MakeTrap(0, new Vector3(21.5f, -3.342f, 0));
+        MakeTrap(0, new Vector3(23f, -3.342f, 0));
+        MakeTrap(0, new Vector3(24.5f, -3.342f, 0));
+        MakeTrap(0, new Vector3(26f, -3.342f, 0));
+        MakeTrap(0, new Vector3(27.5f, -3.342f, 0));
+        MakeTrap(0, new Vector3(29f, -3.342f, 0));
+        MakeTrap(0, new Vector3(30.5f, -3.342f, 0));
+        MakeTrap(6, new Vector3(12, -2.8f, 0));
+        MakeTrap(6, new Vector3(32, -2.8f, 0));
+    }
+
+    void pattern16() // °õµ£ + µ¹
+    {
+        MakeTrap(0, new Vector3(13.8f, -3.342f, 0));
+        MakeTrap(0, new Vector3(18.5f, -3.342f, 0));
+        MakeTrap(0, new Vector3(20f, -3.342f, 0));
+        MakeTrap(0, new Vector3(29f, -3.342f, 0));
+        MakeTrap(0, new Vector3(30.5f, -3.342f, 0));
+        MakeTrap(7, new Vector3(23, 5.7f, 0));
+    }
+
+    void pattern17() // °õµ£ + ²Ü¹ú
+    {
+        MakeTrap(0, new Vector3(19.5f, -3.342f, 0));
+        MakeTrap(0, new Vector3(21.5f, -3.342f, 0));
+        MakeTrap(0, new Vector3(28.5f, -3.342f, 0));
+        MakeTrap(0, new Vector3(30.5f, -3.342f, 0));
+        MakeTrap(8, new Vector3(16, 0, 0));
+        MakeTrap(8, new Vector3(25, 0, 0));
+        MakeTrap(8, new Vector3(34, 0, 0));
+    }
+
+    void pattern18() // µÎ´õÁö + ³ª¹«
+    {
+        MakeTrap(1, new Vector3(15f, -3.334f, 0));
+        MakeTrap(1, new Vector3(27f, -3.334f, 0));
+        MakeTrap(2, new Vector3(21f, -2.97f, 0));
+        MakeTrap(2, new Vector3(33f, -2.97f, 0));
+    }
+
+    void pattern19() // µÎ´õÁö + ¹Ù³ª³ª
+    {
+        MakeTrap(1, new Vector3(15f, -3.334f, 0));
+        MakeTrap(1, new Vector3(25f, -3.334f, 0));
+        MakeTrap(3, new Vector3(13f, -3.16f, 0));
+        MakeTrap(3, new Vector3(17f, -3.16f, 0));
+        MakeTrap(3, new Vector3(23f, -3.16f, 0));
+        MakeTrap(3, new Vector3(27f, -3.16f, 0));
     }
 }

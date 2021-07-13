@@ -14,13 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Scenes/Play.unity
-    - Assets/Script/MoveTrap_y.cs
-    - Assets/Script/ScroolBackGround.cs
-    - Assets/Script/Trap.cs
     - 
-    m_Values: 0000000000
-  RevisionSummary: 
+    m_Values: 01
+  RevisionSummary: savesave
   ChangesSearchValue: 
   SelectedHistoryRevision: 
   HistoryPageNumber: 0
