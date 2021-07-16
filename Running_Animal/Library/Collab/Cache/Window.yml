@@ -14,9 +14,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
+    - Assets/Resources/Trap/Forest/0000_BearTrap.prefab
+    - Assets/Resources/Trap/Forest/0000_BearTrap.prefab.meta
+    - Assets/Resources/Trap/Forest/0001_Mole.prefab
+    - Assets/Resources/Trap/Forest/0001_Mole.prefab.meta
+    - Assets/Resources/Trap/Forest/0002_Stump.prefab
+    - Assets/Resources/Trap/Forest/0002_Stump.prefab.meta
+    - Assets/Resources/Trap/Forest/0003_Banana.prefab
+    - Assets/Resources/Trap/Forest/0003_Banana.prefab.meta
+    - Assets/Resources/Trap/Forest/0004_Bird.prefab
+    - Assets/Resources/Trap/Forest/0004_Bird.prefab.meta
+    - Assets/Resources/Trap/Forest/0005_Shot.prefab
+    - Assets/Resources/Trap/Forest/0005_Shot.prefab.meta
+    - Assets/Resources/Trap/Forest/0006_Monster.prefab
+    - Assets/Resources/Trap/Forest/0006_Monster.prefab.meta
+    - Assets/Resources/Trap/Forest/0007_Stone.prefab
+    - Assets/Resources/Trap/Forest/0007_Stone.prefab.meta
+    - Assets/Resources/Trap/Forest/0008_Honey_Bee.prefab
+    - Assets/Resources/Trap/Forest/0008_Honey_Bee.prefab.meta
+    - Assets/Resources/Trap/Forest/0009_Bridge0.prefab
+    - Assets/Resources/Trap/Forest/0009_Bridge0.prefab.meta
+    - Assets/Resources/Trap/Forest/0010_Trap1.prefab
+    - Assets/Resources/Trap/Forest/0010_Trap1.prefab.meta
+    - Assets/Resources/Trap/Forest/0011_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0011_Pattern.prefab.meta
+    - Assets/Resources/Trap/Forest/0012_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0012_Pattern.prefab.meta
+    - Assets/Resources/Trap/Forest/0013_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0013_Pattern.prefab.meta
+    - Assets/Resources/Trap/Forest/0014_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0014_Pattern.prefab.meta
+    - Assets/Resources/Trap/Forest/0015_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0015_Pattern.prefab.meta
+    - Assets/Resources/Trap/Forest/0016_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0016_Pattern.prefab.meta
+    - Assets/Resources/Trap/Forest/0017_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0017_Pattern.prefab.meta
+    - Assets/Resources/Trap/Forest/0018_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0018_Pattern.prefab.meta
+    - Assets/Resources/Trap/Forest/0019_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0019_Pattern.prefab.meta
+    - Assets/Resources/Trap/Forest/0020_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0020_Pattern.prefab.meta
+    - Assets/Resources/Trap/Forest/0021_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0021_Pattern.prefab.meta
+    - Assets/Resources/Trap/Forest/temp/00_BearTrap.prefab
+    - Assets/Resources/Trap/Forest/temp/00_BearTrap.prefab.meta
+    - Assets/Resources/Trap/Forest/temp/01_Mole.prefab
+    - Assets/Resources/Trap/Forest/temp/01_Mole.prefab.meta
+    - Assets/Resources/Trap/Forest/temp/02_Stump.prefab
+    - Assets/Resources/Trap/Forest/temp/02_Stump.prefab.meta
+    - Assets/Resources/Trap/Forest/temp/03_Banana.prefab
+    - Assets/Resources/Trap/Forest/temp/03_Banana.prefab.meta
+    - Assets/Resources/Trap/Forest/temp/04_Bird.prefab
+    - Assets/Resources/Trap/Forest/temp/04_Bird.prefab.meta
+    - Assets/Resources/Trap/Forest/temp/05_Shot.prefab
+    - Assets/Resources/Trap/Forest/temp/05_Shot.prefab.meta
+    - Assets/Resources/Trap/Forest/temp/06_Monster.prefab
+    - Assets/Resources/Trap/Forest/temp/06_Monster.prefab.meta
+    - Assets/Resources/Trap/Forest/temp/07_Stone.prefab.meta
+    - Assets/Resources/Trap/Forest/temp/08_Honey_Bee.prefab
+    - Assets/Resources/Trap/Forest/temp/08_Honey_Bee.prefab.meta
+    - Assets/Script/Trap.cs
     - 
-    m_Values: 01
-  RevisionSummary: savesave
+    m_Values: 010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
+  RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
   HistoryPageNumber: 0

@@ -19,7 +19,7 @@ public class Trap : MonoBehaviour
         Bridge_Trap // ½£ Æ¯¼ö - Àå¾Ö¹°
     }
 
-    int idx;
+    public int idx; // Å×½ºÆ®ÇÏ·Á°í public
     GameObject[] traps; // ÇÔÁ¤ ¸®¼Ò½º ÀúÀå
     GameObject warning_bird;
     GameObject warning_shot;
@@ -32,7 +32,7 @@ public class Trap : MonoBehaviour
 
     private void Start()
     {
-        idx = 0;
+        //idx = 20; Å×½ºÆ®ÇÏ·Á°í ÁÖ¼®Ã³¸®ÇÔ.
         player = GameObject.Find("Player");
         // ½ÃÀÛ½Ã ÇÔÁ¤ ¸®¼Ò½º ºÒ·¯¿À±â.
         traps = Resources.LoadAll<GameObject>("Trap/Forest");
@@ -61,15 +61,15 @@ public class Trap : MonoBehaviour
             }
             else 
             {
-                //Invoke("pattern" + idx.ToString(), 0);
-                Invoke("pattern19", 0);
-                idx++;
+                Invoke("pattern" + idx.ToString(), 0);
+                //Invoke("pattern38", 0);
+                //idx++;
             }
         }
 
-        if (idx == 10)
+        if (idx == 31)
         {
-            idx = 0;
+            idx = 20;
             GameManager.Data.speed += 0.2f;
         }
     }
@@ -404,4 +404,397 @@ public class Trap : MonoBehaviour
         MakeTrap(3, new Vector3(23f, -3.16f, 0));
         MakeTrap(3, new Vector3(27f, -3.16f, 0));
     }
+
+    void pattern20() // µÎ´õÁö + »õ
+    {
+        MakeTrap(21, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+    }
+
+    void pattern21() // µÎ´õÁö + ÃÑ
+    {
+        MakeTrap(22, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeShot", 0.2f));
+    }
+
+    void pattern22() // µÎ´õÁö + ¸ó½ºÅÍ
+    {
+        MakeTrap(23, new Vector3(0, 0, 0));
+    }
+
+    void pattern23() // µÎ´õÁö + µ¹¶¯ÀÌ
+    {
+        MakeTrap(24, new Vector3(0, 0, 0));
+    }
+
+    void pattern24() // µÎ´õÁö + ²Ü¹ú
+    {
+        MakeTrap(25, new Vector3(0, 0, 0));
+    }
+
+    void pattern25() // ³ª¹« + ¹Ù³ª³ª
+    {
+        MakeTrap(26, new Vector3(0, 0, 0));
+    }
+
+    void pattern26() // ³ª¹« + »õ
+    {
+        MakeTrap(27, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+    }
+
+    void pattern27() // ³ª¹« + ÃÑ
+    {
+        MakeTrap(28, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeShot", 0.2f));
+    }
+
+    void pattern28() // ³ª¹« + ¸ó½ºÅÍ
+    {
+        MakeTrap(29, new Vector3(0, 0, 0));
+    }
+
+    void pattern29() // ³ª¹« + µ¹¶¯ÀÌ
+    {
+        MakeTrap(30, new Vector3(0, 0, 0));
+    }
+
+    void pattern30() // ³ª¹« + ²Ü¹ú
+    {
+        MakeTrap(31, new Vector3(0, 0, 0));
+    }
+
+    void pattern31() // ¹Ù³ª³ª + »õ
+    {
+        MakeTrap(32, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+    }
+
+    void pattern32() // ¹Ù³ª³ª + ÃÑ
+    {
+        MakeTrap(33, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeShot", 0.2f));
+    }
+
+    void pattern33() // ¹Ù³ª³ª + ¸ó½ºÅÍ
+    {
+        MakeTrap(34, new Vector3(0, 0, 0));
+    }
+
+    void pattern34() // ¹Ù³ª³ª + µ¹¶¯ÀÌ
+    {
+        MakeTrap(35, new Vector3(0, 0, 0));
+    }
+
+    void pattern35() // ¹Ù³ª³ª + ²Ü¹ú
+    {
+        MakeTrap(36, new Vector3(0, 0, 0));
+    }
+
+    void pattern36() // »õ + ÃÑ
+    {
+        StartCoroutine(cotime(2, "MakeShot", 0.4f));
+        StartCoroutine(cotime(2, "MakeBird", 0.4f));
+    }
+
+    void pattern37() // »õ + ¸ó½ºÅÍ
+    {
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+        MakeTrap(38, new Vector3(0, 0, 0));
+    }
+
+    void pattern38() // »õ + µ¹¶¯ÀÌ
+    {
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+        MakeTrap(39, new Vector3(0, 0, 0));
+    }
+
+    void pattern39() // »õ + ²Ü¹ú
+    {
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+        MakeTrap(40, new Vector3(0, 0, 0));
+    }
+
+    void pattern40() // ÃÑ + ¸ó½ºÅÍ
+    {
+        StartCoroutine(cotime(2, "MakeShot", 0.2f));
+        MakeTrap(41, new Vector3(0, 0, 0));
+    }
+
+    void pattern41() // ÃÑ + µ¹¶¯ÀÌ
+    {
+        StartCoroutine(cotime(2, "MakeShot", 0.2f));
+        MakeTrap(42, new Vector3(0, 0, 0));
+    }
+
+    void pattern42() // ÃÑ + ²Ü¹ú
+    {
+        StartCoroutine(cotime(2, "MakeShot", 0.2f));
+        MakeTrap(43, new Vector3(0, 0, 0));
+    }
+
+    void pattern43() // ¸ó½ºÅÍ+µ¹¶¯ÀÌ
+    {
+        MakeTrap(44, new Vector3(0, 0, 0));
+    }
+
+    void pattern44() // ¸ó½ºÅÍ+²Ü¹ú
+    {
+        MakeTrap(45, new Vector3(0, 0, 0));
+    }
+
+    void pattern45() // µ¹¶¯ÀÌ+²Ü¹ú
+    {
+        MakeTrap(46, new Vector3(0, 0, 0));
+    }
+
+    void pattern46() // °õµ£ µÎ´õÁö ³ª¹«
+    {
+        MakeTrap(47, new Vector3(0, 0, 0));
+    }
+
+    void pattern47() // °õµ£ µÎ´õÁö ¹Ù³ª³ª
+    {
+        MakeTrap(48, new Vector3(0, 0, 0));
+    }
+
+    void pattern48() // °õµ£ µÎ´õÁö »õ
+    {
+        MakeTrap(49, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+    }
+
+    void pattern49() // °õµ£ µÎ´õÁö ÃÑ
+    {
+        MakeTrap(50, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeShot", 0.2f));
+    }
+
+    void pattern50() // °õµ£ µÎ´õÁö ¸ó½ºÅÍ
+    {
+        MakeTrap(51, new Vector3(0, 0, 0));
+    }
+
+    void pattern51() // °õµ£ µÎ´õÁö µ¹¶¯ÀÌ
+    {
+        MakeTrap(52, new Vector3(0, 0, 0));
+    }
+
+    void pattern52() // °õµ£ µÎ´õÁö ¹ú
+    {
+        MakeTrap(53, new Vector3(0, 0, 0));
+    }
+
+    void pattern53() // °õµ£ ³ª¹« ¹Ù³ª³ª
+    {
+        MakeTrap(54, new Vector3(0, 0, 0));
+    }
+
+    void pattern54() // °õµ£ ³ª¹« »õ
+    {
+        MakeTrap(55, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+    }
+
+    void pattern55() // °õµ£ ³ª¹« ÃÑ
+    {
+        MakeTrap(56, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeShot", 0.2f));
+    }
+
+    void pattern56() // °õµ£ ³ª¹« ¸ó½ºÅÍ
+    {
+        MakeTrap(57, new Vector3(0, 0, 0));
+    }
+
+    void pattern57() // °õµ£ ³ª¹« µ¹¶¯ÀÌ
+    {
+        MakeTrap(58, new Vector3(0, 0, 0));
+    }
+
+    void pattern58() // °õµ£ ³ª¹« ¹ú
+    {
+        MakeTrap(59, new Vector3(0, 0, 0));
+    }
+    void pattern59() // °õµ£ ¹Ù³ª³ª »õ
+    {
+        MakeTrap(60, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+    }
+
+    void pattern60() // °õµ£ ¹Ù³ª³ª ÃÑ
+    {
+        MakeTrap(61, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeShot", 0.2f));
+    }
+
+    void pattern61() // °õµ£ ¹Ù³ª³ª ¸ó½ºÅÍ
+    {
+        MakeTrap(62, new Vector3(0, 0, 0));
+    }
+
+    void pattern62() // °õµ£ ¹Ù³ª³ª µ¹¶¯ÀÌ
+    {
+        MakeTrap(63, new Vector3(0, 0, 0));
+    }
+
+    void pattern63() // °õµ£ ¹Ù³ª³ª ²Ü¹ú
+    {
+        MakeTrap(64, new Vector3(0, 0, 0));
+    }
+
+    void pattern64() // °õµ£ »õ ÃÑ
+    {
+        MakeTrap(65, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeBird", 0.4f));
+        StartCoroutine(cotime(1, "MakeShot", 0.2f));
+    }
+
+    void pattern65() // °õµ£ »õ ¸ó½ºÅÍ 
+    {
+        MakeTrap(66, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+    }
+
+    void pattern66() // °õµ£ »õ µ¹¶¯ÀÌ
+    {
+        MakeTrap(67, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(1, "MakeBird", 0.2f));
+    }
+
+    void pattern67() // °õµ£ »õ ²Ü¹ú
+    {
+        MakeTrap(68, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(1, "MakeBird", 0.2f));
+    }
+
+    void pattern68() // °õµ£ ÃÑ ¸ó½ºÅÍ
+    {
+        MakeTrap(69, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(1, "MakeShot", 0.2f));
+    }
+    void pattern69() // °õµ£ ÃÑ µ¹¶¯ÀÌ
+    {
+        MakeTrap(70, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(1, "MakeShot", 0.2f));
+    }
+
+    void pattern70() // °õµ£ ÃÑ ²Ü¹ú
+    {
+        MakeTrap(71, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(1, "MakeShot", 0.2f));
+    }
+
+    void pattern71() // °õµ£ ¸ó½ºÅÍ µ¹´óÀÌ
+    {
+        MakeTrap(72, new Vector3(0, 0, 0));
+    }
+
+    void pattern72() // °õµ£ ¸ó½ºÅÍ ²Ü¹ú
+    {
+        MakeTrap(73, new Vector3(0, 0, 0));
+    }
+
+    void pattern73() // °õµ£ µ¹¶¯ÀÌ ²Ü¹ú
+    {
+        MakeTrap(74, new Vector3(0, 0, 0));
+    }
+
+    void pattern74() // µÎ´õÁö ³ª¹« ¹Ù³ª³ª
+    {
+        MakeTrap(75, new Vector3(0, 0, 0));
+    }
+
+    void pattern75() // µÎ´õÁö ³ª¹« »õ
+    {
+        MakeTrap(76, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(3, "MakeBird", 0.2f));
+    }
+
+    void pattern76() // µÎ´õÁö ³ª¹« ÃÑ
+    {
+        MakeTrap(77, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeShot", 0.2f));
+    }
+
+    void pattern77() // µÎ´õÁö ³ª¹« ¸ó½ºÅÍ
+    {
+        MakeTrap(78, new Vector3(0, 0, 0));
+    }
+
+    void pattern78() // µÎ´õÁö ³ª¹« µ¹¶¯ÀÌ
+    {
+        MakeTrap(79, new Vector3(0, 0, 0));
+    }
+
+    void pattern79() // µÎ´õÁö ³ª¹« ²Ü¹ú
+    {
+        MakeTrap(80, new Vector3(0, 0, 0));
+    }
+
+    void pattern80() // µÎ´õÁö ¹Ù³ª³ª »õ
+    {
+        MakeTrap(81, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+    }
+
+    void pattern81() // µÎ´õÁö ¹Ù³ª³ª ÃÑ
+    {
+        MakeTrap(82, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeShot", 0.2f));
+    }
+
+    void pattern82() // µÎ´õÁö ¹Ù³ª³ª ¸ó½ºÅÍ
+    {
+        MakeTrap(83, new Vector3(0, 0, 0));
+    }
+
+    void pattern83() // µÎ´õÁö ¹Ù³ª³ª µ¹¶¯ÀÌ
+    {
+        MakeTrap(84, new Vector3(0, 0, 0));
+    }
+
+    void pattern84() // µÎ´õÁö ¹Ù³ª³ª ¹ú
+    {
+        MakeTrap(85, new Vector3(0, 0, 0));
+    }
+
+    void pattern85() // µÎ´õÁö »õ ÃÑ
+    {
+        MakeTrap(86, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+        StartCoroutine(cotime(3, "MakeShot", 0.3f));
+    }
+
+    void pattern86() // µÎ´õÁö »õ ¸ó½ºÅÍ
+    {
+        MakeTrap(87, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
+    }
+
+    void pattern87() // µÎ´õÁö »õ µ¹¶¯ÀÌ
+    {
+        MakeTrap(88, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(1, "MakeBird", 0.2f));
+    }
+
+    void pattern88() // µÎ´õÁö »õ ²Ü¹ú
+    {
+        MakeTrap(89, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(1, "MakeBird", 0.2f));
+    }
+
+    void pattern89() // µÎ´õÁö ÃÑ ¸ó½ºÅÍ
+    {
+        MakeTrap(90, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(1, "MakeShot", 0.2f));
+    }
+
+    void pattern90() // µÎ´õÁö ÃÑ µ¹¶¯ÀÌ
+    {
+        MakeTrap(91, new Vector3(0, 0, 0));
+        StartCoroutine(cotime(3, "MakeShot", 0.2f));
+    }
+
+
 }
