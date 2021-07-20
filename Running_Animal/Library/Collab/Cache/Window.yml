@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Resources/Trap/Forest/0092_Pattern.prefab
-    - Assets/Resources/Trap/Forest/0092_Pattern.prefab.meta
-    - Assets/Script/Trap.cs
+    - Assets/Resources/Trap/Forest/0130_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0130_Pattern.prefab.meta
     - 
-    m_Values: 00000000
+    m_Values: 010101
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

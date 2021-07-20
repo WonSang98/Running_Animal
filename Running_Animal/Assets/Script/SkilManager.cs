@@ -76,13 +76,13 @@ public class SkilManager : MonoBehaviour
         player.transform.Find("2").gameObject.SetActive(true);
         player.transform.Translate(GameManager.Data.speed, 0, 0);
         player.GetComponent<PlayerMove>().speed = GameManager.Data.speed;
-        GameObject.Find("BackGround").GetComponent<ScroolBackGround>().speed *= 2;
+        //GameObject.Find("BackGround").GetComponent<ScroolBackGround>().speed *= 2;
         Invoke("OffFlash", 1);
     }
 
     public void OffFlash()
     {
-        GameObject.Find("BackGround").GetComponent<ScroolBackGround>().speed /= 2;
+        //GameObject.Find("BackGround").GetComponent<ScroolBackGround>().speed /= 2;
         player.GetComponent<PlayerMove>().speed = 0;
         StopCoroutine("Flash");
         player.transform.Find("2").gameObject.SetActive(false);

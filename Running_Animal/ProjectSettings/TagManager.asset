@@ -56,6 +56,15 @@ TagManager:
   - name: BackGround
     uniqueID: 3372013999
     locked: 0
+  - name: BG3
+    uniqueID: 3272492871
+    locked: 0
+  - name: BG2
+    uniqueID: 2926267215
+    locked: 0
+  - name: BG1
+    uniqueID: 276210623
+    locked: 0
   - name: Skil
     uniqueID: 3740690245
     locked: 0
