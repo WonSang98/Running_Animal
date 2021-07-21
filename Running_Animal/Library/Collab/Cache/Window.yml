@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Resources/Trap/Forest/0130_Pattern.prefab
-    - Assets/Resources/Trap/Forest/0130_Pattern.prefab.meta
+    - Assets/Resources/Trap/Forest/0173_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0173_Pattern.prefab.meta
     - 
     m_Values: 010101
   RevisionSummary: 
