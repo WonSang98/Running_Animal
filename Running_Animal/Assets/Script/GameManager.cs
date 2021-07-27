@@ -54,10 +54,13 @@ public class GameManager : MonoBehaviour
         saveData.Cost_Character = Data.Cost_Character;
         saveData.Now_Character = Data.Now_Character;
         saveData.play_gold = Data.play_gold;
+        saveData.multi_coin = Data.multi_coin;
         saveData.active = Data.active;
+        saveData.passive = Data.passive;
         saveData.speed = Data.speed;
         saveData.jump = Data.jump;
         saveData.down = Data.down;
+        saveData.defense = Data.defense;
         saveData.max_hp = Data.max_hp;
         saveData.hp = Data.hp;
         saveData.damage = Data.damage;
@@ -67,8 +70,17 @@ public class GameManager : MonoBehaviour
         saveData.lvup = Data.lvup;
         saveData.stage = Data.stage;
         saveData.combo = Data.combo;
+        saveData.multi_combo = Data.multi_combo;
         saveData.max_jump = Data.max_jump;
-    string path = Application.persistentDataPath + "/save.xml";
+        saveData.luck = Data.luck;
+        saveData.max_active = Data.max_active;
+        saveData.use_active = Data.use_active;
+        saveData.dodge_time = Data.dodge_time;
+        saveData.magnet = Data.magnet;
+        saveData.buwhal = Data.buwhal;
+        saveData.auto_jump = Data.auto_jump;
+        saveData.random_god = Data.random_god;
+        string path = Application.persistentDataPath + "/save.xml";
         XmlManager.XmlSave<Data>(saveData, path);
 
         Debug.Log("SAVE!");
@@ -91,10 +103,13 @@ public class GameManager : MonoBehaviour
         Data.Cost_Character = saveData.Cost_Character;
         Data.Now_Character = saveData.Now_Character;
         Data.play_gold = saveData.play_gold;
+        Data.multi_coin = saveData.multi_coin;
         Data.active = saveData.active;
+        Data.passive = saveData.passive;
         Data.speed = saveData.speed;
         Data.jump = saveData.jump;
         Data.down = saveData.down;
+        Data.defense = saveData.defense;
         Data.max_hp = saveData.max_hp;
         Data.hp = saveData.hp;
         Data.damage = saveData.damage;
@@ -104,7 +119,16 @@ public class GameManager : MonoBehaviour
         Data.lvup = saveData.lvup;
         Data.stage = saveData.stage;
         Data.combo = saveData.combo;
+        Data.multi_combo = saveData.multi_combo;
         Data.max_jump = saveData.max_jump;
+        Data.luck = saveData.luck;
+        Data.max_active = saveData.max_active;
+        Data.use_active = saveData.use_active;
+        Data.dodge_time = saveData.dodge_time;
+        Data.magnet = saveData.magnet;
+        Data.buwhal = saveData.buwhal;
+        Data.auto_jump = saveData.auto_jump;
+        Data.random_god = saveData.random_god;
         Debug.Log("LOAD!");
 
     }

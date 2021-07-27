@@ -977,21 +977,21 @@ public class Trap : MonoBehaviour
     {
         MakeTrap(120, new Vector3(0, 0, 0));
         StartCoroutine(cotime(2, "MakeShot", 0.2f));
-        StartCoroutine(cotime(2, "MakeSBird", 0.2f));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
     }
 
     void pattern120() // ªı √— µπ∂Ø¿Ã
     {
         MakeTrap(121, new Vector3(0, 0, 0));
         StartCoroutine(cotime(2, "MakeShot", 0.2f));
-        StartCoroutine(cotime(1, "MakeSBird", 0.2f));
+        StartCoroutine(cotime(1, "MakeBird", 0.2f));
     }
 
     void pattern121() // ªı √— ≤‹π˙
     {
         MakeTrap(122, new Vector3(0, 0, 0));
         StartCoroutine(cotime(1, "MakeShot", 0.2f));
-        StartCoroutine(cotime(2, "MakeSBird", 0.2f));
+        StartCoroutine(cotime(2, "MakeBird", 0.2f));
     }
 
     void pattern122() // ªı ∏ÛΩ∫≈Õ µπ∂Ø¿Ã

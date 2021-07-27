@@ -37,6 +37,7 @@ public class SelectSkil : MonoBehaviour
         active_sprite = Resources.LoadAll<Sprite>("Active_Buttons/");
         passive_sprite = Resources.LoadAll<Sprite>("Passive_Buttons/");
 
+        GameManager.Data.use_active = 0;
         change_all();
     }
 
@@ -76,7 +77,7 @@ public class SelectSkil : MonoBehaviour
                 Skil_Kinds[i] = 1;
                 do
                 {
-                    temp = Random.Range(0, Enum.GetNames(typeof(DataManager.Passive_Skil)).Length);
+                    temp = Random.Range(1, Enum.GetNames(typeof(DataManager.Passive_Skil)).Length);
                 } while (bool_passive[temp] == true);
                 bool_passive[temp] = true;
                 Skil_Box[i].GetComponent<Image>().sprite = passive_sprite[temp];
@@ -137,29 +138,116 @@ public class SelectSkil : MonoBehaviour
         GameManager.Data.active = (DataManager.Active_Skil)num;
     }
 
+    void save_passive(int num)
+    {
+        for(int i=0; i<12; i++)
+        {
+            if(GameManager.Data.passive[i] == 0)
+            {
+                GameManager.Data.passive[i] = (DataManager.Passive_Skil)num;
+                break;
+            }
+        }
+    }
     void set_passive(int num)
     {   
-            switch (num)
+        switch (num)
             {
-                case 0:
-                    Debug.Log($"스크롤{num}");
-                    break;
-                case 1:
-                    Debug.Log($"스크롤{num}");
-                    break;
-                case 2:
-                    Debug.Log($"스크롤{num}");
-                    break;
-                case 3:
-                    Debug.Log($"스크롤{num}");
-                    break;
-                case 4:
-                    Debug.Log($"스크롤{num}");
-                    break;
-                case 5:
-                    Debug.Log($"스크롤{num}");
-                    break;
-            }
+            case 0:
+                // None
+                break;
+            case 1:
+                // 행운 증가
+                GameManager.Data.luck += 5;
+                save_passive(1);
+                break;
+            case 2:
+                // 액티브 스킬 두 번 사용
+                GameManager.Data.max_active += 1;
+                save_passive(2);
+                break;
+            case 3:
+                // 방어력 증가
+                GameManager.Data.defense += 5;
+                save_passive(3);
+                break;
+            case 4:
+                // 최대 체력 증가
+                GameManager.Data.max_hp += 20.0f;
+                GameManager.Data.hp += 20.0f;
+                save_passive(4);
+                break;
+            case 5:
+                // 이동속도 증가
+                GameManager.Data.speed += (GameManager.Data.speed / 5);
+                save_passive(5); 
+                break;
+            case 6:
+                // 이동속도 감소
+                GameManager.Data.speed -= (GameManager.Data.speed / 5);
+                save_passive(6);
+                break;
+            case 7:
+                // 점프력 증가
+                GameManager.Data.jump += (GameManager.Data.jump / 5);
+                save_passive(7);
+                break;
+            case 8:
+                // 점프력 감소
+                GameManager.Data.jump -= (GameManager.Data.jump / 5);
+                save_passive(8);
+                break;
+            case 9:
+                // 낙하속도 증가
+                GameManager.Data.down += (GameManager.Data.down / 5);
+                save_passive(9);
+                break;
+            case 10:
+                // 낙하속도 감소
+                GameManager.Data.down -= (GameManager.Data.down / 5);
+                save_passive(10);
+                break;
+            case 11:
+                // 자석버그
+                GameManager.Data.magnet = true;
+                save_passive(11);
+                break;
+            case 12:
+                // 콤보 획득량 증가
+                GameManager.Data.multi_combo *= 2;
+                save_passive(12);
+                break;
+            case 13:
+                // 부활
+                GameManager.Data.buwhal += 1;
+                save_passive(13);
+                break;
+            case 14:
+                //코인 획득량 증가
+                GameManager.Data.multi_coin += 1;
+                save_passive(14);
+                break;
+            case 15:
+                // 자동 점프
+                GameManager.Data.auto_jump = true;
+                save_passive(15);
+                break;
+            case 16:
+                // 낮은 확률로 랜덤 무적
+                GameManager.Data.random_god = true;
+                save_passive(16);
+                break;
+            case 17:
+                // 피격시 무적시간 증가
+                GameManager.Data.dodge_time += (GameManager.Data.dodge_time / 2);
+                save_passive(17);
+                break;
+            case 18:
+                // 점프 횟수 증가
+                GameManager.Data.max_jump += 1;
+                save_passive(18);
+                break;
+        }
     }
 
     public void ReLoad()

@@ -75,6 +75,7 @@
     <Compile Include="Assets\Script\SelectCharacter.cs" />
     <Compile Include="Assets\Script\SkilManager.cs" />
     <Compile Include="Assets\Script\DataManager.cs" />
+    <Compile Include="Assets\Script\CoinMove.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
