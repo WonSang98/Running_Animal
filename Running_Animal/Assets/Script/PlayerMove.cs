@@ -24,14 +24,18 @@ public class PlayerMove : MonoBehaviour
     public float speed;
     // 아래의 변수 값은 GameManager에서 받아온다.
     // GameManager.Instance.Player 
-    int Max_Jump; // 플레이어의 최대 가능 점프 횟수
     int Use_Jump; // 플레이어의 현재 사용 점프 횟수
 
     Text player_hp;
     Text get_coin;
     Text Level;
+    Text combo;
 
     Color player_opacity; // 플레이어 투명도, 피격 후 깜박이기 위해 사용
+
+    SpriteRenderer spriterenderer; // 스프라이트 변환을 위해 사용
+
+    Animator animator;
 
     void Awake()
     {
@@ -43,6 +47,7 @@ public class PlayerMove : MonoBehaviour
 
             player_hp = GameObject.Find("UI/HP").GetComponent<Text>();
             get_coin = GameObject.Find("UI/Gold").GetComponent<Text>();
+            combo = GameObject.Find("UI/Combo").GetComponent<Text>();
             Level = GameObject.Find("UI/LV").GetComponent<Text>();
             get_coin.text = $"{GameManager.Data.play_gold}";
             event_jump = GameObject.Find("UI/Button_Jump").GetComponent<EventTrigger>();
@@ -60,10 +65,14 @@ public class PlayerMove : MonoBehaviour
 
             player_opacity = gameObject.GetComponent<SpriteRenderer>().color;
             // Temp선언
-            Max_Jump = 2;
             Use_Jump = 0;
             jump = 10.0f;
             down = 20.0f;
+
+            spriterenderer = GetComponent<SpriteRenderer>();
+
+            animator = GetComponent<Animator>();
+
         }
     }
 
@@ -75,6 +84,8 @@ public class PlayerMove : MonoBehaviour
             transform.Translate(-1 * speed * Time.deltaTime, 0, 0);
             player_hp.text = $"{GameManager.Data.hp}";
             Level.text = $"Lv : {GameManager.Data.lv} EXP : {GameManager.Data.now_Exp} / {GameManager.Data.EXP[GameManager.Data.lv]}";
+            combo.text = $"Combo : {GameManager.Data.combo}";
+            animator.SetBool("StartGame", true);
         }
             
 
@@ -86,7 +97,10 @@ public class PlayerMove : MonoBehaviour
             GameManager.Data.speed = 8.0f; // 임시 !! 추후 캐릭터 속도로 받아 적용하도록 수정예정.
             GameManager.Data.lv = 0;
             GameManager.Data.now_Exp = 0;
+            GameManager.Data.combo = 0;
+            GameManager.Data.max_jump = 2;
             GameManager.Instance.Save();
+            animator.SetBool("StartGame", false);
             SceneManager.LoadScene("End_Game");
             GameManager.Instance.Load();
         }
@@ -94,10 +108,12 @@ public class PlayerMove : MonoBehaviour
         // 원활한 테스트 위함
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if (Use_Jump < Max_Jump)
+            if (Use_Jump < GameManager.Data.max_jump)
             {
                 GetComponent<Rigidbody2D>().velocity = new Vector3(0, jump, 0);
                 Use_Jump += 1;
+                animator.SetTrigger("Jumping");
+                animator.SetBool("Landing", false);
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -112,12 +128,13 @@ public class PlayerMove : MonoBehaviour
 
     void OnJump(PointerEventData data)
     {
-        if (Use_Jump < Max_Jump)
+        if (Use_Jump < GameManager.Data.max_jump)
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, jump, 0);
             Use_Jump += 1;
+            animator.SetTrigger("Jumping");
+            animator.SetBool("Landing", false);
         }
-
     }
 
     void OnDown(PointerEventData data)
@@ -204,6 +221,7 @@ public class PlayerMove : MonoBehaviour
         if (gameObject.CompareTag("Player") && other.gameObject.CompareTag("Trap_Blood"))
         {
             GameManager.Data.hp -= GameManager.Data.damage;
+            GameManager.Data.combo = 0;
             StartCoroutine(OnBlood());
             StartCoroutine(OnDodge(12));
         }
@@ -211,6 +229,7 @@ public class PlayerMove : MonoBehaviour
         if (gameObject.CompareTag("Player") && other.gameObject.CompareTag("Trap_Stun"))
         {
             GameManager.Data.hp -= GameManager.Data.damage;
+            GameManager.Data.combo = 0;
             StartCoroutine(OnStun());
             StartCoroutine(OnDodge(12));
         }
@@ -219,6 +238,7 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("충돌!!!!");
             GameManager.Data.hp -= GameManager.Data.damage;
+            GameManager.Data.combo = 0;
             StartCoroutine(OnDodge(12));
         }
 
@@ -226,6 +246,7 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("충돌!!!!");
             GameManager.Data.hp -= GameManager.Data.damage;
+            GameManager.Data.combo = 0;
             StartCoroutine(OnDodge(12));
         }
 
@@ -264,11 +285,13 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Tile"))
         {
+            animator.SetBool("Landing", true);
             Use_Jump = 0;
         }
         if (collision.gameObject.CompareTag("Jump"))
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 4, 0);
+            animator.SetBool("Landing", true);
             Use_Jump = 0;
             Destroy(collision.gameObject);
         }

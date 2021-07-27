@@ -8,19 +8,23 @@ public class MoveTrap : MonoBehaviour
     //GameObject player;
     public float speed;
     public float more_speed = 0;
+    public int multi; // 콤보 배율
     // Start is called before the first frame update
     void Start()
     {
+        multi = 1;
         speed = GameManager.Data.speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(-1 * (speed + more_speed) * Time.deltaTime, 0, 0);
-        if (transform.position.x <= -10)
+        transform.Translate(-1 * (GameManager.Data.speed + more_speed) * Time.deltaTime, 0, 0);
+        if (transform.position.x <= -14)
         {
             Destroy(gameObject);
+            GameManager.Data.combo += 1 * multi; // 피격시 콤보 증가.
+
             if (GameManager.Data.lv != 12)
             {
                 GameManager.Data.now_Exp += 1;

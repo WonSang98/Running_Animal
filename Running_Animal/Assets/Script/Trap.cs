@@ -19,7 +19,6 @@ public class Trap : MonoBehaviour
         Bridge_Trap // 숲 특수 - 장애물
     }
 
-    int idx; // 테스트하려고 public
     GameObject[] traps; // 함정 리소스 저장
     GameObject warning_bird;
     GameObject warning_shot;
@@ -28,11 +27,13 @@ public class Trap : MonoBehaviour
     GameObject coin;
     GameObject hp;
 
+    bool check_pause;
+
     //BackGround 포함 함정 자동 이동위함
 
     private void Start()
     {
-        idx = 0;
+        check_pause = false;
         player = GameObject.Find("Player");
         // 시작시 함정 리소스 불러오기.
         traps = Resources.LoadAll<GameObject>("Trap/Forest");
@@ -61,16 +62,33 @@ public class Trap : MonoBehaviour
             }
             else 
             {
-                Invoke("pattern" + idx.ToString(), 0);
-                idx++;
+                Invoke("pattern" + GameManager.Data.stage.ToString(), 0);
+                GameManager.Data.stage++;
                 GameManager.Data.speed += 0.001f;
             }
         }
 
-        if (idx == 254)
+        if (GameManager.Data.stage == 254)
         {
-            idx = 0;
-            GameManager.Data.speed += 0.2f;
+            GameManager.Data.stage = 0;
+            //GameManager.Data.speed += 0.2f;
+        }
+    }
+
+    public void BPAUSE()
+    {
+        if (check_pause == false)
+        {
+            Debug.Log("STOP!!");
+            Time.timeScale = 0;
+            check_pause = true;
+        }
+
+        else
+        {
+            Debug.Log("NONSTOP!!");
+            Time.timeScale = 1;
+            check_pause = false;
         }
     }
 
@@ -100,7 +118,7 @@ public class Trap : MonoBehaviour
 
     IEnumerator MakeBird()
     {
-        float rand_y = Random.Range(-2.5f, 3.0f);
+        float rand_y = Random.Range(-1.25f, 3.0f);
         GameObject bird;
         GameObject warn = null;
         for(int i=0; i<2; i++)

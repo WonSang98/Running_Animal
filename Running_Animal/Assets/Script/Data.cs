@@ -24,11 +24,14 @@ public class Data
     public bool lvup; // 레벨업 여부, true일 시 다음 장애물은 레벨업하는 장소로.
     public int lv = 0; // 현재 레벨 최대 0~12렙까지
     public int now_Exp = 0; // 현재 경험치 
+    public short stage = 0; // 스테이지
     public int play_gold = 0; // 게임 중 얻은 골드
     public float max_hp = 100.0f; // 최대 체력
     public float hp = 100.0f; // 현재 체력
     public float speed = 8.0f; // 현재 속도
     public float jump = 10.0f; // 현재 점프력
     public float down = 20.0f; // 현재 하강 속도
-    public float damage = 20.0f; // 현재 피격 데미지 
+    public float damage = 20.0f; // 현재 피격 데미지
+    public int combo = 0; // 게임 진행 중 콤보 
+    public int max_jump = 2; // 최대 점프 가능 횟수
 }

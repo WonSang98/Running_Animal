@@ -65,8 +65,10 @@ public class GameManager : MonoBehaviour
         saveData.now_Exp = Data.now_Exp;
         saveData.lv = Data.lv;
         saveData.lvup = Data.lvup;
-
-        string path = Application.persistentDataPath + "/save.xml";
+        saveData.stage = Data.stage;
+        saveData.combo = Data.combo;
+        saveData.max_jump = Data.max_jump;
+    string path = Application.persistentDataPath + "/save.xml";
         XmlManager.XmlSave<Data>(saveData, path);
 
         Debug.Log("SAVE!");
@@ -100,6 +102,9 @@ public class GameManager : MonoBehaviour
         Data.now_Exp = saveData.now_Exp;
         Data.lv = saveData.lv;
         Data.lvup = saveData.lvup;
+        Data.stage = saveData.stage;
+        Data.combo = saveData.combo;
+        Data.max_jump = saveData.max_jump;
         Debug.Log("LOAD!");
 
     }
