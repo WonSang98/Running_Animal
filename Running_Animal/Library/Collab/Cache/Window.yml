@@ -14,35 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Resources/Item/Coin.prefab
-    - Assets/Resources/Passive_Buttons/000.png
-    - Assets/Resources/Passive_Buttons/001.png
-    - Assets/Resources/Passive_Buttons/002.png
-    - Assets/Resources/Passive_Buttons/003.png
-    - Assets/Resources/Passive_Buttons/004.png
-    - Assets/Resources/Passive_Buttons/005.png
-    - Assets/Resources/Passive_Buttons/006.png
-    - Assets/Resources/Passive_Buttons/007.png
-    - Assets/Resources/Passive_Buttons/008.png
-    - Assets/Resources/Passive_Buttons/009.png
-    - Assets/Resources/Passive_Buttons/010.png
-    - Assets/Resources/Passive_Buttons/011.png
-    - Assets/Resources/Passive_Buttons/012.png
-    - Assets/Resources/Passive_Buttons/013.png
-    - Assets/Resources/Passive_Buttons/014.png
-    - Assets/Resources/Passive_Buttons/015.png
-    - Assets/Resources/Passive_Buttons/016.png
-    - Assets/Resources/Passive_Buttons/017.png
-    - Assets/Resources/Passive_Buttons/017.png.meta
-    - Assets/Script/CoinMove.cs
-    - Assets/Script/CoinMove.cs.meta
-    - Assets/Script/Data.cs
-    - Assets/Script/DataManager.cs
-    - Assets/Script/GameManager.cs
-    - Assets/Script/SelectSkil.cs
-    - Assets/Script/SkilManager.cs
+    - Assets/Scenes/Talent.unity
+    - Assets/Scenes/Talent.unity.meta
+    - Assets/Script/TalentManager.cs
+    - Assets/Script/TalentManager.cs.meta
     - 
-    m_Values: 00000000000000000000000000000000000000000000000000000000
+    m_Values: 0101010101
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

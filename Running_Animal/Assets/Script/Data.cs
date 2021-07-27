@@ -18,7 +18,20 @@ public class Data
     public int[] Cost_Character = { 500, 500, 500, 500 };
     public DataManager.Characters Now_Character = DataManager.Characters.One;
 
+    //재능 관련
+    public float Talent_HP = 0;
+    public float Talent_DEF = 0;
+    public int Talent_LUK = 0;
+    public float Talent_Restore = 0;
+
+    public short[] Talent_LV = { 0, 0, 0, 0 }; // 재능 레벨
+
+
+
+
     // 게임 플레이 관리
+    public bool playing = false; // 플레이 중이던 게임이 있었는지 확인.
+
     public DataManager.Active_Skil active = DataManager.Active_Skil.Defense; // 현재 가진 액티브 능력
     public DataManager.Passive_Skil[] passive = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // 현재 가진 패시브 능력
     public int[] EXP = { 20, 30, 40, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50 }; //레벨업 시 필요 경험치
@@ -42,6 +55,7 @@ public class Data
     public int max_active = 1; // 액티브 스킬 최대 사용가능 횟수
     public int use_active = 0; // 액티브 스킬 현대 사용 횟수
     public int dodge_time = 12; // 피격시 무적 시간 길이. default 12
+    public float restore_eff = 1.0f; // 회복 효율성
 
     public bool magnet = false; // 패시브 자석버그 유무
     public short buwhal = 0; // 패시브 부활 유무

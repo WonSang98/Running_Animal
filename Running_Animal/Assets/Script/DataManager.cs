@@ -71,7 +71,17 @@ public class DataManager
     public int[] Cost_Character = { 500, 500, 500, 500 };
     public Characters Now_Character = Characters.One;
 
+    //재능 관련
+    public float Talent_HP = 0;
+    public float Talent_DEF = 0;
+    public int Talent_LUK = 0;
+    public float Talent_Restore = 0;
+
+    public short[] Talent_LV = { 1, 1, 1, 1 }; // 재능 레벨
+
     // 게임 플레이 관리
+    public bool playing = false;
+
     public Active_Skil active = Active_Skil.Defense;
     public Passive_Skil[] passive = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     public int[] EXP = { 20, 30, 40, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50 }; //레벨
@@ -95,6 +105,7 @@ public class DataManager
     public int max_active = 1;
     public int use_active = 0;
     public int dodge_time = 12;
+    public float restore_eff = 1.0f; // 회복 효율성
 
     public bool magnet = false;
     public short buwhal = 0;

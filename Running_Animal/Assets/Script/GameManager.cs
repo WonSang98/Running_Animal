@@ -80,6 +80,16 @@ public class GameManager : MonoBehaviour
         saveData.buwhal = Data.buwhal;
         saveData.auto_jump = Data.auto_jump;
         saveData.random_god = Data.random_god;
+        saveData.playing = Data.playing;
+        saveData.restore_eff = Data.restore_eff;
+
+        // 재능 관련
+        saveData.Talent_HP = Data.Talent_HP;
+        saveData.Talent_DEF = Data.Talent_DEF;
+        saveData.Talent_LUK = Data.Talent_LUK;
+        saveData.Talent_Restore = Data.Talent_Restore;
+        saveData.Talent_LV = Data.Talent_LV;
+
         string path = Application.persistentDataPath + "/save.xml";
         XmlManager.XmlSave<Data>(saveData, path);
 
@@ -129,6 +139,16 @@ public class GameManager : MonoBehaviour
         Data.buwhal = saveData.buwhal;
         Data.auto_jump = saveData.auto_jump;
         Data.random_god = saveData.random_god;
+        Data.playing = saveData.playing;
+        Data.restore_eff = saveData.restore_eff;
+
+        // 재능 관련
+        Data.Talent_HP = saveData.Talent_HP;
+        Data.Talent_DEF = saveData.Talent_DEF;
+        Data.Talent_LUK = saveData.Talent_LUK;
+        Data.Talent_Restore = saveData.Talent_Restore;
+        Data.Talent_LV = saveData.Talent_LV;
+
         Debug.Log("LOAD!");
 
     }
