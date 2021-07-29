@@ -38,4 +38,18 @@ public class LoadScene : MonoBehaviour
         SceneManager.LoadScene("Main");
         GameManager.Instance.Load();
     }
+
+    public void OnTalent()
+    {
+        GameManager.Instance.Save();
+        SceneManager.LoadScene("Talent");
+        GameManager.Instance.Load();
+    }
+
+    public void OnGameOver()
+    {
+        GameManager.Instance.Save();
+        SceneManager.LoadScene("End_Game");
+        GameManager.Instance.Load();
+    }
 }

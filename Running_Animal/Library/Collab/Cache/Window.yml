@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Scenes/Talent.unity
-    - Assets/Scenes/Talent.unity.meta
-    - Assets/Script/TalentManager.cs
-    - Assets/Script/TalentManager.cs.meta
+    - Assets/Material/Bounce.physicsMaterial2D
+    - Assets/Scenes/Play.unity
+    - Assets/Script/Coin.cs
+    - Assets/Script/PlayerMove.cs
+    - ProjectSettings/Physics2DSettings.asset
+    - ProjectSettings/TagManager.asset
     - 
-    m_Values: 0101010101
+    m_Values: 00000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

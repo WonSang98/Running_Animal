@@ -27,13 +27,13 @@ public class Trap : MonoBehaviour
     GameObject coin;
     GameObject hp;
 
-    bool check_pause;
+    int[] map_pattern = { 255 }; // 추후 배열화
+
 
     //BackGround 포함 함정 자동 이동위함
 
     private void Start()
     {
-        check_pause = false;
         player = GameObject.Find("Player");
         // 시작시 함정 리소스 불러오기.
         traps = Resources.LoadAll<GameObject>("Trap/Forest");
@@ -48,6 +48,7 @@ public class Trap : MonoBehaviour
         StartCoroutine("hptime");
 
 
+        
     }
 
     private void Update()
@@ -62,35 +63,18 @@ public class Trap : MonoBehaviour
             }
             else 
             {
-                Invoke("pattern" + GameManager.Data.stage.ToString(), 0);
+                Invoke("pattern" + GameManager.Data.pattern[GameManager.Data.stage], 0);
                 GameManager.Data.stage++;
+                if(GameManager.Data.stage == (map_pattern[0] + 1))
+                {
+                    GameManager.Data.stage = 0;
+                    GameManager.Data.pattern = GameManager.Instance.ShuffleList(GameManager.Data.pattern);
+                }
                 GameManager.Data.speed += 0.001f;
             }
-        }
-
-        if (GameManager.Data.stage == 254)
-        {
-            GameManager.Data.stage = 0;
-            //GameManager.Data.speed += 0.2f;
-        }
+        }        
     }
 
-    public void BPAUSE()
-    {
-        if (check_pause == false)
-        {
-            Debug.Log("STOP!!");
-            Time.timeScale = 0;
-            check_pause = true;
-        }
-
-        else
-        {
-            Debug.Log("NONSTOP!!");
-            Time.timeScale = 1;
-            check_pause = false;
-        }
-    }
 
     public void MakeTrap(int trap_num, Vector3 pos)
     {
@@ -100,13 +84,6 @@ public class Trap : MonoBehaviour
         tmp.transform.position = pos;
     }
 
-    public void MakeCoin(Vector3 pos)
-    {
-        GameObject tmp;
-        tmp = Instantiate(coin);
-        //tmp.transform.parent = transform;
-        tmp.transform.position = pos;
-    }
 
     public void MakeHP(Vector3 pos)
     {
@@ -134,7 +111,6 @@ public class Trap : MonoBehaviour
                 bird = Instantiate(traps[(int)Forest_Trap.Fly_Bird]);
                 //bird.transform.parent = transform;
                 bird.transform.position = new Vector3(37, rand_y, 0);
-                bird.GetComponent<MoveTrap>().more_speed = 15.0f;
             }
             yield return new WaitForSeconds(1.5f);
         }
@@ -170,7 +146,6 @@ public class Trap : MonoBehaviour
                 shot = Instantiate(traps[(int)Forest_Trap.Fly_Shot]);
                 //shot.transform.parent = transform;
                 shot.transform.position = new Vector3(37, shot_y, 0);
-                shot.GetComponent<MoveTrap>().more_speed = 80.0f;
             }
             yield return new WaitForSeconds(0.15f);
         }
@@ -232,7 +207,7 @@ public class Trap : MonoBehaviour
         while (true)
         {
             MakeHP(new Vector3(36, 0.5f, 0));
-            yield return new WaitForSeconds(20.0f);
+            yield return new WaitForSeconds(60.0f);
 
         }
     }
@@ -248,19 +223,6 @@ public class Trap : MonoBehaviour
         MakeTrap(0, new Vector3(36, -3.36f, 0));
         MakeTrap(0, new Vector3(29, -3.36f, 0));
         MakeTrap(0, new Vector3(22, -3.36f, 0));
-        // coint 생성
-        MakeCoin(new Vector3(11, -2.82f ,0));
-        MakeCoin(new Vector3(13, -2.82f, 0));
-        MakeCoin(new Vector3(15, -2.82f, 0));
-        MakeCoin(new Vector3(17, -2.82f, 0));
-        MakeCoin(new Vector3(19, -2.82f, 0));
-        MakeCoin(new Vector3(22, -1, 0));
-        MakeCoin(new Vector3(25, -2.82f, 0));
-        MakeCoin(new Vector3(26, -2.82f, 0));
-        MakeCoin(new Vector3(29, -1, 0));
-        MakeCoin(new Vector3(32, -2.82f, 0));
-        MakeCoin(new Vector3(33, -2.82f, 0));
-        MakeCoin(new Vector3(34, -2.82f, 0));
     }
 
     void pattern1() // 두더지 생성

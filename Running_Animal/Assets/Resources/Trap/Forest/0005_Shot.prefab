@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1065586036610523535}
   - component: {fileID: 1065586036610523534}
   - component: {fileID: 1065586036610523569}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 0005_Shot
   m_TagString: Trap
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1595912939
-  m_SortingLayer: 5
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: -2982943585158440122, guid: de1a4f2123c46634fbb59f6b8fe72a33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  more_speed: 0
+  more_speed: 11
 --- !u!70 &1065586036610523569
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

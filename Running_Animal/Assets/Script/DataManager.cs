@@ -36,7 +36,7 @@ public class DataManager
     {
         None = 0,
         LUK_UP, // 행운 증가
-        Active_Twice, // 액티브 두 번 사용
+        Active_Twice, // 액티브 두 번 사용 2
         DEF_UP, // 방어력 증가
         HP_UP, // 최대 체력 증가
         MOV_UP, // 이동속도 증가
@@ -45,22 +45,22 @@ public class DataManager
         JMP_DOWN, // 점프력 감소
         DWN_UP, // 낙하속도 증가
         DWN_DOWN, // 낙하속도 감소
-        Magenet, // 자석버그
+        Magenet, // 자석버그 11
         Combo_UP, // 콤보 획득량 증가
-        Resurrection, // 부활 부활 철자 엄청기네 ㅋㅋㅋ
+        Resurrection, // 부활 부활 철자 엄청기네 ㅋㅋㅋ  13
         Coin_UP, // 코인 획득량 증가
-        Auto_Jump, // 자동 점프
-        Random_God, // 낮은 확률로 랜덤 무적
+        Auto_Jump, // 자동 점프 15
+        Random_God, // 낮은 확률로 랜덤 무적 16
         Hit_God_UP, // 피격시 무적시간 증가
         Max_Jump_Plus, // 점프 횟수 증가
-
-
+        Auto_Restore, // 자동 체력 재생 19
+        Heal_Eff// 회복 효율 증가
     }
 
 
     // 재화 관리
     public int Cash = 100; // 캐쉬 재화
-    public int Gold = 10000; // 인게임 재화
+    public int Gold = 100000000; // 인게임 재화
     public int Money_Forest = 10; // 숲 테마 재화
     public int Money_Desert = 10; // 숲 테마 재화
     public int Money_Arctic = 10; // 숲 테마 재화
@@ -75,30 +75,31 @@ public class DataManager
     public float Talent_HP = 0;
     public float Talent_DEF = 0;
     public int Talent_LUK = 0;
-    public float Talent_Restore = 0;
+    public float Talent_Restore = 1.0f;
 
     public short[] Talent_LV = { 1, 1, 1, 1 }; // 재능 레벨
 
     // 게임 플레이 관리
     public bool playing = false;
 
-    public Active_Skil active = Active_Skil.Defense;
-    public Passive_Skil[] passive = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    public int[] EXP = { 20, 30, 40, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50 }; //레벨
+    public Active_Skil active = Active_Skil.None;
+    public Passive_Skil[] passive = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public int[] EXP = { 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999999 }; //레벨
     public bool lvup;
     public int lv = 0;
     public int now_Exp = 0;
-    public short stage = 0; // 스테이지 
+    public short stage = 0; // 통과한 패턴
     public float play_gold = 0; // 게임 중 얻은 골드
     public int multi_coin = 0;
     public float max_hp = 100.0f;
     public float hp = 100.0f;
-    public float speed = 8.0f;
+    public float speed = 9.0f;
     public float jump = 10.0f;
     public float down = 20.0f;
     public float defense = 0.0f;
     public float damage = 20.0f;
     public int combo = 0;
+    public int max_combo = 0; // 게임 진행 중 최대 콤보
     public int multi_combo = 1;
     public int max_jump = 2;
     public int luck = 0;
@@ -111,6 +112,11 @@ public class DataManager
     public short buwhal = 0;
     public bool auto_jump = false;
     public bool random_god = false;
+    public bool auto_restore = false;
+    public bool passive_active = false; // 패시브 액티브 사용횟수 + 1
+    public bool passive_buwhal = false; // 패시브 부활 유무
 
+    public List<int> pattern = new List<int>();
 
+    public short change_chance = 0; // 스킬 선택에서 바꿀 수 있는 기회.
 }

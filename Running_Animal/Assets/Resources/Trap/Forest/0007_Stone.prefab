@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1651790485344058987}
   - component: {fileID: 1651790485344058986}
   - component: {fileID: 1651790485344058980}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 0007_Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  more_speed: 0
+  more_speed: 1
 --- !u!1 &6198367976795231041
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 547522226512259193}
   - component: {fileID: 4195795212219751087}
   - component: {fileID: 2951875754467440924}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: realitystone
   m_TagString: Trap
   m_Icon: {fileID: 0}

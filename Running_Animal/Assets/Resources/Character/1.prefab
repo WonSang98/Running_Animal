@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2576543137812084858}
   - component: {fileID: 2231176928730573315}
   - component: {fileID: 643121200046105151}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: 1
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -198,6 +198,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1244417122419454325, guid: d4b4f9dbd84a5174f9367e8778760206, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244417122419454325, guid: d4b4f9dbd84a5174f9367e8778760206, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -308,6 +312,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9155490952173231922, guid: a30784a7be3a17e4a991a93920b2c558, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155490952173231922, guid: a30784a7be3a17e4a991a93920b2c558, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -328,6 +336,10 @@ PrefabInstance:
     - target: {fileID: 4684062661090446623, guid: 77c1dd86c19192e439da6487f4015505, type: 3}
       propertyPath: m_Name
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4684062661090446623, guid: 77c1dd86c19192e439da6487f4015505, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4684062661090446623, guid: 77c1dd86c19192e439da6487f4015505, type: 3}
       propertyPath: m_IsActive

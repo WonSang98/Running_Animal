@@ -12,9 +12,18 @@ public class SpawnPlayer : MonoBehaviour
         if(GameManager.Data.playing == false)
         {
             GameManager.Data.max_hp += GameManager.Data.Talent_HP;
+            GameManager.Data.hp = GameManager.Data.max_hp;
             GameManager.Data.defense += GameManager.Data.Talent_DEF;
             GameManager.Data.luck += GameManager.Data.Talent_LUK;
-            GameManager.Data.restore_eff += (GameManager.Data.Talent_HP - 1);
+            GameManager.Data.restore_eff += (GameManager.Data.Talent_Restore - 1);
+
+            // ∏ ¿Ã Forest¿œ∂ß
+            for(int i=0; i<255; i++)
+            {
+                GameManager.Data.pattern.Add(i);
+            }
+
+            GameManager.Data.pattern = GameManager.Instance.ShuffleList(GameManager.Data.pattern);
             
             GameManager.Data.playing = true;
 
@@ -26,4 +35,6 @@ public class SpawnPlayer : MonoBehaviour
         Player.transform.Translate(-6.495f, -1.5f, 0);
         Player.transform.name = "Player";
     }
+
+    
 }

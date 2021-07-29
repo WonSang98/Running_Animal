@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9149324707209570477}
   - component: {fileID: 9149324707209570476}
   - component: {fileID: 9149324707209570474}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 0001_Mole
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  more_speed: 0
+  more_speed: 1
 --- !u!1 &9149324707882070338
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 9149324707882070336}
   - component: {fileID: 9149324707882070350}
   - component: {fileID: 9149324707882070339}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mole1
   m_TagString: Trap
   m_Icon: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5017674971971692104}
   - component: {fileID: 1162267733549187984}
   - component: {fileID: 6271934739665784869}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 0008_Honey_Bee
   m_TagString: Trap
   m_Icon: {fileID: 0}
@@ -140,4 +140,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  more_speed: 0
+  more_speed: 1

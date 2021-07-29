@@ -38,7 +38,12 @@ public class SelectSkil : MonoBehaviour
         passive_sprite = Resources.LoadAll<Sprite>("Passive_Buttons/");
 
         GameManager.Data.use_active = 0;
+        GameManager.Data.change_chance = 999;
+
+        GameObject.Find("UI/Button_GO").GetComponent<Button>().interactable = false;
         change_all();
+
+        
     }
 
     // Update is called once per frame
@@ -52,6 +57,18 @@ public class SelectSkil : MonoBehaviour
     {
         Boolean[] bool_active = new Boolean[Enum.GetNames(typeof(DataManager.Active_Skil)).Length];
         Boolean[] bool_passive = new Boolean[Enum.GetNames(typeof(DataManager.Passive_Skil)).Length];
+
+        //이미 선택된 패시브 제하기.
+        //이거는 나중에 데이터를 따로 간결하게 정리하면서 정리해야할듯.
+        //패시브 부분만 따로 이제 배열화해서... 이건 나중에 코드 정리하면서 합시다... 우선은 하드코딩으로
+        bool_passive[2] = GameManager.Data.passive_active;
+        bool_passive[11] = GameManager.Data.magnet;
+        bool_passive[13] = GameManager.Data.passive_buwhal;
+        bool_passive[15] = GameManager.Data.auto_jump;
+        bool_passive[16] = GameManager.Data.random_god;
+        bool_passive[19] = GameManager.Data.auto_restore;
+        
+
 
         Skil_Num[0] = 0;
         Skil_Num[1] = 0;
@@ -101,6 +118,8 @@ public class SelectSkil : MonoBehaviour
         GameObject.Find("UI/Button_Item0").GetComponent<Button>().interactable = false;
         GameObject.Find("UI/Button_Item1").GetComponent<Button>().interactable = false;
         GameObject.Find("UI/Button_Item2").GetComponent<Button>().interactable = false;
+        //GameObject.Find("UI/Button_Reload").GetComponent<Button>().interactable = false;
+        GameObject.Find("UI/Button_GO").GetComponent<Button>().interactable = true;
     }
 
     public void button1()
@@ -116,6 +135,8 @@ public class SelectSkil : MonoBehaviour
         GameObject.Find("UI/Button_Item0").GetComponent<Button>().interactable = false;
         GameObject.Find("UI/Button_Item1").GetComponent<Button>().interactable = false;
         GameObject.Find("UI/Button_Item2").GetComponent<Button>().interactable = false;
+        //GameObject.Find("UI/Button_Reload").GetComponent<Button>().interactable = false;
+        GameObject.Find("UI/Button_GO").GetComponent<Button>().interactable = true;
     }
 
     public void button2()
@@ -131,6 +152,8 @@ public class SelectSkil : MonoBehaviour
         GameObject.Find("UI/Button_Item0").GetComponent<Button>().interactable = false;
         GameObject.Find("UI/Button_Item1").GetComponent<Button>().interactable = false;
         GameObject.Find("UI/Button_Item2").GetComponent<Button>().interactable = false;
+        //GameObject.Find("UI/Button_Reload").GetComponent<Button>().interactable = false;
+        GameObject.Find("UI/Button_GO").GetComponent<Button>().interactable = true;
     }
 
     void set_active(int num)
@@ -158,17 +181,18 @@ public class SelectSkil : MonoBehaviour
                 break;
             case 1:
                 // 행운 증가
-                GameManager.Data.luck += 5;
+                GameManager.Data.luck += 3;
                 save_passive(1);
                 break;
             case 2:
                 // 액티브 스킬 두 번 사용
                 GameManager.Data.max_active += 1;
+                GameManager.Data.passive_active = true;
                 save_passive(2);
                 break;
             case 3:
                 // 방어력 증가
-                GameManager.Data.defense += 5;
+                GameManager.Data.defense += 1;
                 save_passive(3);
                 break;
             case 4:
@@ -220,6 +244,7 @@ public class SelectSkil : MonoBehaviour
             case 13:
                 // 부활
                 GameManager.Data.buwhal += 1;
+                GameManager.Data.passive_buwhal = true;
                 save_passive(13);
                 break;
             case 14:
@@ -247,16 +272,35 @@ public class SelectSkil : MonoBehaviour
                 GameManager.Data.max_jump += 1;
                 save_passive(18);
                 break;
+            case 19:
+                // 자동 체력 재생
+                GameManager.Data.auto_restore = true;
+                save_passive(19);
+                break;
+            case 20:
+                // 체력 회복량 증가.
+                GameManager.Data.restore_eff += 0.1f;
+                save_passive(20);
+                break;
         }
     }
 
     public void ReLoad()
     {
-        GameObject.Find("UI/Button_Item0").GetComponent<Button>().interactable = true;
-        GameObject.Find("UI/Button_Item1").GetComponent<Button>().interactable = true;
-        GameObject.Find("UI/Button_Item2").GetComponent<Button>().interactable = true;
-        change_all();
-    }
+        if (GameManager.Data.change_chance > 0)
+        {
+            GameObject.Find("UI/Button_Item0").GetComponent<Button>().interactable = true;
+            GameObject.Find("UI/Button_Item1").GetComponent<Button>().interactable = true;
+            GameObject.Find("UI/Button_Item2").GetComponent<Button>().interactable = true;
+            change_all();
 
+            GameManager.Data.change_chance -= 1;
+        }
+
+        if(GameManager.Data.change_chance == 0)
+        {
+            GameObject.Find("UI/Button_Reload").GetComponent<Button>().interactable = false;
+        }
+    }
 
 }

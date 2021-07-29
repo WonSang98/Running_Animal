@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4423729136244294310}
   - component: {fileID: 4423729136244294311}
   - component: {fileID: 4423729136244294308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 0006_Monster
   m_TagString: Jump
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1595912939
-  m_SortingLayer: 5
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 933331081813262682, guid: de1a4f2123c46634fbb59f6b8fe72a33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -140,4 +140,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  more_speed: 0
+  more_speed: 1

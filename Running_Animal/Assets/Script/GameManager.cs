@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,8 +11,19 @@ public class GameManager : MonoBehaviour
 
     DataManager _data = new DataManager();
     public static DataManager Data { get { return Instance._data; } }
-    //Play Theme
-    
+
+
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            if (SceneManager.GetActiveScene().name == "Play") 
+            {
+                Time.timeScale = 0;
+                GameObject.Find("UI").transform.Find("Panel_Pause").gameObject.SetActive(true);
+            }
+        }
+    }
     static void Init()
     {
         GameObject go = GameObject.Find("@Managers");
@@ -40,6 +53,67 @@ public class GameManager : MonoBehaviour
         
     }
 
+    public void OnPause()
+    {
+        Debug.Log("onpause");
+        if (SceneManager.GetActiveScene().name == "Play")
+        {
+            Time.timeScale = 0;
+            GameObject.Find("UI").transform.Find("Panel_Pause").gameObject.SetActive(true);
+        }
+    }
+
+    public void OffPause()
+    {
+        Debug.Log("offpause");
+        if (SceneManager.GetActiveScene().name == "Play")
+        {
+            GameObject.Find("UI").transform.Find("Panel_Pause").gameObject.SetActive(false);
+            GameObject.Find("UI").transform.Find("Text_Count").gameObject.SetActive(true);
+            StartCoroutine("Count_Time");
+        }
+    }
+
+    IEnumerator Count_Time()
+    {
+        float temp_speed = 0.0f;
+        for (int i = 3; i > -1; i--)
+        {
+            if(i == 3)
+            {
+                temp_speed = GameManager.Data.speed;
+                GameManager.Data.speed = 0.0f;
+                Time.timeScale = 1;
+            }
+            GameObject.Find("UI/Text_Count").GetComponent<Text>().text = $"{i}";
+            if (i == 0)
+            {
+                GameObject.Find("UI/Text_Count").SetActive(false);
+                GameManager.Data.speed = temp_speed;
+            }
+            
+
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+
+    public List<T> ShuffleList<T>(List<T> list)
+    {
+        int random1, random2;
+        T temp;
+
+        for (int i = 0; i < list.Count; ++i)
+        {
+            random1 = Random.Range(0, list.Count);
+            random2 = Random.Range(0, list.Count);
+
+            temp = list[random1];
+            list[random1] = list[random2];
+            list[random2] = temp;
+        }
+
+        return list;
+    }
     public void Save()
     {
         Data saveData = new Data();
@@ -70,18 +144,28 @@ public class GameManager : MonoBehaviour
         saveData.lvup = Data.lvup;
         saveData.stage = Data.stage;
         saveData.combo = Data.combo;
+        saveData.max_combo = Data.max_combo;
         saveData.multi_combo = Data.multi_combo;
         saveData.max_jump = Data.max_jump;
         saveData.luck = Data.luck;
         saveData.max_active = Data.max_active;
         saveData.use_active = Data.use_active;
         saveData.dodge_time = Data.dodge_time;
+
         saveData.magnet = Data.magnet;
         saveData.buwhal = Data.buwhal;
         saveData.auto_jump = Data.auto_jump;
         saveData.random_god = Data.random_god;
+        saveData.auto_restore = Data.auto_restore;
+        saveData.passive_active = Data.passive_active;
+        saveData.passive_buwhal = Data.passive_buwhal;
+
         saveData.playing = Data.playing;
         saveData.restore_eff = Data.restore_eff;
+
+        saveData.pattern = Data.pattern;
+
+        saveData.change_chance = Data.change_chance;
 
         // 재능 관련
         saveData.Talent_HP = Data.Talent_HP;
@@ -129,18 +213,30 @@ public class GameManager : MonoBehaviour
         Data.lvup = saveData.lvup;
         Data.stage = saveData.stage;
         Data.combo = saveData.combo;
+        Data.max_combo = saveData.max_combo;
         Data.multi_combo = saveData.multi_combo;
         Data.max_jump = saveData.max_jump;
         Data.luck = saveData.luck;
         Data.max_active = saveData.max_active;
         Data.use_active = saveData.use_active;
         Data.dodge_time = saveData.dodge_time;
+        
         Data.magnet = saveData.magnet;
         Data.buwhal = saveData.buwhal;
         Data.auto_jump = saveData.auto_jump;
         Data.random_god = saveData.random_god;
+        Data.auto_restore = saveData.auto_restore;
+        Data.passive_active = saveData.passive_active;
+        Data.passive_buwhal = saveData.passive_buwhal;
+
+
+
         Data.playing = saveData.playing;
         Data.restore_eff = saveData.restore_eff;
+
+        Data.pattern = saveData.pattern;
+
+        Data.change_chance = saveData.change_chance;
 
         // 재능 관련
         Data.Talent_HP = saveData.Talent_HP;
@@ -155,6 +251,44 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
+        Data.playing = false;
+        GameManager.Data.active = DataManager.Active_Skil.None;
+        Time.timeScale = 1;
+
+        Data.lvup = false; // 레벨업 여부, true일 시 다음 장애물은 레벨업하는 장소로.
+        Data.lv = 0; // 현재 레벨 최대 0~12렙까지
+        Data.now_Exp = 0; // 현재 경험치 
+        Data.stage = 0; // 스테이지
+        Data.multi_coin = 0; // 코인 획득량 증가율
+        Data.max_hp = 100.0f; // 최대 체력
+        Data.speed = 8.0f; // 현재 속도
+        Data.jump = 10.0f; // 현재 점프력
+        Data.down = 20.0f; // 현재 하강 속도
+        Data.defense = 0.0f; // 현재 방어력
+        Data.damage = 20.0f; // 현재 피격 데미지
+        Data.combo = 0; // 게임 진행 중 콤보 
+        Data.max_combo = 0;
+        Data.multi_combo = 1; // 콤보 배율
+        Data.max_jump = 2; // 최대 점프 가능 횟수
+        Data.luck = 0; // 행운 (회피와, 콤보 크리티컬에 기인한다)
+        Data.max_active = 1; // 액티브 스킬 최대 사용가능 횟수
+        Data.use_active = 0; // 액티브 스킬 현대 사용 횟수
+        Data.dodge_time = 12; // 피격시 무적 시간 길이. default 12
+        Data.restore_eff = 1.0f;
+
+        Data.magnet = false; // 패시브 자석버그 유무
+        Data.buwhal = 0; // 패시브 부활 유무
+        Data.auto_jump = false; //패시브 오토점프 유무
+        Data.random_god = false; // 패시브 작은 확률로 무적 유무
+        Data.auto_restore = false;
+        Data.change_chance = 0;
+        Data.passive_active = false; // 패시브 액티브 사용횟수 + 1
+        Data.passive_buwhal = false;
+
+
+    Data.pattern = new List<int>();
+        Data.Gold += (int)GameManager.Data.play_gold;
+        Data.play_gold = 0;
         Save();
     }
 }

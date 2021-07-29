@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 6232683685916494537}
   - component: {fileID: 7689737175020354183}
   - component: {fileID: 5473102703348513460}
-  m_Layer: 0
+  - component: {fileID: 5049729201817686463}
+  m_Layer: 8
   m_Name: 0009_Bridge0
   m_TagString: Jump2
   m_Icon: {fileID: 0}
@@ -113,4 +114,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  more_speed: 0
+  more_speed: 1
+--- !u!58 &5049729201817686463
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084798872037342448}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.015868813}
+  serializedVersion: 2
+  m_Radius: 0.15086204

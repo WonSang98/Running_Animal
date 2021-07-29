@@ -159,8 +159,8 @@ public class SkilManager : MonoBehaviour
         Show_Button.GetComponent<Button>().interactable = false; // 액티브 스킬 버튼 비활성화
         GameManager.Data.use_active += 1; // 액티브 스킬 사용 횟수 1회 차감.
 
-        int plus_hp; // 회복할 체력의 양
-        plus_hp = 50; // 기본 회복량 50, 재능 및 다른 요소에 의해 회복량 변동될것
+        float plus_hp; // 회복할 체력의 양
+        plus_hp = 50 * GameManager.Data.restore_eff; // 기본 회복량 50, 재능 및 다른 요소에 의해 회복량 변동될것
         if(GameManager.Data.hp + plus_hp > GameManager.Data.max_hp)
         {
             GameManager.Data.hp = GameManager.Data.max_hp;

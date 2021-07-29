@@ -84,7 +84,10 @@ public class PlayerMove : MonoBehaviour
             {
                 StartCoroutine("Random_God");
             }
-
+            if (GameManager.Data.auto_restore)
+            {
+                StartCoroutine("Auto_Restore");
+            }
         }
     }
 
@@ -97,7 +100,7 @@ public class PlayerMove : MonoBehaviour
             player_hp.text = $"{GameManager.Data.hp}";
             Level.text = $"Lv : {GameManager.Data.lv} EXP : {GameManager.Data.now_Exp} / {GameManager.Data.EXP[GameManager.Data.lv]}";
             combo.text = $"Combo : {GameManager.Data.combo}";
-            stage.text = $"{GameManager.Data.stage}";
+            stage.text = $"{GameManager.Data.pattern[GameManager.Data.stage]}";
             animator.SetBool("StartGame", true);
         }
             
@@ -113,33 +116,7 @@ public class PlayerMove : MonoBehaviour
             else
             {
                 //부활 없슴
-                GameManager.Data.lvup = false; // 레벨업 여부, true일 시 다음 장애물은 레벨업하는 장소로.
-                GameManager.Data.lv = 0; // 현재 레벨 최대 0~12렙까지
-                GameManager.Data.now_Exp = 0; // 현재 경험치 
-                GameManager.Data.stage = 0; // 스테이지
-                GameManager.Data.multi_coin = 0; // 코인 획득량 증가율
-                GameManager.Data.max_hp = 100.0f; // 최대 체력
-                GameManager.Data.speed = 8.0f; // 현재 속도
-                GameManager.Data.jump = 10.0f; // 현재 점프력
-                GameManager.Data.down = 20.0f; // 현재 하강 속도
-                GameManager.Data.defense = 0.0f; // 현재 방어력
-                GameManager.Data.damage = 20.0f; // 현재 피격 데미지
-                GameManager.Data.combo = 0; // 게임 진행 중 콤보 
-                GameManager.Data.multi_combo = 1; // 콤보 배율
-                GameManager.Data.max_jump = 2; // 최대 점프 가능 횟수
-                GameManager.Data.luck = 0; // 행운 (회피와, 콤보 크리티컬에 기인한다)
-                GameManager.Data.max_active = 1; // 액티브 스킬 최대 사용가능 횟수
-                GameManager.Data.use_active = 0; // 액티브 스킬 현대 사용 횟수
-                GameManager.Data.dodge_time = 12; // 피격시 무적 시간 길이. default 12
-
-                GameManager.Data.magnet = false; // 패시브 자석버그 유무
-                GameManager.Data.buwhal = 0; // 패시브 부활 유무
-                GameManager.Data.auto_jump = false; //패시브 오토점프 유무
-                GameManager.Data.random_god = false; // 패시브 작은 확률로 무적 유무
-
-                GameManager.Data.hp = GameManager.Data.max_hp;
-                GameManager.Data.Gold += (int)GameManager.Data.play_gold;
-                GameManager.Data.play_gold = 0;
+                
                 GameManager.Instance.Save();
                 animator.SetBool("StartGame", false);
                 SceneManager.LoadScene("End_Game");
@@ -168,6 +145,7 @@ public class PlayerMove : MonoBehaviour
       
     }
 
+    
     IEnumerator Auto_Jump()
     {
         while (true)
@@ -229,6 +207,16 @@ public class PlayerMove : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
     }
+
+    IEnumerator Auto_Restore()
+    {
+        while (true)
+        {
+            GameManager.Data.hp += 4 * GameManager.Data.restore_eff;
+            yield return new WaitForSeconds(10f);
+        }
+    }
+
     void OnJump(PointerEventData data)
     {
         if (Use_Jump < GameManager.Data.max_jump)
@@ -311,6 +299,25 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    // 피격시 
+    void OnHit()
+    {
+        StartCoroutine(OnDodge(GameManager.Data.dodge_time));
+
+        int per = Random.Range(0, 100);
+        //회피함
+        if(per > GameManager.Data.luck)
+        {
+            if (GameManager.Data.combo > GameManager.Data.max_combo)
+            {
+                GameManager.Data.max_combo = GameManager.Data.combo;
+            }
+            GameManager.Data.combo = 0;
+
+            GameManager.Data.hp -= (GameManager.Data.damage - GameManager.Data.defense);
+        }
+
+    }
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -323,43 +330,27 @@ public class PlayerMove : MonoBehaviour
         }
         if (gameObject.CompareTag("Player") && other.gameObject.CompareTag("Trap_Blood"))
         {
-            GameManager.Data.hp -= (GameManager.Data.damage - GameManager.Data.defense);
-            GameManager.Data.combo = 0;
+            OnHit();
             StartCoroutine(OnBlood());
-            StartCoroutine(OnDodge(GameManager.Data.dodge_time));
         }
 
         if (gameObject.CompareTag("Player") && other.gameObject.CompareTag("Trap_Stun"))
         {
-            GameManager.Data.hp -= (GameManager.Data.damage - GameManager.Data.defense);
-            GameManager.Data.combo = 0;
+            OnHit();
             StartCoroutine(OnStun());
-            StartCoroutine(OnDodge(GameManager.Data.dodge_time));
         }
 
         if (gameObject.CompareTag("Player") && other.gameObject.CompareTag("Trap"))
         {
-            Debug.Log("충돌!!!!");
-            GameManager.Data.hp -= (GameManager.Data.damage - GameManager.Data.defense);
-            GameManager.Data.combo = 0;
-            StartCoroutine(OnDodge(GameManager.Data.dodge_time));
+            OnHit();
         }
 
         if (gameObject.CompareTag("Player") && other.gameObject.CompareTag("Jump"))
         {
-            Debug.Log("충돌!!!!");
-            GameManager.Data.hp -= (GameManager.Data.damage - GameManager.Data.defense);
-            GameManager.Data.combo = 0;
-            StartCoroutine(OnDodge(GameManager.Data.dodge_time));
+            OnHit();
         }
 
-        if (other.gameObject.CompareTag("Coin"))
-        {
-            Debug.Log("돈!!!!");
-            GameManager.Data.play_gold += 10 * (1 + (0.1f * GameManager.Data.multi_coin));
-            get_coin.text = $"{GameManager.Data.play_gold}";
-            Destroy(other.gameObject);
-        }
+        
 
         if (other.gameObject.CompareTag("HP"))
         {
@@ -380,7 +371,13 @@ public class PlayerMove : MonoBehaviour
             GameManager.Instance.Save();
             SceneManager.LoadScene("Select_Item");
         }
-
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            Debug.Log("돈!!!!");
+            GameManager.Data.play_gold += 10 * (1 + (0.1f * GameManager.Data.multi_coin));
+            get_coin.text = $"{GameManager.Data.play_gold}";
+            Destroy(other.gameObject);
+        }
 
     }
 
@@ -396,6 +393,7 @@ public class PlayerMove : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 4, 0);
             animator.SetBool("Landing", true);
             Use_Jump = 0;
+            GameManager.Data.combo += 1;
             Destroy(collision.gameObject);
         }
 
@@ -403,6 +401,14 @@ public class PlayerMove : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 10, 0);
             Use_Jump = 0;
+        }
+
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            Debug.Log("돈!!!!");
+            GameManager.Data.play_gold += 10 * (1 + (0.1f * GameManager.Data.multi_coin));
+            get_coin.text = $"{GameManager.Data.play_gold}";
+            Destroy(collision.gameObject);
         }
     }
 }

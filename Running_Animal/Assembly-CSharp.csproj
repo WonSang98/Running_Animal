@@ -66,7 +66,8 @@
     <Compile Include="Assets\Script\PlayerMove.cs" />
     <Compile Include="Assets\Script\Character.cs" />
     <Compile Include="Assets\Script\MoveTrap.cs" />
-    <Compile Include="Assets\Script\CoinMove.cs" />
+    <Compile Include="Assets\Script\TalentManager.cs" />
+    <Compile Include="Assets\Script\DestroyTrap.cs" />
     <Compile Include="Assets\Script\SpawnPlayer.cs" />
     <Compile Include="Assets\Script\Data.cs" />
     <Compile Include="Assets\Script\GameManager.cs" />
@@ -76,7 +77,8 @@
     <Compile Include="Assets\Script\SelectCharacter.cs" />
     <Compile Include="Assets\Script\SkilManager.cs" />
     <Compile Include="Assets\Script\DataManager.cs" />
-    <Compile Include="Assets\Script\TalentManager.cs" />
+    <Compile Include="Assets\Script\GameOver.cs" />
+    <Compile Include="Assets\Script\Coin.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

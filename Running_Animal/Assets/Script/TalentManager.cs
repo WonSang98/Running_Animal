@@ -29,6 +29,8 @@ public class TalentManager : MonoBehaviour
         txts[2] = GameObject.Find("UI/Panel_LUK/Text").GetComponent<Text>();
         txts[3] = GameObject.Find("UI/Panel_RESTORE/Text").GetComponent<Text>();
 
+        for (int i = 0; i < 4; i++) panels[i].SetActive(false);
+
         txts[0].text = $"LV : {GameManager.Data.Talent_LV[0]}\n" +
                        $"최대 HP를 {HP[GameManager.Data.Talent_LV[0] - 1]} 만큼 추가합니다.\n" +
                        $"레벨업에 필요한 Gold {costs[GameManager.Data.Talent_LV[0] - 1]}";

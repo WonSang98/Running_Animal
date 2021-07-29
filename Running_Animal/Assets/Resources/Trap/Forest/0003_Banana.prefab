@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 844302007615879084}
   - component: {fileID: 844302007615879085}
   - component: {fileID: 844302007615879081}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 0003_Banana
   m_TagString: Trap_Stun
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1595912939
-  m_SortingLayer: 5
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: -7543944989671157358, guid: 4e41736ac3794e34e83db6282c9d08c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -140,4 +140,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
-  more_speed: 0
+  more_speed: 1

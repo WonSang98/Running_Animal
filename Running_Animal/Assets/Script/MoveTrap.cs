@@ -7,7 +7,8 @@ public class MoveTrap : MonoBehaviour
 {
     //GameObject player;
     public float speed;
-    public float more_speed = 0;
+    public float more_speed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,21 +18,7 @@ public class MoveTrap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(-1 * (GameManager.Data.speed + more_speed) * Time.deltaTime, 0, 0);
-        if (transform.position.x <= -14)
-        {
-            Destroy(gameObject);
-            GameManager.Data.combo += GameManager.Data.multi_combo; // 피격시 콤보 증가.
-
-            if (GameManager.Data.lv != 12)
-            {
-                GameManager.Data.now_Exp += 1;
-                if (GameManager.Data.now_Exp >= GameManager.Data.EXP[GameManager.Data.lv])
-                {
-                    GameManager.Data.lvup = true;
-                }
-            }
-        }
+        transform.Translate(-1 * (GameManager.Data.speed * more_speed) * Time.deltaTime, 0, 0);
     }
 
 }
