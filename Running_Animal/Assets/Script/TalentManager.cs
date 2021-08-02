@@ -85,7 +85,7 @@ public class TalentManager : MonoBehaviour
 
     public void UpgradeHP()
     {
-        if(GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[0] - 1])
+        if(GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[0] - 1] && GameManager.Data.Talent_LV[0] < 9)
         {
             GameManager.Data.Gold -= costs[GameManager.Data.Talent_LV[0] - 1];
             GameManager.Data.Talent_LV[0] += 1;
@@ -99,7 +99,7 @@ public class TalentManager : MonoBehaviour
 
     public void UpgradeDEF()
     {
-        if (GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[1] - 1])
+        if (GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[1] - 1] && GameManager.Data.Talent_LV[1] < 9)
         {
             GameManager.Data.Gold -= costs[GameManager.Data.Talent_LV[1] - 1];
             GameManager.Data.Talent_LV[1] += 1;
@@ -113,7 +113,7 @@ public class TalentManager : MonoBehaviour
 
     public void UpgradeLUK()
     {
-        if (GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[2] - 1])
+        if (GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[2] - 1] && GameManager.Data.Talent_LV[2] < 9)
         {
             GameManager.Data.Gold -= costs[GameManager.Data.Talent_LV[2] - 1];
             GameManager.Data.Talent_LV[2] += 1;
@@ -127,7 +127,7 @@ public class TalentManager : MonoBehaviour
 
     public void UpgradeRstore()
     {
-        if (GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[3] - 1])
+        if (GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[3] - 1] && GameManager.Data.Talent_LV[3] < 9)
         {
             GameManager.Data.Gold -= costs[GameManager.Data.Talent_LV[3] - 1];
             GameManager.Data.Talent_LV[3] += 1;

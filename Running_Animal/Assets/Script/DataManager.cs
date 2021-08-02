@@ -12,9 +12,9 @@ public class DataManager
 
     public enum Characters // 캐릭터, enum값을 통해 prefeb instance화 할 예정.
     {
-        One = 0,
-        Two,
-        Three,
+        Pig = 0,
+        Cat,
+        Monky,
         Rabbit
     }
 
@@ -69,7 +69,20 @@ public class DataManager
     // 캐릭터 구매 관리
     public bool[] Buy_Character = { true, false, false, false };
     public int[] Cost_Character = { 500, 500, 500, 500 };
-    public Characters Now_Character = Characters.One;
+    public Characters Now_Character = Characters.Rabbit;
+
+    // 캐릭터 스탯
+    /*
+     * { LV , STAT_POINT, MAX_HP, SPEED, JUMP, DOWN, JUMP_CNT, DEF, LUK, ACTIVE }
+     */
+    public Character[] Character_STAT =
+    {
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 0, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 0, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 0, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 0, 1, DataManager.Active_Skil.None)
+    };
+
 
     //재능 관련
     public float Talent_HP = 0;

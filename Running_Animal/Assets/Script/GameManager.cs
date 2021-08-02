@@ -137,6 +137,9 @@ public class GameManager : MonoBehaviour
         saveData.Buy_Character = Data.Buy_Character;
         saveData.Cost_Character = Data.Cost_Character;
         saveData.Now_Character = Data.Now_Character;
+
+        //캐릭터 스탯 관리
+        saveData.Character_STAT = Data.Character_STAT;
         
         // 게임 플레잉
         saveData.play_gold = Data.play_gold;
@@ -220,7 +223,10 @@ public class GameManager : MonoBehaviour
         Data.Buy_Character = saveData.Buy_Character;
         Data.Cost_Character = saveData.Cost_Character;
         Data.Now_Character = saveData.Now_Character;
-        
+
+        //캐릭터 스탯 관리
+        Data.Character_STAT = saveData.Character_STAT;
+
         //플레잉
         Data.play_gold = saveData.play_gold;
         Data.multi_coin = saveData.multi_coin;

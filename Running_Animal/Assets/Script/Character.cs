@@ -2,27 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character
 {
-    public float Max_HP;
-    public float Max_Speed; // 캐릭터의 최고 속도 테마별로 다름.
-    public int Max_Jump; // 캐릭터의 최고 점프 횟수
-    public int Plus_Gold; // 테마별 골드 추가 수금
-    public float init_Speed; // 캐릭터 초기속도
-    public float Lucky; // 캐릭터 운빨
+    // 캐릭터 스탯
+    /*
+     * { LV , STAT_POINT, MAX_HP, SPEED, JUMP, DOWN, JUMP_CNT, DEF, LUK, ACTIVE }
+     */
 
-    
-    public Character(float _max_hp, float _max_speed, int _max_jump, int _plus_gold, float _Lucky, float _init_Speed = 8.0f)
+    public int LV;
+    public int STAT_POINT;
+    public float MAX_HP;
+    public int LV_MAX_HP;
+    public float SPEED;
+    public int LV_SPEED;
+    public float JUMP_POWER;
+    public int LV_JUMP_POWER;
+    public float DOWN_POWER;
+    public int LV_DOWN_POWER;
+    public float JUMP_COUNT;
+    public int LV_JUMP_COUNT;
+    public float DEF;
+    public int LV_DEF;
+    public float LUK;
+    public int LV_LUK;
+    public DataManager.Active_Skil ACTIVE;
+
+    public Character(int _LV, int _STAT_POINT,
+                     float _MAX_HP, int _LV_MAX_HP,
+                     float _SPEED, int _LV_SPEED,
+                     float _JUMP_POWER, int _LV_JUMP_POWER,
+                     float _DOWN_POWER, int _LV_DOWN_POWER,
+                     float _JUMP_COUNT, int _LV_JUMP_COUNT,
+                     float _DEF, int _LV_DEF,
+                     float _LUK, int _LV_LUK, DataManager.Active_Skil _ACTIVE)
     {
-        Max_HP = _max_hp;
-        Max_Speed = _max_speed;
-        Max_Jump = _max_jump;
-        Plus_Gold = _plus_gold;
-        init_Speed = _init_Speed;
-        Lucky = _Lucky;
-
+        LV = _LV;
+        STAT_POINT = _STAT_POINT;
+        MAX_HP = _MAX_HP;
+        LV_MAX_HP = _LV_MAX_HP;
+        SPEED = _SPEED;
+        LV_SPEED = _LV_SPEED;
+        JUMP_POWER = _JUMP_POWER;
+        LV_JUMP_POWER = _LV_JUMP_POWER;
+        DOWN_POWER = _DOWN_POWER;
+        LV_DOWN_POWER = _LV_DOWN_POWER;
+        JUMP_COUNT = _JUMP_COUNT;
+        LV_JUMP_COUNT = _LV_JUMP_COUNT;
+        DEF = _DEF;
+        LV_DEF = _LV_DEF;
+        LUK = _LUK;
+        LV_LUK = _LV_LUK;
+        ACTIVE = _ACTIVE;
     }
 
+    Character() { }
 
-    
+
+
+
 }
