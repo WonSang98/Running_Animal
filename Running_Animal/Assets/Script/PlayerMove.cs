@@ -324,33 +324,42 @@ public class PlayerMove : MonoBehaviour
     {
         if (gameObject.CompareTag("Shield"))
         {
-            gameObject.tag = "Player";
-            gameObject.transform.Find("1").gameObject.SetActive(false);
-            StartCoroutine(OnDodge(GameManager.Data.dodge_time));
+            if (other.gameObject.CompareTag("Trap_Blood") || other.gameObject.CompareTag("Trap_Stun") || other.gameObject.CompareTag("Trap") || other.gameObject.CompareTag("Jump"))
+            {
+                gameObject.tag = "Player";
+                gameObject.transform.Find("1").gameObject.SetActive(false);
+                StartCoroutine(OnDodge(GameManager.Data.dodge_time));
+            }
         }
-        if (gameObject.CompareTag("Player") && other.gameObject.CompareTag("Trap_Blood"))
+        if (gameObject.CompareTag("Player"))
         {
-            OnHit();
-            StartCoroutine(OnBlood());
+            if (other.gameObject.CompareTag("Trap_Blood"))
+            {
+                OnHit();
+                StartCoroutine(OnBlood());
+            }
+            if (other.gameObject.CompareTag("Trap_Stun"))
+            {
+                OnHit();
+                StartCoroutine(OnStun());
+            }
+            if (other.gameObject.CompareTag("Trap") || other.gameObject.CompareTag("Jump"))
+            {
+                OnHit();
+            }
         }
 
-        if (gameObject.CompareTag("Player") && other.gameObject.CompareTag("Trap_Stun"))
+        if (gameObject.CompareTag("Run"))
         {
-            OnHit();
-            StartCoroutine(OnStun());
+            if (other.gameObject.CompareTag("Trap_Blood") || other.gameObject.CompareTag("Trap_Stun") || other.gameObject.CompareTag("Trap") || other.gameObject.CompareTag("Jump"))
+            {
+                Destroy(other.gameObject);
+                GameManager.Instance.MakeCoin(other.transform);
+                GameManager.Data.Exp_run += 1;
+            }
         }
 
-        if (gameObject.CompareTag("Player") && other.gameObject.CompareTag("Trap"))
-        {
-            OnHit();
-        }
 
-        if (gameObject.CompareTag("Player") && other.gameObject.CompareTag("Jump"))
-        {
-            OnHit();
-        }
-
-        
 
         if (other.gameObject.CompareTag("HP"))
         {
@@ -365,9 +374,16 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("레벨업");
 
-            GameManager.Data.now_Exp = 0;
+            GameManager.Data.now_Exp = GameManager.Data.now_Exp - GameManager.Data.EXP[GameManager.Data.lv];
             GameManager.Data.lv += 1;
-            GameManager.Data.lvup = false;
+            if(GameManager.Data.now_Exp > GameManager.Data.EXP[GameManager.Data.lv])
+            {
+                GameManager.Data.lvup = true;
+            }
+            else
+            {
+                GameManager.Data.lvup = false;
+            }
             GameManager.Instance.Save();
             SceneManager.LoadScene("Select_Item");
         }
@@ -395,6 +411,7 @@ public class PlayerMove : MonoBehaviour
             Use_Jump = 0;
             GameManager.Data.combo += 1;
             Destroy(collision.gameObject);
+            GameManager.Instance.MakeCoin(collision.transform);
         }
 
         if (collision.gameObject.CompareTag("Jump2"))
@@ -409,6 +426,17 @@ public class PlayerMove : MonoBehaviour
             GameManager.Data.play_gold += 10 * (1 + (0.1f * GameManager.Data.multi_coin));
             get_coin.text = $"{GameManager.Data.play_gold}";
             Destroy(collision.gameObject);
+        }
+
+        //질주 아이템 사용 시
+        if (gameObject.CompareTag("Run"))
+        {
+            if (collision.gameObject.CompareTag("Trap_Blood") || collision.gameObject.CompareTag("Trap_Stun") || collision.gameObject.CompareTag("Trap") || collision.gameObject.CompareTag("Jump"))
+            {
+                Destroy(collision.gameObject);
+                GameManager.Instance.MakeCoin(collision.transform);
+                GameManager.Data.Exp_run += 1;
+            }
         }
     }
 }

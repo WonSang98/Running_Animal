@@ -33,7 +33,7 @@ public class GameOver : MonoBehaviour
         Time.timeScale = 1;
 
         GameManager.Data.lvup = false; // 레벨업 여부, true일 시 다음 장애물은 레벨업하는 장소로.
-        GameManager.Data.lv = 0; // 현재 레벨 최대 0~12렙까지
+        GameManager.Data.lv = 1; // 현재 레벨 최대 0~12렙까지
         GameManager.Data.now_Exp = 0; // 현재 경험치 
         GameManager.Data.stage = 0; // 스테이지
         GameManager.Data.multi_coin = 0; // 코인 획득량 증가율
@@ -66,6 +66,13 @@ public class GameOver : MonoBehaviour
         GameManager.Data.pattern = new List<int>();
         GameManager.Data.Gold += (int)GameManager.Data.play_gold;
         GameManager.Data.play_gold = 0;
+
+        // 시작 전 구매 아이템 초기화
+        // 시작 전 구매 아이템 초기화
+        GameManager.Data.Pre_Shield = false;
+        GameManager.Data.Pre_100 = false;
+        GameManager.Data.Pre_300 = false;
+        GameManager.Data.Exp_run = 0;
     }
 
     void Update()

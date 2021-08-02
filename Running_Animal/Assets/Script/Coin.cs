@@ -11,7 +11,7 @@ public class Coin : MonoBehaviour
     void Start()
     {
         cnt = false;
-        transform.GetComponent<Rigidbody2D>().AddForce(new Vector3(50, 40, 0));
+        transform.GetComponent<Rigidbody2D>().AddForce(new Vector3(30, 20, 0));
         target = GameObject.Find("Player");
         Invoke("DelCoin", 10);
 
@@ -19,12 +19,17 @@ public class Coin : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.SmoothDamp(gameObject.transform.position, target.transform.position, ref vel, 0.1f);
+        if (GameManager.Data.magnet)
+        {
+            transform.position = Vector3.SmoothDamp(gameObject.transform.position, target.transform.position, ref vel, 0.1f);
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Tile") && cnt == false)
         {
+            Debug.Log("???");
+
             transform.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             transform.GetComponent<Rigidbody2D>().AddForce(new Vector3(-40, 40, 0));
             cnt = true;

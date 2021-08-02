@@ -22,6 +22,7 @@ public class Trap : MonoBehaviour
     GameObject[] traps; // 함정 리소스 저장
     GameObject warning_bird;
     GameObject warning_shot;
+    GameObject warning_shot2;
     GameObject LvUp;
     GameObject player;
     GameObject coin;
@@ -39,6 +40,7 @@ public class Trap : MonoBehaviour
         traps = Resources.LoadAll<GameObject>("Trap/Forest");
         warning_bird = Resources.Load<GameObject>("Trap/Warning_Bird");
         warning_shot = Resources.Load<GameObject>("Trap/Warning_Shot");
+        warning_shot2 = Resources.Load<GameObject>("Trap/Warning_Shot2");
         LvUp = Resources.Load<GameObject>("Trap/LvUp");
 
         //test
@@ -119,35 +121,35 @@ public class Trap : MonoBehaviour
     IEnumerator MakeShot()
     {
         GameObject shot;
-        GameObject warn = null;
+        GameObject warn = null; // 실시간 좌표 수정
         float shot_y = 0;
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 450; i++)
         {
             float y = player.transform.position.y;
-            if (i < 20) // 경고 생성.
+            if (i < 300) // 경고 생성.
             {
                 Destroy(warn);
                 warn = Instantiate(warning_shot);
                 warn.transform.position = new Vector3(warn.transform.position.x, y, warn.transform.position.z);
                 shot_y = y;
             }
-            else if (i < 24)
+            else if (i < 360)
             {
                 Destroy(warn);
-                warn = Instantiate(warning_shot);
+                warn = Instantiate(warning_shot2);
                 warn.transform.position = new Vector3(warn.transform.position.x, shot_y, warn.transform.position.z);
             }
-            else if( i == 25)
+            else if( i == 375)
             {
                 Destroy(warn);
             }
-            else if (i == 29)
+            else if (i == 435)
             {
                 shot = Instantiate(traps[(int)Forest_Trap.Fly_Shot]);
                 //shot.transform.parent = transform;
                 shot.transform.position = new Vector3(37, shot_y, 0);
             }
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.01f);
         }
     }
 

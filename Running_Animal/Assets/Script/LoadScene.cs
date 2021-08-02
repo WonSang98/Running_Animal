@@ -52,4 +52,11 @@ public class LoadScene : MonoBehaviour
         SceneManager.LoadScene("End_Game");
         GameManager.Instance.Load();
     }
+
+    public void OnPreItem()
+    {
+        GameManager.Instance.Save();
+        SceneManager.LoadScene("Pre_Item");
+        GameManager.Instance.Load();
+    }
 }

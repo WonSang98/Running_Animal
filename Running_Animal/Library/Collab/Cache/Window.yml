@@ -14,14 +14,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Material/Bounce.physicsMaterial2D
+    - Assets/Resources/Item/Coin.prefab
+    - Assets/Resources/Item/Coin.prefab.meta
+    - Assets/Resources/Trap/Forest/0007_Stone.prefab
+    - Assets/Resources/Trap/Forest/0024_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0025_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0026_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0030_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0031_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0039_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0042_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0052_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0058_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0063_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0067_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0070_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0074_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0079_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0098_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0108_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0112_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0125_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0131_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0139_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0143_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0150_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0151_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0163_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0173_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0182_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0184_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0185_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0186_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0187_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0189_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0198_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0200_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0208_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0223_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0226_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0228_Pattern.prefab
+    - Assets/Resources/Trap/Forest/0250_Pattern.prefab
+    - Assets/Scenes/Character.unity
+    - Assets/Scenes/Main.unity
     - Assets/Scenes/Play.unity
-    - Assets/Script/Coin.cs
+    - Assets/Scenes/Pre_Item.unity
+    - Assets/Script/Data.cs
+    - Assets/Script/DataManager.cs
+    - Assets/Script/DestroyTrap.cs
+    - Assets/Script/GameManager.cs
+    - Assets/Script/GameOver.cs
+    - Assets/Script/LoadScene.cs
+    - Assets/Script/Money.cs
+    - Assets/Script/Money.cs.meta
     - Assets/Script/PlayerMove.cs
-    - ProjectSettings/Physics2DSettings.asset
+    - Assets/Script/Pre_BuyItem.cs
+    - Assets/Script/SkilManager.cs
+    - Assets/Script/SpawnPlayer.cs
+    - ProjectSettings/EditorBuildSettings.asset
     - ProjectSettings/TagManager.asset
     - 
-    m_Values: 00000000000000
+    m_Values: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

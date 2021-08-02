@@ -30,6 +30,7 @@ public class DataManager
         The_World, // 느-려-져
         Multiple_Combo, // 콤보3배
         Fly, // 나는 날 수 잇서요
+        Run, // 질주 우당탕 다 부수기~
     }
 
     public enum Passive_Skil// 패시브 스킬 목록
@@ -57,7 +58,6 @@ public class DataManager
         Heal_Eff// 회복 효율 증가
     }
 
-
     // 재화 관리
     public int Cash = 100; // 캐쉬 재화
     public int Gold = 100000000; // 인게임 재화
@@ -79,14 +79,22 @@ public class DataManager
 
     public short[] Talent_LV = { 1, 1, 1, 1 }; // 재능 레벨
 
+    // 시작 전 아이템 구매
+    public bool Pre_Shield = false;
+    public bool Pre_100 = false;
+    public bool Pre_300 = false;
+
+    // 시작 전 아이템 관련
+    public int Exp_run = 0; // 100미터 300미터 질주 시, 질주 가 끝난 후 파괴 된 장애물 경험치 한 번에 적용.
+
     // 게임 플레이 관리
     public bool playing = false;
 
     public Active_Skil active = Active_Skil.None;
     public Passive_Skil[] passive = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    public int[] EXP = { 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999999 }; //레벨
+    public int[] EXP = { 0, 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999999 }; //레벨
     public bool lvup;
-    public int lv = 0;
+    public int lv = 1;
     public int now_Exp = 0;
     public short stage = 0; // 통과한 패턴
     public float play_gold = 0; // 게임 중 얻은 골드

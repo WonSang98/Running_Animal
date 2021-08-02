@@ -69,6 +69,7 @@ public class SkilManager : MonoBehaviour
                 StartCoroutine("OnFly");
                 Invoke("CoolTime", 15f);
                 break;
+
         }
     }
     public void CoolTime()
@@ -292,4 +293,27 @@ public class SkilManager : MonoBehaviour
         }
     }
    
+    //Skil Code : 10 Run
+
+    IEnumerator OnRun(float t)
+    {
+        float pre_speed = 0;
+        for (int i = 0; i < 2; i++)
+        {
+            if(i == 0)
+            {
+                pre_speed = GameManager.Data.speed;
+                player.tag = "Run";
+                GameManager.Data.speed = 30.0f;
+            }
+            if(i == 1)
+            {
+                GameManager.Data.speed = pre_speed;
+                player.tag = "Player";
+                GameManager.Data.now_Exp += GameManager.Data.Exp_run;
+                GameManager.Data.Exp_run = 0;
+            }
+            yield return new WaitForSeconds(t);
+        }
+    }
 }

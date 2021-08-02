@@ -16,6 +16,8 @@ TagManager:
   - Coin
   - HP
   - LevelUp
+  - Run
+  - NonTrap
   layers:
   - Default
   - TransparentFX

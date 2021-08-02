@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     DataManager _data = new DataManager();
     public static DataManager Data { get { return Instance._data; } }
 
+    //Prefabs
+    GameObject coin; 
+
 
     private void OnApplicationPause(bool pause)
     {
@@ -36,6 +39,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(go);
         s_Instance = go.GetComponent<GameManager>();
 
+        //Load Prefabs
     }
 
 
@@ -43,6 +47,7 @@ public class GameManager : MonoBehaviour
     {
         Init();
         string path = Application.persistentDataPath + "/save.xml";
+        coin = Resources.Load<GameObject>("Item/Coin");
         if (System.IO.File.Exists(path)) {
             Debug.Log("아아...소환되었따");
             Load(); }
@@ -118,15 +123,22 @@ public class GameManager : MonoBehaviour
     {
         Data saveData = new Data();
 
+        //재화
         saveData.Cash = Data.Cash;
         saveData.Gold = Data.Gold;
         saveData.Money_Forest = Data.Money_Forest;
         saveData.Money_Desert = Data.Money_Desert;
         saveData.Money_Arctic = Data.Money_Arctic;
+
+        //테마
         saveData.Theme = Data.Theme;
+        
+        //캐릭터 구매 관리
         saveData.Buy_Character = Data.Buy_Character;
         saveData.Cost_Character = Data.Cost_Character;
         saveData.Now_Character = Data.Now_Character;
+        
+        // 게임 플레잉
         saveData.play_gold = Data.play_gold;
         saveData.multi_coin = Data.multi_coin;
         saveData.active = Data.active;
@@ -152,6 +164,7 @@ public class GameManager : MonoBehaviour
         saveData.use_active = Data.use_active;
         saveData.dodge_time = Data.dodge_time;
 
+        // 패시브
         saveData.magnet = Data.magnet;
         saveData.buwhal = Data.buwhal;
         saveData.auto_jump = Data.auto_jump;
@@ -174,6 +187,12 @@ public class GameManager : MonoBehaviour
         saveData.Talent_Restore = Data.Talent_Restore;
         saveData.Talent_LV = Data.Talent_LV;
 
+        // 시작 전 구매 아이템.
+        saveData.Pre_Shield = Data.Pre_Shield;
+        saveData.Pre_100 = Data.Pre_100;
+        saveData.Pre_300 = Data.Pre_300;
+        saveData.Exp_run = Data.Exp_run;
+
         string path = Application.persistentDataPath + "/save.xml";
         XmlManager.XmlSave<Data>(saveData, path);
 
@@ -187,15 +206,22 @@ public class GameManager : MonoBehaviour
         string path = Application.persistentDataPath + "/save.xml";
         saveData = XmlManager.XmlLoad<Data>(path);
 
+        //재화
         Data.Cash = saveData.Cash;
         Data.Gold = saveData.Gold;
         Data.Money_Forest = saveData.Money_Forest;
         Data.Money_Desert = saveData.Money_Desert;
         Data.Money_Arctic = saveData.Money_Arctic;
+
+        //테마
         Data.Theme = saveData.Theme;
+        
+        //캐릭터 구매 관련
         Data.Buy_Character = saveData.Buy_Character;
         Data.Cost_Character = saveData.Cost_Character;
         Data.Now_Character = saveData.Now_Character;
+        
+        //플레잉
         Data.play_gold = saveData.play_gold;
         Data.multi_coin = saveData.multi_coin;
         Data.active = saveData.active;
@@ -221,6 +247,7 @@ public class GameManager : MonoBehaviour
         Data.use_active = saveData.use_active;
         Data.dodge_time = saveData.dodge_time;
         
+        //패시브
         Data.magnet = saveData.magnet;
         Data.buwhal = saveData.buwhal;
         Data.auto_jump = saveData.auto_jump;
@@ -245,9 +272,21 @@ public class GameManager : MonoBehaviour
         Data.Talent_Restore = saveData.Talent_Restore;
         Data.Talent_LV = saveData.Talent_LV;
 
+        // 시작 전 구매 아이템
+        Data.Pre_Shield = saveData.Pre_Shield;
+        Data.Pre_100 = saveData.Pre_100;
+        Data.Pre_300 = saveData.Pre_300;
+        Data.Exp_run = saveData.Exp_run;
+
         Debug.Log("LOAD!");
 
     }
+
+    public void MakeCoin(Transform other)
+    {
+        Instantiate(coin, new Vector3(other.position.x + 0.5f, other.position.y + 4.0f, other.position.z), Quaternion.identity);
+    }
+
 
     private void OnApplicationQuit()
     {
@@ -256,11 +295,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         Data.lvup = false; // 레벨업 여부, true일 시 다음 장애물은 레벨업하는 장소로.
-        Data.lv = 0; // 현재 레벨 최대 0~12렙까지
+        Data.lv = 1; // 현재 레벨 최대 0~12렙까지
         Data.now_Exp = 0; // 현재 경험치 
         Data.stage = 0; // 스테이지
         Data.multi_coin = 0; // 코인 획득량 증가율
         Data.max_hp = 100.0f; // 최대 체력
+        Data.hp = 100.0f;
         Data.speed = 8.0f; // 현재 속도
         Data.jump = 10.0f; // 현재 점프력
         Data.down = 20.0f; // 현재 하강 속도
@@ -285,6 +325,11 @@ public class GameManager : MonoBehaviour
         Data.passive_active = false; // 패시브 액티브 사용횟수 + 1
         Data.passive_buwhal = false;
 
+        // 시작 전 구매 아이템 초기화
+        Data.Pre_Shield = false;
+        Data.Pre_100 = false;
+        Data.Pre_300 = false;
+        Data.Exp_run = 0;
 
     Data.pattern = new List<int>();
         Data.Gold += (int)GameManager.Data.play_gold;
