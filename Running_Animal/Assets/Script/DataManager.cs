@@ -30,7 +30,6 @@ public class DataManager
         The_World, // 느-려-져
         Multiple_Combo, // 콤보3배
         Fly, // 나는 날 수 잇서요
-        Run, // 질주 우당탕 다 부수기~
     }
 
     public enum Passive_Skil// 패시브 스킬 목록
@@ -77,10 +76,10 @@ public class DataManager
      */
     public Character[] Character_STAT =
     {
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 0, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 0, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 0, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 0, 1, DataManager.Active_Skil.None)
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None)
     };
 
 
@@ -105,10 +104,10 @@ public class DataManager
 
     public Active_Skil active = Active_Skil.None;
     public Passive_Skil[] passive = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-    public int[] EXP = { 0, 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999999 }; //레벨
+    public float[] EXP = { 0, 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999 }; //레벨
     public bool lvup;
     public int lv = 1;
-    public int now_Exp = 0;
+    public float now_Exp = 0;
     public short stage = 0; // 통과한 패턴
     public float play_gold = 0; // 게임 중 얻은 골드
     public int multi_coin = 0;

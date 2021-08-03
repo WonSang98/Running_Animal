@@ -165,11 +165,13 @@ public class SkilManager : MonoBehaviour
         if(GameManager.Data.hp + plus_hp > GameManager.Data.max_hp)
         {
             GameManager.Data.hp = GameManager.Data.max_hp;
+
         }
         else
         {
             GameManager.Data.hp += plus_hp; 
         }
+        GameManager.Instance.BAR_HP();
     }
 
     // Skil Code : 5 Item_Change
@@ -312,6 +314,7 @@ public class SkilManager : MonoBehaviour
                 player.tag = "Player";
                 GameManager.Data.now_Exp += GameManager.Data.Exp_run;
                 GameManager.Data.Exp_run = 0;
+                GameManager.Instance.BAR_EXP();
             }
             yield return new WaitForSeconds(t);
         }

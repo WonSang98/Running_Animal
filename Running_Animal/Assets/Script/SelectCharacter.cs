@@ -122,6 +122,9 @@ public class SelectCharacter : MonoBehaviour
     {
 
         GameManager.Data.Now_Character = (DataManager.Characters)(idx);
+
+        //temp
+        GameManager.Data.luck = GameManager.Data.Character_STAT[idx].LUK;
         show_info();
     }
 

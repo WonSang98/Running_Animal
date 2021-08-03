@@ -25,10 +25,10 @@ public class Data
 
     public Character[] Character_STAT =
     {
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 0, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 0, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 0, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 0, 1, DataManager.Active_Skil.None)
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None)
     };
 
     //재능 관련
@@ -53,10 +53,10 @@ public class Data
 
     public DataManager.Active_Skil active = DataManager.Active_Skil.None; // 현재 가진 액티브 능력
     public DataManager.Passive_Skil[] passive = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; // 현재 가진 패시브 능력
-    public int[] EXP = { 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999999 }; //레벨업 시 필요 경험치
+    public float[] EXP = { 0, 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999 }; //레벨업 시 필요 경험치
     public bool lvup; // 1.레벨업 여부, true일 시 다음 장애물은 레벨업하는 장소로.
-    public int lv = 0; // 2.현재 레벨 최대 0~12렙까지
-    public int now_Exp = 0; // 3.현재 경험치 
+    public int lv = 1; // 2.현재 레벨 최대 0~12렙까지
+    public float now_Exp = 0; // 3.현재 경험치 
     public short stage = 0; // 4.통과한 스테이지 
     public float play_gold = 0; // 5.게임 중 얻은 골드
     public int multi_coin = 0; // 6.코인 획득량 증가율

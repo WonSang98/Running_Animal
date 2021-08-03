@@ -15,19 +15,10 @@ public class DestroyTrap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(other.gameObject); // 그 장애물을 파! 괘!
-        int per = Random.Range(0, 100);
+        GameManager.Instance.Trap_Combo(other.transform);
+
         if (Player.CompareTag("Run"))
         {
-            GameManager.Instance.MakeCoin(other.transform);
-            if (per < GameManager.Data.luck) // 행운 수치에 따라 크리티컬 적용.
-            {
-                GameManager.Data.combo += GameManager.Data.multi_combo * 2;
-            }
-            else
-            {
-                GameManager.Data.combo += GameManager.Data.multi_combo;
-            }
             if (GameManager.Data.lv != 13)
             {
                 GameManager.Data.Exp_run += 1;
@@ -37,27 +28,14 @@ public class DestroyTrap : MonoBehaviour
         {
             if (!other.CompareTag("NonTrap"))
             {
-                GameManager.Instance.MakeCoin(other.transform);
-                if (per < GameManager.Data.luck) // 행운 수치에 따라 크리티컬 적용.
-                {
-                    GameManager.Data.combo += GameManager.Data.multi_combo * 2;
-                }
-                else
-                {
-                    GameManager.Data.combo += GameManager.Data.multi_combo;
-                }
-                if (GameManager.Data.lv != 13)
-                {
-                    GameManager.Data.now_Exp += 1;
+                GameManager.Data.now_Exp += 1;
+                GameManager.Instance.BAR_EXP();
                     if (GameManager.Data.now_Exp >= GameManager.Data.EXP[GameManager.Data.lv])
                     {
                         GameManager.Data.lvup = true;
                     }
-                }
             }
+        }
 
-        }     
-        
-    }
-    
+    }        
 }

@@ -16,6 +16,7 @@ public class SpawnPlayer : MonoBehaviour
         Player.transform.Translate(-6.495f, -1.5f, 0);
         Player.transform.name = "Player";
 
+
         if (GameManager.Data.playing == false) // 게임 시작의 첫 부분 
         {
             // 시작 전 구매한 아이템의 적용
@@ -61,6 +62,7 @@ public class SpawnPlayer : MonoBehaviour
                 Player.tag = "Player";
                 GameManager.Data.now_Exp += GameManager.Data.Exp_run;
                 GameManager.Data.Exp_run = 0;
+                GameManager.Instance.BAR_EXP();
             }
             yield return new WaitForSeconds(t);
         }

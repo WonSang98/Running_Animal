@@ -26,17 +26,15 @@ public class PlayerMove : MonoBehaviour
     // GameManager.Instance.Player 
     int Use_Jump; // 플레이어의 현재 사용 점프 횟수
 
-    Text player_hp;
-    Text get_coin;
-    Text Level;
-    Text combo;
-    Text stage;
+    Text Text_gold;
 
     Color player_opacity; // 플레이어 투명도, 피격 후 깜박이기 위해 사용
 
     SpriteRenderer spriterenderer; // 스프라이트 변환을 위해 사용
 
     Animator animator;
+
+    GameObject Miss; // 피격시 미스 창 보여줌~
 
     void Awake()
     {
@@ -46,14 +44,11 @@ public class PlayerMove : MonoBehaviour
             button_down = GameObject.Find("UI/Button_Down").GetComponent<Button>();
 
 
-            player_hp = GameObject.Find("UI/HP").GetComponent<Text>();
-            get_coin = GameObject.Find("UI/Gold").GetComponent<Text>();
-            combo = GameObject.Find("UI/Combo").GetComponent<Text>();
-            Level = GameObject.Find("UI/LV").GetComponent<Text>();
-            stage = GameObject.Find("UI/Stage").GetComponent<Text>();
-            get_coin.text = $"{GameManager.Data.play_gold}";
+            Text_gold = GameObject.Find("UI/Image_GOLD/Text_Gold").GetComponent<Text>();
+            Text_gold.text = $"{GameManager.Data.play_gold}";
             event_jump = GameObject.Find("UI/Button_Jump").GetComponent<EventTrigger>();
             event_down = GameObject.Find("UI/Button_Down").GetComponent<EventTrigger>();
+
 
             entry_Jump = new EventTrigger.Entry();
             entry_Jump.eventID = EventTriggerType.PointerDown;
@@ -74,6 +69,8 @@ public class PlayerMove : MonoBehaviour
             spriterenderer = GetComponent<SpriteRenderer>();
 
             animator = GetComponent<Animator>();
+
+            Miss = Resources.Load<GameObject>("Item/Miss");
 
             if (GameManager.Data.auto_jump)
             {
@@ -97,10 +94,10 @@ public class PlayerMove : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Play")
         {
             transform.Translate(-1 * speed * Time.deltaTime, 0, 0);
-            player_hp.text = $"{GameManager.Data.hp}";
-            Level.text = $"Lv : {GameManager.Data.lv} EXP : {GameManager.Data.now_Exp} / {GameManager.Data.EXP[GameManager.Data.lv]}";
-            combo.text = $"Combo : {GameManager.Data.combo}";
-            stage.text = $"{GameManager.Data.pattern[GameManager.Data.stage]}";
+
+
+            
+
             animator.SetBool("StartGame", true);
         }
             
@@ -213,6 +210,7 @@ public class PlayerMove : MonoBehaviour
         while (true)
         {
             GameManager.Data.hp += 4 * GameManager.Data.restore_eff;
+            GameManager.Instance.BAR_HP();
             yield return new WaitForSeconds(10f);
         }
     }
@@ -305,7 +303,7 @@ public class PlayerMove : MonoBehaviour
         StartCoroutine(OnDodge(GameManager.Data.dodge_time));
 
         int per = Random.Range(0, 100);
-        //회피함
+        //회피 못함 ㅠ
         if(per > GameManager.Data.luck)
         {
             if (GameManager.Data.combo > GameManager.Data.max_combo)
@@ -315,6 +313,11 @@ public class PlayerMove : MonoBehaviour
             GameManager.Data.combo = 0;
 
             GameManager.Data.hp -= (GameManager.Data.damage - GameManager.Data.defense);
+            GameManager.Instance.BAR_HP();
+        }
+        else // 회피함. ㅎㅎ
+        {
+            Instantiate(Miss, gameObject.transform); 
         }
 
     }
@@ -366,7 +369,7 @@ public class PlayerMove : MonoBehaviour
             Debug.Log("체력!");
 
             GameManager.Data.hp = GameManager.Data.hp + 50 > GameManager.Data.max_hp ? GameManager.Data.max_hp : GameManager.Data.hp + 50;
-            player_hp.text = $"{GameManager.Data.hp}";
+            GameManager.Instance.BAR_HP();
             Destroy(other.gameObject);
         }
 
@@ -391,7 +394,7 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("돈!!!!");
             GameManager.Data.play_gold += 10 * (1 + (0.1f * GameManager.Data.multi_coin));
-            get_coin.text = $"{GameManager.Data.play_gold}";
+            Text_gold.text = $"{GameManager.Data.play_gold}g";
             Destroy(other.gameObject);
         }
 
@@ -409,9 +412,9 @@ public class PlayerMove : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 4, 0);
             animator.SetBool("Landing", true);
             Use_Jump = 0;
-            GameManager.Data.combo += 1;
-            Destroy(collision.gameObject);
-            GameManager.Instance.MakeCoin(collision.transform);
+            GameManager.Instance.Trap_Combo(collision.transform);
+            GameManager.Data.now_Exp += 1;
+            GameManager.Instance.BAR_EXP();
         }
 
         if (collision.gameObject.CompareTag("Jump2"))
@@ -424,7 +427,7 @@ public class PlayerMove : MonoBehaviour
         {
             Debug.Log("돈!!!!");
             GameManager.Data.play_gold += 10 * (1 + (0.1f * GameManager.Data.multi_coin));
-            get_coin.text = $"{GameManager.Data.play_gold}";
+            Text_gold.text = $"{GameManager.Data.play_gold}g";
             Destroy(collision.gameObject);
         }
 

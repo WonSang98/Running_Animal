@@ -79,6 +79,7 @@
     <Compile Include="Assets\Script\SkilManager.cs" />
     <Compile Include="Assets\Script\DataManager.cs" />
     <Compile Include="Assets\Script\GameOver.cs" />
+    <Compile Include="Assets\Script\MoveMiss.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

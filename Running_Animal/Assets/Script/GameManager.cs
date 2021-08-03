@@ -13,8 +13,14 @@ public class GameManager : MonoBehaviour
     public static DataManager Data { get { return Instance._data; } }
 
     //Prefabs
-    GameObject coin; 
+    GameObject coin;
+    public static GameObject combo;
+    public static GameObject combo_Count;
 
+    public static Image HP_Bar;
+    public static Image EXP_Bar;
+
+    IEnumerator Coroutine_Combo;
 
     private void OnApplicationPause(bool pause)
     {
@@ -51,11 +57,18 @@ public class GameManager : MonoBehaviour
         if (System.IO.File.Exists(path)) {
             Debug.Log("아아...소환되었따");
             Load(); }
-    }
 
-    void Update()
-    {
-        
+        if(SceneManager.GetActiveScene().name == "Play")
+        {
+            Debug.Log("글자 불러오기 완료");
+            combo = GameObject.Find("UI/Text_Combo");
+            combo_Count = GameObject.Find("UI/Text_Combo/Text_Count");
+            Coroutine_Combo = ComboEffect();
+            HP_Bar = GameObject.Find("UI/Bar_HP/Gage_HP").GetComponent<Image>();
+            EXP_Bar = GameObject.Find("UI/Bar_EXP/Gage_EXP").GetComponent<Image>();
+            BAR_HP();
+            BAR_EXP();
+        }
     }
 
     public void OnPause()
@@ -86,15 +99,15 @@ public class GameManager : MonoBehaviour
         {
             if(i == 3)
             {
-                temp_speed = GameManager.Data.speed;
-                GameManager.Data.speed = 0.0f;
+                temp_speed = Data.speed;
+                Data.speed = 0.0f;
                 Time.timeScale = 1;
             }
             GameObject.Find("UI/Text_Count").GetComponent<Text>().text = $"{i}";
             if (i == 0)
             {
                 GameObject.Find("UI/Text_Count").SetActive(false);
-                GameManager.Data.speed = temp_speed;
+                Data.speed = temp_speed;
             }
             
 
@@ -287,17 +300,91 @@ public class GameManager : MonoBehaviour
         Debug.Log("LOAD!");
 
     }
+    // 체력 바
+    public void BAR_HP()
+    {
+        HP_Bar.fillAmount = GameManager.Data.hp / GameManager.Data.max_hp;
+    }
 
+    // 경험치 바
+    public void BAR_EXP()
+    {
+        Debug.Log(GameManager.Data.now_Exp / GameManager.Data.EXP[GameManager.Data.lv]);
+        EXP_Bar.fillAmount = (GameManager.Data.now_Exp / GameManager.Data.EXP[GameManager.Data.lv]);
+    }
+    // 코인 생성...
     public void MakeCoin(Transform other)
     {
         Instantiate(coin, new Vector3(other.position.x + 0.5f, other.position.y + 4.0f, other.position.z), Quaternion.identity);
+    }
+
+    // 트랩 파괴 시 콤보 적용
+    public void Trap_Combo(Transform other)
+    {
+        MakeCoin(other.transform);
+        Destroy(other.gameObject); // 그 장애물을 파! 괘!
+        int per = Random.Range(0, 100);
+        if (per < Data.luck) // 행운 수치에 따라 크리티컬 적용.
+        {
+            Data.combo += Data.multi_combo * 2;
+            combo.GetComponent<Text>().color = Color.red;
+            combo_Count.GetComponent<Text>().color = Color.red;
+            combo.GetComponent<Text>().text = "ComboX2";
+            combo_Count.GetComponent<Text>().text = $"{Data.combo}!";
+            if (Coroutine_Combo != null)
+            {
+                StopCoroutine(Coroutine_Combo);
+                Coroutine_Combo = ComboEffect();
+                StartCoroutine(Coroutine_Combo);
+            }
+            else
+            {
+                Coroutine_Combo = ComboEffect();
+                StartCoroutine(Coroutine_Combo);
+            }
+        }
+        else
+        {
+            Data.combo += Data.multi_combo;
+            combo.GetComponent<Text>().color = Color.white;
+            combo_Count.GetComponent<Text>().color = Color.white;
+            combo.GetComponent<Text>().text = "Combo";
+            combo_Count.GetComponent<Text>().text = $"{Data.combo}!";
+            if (Coroutine_Combo != null)
+            {
+                StopCoroutine(Coroutine_Combo);
+                Coroutine_Combo = ComboEffect();
+                StartCoroutine(Coroutine_Combo);
+            }
+            else
+            {
+                Coroutine_Combo = ComboEffect();
+                StartCoroutine(Coroutine_Combo);
+            }
+        }
+    }
+
+    IEnumerator ComboEffect()
+    {
+        for(int i=0; i<=100; i++)
+        {
+            if(i == 0)
+            {
+                combo.transform.localScale = new Vector3(1.5f, 1.5f, 0);
+            }
+            else
+            {
+                combo.transform.localScale -= new Vector3(0.005f, 0.005f, 0);
+            }
+            yield return new WaitForSeconds(0.01f);
+        }
     }
 
 
     private void OnApplicationQuit()
     {
         Data.playing = false;
-        GameManager.Data.active = DataManager.Active_Skil.None;
+        Data.active = DataManager.Active_Skil.None;
         Time.timeScale = 1;
 
         Data.lvup = false; // 레벨업 여부, true일 시 다음 장애물은 레벨업하는 장소로.
@@ -338,7 +425,7 @@ public class GameManager : MonoBehaviour
         Data.Exp_run = 0;
 
     Data.pattern = new List<int>();
-        Data.Gold += (int)GameManager.Data.play_gold;
+        Data.Gold += (int)Data.play_gold;
         Data.play_gold = 0;
         Save();
     }

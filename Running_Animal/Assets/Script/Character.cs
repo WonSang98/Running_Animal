@@ -23,7 +23,7 @@ public class Character
     public int LV_JUMP_COUNT;
     public float DEF;
     public int LV_DEF;
-    public float LUK;
+    public int LUK;
     public int LV_LUK;
     public DataManager.Active_Skil ACTIVE;
 
@@ -34,7 +34,7 @@ public class Character
                      float _DOWN_POWER, int _LV_DOWN_POWER,
                      float _JUMP_COUNT, int _LV_JUMP_COUNT,
                      float _DEF, int _LV_DEF,
-                     float _LUK, int _LV_LUK, DataManager.Active_Skil _ACTIVE)
+                     int _LUK, int _LV_LUK, DataManager.Active_Skil _ACTIVE)
     {
         LV = _LV;
         STAT_POINT = _STAT_POINT;
