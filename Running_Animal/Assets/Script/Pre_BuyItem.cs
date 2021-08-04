@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Pre_BuyItem : MonoBehaviour
@@ -9,28 +10,18 @@ public class Pre_BuyItem : MonoBehaviour
     int normal_price = 500;
     int random_price = 1000;
 
-    enum Random_Item
-    {
-        HP15 = 0, // 체력 15% 증가
-        HP30, // 체력 30% 증가
-        LUK5, // 행운 5 증가
-        LUK10, // 행운 10 증가
-        SPEED15, // 속도 15%
-        SPEED30, // 속도 30%
-        JUMP20, // 점프 20%
-        JUMP40, // 점프 40%
-        GOLD25, // 골드 획득량 25% 증가
-        GOLD50, // 골드 획득량 50% 증가
-        COMBO2, // 콤보 획득량 2배
-        COMBO3, // 콤보 획득량 3배
-        JUMP_PLUS, // 점프 횟수 1회 추가
-        DEF10, // 피해 10% 경감
-        DEF15, // 피해 15% 경감
-        EXP2, // 경험치 2배 (스테이지 도달 속도 UP)
-    }
+    Text[] temp_info = new Text[6];
 
     private void Start()
     {
+        //TEMP
+        temp_info[0] = GameObject.Find("UI/Button_HP/Text_HP").GetComponent<Text>();
+        temp_info[1] = GameObject.Find("UI/Button_Shield/Text_Shield").GetComponent<Text>();
+        temp_info[2] = GameObject.Find("UI/Button_RUN0/Text_RUN0").GetComponent<Text>();
+        temp_info[3] = GameObject.Find("UI/Button_RUN1/Text_RUN1").GetComponent<Text>();
+        temp_info[4] = GameObject.Find("UI/Button_ACTIVE/Text_ACTIVE").GetComponent<Text>();
+        temp_info[5] = GameObject.Find("UI/Text_RandomEFF").GetComponent<Text>();
+        //TEMP
         GameManager.Data.max_hp += GameManager.Data.Talent_HP;
         GameManager.Data.hp = GameManager.Data.max_hp;
         GameManager.Data.defense += GameManager.Data.Talent_DEF;
@@ -48,38 +39,43 @@ public class Pre_BuyItem : MonoBehaviour
 
     public void Buy_HP() // 체력 10% 증가.
     {
-        if(GameManager.Data.Gold > normal_price)
+        if(GameManager.Data.Gold > normal_price && !GameManager.Data.Pre_HP)
         {
             GameManager.Data.Gold -= normal_price;
             GameManager.Data.max_hp *= 1.1f;
             GameManager.Data.hp = GameManager.Data.max_hp;
+            GameManager.Data.Pre_HP = true;
+            temp_info[0].text = $"체력{GameManager.Data.max_hp}";
         }
     }
 
     public void Buy_Shield() // 시작 시 1회 쉴드
     {
-        if (GameManager.Data.Gold > normal_price)
+        if (GameManager.Data.Gold > normal_price && !GameManager.Data.Pre_Shield)
         {
             GameManager.Data.Gold -= normal_price;
             GameManager.Data.Pre_Shield = true;
+            temp_info[1].text = "구매";
         }
     }
 
     public void Buy_100() //100미터 달리기 이용권
     {
-        if (GameManager.Data.Gold > normal_price)
+        if (GameManager.Data.Gold > normal_price && !(GameManager.Data.Pre_100 || GameManager.Data.Pre_300))
         {
             GameManager.Data.Gold -= normal_price;
             GameManager.Data.Pre_100 = true;
+            temp_info[2].text = "구매";
         }
     }
 
     public void Buy_300() //300미터 달리기 이용권
     {
-        if (GameManager.Data.Gold > normal_price)
+        if (GameManager.Data.Gold > normal_price && !(GameManager.Data.Pre_100 || GameManager.Data.Pre_300))
         {
             GameManager.Data.Gold -= normal_price;
             GameManager.Data.Pre_300 = true;
+            temp_info[3].text = "구매";
         }
     }
 
@@ -90,6 +86,7 @@ public class Pre_BuyItem : MonoBehaviour
             GameManager.Data.Gold -= normal_price;
             int idx = Random.Range(1, Enum.GetNames(typeof(DataManager.Active_Skil)).Length);
             GameManager.Data.active = (DataManager.Active_Skil)idx;
+            temp_info[4].text = $"{GameManager.Data.active}";
         }
     }
 
@@ -98,8 +95,10 @@ public class Pre_BuyItem : MonoBehaviour
         if (GameManager.Data.Gold > random_price)
         {
             GameManager.Data.Gold -= random_price;
-            int idx = Random.Range(0, Enum.GetNames(typeof(Random_Item)).Length);
-            GameManager.Data.active = (DataManager.Active_Skil)idx;
+            int idx = Random.Range(0, Enum.GetNames(typeof(DataManager.Random_Item)).Length);
+            GameManager.Data.Pre_Random = (DataManager.Random_Item)idx;
+            temp_info[5].text = $"{(DataManager.Random_Item)Enum.ToObject(typeof(DataManager.Random_Item), idx)}";
         }
     }
+
 }

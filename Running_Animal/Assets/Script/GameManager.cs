@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
         saveData.damage = Data.damage;
         saveData.EXP = Data.EXP;
         saveData.now_Exp = Data.now_Exp;
+        saveData.multi_exp = Data.multi_exp;
         saveData.lv = Data.lv;
         saveData.lvup = Data.lvup;
         saveData.stage = Data.stage;
@@ -204,9 +205,11 @@ public class GameManager : MonoBehaviour
         saveData.Talent_LV = Data.Talent_LV;
 
         // 시작 전 구매 아이템.
+        saveData.Pre_HP = Data.Pre_HP;
         saveData.Pre_Shield = Data.Pre_Shield;
         saveData.Pre_100 = Data.Pre_100;
         saveData.Pre_300 = Data.Pre_300;
+        saveData.Pre_Random = Data.Pre_Random;
         saveData.Exp_run = Data.Exp_run;
 
         string path = Application.persistentDataPath + "/save.xml";
@@ -254,6 +257,7 @@ public class GameManager : MonoBehaviour
         Data.damage = saveData.damage;
         Data.EXP = saveData.EXP;
         Data.now_Exp = saveData.now_Exp;
+        Data.multi_exp = saveData.multi_exp;
         Data.lv = saveData.lv;
         Data.lvup = saveData.lvup;
         Data.stage = saveData.stage;
@@ -292,9 +296,11 @@ public class GameManager : MonoBehaviour
         Data.Talent_LV = saveData.Talent_LV;
 
         // 시작 전 구매 아이템
+        Data.Pre_HP = saveData.Pre_HP;
         Data.Pre_Shield = saveData.Pre_Shield;
         Data.Pre_100 = saveData.Pre_100;
         Data.Pre_300 = saveData.Pre_300;
+        Data.Pre_Random = saveData.Pre_Random;
         Data.Exp_run = saveData.Exp_run;
 
         Debug.Log("LOAD!");
@@ -366,48 +372,66 @@ public class GameManager : MonoBehaviour
 
     IEnumerator ComboEffect()
     {
-        for(int i=0; i<=100; i++)
+        for (int i = 0; i <= 100; i++)
         {
-            if(i == 0)
-            {
-                combo.transform.localScale = new Vector3(1.5f, 1.5f, 0);
-            }
-            else
-            {
-                combo.transform.localScale -= new Vector3(0.005f, 0.005f, 0);
+            if (SceneManager.GetActiveScene().name == "Play") 
+            { 
+                if (i == 0)
+                {
+                    combo.transform.localScale = new Vector3(1.5f, 1.5f, 0);
+                }
+                else
+                {
+                    combo.transform.localScale -= new Vector3(0.005f, 0.005f, 0);
+                }
             }
             yield return new WaitForSeconds(0.01f);
         }
     }
 
+    public void Set_Stat()
+    {
+        int idx = (int)Data.Now_Character;
+        //현재 선택된 캐릭터 스탯 + 재능으로 플레이 스탯 설정.
+        
+        // 
+        Data.max_hp = Data.Character_STAT[idx].MAX_HP + Data.Talent_HP;
+        Data.hp = Data.max_hp;
+        Data.speed = Data.Character_STAT[idx].SPEED;
+        Data.jump = Data.Character_STAT[idx].JUMP_POWER;
+        Data.down = Data.Character_STAT[idx].DOWN_POWER;
+        Data.max_jump = Data.Character_STAT[idx].JUMP_COUNT;
+        Data.defense = Data.Character_STAT[idx].DEF + Data.Talent_DEF;
+        Data.luck = Data.Character_STAT[idx].LUK + Data.Talent_LUK;
+        Data.active = Data.Character_STAT[idx].ACTIVE;
+        Data.restore_eff = Data.Talent_Restore;
 
+    }
     private void OnApplicationQuit()
     {
+        Re_Stat();
+    }
+
+    public void Re_Stat()
+    {
         Data.playing = false;
-        Data.active = DataManager.Active_Skil.None;
         Time.timeScale = 1;
+
+        Set_Stat();
 
         Data.lvup = false; // 레벨업 여부, true일 시 다음 장애물은 레벨업하는 장소로.
         Data.lv = 1; // 현재 레벨 최대 0~12렙까지
         Data.now_Exp = 0; // 현재 경험치 
+        Data.multi_exp = 1;
         Data.stage = 0; // 스테이지
-        Data.multi_coin = 0; // 코인 획득량 증가율
-        Data.max_hp = 100.0f; // 최대 체력
-        Data.hp = 100.0f;
-        Data.speed = 8.0f; // 현재 속도
-        Data.jump = 10.0f; // 현재 점프력
-        Data.down = 20.0f; // 현재 하강 속도
-        Data.defense = 0.0f; // 현재 방어력
+        Data.multi_coin = 1; // 코인 획득량 증가율
         Data.damage = 20.0f; // 현재 피격 데미지
         Data.combo = 0; // 게임 진행 중 콤보 
         Data.max_combo = 0;
         Data.multi_combo = 1; // 콤보 배율
-        Data.max_jump = 2; // 최대 점프 가능 횟수
-        Data.luck = 0; // 행운 (회피와, 콤보 크리티컬에 기인한다)
         Data.max_active = 1; // 액티브 스킬 최대 사용가능 횟수
         Data.use_active = 0; // 액티브 스킬 현대 사용 횟수
         Data.dodge_time = 12; // 피격시 무적 시간 길이. default 12
-        Data.restore_eff = 1.0f;
 
         Data.magnet = false; // 패시브 자석버그 유무
         Data.buwhal = 0; // 패시브 부활 유무
@@ -419,12 +443,14 @@ public class GameManager : MonoBehaviour
         Data.passive_buwhal = false;
 
         // 시작 전 구매 아이템 초기화
+        Data.Pre_HP = false;
         Data.Pre_Shield = false;
         Data.Pre_100 = false;
         Data.Pre_300 = false;
+        Data.Pre_Random = DataManager.Random_Item.None;
         Data.Exp_run = 0;
 
-    Data.pattern = new List<int>();
+        Data.pattern = new List<int>();
         Data.Gold += (int)Data.play_gold;
         Data.play_gold = 0;
         Save();

@@ -14,22 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Resources/Character/3.prefab
-    - Assets/Resources/Image/GUI/MISS.png
-    - Assets/Resources/Image/GUI/MISS.png.meta
-    - Assets/Resources/Item/Miss.prefab
-    - Assets/Resources/Item/Miss.prefab.meta
-    - Assets/Scenes/Main.unity
     - Assets/Scenes/Play.unity
+    - Assets/Script/Character.cs
+    - Assets/Script/Data.cs
     - Assets/Script/DataManager.cs
-    - Assets/Script/MoveMiss.cs
-    - Assets/Script/MoveMiss.cs.meta
-    - Assets/fonts.meta
-    - Assets/fonts/Sam3KRFont.ttf
-    - Assets/fonts/Sam3KRFont.ttf.meta
-    - ProjectSettings/TagManager.asset
+    - Assets/Script/DestroyTrap.cs
+    - Assets/Script/GameManager.cs
+    - Assets/Script/GameOver.cs
+    - Assets/Script/PlayerMove.cs
+    - Assets/Script/Pre_BuyItem.cs
+    - Assets/Script/SkilManager.cs
+    - Assets/Script/SpawnPlayer.cs
     - 
-    m_Values: 000000000000000000000000000000
+    m_Values: 000000000000000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

@@ -19,7 +19,7 @@ public class Character
     public int LV_JUMP_POWER;
     public float DOWN_POWER;
     public int LV_DOWN_POWER;
-    public float JUMP_COUNT;
+    public int JUMP_COUNT;
     public int LV_JUMP_COUNT;
     public float DEF;
     public int LV_DEF;
@@ -32,7 +32,7 @@ public class Character
                      float _SPEED, int _LV_SPEED,
                      float _JUMP_POWER, int _LV_JUMP_POWER,
                      float _DOWN_POWER, int _LV_DOWN_POWER,
-                     float _JUMP_COUNT, int _LV_JUMP_COUNT,
+                     int _JUMP_COUNT, int _LV_JUMP_COUNT,
                      float _DEF, int _LV_DEF,
                      int _LUK, int _LV_LUK, DataManager.Active_Skil _ACTIVE)
     {

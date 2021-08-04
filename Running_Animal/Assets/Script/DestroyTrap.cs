@@ -21,14 +21,14 @@ public class DestroyTrap : MonoBehaviour
         {
             if (GameManager.Data.lv != 13)
             {
-                GameManager.Data.Exp_run += 1;
+                GameManager.Data.Exp_run += 1 * GameManager.Data.multi_exp;
             }
         }
         else
         {
             if (!other.CompareTag("NonTrap"))
             {
-                GameManager.Data.now_Exp += 1;
+                GameManager.Data.now_Exp += 1 * GameManager.Data.multi_exp;
                 GameManager.Instance.BAR_EXP();
                     if (GameManager.Data.now_Exp >= GameManager.Data.EXP[GameManager.Data.lv])
                     {

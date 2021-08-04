@@ -35,49 +35,65 @@ public class SkilManager : MonoBehaviour
                 break;
             case DataManager.Active_Skil.Defense:
                 OnDefense();
-                Invoke("CoolTime", 15f);
+                Show_Button.GetComponent<Image>().fillAmount = 0;
+                StartCoroutine(CoolTime(15));
                 break;
             case DataManager.Active_Skil.Flash:
                 OnFlash();
-                Invoke("CoolTime", 15f);
+                Show_Button.GetComponent<Image>().fillAmount = 0;
+                StartCoroutine(CoolTime(15));
                 break;
             case DataManager.Active_Skil.Ghost:
                 OnGhost();
-                Invoke("CoolTime", 15f);
+                Show_Button.GetComponent<Image>().fillAmount = 0;
+                StartCoroutine(CoolTime(15));
                 break;
             case DataManager.Active_Skil.Heal:
                 OnHeal();
-                Invoke("CoolTime", 20f);
+                Show_Button.GetComponent<Image>().fillAmount = 0;
+                StartCoroutine(CoolTime(20));
                 break;
             case DataManager.Active_Skil.Item_Change:
                 Item_Change();
-                Invoke("CoolTime", 20f);
+                Show_Button.GetComponent<Image>().fillAmount = 0;
+                StartCoroutine(CoolTime(20));
                 break;
             case DataManager.Active_Skil.Change_Coin:
                 Change_Coin();
-                Invoke("CoolTime", 20f);
+                Show_Button.GetComponent<Image>().fillAmount = 0;
+                StartCoroutine(CoolTime(20));
                 break;
             case DataManager.Active_Skil.The_World:
                 StartCoroutine("OnSlow");
-                Invoke("CoolTime", 10f);
+                Show_Button.GetComponent<Image>().fillAmount = 0;
+                StartCoroutine(CoolTime(10));
                 break;
             case DataManager.Active_Skil.Multiple_Combo:
                 StartCoroutine("MultiCombo");
-                Invoke("CoolTime", 5f);
+                Show_Button.GetComponent<Image>().fillAmount = 0;
+                StartCoroutine(CoolTime(5));
                 break;
             case DataManager.Active_Skil.Fly:
                 StartCoroutine("OnFly");
-                Invoke("CoolTime", 15f);
+                Show_Button.GetComponent<Image>().fillAmount = 0;
+                StartCoroutine(CoolTime(15));
                 break;
 
         }
     }
-    public void CoolTime()
+    IEnumerator CoolTime(float t)
     {
-        if (GameManager.Data.use_active < GameManager.Data.max_active)
+        if (GameManager.Data.use_active < GameManager.Data.max_active) 
         {
-            Debug.Log("ÄðÅ¸ÀÓ ¿Ï·á~");
-            Show_Button.GetComponent<Button>().interactable = true;
+            for (float i = 0; i <= t; i++)
+            {
+                if(i == t)
+                {
+                    Show_Button.GetComponent<Button>().interactable = true;
+                }
+                Show_Button.GetComponent<Image>().fillAmount += (1.0f / t);
+                yield return new WaitForSeconds(1);
+            }
         }
     }
     // Skil Code : 1 Defense

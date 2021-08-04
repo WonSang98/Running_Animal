@@ -57,6 +57,27 @@ public class DataManager
         Heal_Eff// 회복 효율 증가
     }
 
+    public enum Random_Item // 시작 전 구매 랜덤 아이템 목록
+    {
+        None = 0,
+        HP15, // 체력 15% 증가
+        HP30, // 체력 30% 증가
+        LUK5, // 행운 5 증가
+        LUK10, // 행운 10 증가
+        SPEED15, // 속도 15%
+        SPEED30, // 속도 30%
+        JUMP20, // 점프 20%
+        JUMP40, // 점프 40%
+        GOLD25, // 골드 획득량 25% 증가
+        GOLD50, // 골드 획득량 50% 증가
+        COMBO2, // 콤보 획득량 2배
+        COMBO3, // 콤보 획득량 3배
+        JUMP_PLUS, // 점프 횟수 1회 추가
+        DEF10, // 피해 10% 경감
+        DEF15, // 피해 15% 경감
+        EXP2, // 경험치 2배 (스테이지 도달 속도 UP)
+    }
+
     // 재화 관리
     public int Cash = 100; // 캐쉬 재화
     public int Gold = 100000000; // 인게임 재화
@@ -76,10 +97,10 @@ public class DataManager
      */
     public Character[] Character_STAT =
     {
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None)
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 50, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 50, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 50, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 50, 1, DataManager.Active_Skil.None)
     };
 
 
@@ -92,12 +113,14 @@ public class DataManager
     public short[] Talent_LV = { 1, 1, 1, 1 }; // 재능 레벨
 
     // 시작 전 아이템 구매
+    public bool Pre_HP = false;
     public bool Pre_Shield = false;
     public bool Pre_100 = false;
     public bool Pre_300 = false;
+    public Random_Item Pre_Random = Random_Item.None;
 
     // 시작 전 아이템 관련
-    public int Exp_run = 0; // 100미터 300미터 질주 시, 질주 가 끝난 후 파괴 된 장애물 경험치 한 번에 적용.
+    public float Exp_run = 0; // 100미터 300미터 질주 시, 질주 가 끝난 후 파괴 된 장애물 경험치 한 번에 적용.
 
     // 게임 플레이 관리
     public bool playing = false;
@@ -108,9 +131,10 @@ public class DataManager
     public bool lvup;
     public int lv = 1;
     public float now_Exp = 0;
+    public float multi_exp = 1;
     public short stage = 0; // 통과한 패턴
     public float play_gold = 0; // 게임 중 얻은 골드
-    public int multi_coin = 0;
+    public float multi_coin = 1;
     public float max_hp = 100.0f;
     public float hp = 100.0f;
     public float speed = 9.0f;

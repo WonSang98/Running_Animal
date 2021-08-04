@@ -25,10 +25,10 @@ public class Data
 
     public Character[] Character_STAT =
     {
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 100, 1, DataManager.Active_Skil.None)
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 50, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 50, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 50, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 50, 1, DataManager.Active_Skil.None)
     };
 
     //재능 관련
@@ -40,12 +40,14 @@ public class Data
     public short[] Talent_LV = { 0, 0, 0, 0 }; // 재능 레벨
 
     // 시작 전 아이템 구매
+    public bool Pre_HP = false;
     public bool Pre_Shield = false;
     public bool Pre_100 = false;
     public bool Pre_300 = false;
+    public DataManager.Random_Item Pre_Random = DataManager.Random_Item.None;
 
     // 시작 전 아이템 관련
-    public int Exp_run = 0; // 100미터 300미터 질주 시, 질주 가 끝난 후 파괴 된 장애물 경험치 한 번에 적용.
+    public float Exp_run = 0; // 100미터 300미터 질주 시, 질주 가 끝난 후 파괴 된 장애물 경험치 한 번에 적용.
 
 
     // 게임 플레이 관리
@@ -57,9 +59,10 @@ public class Data
     public bool lvup; // 1.레벨업 여부, true일 시 다음 장애물은 레벨업하는 장소로.
     public int lv = 1; // 2.현재 레벨 최대 0~12렙까지
     public float now_Exp = 0; // 3.현재 경험치 
+    public float multi_exp = 1;
     public short stage = 0; // 4.통과한 스테이지 
     public float play_gold = 0; // 5.게임 중 얻은 골드
-    public int multi_coin = 0; // 6.코인 획득량 증가율
+    public float multi_coin = 1; // 6.코인 획득량 증가율
     public float max_hp = 100.0f; // 7.최대 체력
     public float hp = 100.0f; // 8.현재 체력
     public float speed = 9.0f; // 9.현재 속도
