@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5017674971971692104}
   - component: {fileID: 1162267733549187984}
   - component: {fileID: 6271934739665784869}
+  - component: {fileID: 5573433247577083275}
   m_Layer: 8
   m_Name: 0008_Honey_Bee
   m_TagString: Trap
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1595912939
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: -6796169751471096908, guid: de1a4f2123c46634fbb59f6b8fe72a33, type: 3}
+  m_Sprite: {fileID: -7317790261048627795, guid: 54563cd4fa184f6449af49beb58bf92b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -141,3 +142,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   more_speed: 1
+--- !u!95 &5573433247577083275
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5790576199615003174}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 77d7917b277a85e44a16dc518897cb67, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

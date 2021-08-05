@@ -21,6 +21,12 @@ public class SpawnPlayer : MonoBehaviour
         {
             Set_Random();
             // 시작 전 구매한 아이템의 적용
+            if (GameManager.Data.Pre_HP)
+            {
+                GameManager.Data.max_hp *= 1.1f;
+                GameManager.Data.hp = GameManager.Data.max_hp;
+                GameManager.Data.Pre_HP = false;
+            }
             if (GameManager.Data.Pre_Shield)
             {
                 // 1회용 쉴드 구매 시
@@ -53,52 +59,68 @@ public class SpawnPlayer : MonoBehaviour
             case DataManager.Random_Item.HP15:
                 GameManager.Data.max_hp *= 1.15f;
                 GameManager.Data.hp = GameManager.Data.max_hp;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.HP30:
                 GameManager.Data.max_hp *= 1.30f;
                 GameManager.Data.hp = GameManager.Data.max_hp;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.LUK5: 
                 GameManager.Data.luck += 5;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.LUK10:
                 GameManager.Data.luck += 10;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.SPEED15:
                 GameManager.Data.speed *= 1.15f;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.SPEED30:
                 GameManager.Data.speed *= 1.30f;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.JUMP20:
                 GameManager.Data.jump *= 1.20f;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.JUMP40:
                 GameManager.Data.jump *= 1.40f;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.GOLD25:
                 GameManager.Data.multi_coin *= 1.25f;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.GOLD50:
                 GameManager.Data.multi_coin *= 1.5f;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.COMBO2:
                 GameManager.Data.multi_combo *= 2;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.COMBO3:
                 GameManager.Data.multi_combo *= 3;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.JUMP_PLUS:
                 GameManager.Data.max_jump += 1;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.DEF10:
                 GameManager.Data.defense += 10;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.DEF15:
                 GameManager.Data.defense += 15;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.EXP2:
                 GameManager.Data.multi_exp *= 2;
+                GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
 
         }

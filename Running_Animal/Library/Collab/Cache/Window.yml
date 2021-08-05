@@ -14,20 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Scenes/Play.unity
-    - Assets/Script/Character.cs
-    - Assets/Script/Data.cs
-    - Assets/Script/DataManager.cs
-    - Assets/Script/DestroyTrap.cs
-    - Assets/Script/GameManager.cs
-    - Assets/Script/GameOver.cs
-    - Assets/Script/PlayerMove.cs
-    - Assets/Script/Pre_BuyItem.cs
-    - Assets/Script/SkilManager.cs
-    - Assets/Script/SpawnPlayer.cs
     - 
-    m_Values: 000000000000000000000000
-  RevisionSummary: 
+    m_Values: 01
+  RevisionSummary: "\uC5C5\uB85C\uB4DC \uADF8\uB7F0\uB370 \uC774\uC81C \uBC84\uADF8
+    \uC218\uC815\uC744 \uACC1\uB4E4\uC778.."
   ChangesSearchValue: 
   SelectedHistoryRevision: 
   HistoryPageNumber: 0

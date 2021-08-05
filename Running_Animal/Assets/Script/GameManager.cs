@@ -153,6 +153,10 @@ public class GameManager : MonoBehaviour
 
         //캐릭터 스탯 관리
         saveData.Character_STAT = Data.Character_STAT;
+
+        //난이도 설정
+        saveData.Forest_Diff = Data.Forest_Diff;
+        saveData.Diff_LV = Data.Diff_LV;
         
         // 게임 플레잉
         saveData.play_gold = Data.play_gold;
@@ -242,6 +246,10 @@ public class GameManager : MonoBehaviour
 
         //캐릭터 스탯 관리
         Data.Character_STAT = saveData.Character_STAT;
+
+        //난이도 설정
+        Data.Forest_Diff = saveData.Forest_Diff;
+        Data.Diff_LV = saveData.Diff_LV;
 
         //플레잉
         Data.play_gold = saveData.play_gold;
@@ -392,7 +400,7 @@ public class GameManager : MonoBehaviour
     public void Set_Stat()
     {
         int idx = (int)Data.Now_Character;
-        //현재 선택된 캐릭터 스탯 + 재능으로 플레이 스탯 설정.
+        //현재 선택된 캐릭터 스탯 + 재능 + 단계으로 플레이 스탯 설정.
         
         // 
         Data.max_hp = Data.Character_STAT[idx].MAX_HP + Data.Talent_HP;
@@ -401,15 +409,45 @@ public class GameManager : MonoBehaviour
         Data.jump = Data.Character_STAT[idx].JUMP_POWER;
         Data.down = Data.Character_STAT[idx].DOWN_POWER;
         Data.max_jump = Data.Character_STAT[idx].JUMP_COUNT;
-        Data.defense = Data.Character_STAT[idx].DEF + Data.Talent_DEF;
+        Data.defense = 1 - (Data.Character_STAT[idx].DEF + Data.Talent_DEF);
         Data.luck = Data.Character_STAT[idx].LUK + Data.Talent_LUK;
         Data.active = Data.Character_STAT[idx].ACTIVE;
         Data.restore_eff = Data.Talent_Restore;
+
+        switch (GameManager.Data.Theme)
+        {
+            case DataManager.Themes.Forest:
+                Data.damage = Data.Forest_Diff[Data.Diff_LV].DMG;
+
+                Data.multi_coin = 1 + Data.Forest_Diff[Data.Diff_LV].COIN;
+
+                Data.restore_eff -= Data.Forest_Diff[Data.Diff_LV].RESTORE;
+
+                if(Data.luck - Data.Forest_Diff[Data.Diff_LV].LUK < 0)
+                {
+                    Data.luck = 0;
+                }
+                else
+                {
+                    Data.luck -= Data.Forest_Diff[Data.Diff_LV].LUK;
+                }
+
+                Data.defense += Data.Forest_Diff[Data.Diff_LV].DEF;
+
+                Data.speed += Data.Forest_Diff[Data.Diff_LV].SPEED;
+
+                break;
+            case DataManager.Themes.Desert:
+                break;
+            case DataManager.Themes.Arctic:
+                break;
+        }
 
     }
     private void OnApplicationQuit()
     {
         Re_Stat();
+        Save();
     }
 
     public void Re_Stat()
@@ -424,8 +462,6 @@ public class GameManager : MonoBehaviour
         Data.now_Exp = 0; // 현재 경험치 
         Data.multi_exp = 1;
         Data.stage = 0; // 스테이지
-        Data.multi_coin = 1; // 코인 획득량 증가율
-        Data.damage = 20.0f; // 현재 피격 데미지
         Data.combo = 0; // 게임 진행 중 콤보 
         Data.max_combo = 0;
         Data.multi_combo = 1; // 콤보 배율
@@ -443,13 +479,14 @@ public class GameManager : MonoBehaviour
         Data.passive_buwhal = false;
 
         // 시작 전 구매 아이템 초기화
+        /*
         Data.Pre_HP = false;
         Data.Pre_Shield = false;
         Data.Pre_100 = false;
         Data.Pre_300 = false;
         Data.Pre_Random = DataManager.Random_Item.None;
         Data.Exp_run = 0;
-
+        */
         Data.pattern = new List<int>();
         Data.Gold += (int)Data.play_gold;
         Data.play_gold = 0;

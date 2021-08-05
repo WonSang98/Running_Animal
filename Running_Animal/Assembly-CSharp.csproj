@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\MainManager.cs" />
     <Compile Include="Assets\Script\Coin.cs" />
+    <Compile Include="Assets\Script\MoveMiss.cs" />
     <Compile Include="Assets\Script\MoveTrap_y.cs" />
     <Compile Include="Assets\Script\SelectSkil.cs" />
     <Compile Include="Assets\Script\ScroolBackGround.cs" />
@@ -79,7 +80,7 @@
     <Compile Include="Assets\Script\SkilManager.cs" />
     <Compile Include="Assets\Script\DataManager.cs" />
     <Compile Include="Assets\Script\GameOver.cs" />
-    <Compile Include="Assets\Script\MoveMiss.cs" />
+    <Compile Include="Assets\Script\Difficulty.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

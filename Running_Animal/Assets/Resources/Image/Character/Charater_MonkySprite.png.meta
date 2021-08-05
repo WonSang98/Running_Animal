@@ -1,0 +1,648 @@
+fileFormatVersion: 2
+guid: ffd9ee505c76bba468aedf0e58053a8d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -845424891012881475
+    second: Charater_MonkySprite_0
+  - first:
+      213: -7976849413609452191
+    second: Charater_MonkySprite_1
+  - first:
+      213: -6542442850994373106
+    second: Charater_MonkySprite_2
+  - first:
+      213: -8681102008260118455
+    second: Charater_MonkySprite_3
+  - first:
+      213: 729763491578752162
+    second: Charater_MonkySprite_4
+  - first:
+      213: 2675685161645028535
+    second: Charater_MonkySprite_5
+  - first:
+      213: 18008861565027066
+    second: Charater_MonkySprite_6
+  - first:
+      213: 6559371318251239175
+    second: Charater_MonkySprite_7
+  - first:
+      213: -416786702061090545
+    second: Charater_MonkySprite_8
+  - first:
+      213: 8378243324226819676
+    second: Charater_MonkySprite_9
+  - first:
+      213: -1990703050596770491
+    second: Charater_MonkySprite_10
+  - first:
+      213: -3439451654217551175
+    second: Charater_MonkySprite_11
+  - first:
+      213: -344428447615127167
+    second: Charater_MonkySprite_12
+  - first:
+      213: 1266292702985271735
+    second: Charater_MonkySprite_13
+  - first:
+      213: -7531754845701553751
+    second: Charater_MonkySprite_14
+  - first:
+      213: -3263025221774926091
+    second: Charater_MonkySprite_15
+  - first:
+      213: -3160636312321255826
+    second: Charater_MonkySprite_16
+  - first:
+      213: -3613116174477793614
+    second: Charater_MonkySprite_17
+  - first:
+      213: 7799580389367151235
+    second: Charater_MonkySprite_18
+  - first:
+      213: -1421125375311559534
+    second: Charater_MonkySprite_19
+  - first:
+      213: 7296079314315196676
+    second: Charater_MonkySprite_20
+  - first:
+      213: -2923250194991649700
+    second: Charater_MonkySprite_21
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Charater_MonkySprite_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 1640
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db367e67a827444f0800000000000000
+      internalID: -845424891012881475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_1
+      rect:
+        serializedVersion: 2
+        x: 250
+        y: 1630
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16d8603b8b98c4190800000000000000
+      internalID: -7976849413609452191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_2
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 1630
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0ebf2fe3e29435a0800000000000000
+      internalID: -6542442850994373106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_3
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 1630
+        width: 230
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 948b9bac7b7868780800000000000000
+      internalID: -8681102008260118455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_4
+      rect:
+        serializedVersion: 2
+        x: 1000
+        y: 1630
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2aca9957704a02a00800000000000000
+      internalID: 729763491578752162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_5
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 1240
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b4b2a66a71f12520800000000000000
+      internalID: 2675685161645028535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_6
+      rect:
+        serializedVersion: 2
+        x: 400
+        y: 1240
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af28464d6faff3000800000000000000
+      internalID: 18008861565027066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_7
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1220
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 707304ef571970b50800000000000000
+      internalID: 6559371318251239175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_8
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 1220
+        width: 230
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f09ca84e3b6473af0800000000000000
+      internalID: -416786702061090545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_9
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 1210
+        width: 230
+        height: 290
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c56d35ed9ef754470800000000000000
+      internalID: 8378243324226819676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_10
+      rect:
+        serializedVersion: 2
+        x: 1360
+        y: 1210
+        width: 230
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54d94e76f1a9f54e0800000000000000
+      internalID: -1990703050596770491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_11
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 820
+        width: 230
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b2bb3881fc9440d0800000000000000
+      internalID: -3439451654217551175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_12
+      rect:
+        serializedVersion: 2
+        x: 450
+        y: 830
+        width: 230
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1817c59d628583bf0800000000000000
+      internalID: -344428447615127167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_13
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 820
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b93b171186c29110800000000000000
+      internalID: 1266292702985271735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_14
+      rect:
+        serializedVersion: 2
+        x: 940
+        y: 820
+        width: 230
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a1c1ae6fd4d97790800000000000000
+      internalID: -7531754845701553751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_15
+      rect:
+        serializedVersion: 2
+        x: 1190
+        y: 820
+        width: 230
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5fe17fa59d767b2d0800000000000000
+      internalID: -3263025221774926091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_16
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 500
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6614eb050a2324d0800000000000000
+      internalID: -3160636312321255826
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_17
+      rect:
+        serializedVersion: 2
+        x: 460
+        y: 490
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b668008bf1abddc0800000000000000
+      internalID: -3613116174477793614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_18
+      rect:
+        serializedVersion: 2
+        x: 710
+        y: 490
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38af4594a0dad3c60800000000000000
+      internalID: 7799580389367151235
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_19
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 490
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 294c2472006274ce0800000000000000
+      internalID: -1421125375311559534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_20
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 200
+        width: 230
+        height: 260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40935d6ea71e04560800000000000000
+      internalID: 7296079314315196676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_MonkySprite_21
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 210
+        width: 280
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5c6ee98f678e67d0800000000000000
+      internalID: -2923250194991649700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

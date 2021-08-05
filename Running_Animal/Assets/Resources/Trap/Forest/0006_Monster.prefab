@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4423729136244294310}
   - component: {fileID: 4423729136244294311}
   - component: {fileID: 4423729136244294308}
+  - component: {fileID: 6927709657675019608}
   m_Layer: 8
   m_Name: 0006_Monster
   m_TagString: Jump
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1595912939
   m_SortingLayer: 8
   m_SortingOrder: 0
-  m_Sprite: {fileID: 933331081813262682, guid: de1a4f2123c46634fbb59f6b8fe72a33, type: 3}
+  m_Sprite: {fileID: -6737977631477542574, guid: 54563cd4fa184f6449af49beb58bf92b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,7 +103,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.2202168, y: 1.52}
+    oldSize: {x: 2.2202168, y: 1.53}
     newSize: {x: 2.2202168, y: 1.52}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -141,3 +142,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   more_speed: 1
+--- !u!95 &6927709657675019608
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4423729136244294309}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3d299ea6882d1334b89d0e6e84d9b1d3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

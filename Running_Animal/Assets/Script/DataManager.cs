@@ -80,8 +80,8 @@ public class DataManager
 
     // 재화 관리
     public int Cash = 100; // 캐쉬 재화
-    public int Gold = 100000000; // 인게임 재화
-    public int Money_Forest = 10; // 숲 테마 재화
+    public int Gold = 1000000; // 인게임 재화
+    public int Money_Forest = 1000; // 숲 테마 재화
     public int Money_Desert = 10; // 숲 테마 재화
     public int Money_Arctic = 10; // 숲 테마 재화
     // 테마 관리
@@ -97,10 +97,10 @@ public class DataManager
      */
     public Character[] Character_STAT =
     {
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 50, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 50, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 50, 1, DataManager.Active_Skil.None),
-        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 50, 1, DataManager.Active_Skil.None)
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 5, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 5, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 5, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 5, 1, DataManager.Active_Skil.None)
     };
 
 
@@ -122,6 +122,31 @@ public class DataManager
     // 시작 전 아이템 관련
     public float Exp_run = 0; // 100미터 300미터 질주 시, 질주 가 끝난 후 파괴 된 장애물 경험치 한 번에 적용.
 
+    // 난이도 설정
+    /*
+     * 피격 데미지 상승
+     * 코인 획득량 증가
+     * 회복 효율 감소
+     * 행운 감소
+     * 방어력 감소
+     * 속도 증가
+     * 다음 스테이지 필요 경험치량 증가
+     */
+    public Difficulty[] Forest_Diff =
+    {
+        new Difficulty(20,  0.00f, 0.00f , 0 , 0.00f , 0.00f  , 0), // LEVEL 1
+        new Difficulty(25,  0.05f, 0.01f , 0 , 0.01f , 0.25f  , 0), // LEVEL 2
+        new Difficulty(30,  0.10f, 0.02f , 0 , 0.02f , 0.50f  , 0), // LEVEL 3
+        new Difficulty(40,  0.20f, 0.04f , 5 , 0.04f , 0.33f  , 10), // LEVEL 4
+        new Difficulty(50,  0.30f, 0.06f , 6 , 0.06f , 0.66f  , 10), // LEVEL 5
+        new Difficulty(60,  0.40f, 0.08f , 7 , 0.08f , 0.99f  , 10), // LEVEL 6
+        new Difficulty(75,  0.60f, 0.12f , 10, 0.12f , 1.5f  , 15), // LEVEL 7
+        new Difficulty(90,  0.80f, 0.16f , 12, 0.16f , 2.00f , 15), // LEVEL 8
+        new Difficulty(105, 1.00f, 0.20f , 14, 0.20f , 2.50f , 20), // LEVEL 9
+        new Difficulty(120, 1.20f, 0.25f , 15, 0.25f , 3.00f , 20), // LEVEL 10
+    };
+    public int Diff_LV = 0; // 난이도 레벨
+
     // 게임 플레이 관리
     public bool playing = false;
 
@@ -140,13 +165,13 @@ public class DataManager
     public float speed = 9.0f;
     public float jump = 10.0f;
     public float down = 20.0f;
-    public float defense = 0.0f;
-    public float damage = 20.0f;
+    public float defense = 1.0f;
+    public float damage = 1.00f;
     public int combo = 0;
     public int max_combo = 0; // 게임 진행 중 최대 콤보
     public int multi_combo = 1;
     public int max_jump = 2;
-    public int luck = 0;
+    public float luck = 0;
     public int max_active = 1;
     public int use_active = 0;
     public int dodge_time = 12;

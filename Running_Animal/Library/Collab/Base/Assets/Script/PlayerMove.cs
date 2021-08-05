@@ -35,6 +35,8 @@ public class PlayerMove : MonoBehaviour
     Animator animator;
 
     GameObject Miss; // 피격시 미스 창 보여줌~
+    GameObject Cam; // 피격, 혹은 뭐 공격시 카메라 무빙으로 타격감
+    
 
     void Awake()
     {
@@ -71,6 +73,8 @@ public class PlayerMove : MonoBehaviour
             animator = GetComponent<Animator>();
 
             Miss = Resources.Load<GameObject>("Item/Miss");
+
+            Cam = GameObject.Find("Main Camera");
 
             if (GameManager.Data.auto_jump)
             {
@@ -116,8 +120,7 @@ public class PlayerMove : MonoBehaviour
                 
                 GameManager.Instance.Save();
                 animator.SetBool("StartGame", false);
-                SceneManager.LoadScene("End_Game");
-                GameManager.Instance.Load();
+                StartCoroutine(GameOver());
             }
         }
 
@@ -163,6 +166,7 @@ public class PlayerMove : MonoBehaviour
             {
                 Time.timeScale = 0;
                 GameManager.Data.hp = (GameManager.Data.max_hp / 2);
+                GameManager.Instance.BAR_HP();
             }
             if(i == 1)
             {
@@ -172,6 +176,22 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    IEnumerator GameOver()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if (i == 0)
+            {
+                GameManager.Data.speed = 0;
+            }
+            if (i == 1)
+            {
+                SceneManager.LoadScene("End_Game");
+                GameManager.Instance.Load();
+            }
+            yield return new WaitForSeconds(3.0f);
+        }
+    }
     IEnumerator Random_God()
     {
         while (true)
@@ -313,6 +333,7 @@ public class PlayerMove : MonoBehaviour
             GameManager.Data.combo = 0;
 
             GameManager.Data.hp -= (GameManager.Data.damage - GameManager.Data.defense);
+            StartCoroutine(Cam_Hit());
             GameManager.Instance.BAR_HP();
         }
         else // 회피함. ㅎㅎ
@@ -322,7 +343,37 @@ public class PlayerMove : MonoBehaviour
 
     }
 
+    IEnumerator Cam_Hit()
+    {
+        for(int i = 0; i < 2; i++)
+        {
+            if(i == 0)
+            {
+                Cam.transform.Translate(-0.25f, -0.25f, 0);
+            }
+            else
+            {
+                Cam.transform.Translate(0.25f, 0.25f, 0);
+            }
+            yield return new WaitForSeconds(0.0125f);
+        }
+    }
 
+    IEnumerator Cam_ATT()
+    {
+        for(int i = 0; i < 2; i++)
+        {
+            if(i == 0)
+            {
+                Cam.GetComponent<Camera>().orthographicSize = 4.75f;
+            }
+            else
+            {
+                Cam.GetComponent<Camera>().orthographicSize = 5.0f;
+            }
+            yield return new WaitForSeconds(0.0125f);
+        }
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (gameObject.CompareTag("Shield"))
@@ -357,8 +408,8 @@ public class PlayerMove : MonoBehaviour
             if (other.gameObject.CompareTag("Trap_Blood") || other.gameObject.CompareTag("Trap_Stun") || other.gameObject.CompareTag("Trap") || other.gameObject.CompareTag("Jump"))
             {
                 Destroy(other.gameObject);
-                GameManager.Instance.MakeCoin(other.transform);
-                GameManager.Data.Exp_run += 1;
+                GameManager.Instance.Trap_Combo(other.transform);
+                GameManager.Data.Exp_run += 1 * GameManager.Data.multi_exp; 
             }
         }
 
@@ -393,7 +444,7 @@ public class PlayerMove : MonoBehaviour
         if (other.gameObject.CompareTag("Coin"))
         {
             Debug.Log("돈!!!!");
-            GameManager.Data.play_gold += 10 * (1 + (0.1f * GameManager.Data.multi_coin));
+            GameManager.Data.play_gold += 10 * GameManager.Data.multi_coin;
             Text_gold.text = $"{GameManager.Data.play_gold}g";
             Destroy(other.gameObject);
         }
@@ -412,8 +463,9 @@ public class PlayerMove : MonoBehaviour
             GetComponent<Rigidbody2D>().velocity = new Vector3(0, 4, 0);
             animator.SetBool("Landing", true);
             Use_Jump = 0;
+            StartCoroutine(Cam_ATT());
             GameManager.Instance.Trap_Combo(collision.transform);
-            GameManager.Data.now_Exp += 1;
+            GameManager.Data.now_Exp += 1 * GameManager.Data.multi_exp;
             GameManager.Instance.BAR_EXP();
         }
 
@@ -426,7 +478,7 @@ public class PlayerMove : MonoBehaviour
         if (collision.gameObject.CompareTag("Coin"))
         {
             Debug.Log("돈!!!!");
-            GameManager.Data.play_gold += 10 * (1 + (0.1f * GameManager.Data.multi_coin));
+            GameManager.Data.play_gold += 10 * (GameManager.Data.multi_coin);
             Text_gold.text = $"{GameManager.Data.play_gold}g";
             Destroy(collision.gameObject);
         }
@@ -438,7 +490,7 @@ public class PlayerMove : MonoBehaviour
             {
                 Destroy(collision.gameObject);
                 GameManager.Instance.MakeCoin(collision.transform);
-                GameManager.Data.Exp_run += 1;
+                GameManager.Data.Exp_run += 1 * GameManager.Data.multi_exp;
             }
         }
     }

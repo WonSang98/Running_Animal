@@ -1,0 +1,696 @@
+fileFormatVersion: 2
+guid: 5029dbf974cddc34598fdd86f06d5b99
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6362885213241292530
+    second: Charater_RabbitSprite2 1_0
+  - first:
+      213: 7396754957861673477
+    second: Charater_RabbitSprite2 1_1
+  - first:
+      213: 1408782343136727199
+    second: Charater_RabbitSprite2 1_2
+  - first:
+      213: -1474822890587773904
+    second: Charater_RabbitSprite2 1_3
+  - first:
+      213: 8215067664370754637
+    second: Charater_RabbitSprite2 1_4
+  - first:
+      213: 1992658083665902583
+    second: Charater_RabbitSprite2 1_5
+  - first:
+      213: 5930867922956581604
+    second: Charater_RabbitSprite2 1_6
+  - first:
+      213: 4201609093200378978
+    second: Charater_RabbitSprite2 1_7
+  - first:
+      213: 6014147685859753989
+    second: Charater_RabbitSprite2 1_8
+  - first:
+      213: -5902123973567760249
+    second: Charater_RabbitSprite2 1_9
+  - first:
+      213: 4091006609422619397
+    second: Charater_RabbitSprite2 1_10
+  - first:
+      213: -3961380675385189392
+    second: Charater_RabbitSprite2 1_11
+  - first:
+      213: -1192776047406700768
+    second: Charater_RabbitSprite2 1_12
+  - first:
+      213: 7045874667359631401
+    second: Charater_RabbitSprite2 1_13
+  - first:
+      213: 6791709230255365173
+    second: Charater_RabbitSprite2 1_14
+  - first:
+      213: -3172770490821371707
+    second: Charater_RabbitSprite2 1_15
+  - first:
+      213: 2713785984452075886
+    second: Charater_RabbitSprite2 1_16
+  - first:
+      213: -3621353572394524204
+    second: Charater_RabbitSprite2 1_17
+  - first:
+      213: -923409971879962081
+    second: Charater_RabbitSprite2 1_18
+  - first:
+      213: 352727058880826314
+    second: Charater_RabbitSprite2 1_19
+  - first:
+      213: 4081849564069779216
+    second: Charater_RabbitSprite2 1_20
+  - first:
+      213: 2883747147012483760
+    second: Charater_RabbitSprite2 1_21
+  - first:
+      213: 769381630580411619
+    second: Charater_RabbitSprite2 1_22
+  - first:
+      213: -2358913640115070594
+    second: Charater_RabbitSprite2 1_23
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_0
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 1630
+        width: 180
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f635d1b3628d4850800000000000000
+      internalID: 6362885213241292530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_1
+      rect:
+        serializedVersion: 2
+        x: 260
+        y: 1630
+        width: 180
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50a54f9c17d86a660800000000000000
+      internalID: 7396754957861673477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_2
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 1630
+        width: 180
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f90d188b3100d8310800000000000000
+      internalID: 1408782343136727199
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_3
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 1630
+        width: 180
+        height: 290
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 034a6eb1560688be0800000000000000
+      internalID: -1474822890587773904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_4
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 1620
+        width: 180
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d44ed94f388c10270800000000000000
+      internalID: 8215067664370754637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_5
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 1230
+        width: 180
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fb77b338f757ab10800000000000000
+      internalID: 1992658083665902583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_6
+      rect:
+        serializedVersion: 2
+        x: 420
+        y: 1240
+        width: 180
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4eaf59de3fcae4250800000000000000
+      internalID: 5930867922956581604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_7
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 1220
+        width: 180
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26c724d853d1f4a30800000000000000
+      internalID: 4201609093200378978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_8
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 1220
+        width: 200
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 500886ab47b867350800000000000000
+      internalID: 6014147685859753989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_9
+      rect:
+        serializedVersion: 2
+        x: 1090
+        y: 1210
+        width: 200
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7883d2f4481771ea0800000000000000
+      internalID: -5902123973567760249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_10
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 1210
+        width: 180
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 503196016dc26c830800000000000000
+      internalID: 4091006609422619397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_11
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 830
+        width: 180
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fb919793495609c0800000000000000
+      internalID: -3961380675385189392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_12
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 840
+        width: 200
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 027aab52188627fe0800000000000000
+      internalID: -1192776047406700768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_13
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 830
+        width: 180
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 928f4e7eda9f7c160800000000000000
+      internalID: 7045874667359631401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_14
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 850
+        width: 180
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53cdc179f8ff04e50800000000000000
+      internalID: 6791709230255365173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_15
+      rect:
+        serializedVersion: 2
+        x: 1160
+        y: 860
+        width: 180
+        height: 320
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c810c47c0e08f3d0800000000000000
+      internalID: -3172770490821371707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_16
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 420
+        width: 180
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6123bf79fd49a520800000000000000
+      internalID: 2713785984452075886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_17
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 420
+        width: 180
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d12557dc1e5ebdc0800000000000000
+      internalID: -3621353572394524204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_18
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 420
+        width: 190
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1a9a04e5836f23f0800000000000000
+      internalID: -923409971879962081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_19
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 420
+        width: 190
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acb8247246325e400800000000000000
+      internalID: 352727058880826314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_20
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 60
+        width: 180
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01756fc4d84a5a830800000000000000
+      internalID: 4081849564069779216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_21
+      rect:
+        serializedVersion: 2
+        x: 440
+        y: 100
+        width: 300
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0baa9bf50c0250820800000000000000
+      internalID: 2883747147012483760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_22
+      rect:
+        serializedVersion: 2
+        x: 760
+        y: 120
+        width: 300
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ecc47344846daa00800000000000000
+      internalID: 769381630580411619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2 1_23
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 80
+        width: 360
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e791e19da84734fd0800000000000000
+      internalID: -2358913640115070594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

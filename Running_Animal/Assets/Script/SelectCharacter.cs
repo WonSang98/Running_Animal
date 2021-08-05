@@ -29,9 +29,19 @@ public class SelectCharacter : MonoBehaviour
                       new cost(1000, 2),
                       new cost(1500, 3),
                       new cost(2000, 4),
-                      new cost(2500, 5) };
+                      new cost(2500, 5),
+                      new cost(99999, 9999)};
 
     int[] SP = { 2, 4, 6, 8, 10 };
+
+    // 캐릭터 DEFAULT 값
+    Character[] Natural_STAT =
+    {
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 5, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 5, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 5, 1, DataManager.Active_Skil.None),
+        new Character(0, 0, 100, 1, 8, 1, 10, 1, 20, 1, 2, 1, 0, 1, 5, 1, DataManager.Active_Skil.None)
+    };
 
     void Start()
     {
@@ -107,13 +117,13 @@ public class SelectCharacter : MonoBehaviour
         GameObject.Find("UI/Text_Perform").GetComponent<Text>().text =
               $"    LV     : {GameManager.Data.Character_STAT[idx].LV}\n"
             + $"STAT POINT : {GameManager.Data.Character_STAT[idx].STAT_POINT}\n"
-            + $"  MAX HP   : {GameManager.Data.Character_STAT[idx].MAX_HP}\n"
+            + $"  MAX HP   : {GameManager.Data.Character_STAT[idx].MAX_HP + GameManager.Data.Talent_HP}\n"
             + $"  SPEED    : {GameManager.Data.Character_STAT[idx].SPEED}\n"
             + $"   JUMP    : {GameManager.Data.Character_STAT[idx].JUMP_POWER}\n"
             + $"   DOWN    : {GameManager.Data.Character_STAT[idx].DOWN_POWER}\n"
             + $" JUMP CNT  : {GameManager.Data.Character_STAT[idx].JUMP_COUNT}\n"
-            + $"   DEF     : {GameManager.Data.Character_STAT[idx].DEF}\n"
-            + $"   LUK     : {GameManager.Data.Character_STAT[idx].LUK}\n"
+            + $"   DEF     : {GameManager.Data.Character_STAT[idx].DEF + GameManager.Data.Talent_DEF}\n"
+            + $"   LUK     : {GameManager.Data.Character_STAT[idx].LUK + GameManager.Data.Talent_LUK}\n"
             + $"  ACTIVE   : {GameManager.Data.Character_STAT[idx].ACTIVE}";
 
     }
@@ -175,7 +185,7 @@ public class SelectCharacter : MonoBehaviour
         if (GameManager.Data.Character_STAT[idx].STAT_POINT >= GameManager.Data.Character_STAT[idx].LV_SPEED)
         {
             GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].LV_SPEED;
-            GameManager.Data.Character_STAT[idx].SPEED += GameManager.Data.Character_STAT[idx].LV_SPEED * 10;
+            GameManager.Data.Character_STAT[idx].SPEED += GameManager.Data.Character_STAT[idx].LV_SPEED * 0.5f;
             GameManager.Data.Character_STAT[idx].LV_SPEED += 1;
             show_info();
         }
@@ -186,7 +196,7 @@ public class SelectCharacter : MonoBehaviour
         if (GameManager.Data.Character_STAT[idx].STAT_POINT >= GameManager.Data.Character_STAT[idx].LV_JUMP_POWER)
         {
             GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].LV_JUMP_POWER;
-            GameManager.Data.Character_STAT[idx].JUMP_POWER += GameManager.Data.Character_STAT[idx].LV_JUMP_POWER * 10;
+            GameManager.Data.Character_STAT[idx].JUMP_POWER += GameManager.Data.Character_STAT[idx].LV_JUMP_POWER * 0.5f;
             GameManager.Data.Character_STAT[idx].LV_JUMP_POWER += 1;
             show_info();
         }
@@ -197,7 +207,7 @@ public class SelectCharacter : MonoBehaviour
         if (GameManager.Data.Character_STAT[idx].STAT_POINT >= GameManager.Data.Character_STAT[idx].LV_DOWN_POWER)
         {
             GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].LV_DOWN_POWER;
-            GameManager.Data.Character_STAT[idx].DOWN_POWER += GameManager.Data.Character_STAT[idx].LV_DOWN_POWER * 10;
+            GameManager.Data.Character_STAT[idx].DOWN_POWER += GameManager.Data.Character_STAT[idx].LV_DOWN_POWER * 0.5f;
             GameManager.Data.Character_STAT[idx].LV_DOWN_POWER += 1;
             show_info();
         }
@@ -205,10 +215,10 @@ public class SelectCharacter : MonoBehaviour
 
     public void UP_JUMP_C()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= GameManager.Data.Character_STAT[idx].LV_JUMP_COUNT)
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (GameManager.Data.Character_STAT[idx].LV_JUMP_COUNT * 15))
         {
-            GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].LV_JUMP_COUNT;
-            GameManager.Data.Character_STAT[idx].JUMP_COUNT += GameManager.Data.Character_STAT[idx].LV_JUMP_COUNT * 10;
+            GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].LV_JUMP_COUNT * 15;
+            GameManager.Data.Character_STAT[idx].JUMP_COUNT += 1;
             GameManager.Data.Character_STAT[idx].LV_JUMP_COUNT += 1;
             show_info();
         }
@@ -219,7 +229,7 @@ public class SelectCharacter : MonoBehaviour
         if (GameManager.Data.Character_STAT[idx].STAT_POINT >= GameManager.Data.Character_STAT[idx].LV_DEF)
         {
             GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].LV_DEF;
-            GameManager.Data.Character_STAT[idx].DEF += GameManager.Data.Character_STAT[idx].LV_DEF * 10;
+            GameManager.Data.Character_STAT[idx].DEF += GameManager.Data.Character_STAT[idx].LV_DEF * 0.01f;
             GameManager.Data.Character_STAT[idx].LV_DEF += 1;
             show_info();
         }
@@ -230,10 +240,27 @@ public class SelectCharacter : MonoBehaviour
         if (GameManager.Data.Character_STAT[idx].STAT_POINT >= GameManager.Data.Character_STAT[idx].LV_LUK)
         {
             GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].LV_LUK;
-            GameManager.Data.Character_STAT[idx].LUK += GameManager.Data.Character_STAT[idx].LV_LUK * 10;
+            GameManager.Data.Character_STAT[idx].LUK += GameManager.Data.Character_STAT[idx].LV_LUK * 1;
             GameManager.Data.Character_STAT[idx].LV_LUK += 1;
             show_info();
         }
+    }
+
+    public void Reset_SP()
+    {
+        if(GameManager.Data.Money_Forest >= 5)
+        {
+            GameManager.Data.Money_Forest -= 5;
+            GameManager.Data.Character_STAT[idx].STAT_POINT = 0;
+            for (int i = 0; i < GameManager.Data.Character_STAT[idx].LV; i++)
+            {
+                GameManager.Data.Character_STAT[idx].STAT_POINT += SP[i];
+            }
+
+            GameManager.Data.Character_STAT[idx] = Natural_STAT[idx];
+            show_info();
+        }
+
     }
 
 }

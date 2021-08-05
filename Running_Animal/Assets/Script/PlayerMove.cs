@@ -108,7 +108,8 @@ public class PlayerMove : MonoBehaviour
 
         if(GameManager.Data.hp <= 0) //GameEnd 조건
         {
-            if(GameManager.Data.buwhal != 0)
+            animator.SetTrigger("Die");
+            if (GameManager.Data.buwhal != 0)
             {
                 // 부활 있슴
                 StartCoroutine("Resurrection");
@@ -120,8 +121,7 @@ public class PlayerMove : MonoBehaviour
                 
                 GameManager.Instance.Save();
                 animator.SetBool("StartGame", false);
-                SceneManager.LoadScene("End_Game");
-                GameManager.Instance.Load();
+                StartCoroutine(GameOver());
             }
         }
 
@@ -167,6 +167,7 @@ public class PlayerMove : MonoBehaviour
             {
                 Time.timeScale = 0;
                 GameManager.Data.hp = (GameManager.Data.max_hp / 2);
+                GameManager.Instance.BAR_HP();
             }
             if(i == 1)
             {
@@ -176,6 +177,22 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
+    IEnumerator GameOver()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if (i == 0)
+            {
+                GameManager.Data.speed = 0;
+            }
+            if (i == 1)
+            {
+                SceneManager.LoadScene("End_Game");
+                GameManager.Instance.Load();
+            }
+            yield return new WaitForSeconds(3.0f);
+        }
+    }
     IEnumerator Random_God()
     {
         while (true)
@@ -305,6 +322,7 @@ public class PlayerMove : MonoBehaviour
     void OnHit()
     {
         StartCoroutine(OnDodge(GameManager.Data.dodge_time));
+        animator = GetComponent<Animator>();
 
         int per = Random.Range(0, 100);
         //회피 못함 ㅠ
@@ -316,9 +334,11 @@ public class PlayerMove : MonoBehaviour
             }
             GameManager.Data.combo = 0;
 
-            GameManager.Data.hp -= (GameManager.Data.damage - GameManager.Data.defense);
+            GameManager.Data.hp -= (GameManager.Data.damage * GameManager.Data.defense);
+            Debug.Log(GameManager.Data.damage * GameManager.Data.defense + "만큼의 피해! 현재 체력 " + GameManager.Data.hp);
             StartCoroutine(Cam_Hit());
             GameManager.Instance.BAR_HP();
+            animator.SetTrigger("Attacked");
         }
         else // 회피함. ㅎㅎ
         {

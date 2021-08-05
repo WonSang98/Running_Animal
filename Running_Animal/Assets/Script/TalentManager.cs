@@ -11,7 +11,7 @@ public class TalentManager : MonoBehaviour
     int[] costs = { 500, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 6000, 7000};
     // 재능 업그레이드 시 능력치
     float[] HP = { 20, 40, 60, 80, 100, 120, 140, 160, 180, 200};
-    float[] DEF = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    float[] DEF = { 0.01f, 0.02f, 0.03f, 0.04f, 0.05f, 0.06f, 0.07f, 0.08f, 0.09f, 0.10f};
     int[] LUK = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     float[] Restore = { 1.1f, 1,15f, 1.2f, 1.25f, 1.3f, 1.35f, 1.4f, 1.45f, 1.5f};
 
@@ -85,7 +85,7 @@ public class TalentManager : MonoBehaviour
 
     public void UpgradeHP()
     {
-        if(GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[0] - 1] && GameManager.Data.Talent_LV[0] < 9)
+        if(GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[0] - 1] && GameManager.Data.Talent_LV[0] <= 9)
         {
             GameManager.Data.Gold -= costs[GameManager.Data.Talent_LV[0] - 1];
             GameManager.Data.Talent_LV[0] += 1;
@@ -99,7 +99,7 @@ public class TalentManager : MonoBehaviour
 
     public void UpgradeDEF()
     {
-        if (GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[1] - 1] && GameManager.Data.Talent_LV[1] < 9)
+        if (GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[1] - 1] && GameManager.Data.Talent_LV[1] <= 9)
         {
             GameManager.Data.Gold -= costs[GameManager.Data.Talent_LV[1] - 1];
             GameManager.Data.Talent_LV[1] += 1;
@@ -113,7 +113,7 @@ public class TalentManager : MonoBehaviour
 
     public void UpgradeLUK()
     {
-        if (GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[2] - 1] && GameManager.Data.Talent_LV[2] < 9)
+        if (GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[2] - 1] && GameManager.Data.Talent_LV[2] <= 9)
         {
             GameManager.Data.Gold -= costs[GameManager.Data.Talent_LV[2] - 1];
             GameManager.Data.Talent_LV[2] += 1;
@@ -127,7 +127,7 @@ public class TalentManager : MonoBehaviour
 
     public void UpgradeRstore()
     {
-        if (GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[3] - 1] && GameManager.Data.Talent_LV[3] < 9)
+        if (GameManager.Data.Gold > costs[GameManager.Data.Talent_LV[3] - 1] && GameManager.Data.Talent_LV[3] <= 9)
         {
             GameManager.Data.Gold -= costs[GameManager.Data.Talent_LV[3] - 1];
             GameManager.Data.Talent_LV[3] += 1;

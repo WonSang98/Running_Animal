@@ -65,14 +65,16 @@ public class Trap : MonoBehaviour
             }
             else 
             {
+                
                 Invoke("pattern" + GameManager.Data.pattern[GameManager.Data.stage], 0);
                 GameManager.Data.stage++;
-                if(GameManager.Data.stage == (map_pattern[0] + 1))
+                if (GameManager.Data.stage == (map_pattern[0] + 1))
                 {
                     GameManager.Data.stage = 0;
                     GameManager.Data.pattern = GameManager.Instance.ShuffleList(GameManager.Data.pattern);
                 }
                 GameManager.Data.speed += 0.001f;
+                
             }
         }        
     }
@@ -161,8 +163,8 @@ public class Trap : MonoBehaviour
         float start_x = 16.0f;
         float interval_x = 2.5f;
 
-        const float bridge_y = -3.8f;
-        const float trap_y = 2.65f;
+        const float bridge_y = -2.62f;
+        const float trap_y = 3.31f;
 
         for(int i=0; i<9; i++)
         {
