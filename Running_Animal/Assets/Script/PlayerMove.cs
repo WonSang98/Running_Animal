@@ -393,8 +393,11 @@ public class PlayerMove : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Trap_Blood"))
             {
+                
+                other.GetComponent<Animator>().SetTrigger("Bear");
                 OnHit();
                 StartCoroutine(OnBlood());
+
             }
             if (other.gameObject.CompareTag("Trap_Stun"))
             {

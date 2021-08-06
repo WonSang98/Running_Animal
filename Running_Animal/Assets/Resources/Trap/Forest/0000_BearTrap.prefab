@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5662316184737892821}
   - component: {fileID: 5662316184737892816}
   - component: {fileID: 5662316184737892823}
+  - component: {fileID: 8203966470313939794}
   m_Layer: 8
   m_Name: 0000_BearTrap
   m_TagString: Trap_Blood
@@ -124,3 +125,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4023037, y: 0.41131067}
   m_EdgeRadius: 0
+--- !u!95 &8203966470313939794
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5662316184737892820}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b8c638af064095c479439144b1c91b9b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

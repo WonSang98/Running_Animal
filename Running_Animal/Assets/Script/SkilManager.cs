@@ -300,12 +300,14 @@ public class SkilManager : MonoBehaviour
         {
             if (i == 0)
             {
+                Debug.Log("액티브 시작  " + temp);
                 temp = GameManager.Data.max_jump;
                 GameManager.Data.max_jump = 999999;
             }
             else
             {
                 GameManager.Data.max_jump = temp;
+                Debug.Log("액티브 끝  " + GameManager.Data.max_jump);
             }
             yield return new WaitForSeconds(5f);
         }

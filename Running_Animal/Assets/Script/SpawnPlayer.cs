@@ -20,34 +20,36 @@ public class SpawnPlayer : MonoBehaviour
         if (GameManager.Data.playing == false) // 게임 시작의 첫 부분 
         {
             Set_Random();
+            GameManager.Data.active = GameManager.Data.Pre_Active;
+            GameManager.Data.Pre_Active = DataManager.Active_Skil.None;
             // 시작 전 구매한 아이템의 적용
-            if (GameManager.Data.Pre_HP)
+            if (GameManager.Data.Pre_HP.USE)
             {
                 GameManager.Data.max_hp *= 1.1f;
                 GameManager.Data.hp = GameManager.Data.max_hp;
-                GameManager.Data.Pre_HP = false;
+                GameManager.Data.Pre_HP.USE = false;
             }
-            if (GameManager.Data.Pre_Shield)
+            if (GameManager.Data.Pre_Shield.USE)
             {
                 // 1회용 쉴드 구매 시
                 Player.transform.Find("1").gameObject.SetActive(true);
                 Player.tag = "Shield";
-                GameManager.Data.Pre_Shield = false;
+                GameManager.Data.Pre_Shield.USE = false;
             }
 
-            if (GameManager.Data.Pre_100)
+            if (GameManager.Data.Pre_100.USE)
             {
                 //100미터 달리기 - 5초 달리기
                 StartCoroutine(OnRun(5.0f));
-                GameManager.Data.Pre_100 = false;
+                GameManager.Data.Pre_100.USE = false;
 
             }
 
-            if (GameManager.Data.Pre_300)
+            if (GameManager.Data.Pre_300.USE)
             {
                 //300미터 달리기 - 10초 달리기
                 StartCoroutine(OnRun(10.0f));
-                GameManager.Data.Pre_300 = false;
+                GameManager.Data.Pre_300.USE = false;
             }
             GameManager.Data.playing = true;
         }
@@ -91,11 +93,11 @@ public class SpawnPlayer : MonoBehaviour
                 GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.GOLD25:
-                GameManager.Data.multi_coin *= 1.25f;
+                GameManager.Data.multi_coin += 0.25f;
                 GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.GOLD50:
-                GameManager.Data.multi_coin *= 1.5f;
+                GameManager.Data.multi_coin += 0.5f;
                 GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.COMBO2:
@@ -111,11 +113,11 @@ public class SpawnPlayer : MonoBehaviour
                 GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.DEF10:
-                GameManager.Data.defense += 10;
+                GameManager.Data.defense -= 0.1f;
                 GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.DEF15:
-                GameManager.Data.defense += 15;
+                GameManager.Data.defense -= 0.15f;
                 GameManager.Data.Pre_Random = DataManager.Random_Item.None;
                 break;
             case DataManager.Random_Item.EXP2:

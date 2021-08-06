@@ -214,6 +214,7 @@ public class GameManager : MonoBehaviour
         saveData.Pre_100 = Data.Pre_100;
         saveData.Pre_300 = Data.Pre_300;
         saveData.Pre_Random = Data.Pre_Random;
+        saveData.Pre_Active = Data.Pre_Active;
         saveData.Exp_run = Data.Exp_run;
 
         string path = Application.persistentDataPath + "/save.xml";
@@ -309,6 +310,7 @@ public class GameManager : MonoBehaviour
         Data.Pre_100 = saveData.Pre_100;
         Data.Pre_300 = saveData.Pre_300;
         Data.Pre_Random = saveData.Pre_Random;
+        Data.Pre_Active = saveData.Pre_Active;
         Data.Exp_run = saveData.Exp_run;
 
         Debug.Log("LOAD!");

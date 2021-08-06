@@ -1,6 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+public struct Pre_Item
+{
+    public bool USE; // 플레이 할 때 적용 할 것인지
+    public int CNT; // 갖고 있는 개수.
+
+    public Pre_Item(bool _USE, int _CNT)
+    {
+        USE = _USE;
+        CNT = _CNT;
+    }
+}
+
 public class DataManager 
 {
     public enum Themes // 게임 플레이 테마
@@ -113,10 +126,11 @@ public class DataManager
     public short[] Talent_LV = { 1, 1, 1, 1 }; // 재능 레벨
 
     // 시작 전 아이템 구매
-    public bool Pre_HP = false;
-    public bool Pre_Shield = false;
-    public bool Pre_100 = false;
-    public bool Pre_300 = false;
+    public Pre_Item Pre_HP = new Pre_Item(false, 0);
+    public Pre_Item Pre_Shield = new Pre_Item(false, 0);
+    public Pre_Item Pre_100 = new Pre_Item(false, 0);
+    public Pre_Item Pre_300 = new Pre_Item(false, 0);
+    public Active_Skil Pre_Active = Active_Skil.None;
     public Random_Item Pre_Random = Random_Item.None;
 
     // 시작 전 아이템 관련

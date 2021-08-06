@@ -40,10 +40,11 @@ public class Data
     public short[] Talent_LV = { 0, 0, 0, 0 }; // 재능 레벨
 
     // 시작 전 아이템 구매
-    public bool Pre_HP = false;
-    public bool Pre_Shield = false;
-    public bool Pre_100 = false;
-    public bool Pre_300 = false;
+    public Pre_Item Pre_HP = new Pre_Item(false, 0);
+    public Pre_Item Pre_Shield = new Pre_Item(false, 0);
+    public Pre_Item Pre_100 = new Pre_Item(false, 0);
+    public Pre_Item Pre_300 = new Pre_Item(false, 0);
+    public DataManager.Active_Skil Pre_Active = DataManager.Active_Skil.None;
     public DataManager.Random_Item Pre_Random = DataManager.Random_Item.None;
 
     // 시작 전 아이템 관련
