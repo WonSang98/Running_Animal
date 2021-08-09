@@ -257,12 +257,12 @@ public class SkilManager : MonoBehaviour
         Show_Button.GetComponent<Button>().interactable = false; // 액티브 스킬 버튼 비활성화
         GameManager.Data.use_active += 1; // 액티브 스킬 사용 횟수 1회 차감.
 
-        for (int i=0; i<5; i++)
+        for (int i=0; i<2; i++)
         {
-            if (i == 0) GameManager.Data.speed /= 10;
-            else if (i == 4) GameManager.Data.speed *= 10;
+            if (i == 0) Time.timeScale = 0.1f;
+            else if (i == 1) Time.timeScale = 1.0f;
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(5f);
         }
     }
 

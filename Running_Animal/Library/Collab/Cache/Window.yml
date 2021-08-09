@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Script/SkilManager.cs
+    - ProjectSettings/ProjectVersion.txt
     - 
     m_Values: 0000
-  RevisionSummary: "+ \uC2DC\uC791 \uC804 \uAD6C\uB9E4 \uC544\uC774\uD15C \uBC84\uADF8
-    \uC218\uC815"
+  RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
   HistoryPageNumber: 0

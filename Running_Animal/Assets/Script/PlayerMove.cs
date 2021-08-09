@@ -161,17 +161,21 @@ public class PlayerMove : MonoBehaviour
     }
     IEnumerator Resurrection()
     {
+        float temp_speed = 0f;
         for(int i=0; i<2; i++)
         {
             if(i == 0)
             {
-                Time.timeScale = 0;
+                temp_speed = GameManager.Data.speed;
+                GameManager.Data.speed = 0.0f;
                 GameManager.Data.hp = (GameManager.Data.max_hp / 2);
                 GameManager.Instance.BAR_HP();
             }
             if(i == 1)
             {
-                Time.timeScale = 1;
+                GameManager.Data.speed = temp_speed;
+                StartCoroutine(OnDodge(16));
+
             }
             yield return new WaitForSeconds(3.0f);
         }
