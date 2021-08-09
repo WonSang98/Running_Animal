@@ -27,12 +27,8 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.IK.IKEditorManager
     Unity.2D.IK.Runtime.dll:
     - UnityEditor.U2D.IK.IKEditorManagerHelper
-    Unity.2D.Sprite.Editor.dll:
-    - UnityEditor.U2D.Sprites.SpriteEditorWindow
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
-    - UnityEditor.Tilemaps.GridPaletteBrushes
-    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.SceneViewOpenTilePaletteHelper
     - UnityEditor.Tilemaps.TileDragAndDropManager
@@ -58,10 +54,15 @@ ScriptsOnlyBuild:
     - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.Button
     - UnityEngine.UI.CanvasScaler
+    - UnityEngine.UI.ContentSizeFitter
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
+    - UnityEngine.UI.Mask
     - UnityEngine.UI.Outline
+    - UnityEngine.UI.ScrollRect
+    - UnityEngine.UI.Shadow
     - UnityEngine.UI.Text
+    - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
     Assets/Scenes/Character.unity:
     - Class: 1
@@ -99,7 +100,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3384}
     - Class: 114
-      Script: {instanceID: 5154}
+      Script: {instanceID: 5156}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -150,7 +151,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3384}
     - Class: 114
-      Script: {instanceID: 5632}
+      Script: {instanceID: 5634}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -206,6 +207,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 650}
     - Class: 114
       Script: {instanceID: 1534}
+    - Class: 114
+      Script: {instanceID: 1764}
     - Class: 114
       Script: {instanceID: 1796}
     - Class: 114
@@ -406,13 +409,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4116}
     - Class: 114
-      Script: {instanceID: 4476}
+      Script: {instanceID: 4478}
     - Class: 114
-      Script: {instanceID: 4562}
+      Script: {instanceID: 4564}
     - Class: 114
-      Script: {instanceID: 5098}
+      Script: {instanceID: 5100}
     - Class: 114
-      Script: {instanceID: 5296}
+      Script: {instanceID: 5298}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -476,6 +479,16 @@ ScriptsOnlyBuild:
       Script: {instanceID: 3272}
     - Class: 114
       Script: {instanceID: 3384}
+    - Class: 114
+      Script: {instanceID: 3608}
+    - Class: 114
+      Script: {instanceID: 3686}
+    - Class: 114
+      Script: {instanceID: 3772}
+    - Class: 114
+      Script: {instanceID: 4386}
+    - Class: 114
+      Script: {instanceID: 4590}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -483,6 +496,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -522,13 +537,13 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3022}
     - Class: 114
-      Script: {instanceID: 3134}
-    - Class: 114
       Script: {instanceID: 3272}
     - Class: 114
       Script: {instanceID: 3384}
     - Class: 114
-      Script: {instanceID: 5296}
+      Script: {instanceID: 3686}
+    - Class: 114
+      Script: {instanceID: 5298}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -536,6 +551,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -1294,4 +1311,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Play.unity
   - Assets/Scenes/Select_Item.unity
   - Assets/Scenes/End_Game.unity
-  playerPath: D:/tt/014.apk
+  playerPath: D:/tt/015.apk

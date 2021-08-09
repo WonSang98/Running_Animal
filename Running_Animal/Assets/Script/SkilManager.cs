@@ -262,7 +262,7 @@ public class SkilManager : MonoBehaviour
             if (i == 0) Time.timeScale = 0.1f;
             else if (i == 1) Time.timeScale = 1.0f;
 
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
