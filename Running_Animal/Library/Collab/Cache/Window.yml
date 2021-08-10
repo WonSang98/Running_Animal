@@ -14,24 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Resources/Image/GUI/Talent.meta
-    - Assets/Resources/Image/GUI/Talent/Show_Info.png
-    - Assets/Resources/Image/GUI/Talent/Show_Info.png.meta
-    - Assets/Resources/Image/GUI/Talent/Show_LV.png
-    - Assets/Resources/Image/GUI/Talent/Show_LV.png.meta
-    - Assets/Resources/Image/GUI/Talent/Upgrade_DEF.png
-    - Assets/Resources/Image/GUI/Talent/Upgrade_DEF.png.meta
-    - Assets/Resources/Image/GUI/Talent/Upgrade_HP.png
-    - Assets/Resources/Image/GUI/Talent/Upgrade_HP.png.meta
-    - Assets/Resources/Image/GUI/Talent/Upgrade_LUK.png
-    - Assets/Resources/Image/GUI/Talent/Upgrade_LUK.png.meta
-    - Assets/Resources/Image/GUI/Talent/Upgrade_Restore.png
-    - Assets/Resources/Image/GUI/Talent/Upgrade_Restore.png.meta
-    - Assets/Scenes/Talent.unity
-    - Assets/Script/SkilManager.cs
-    - Assets/Script/TalentManager.cs
+    - Assets/Resources/Image/BackGround/HELL.jpg
+    - Assets/Resources/Image/BackGround/HELL.jpg.meta
     - 
-    m_Values: 0000000000000000000000000000000000
+    m_Values: 010101
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

@@ -18,6 +18,9 @@ public class MainManager : MonoBehaviour
     GameObject character; // 화면 중앙에 표시할 캐릭터
     GameObject theme;
     Button[] Level = new Button[10]; // Level 선택 버튼
+    Button Select_Diff;
+
+    int temp_diff; // 임시로 선택되어있는 난이도
     void Start()
     {
         // Data에 저장되어있는 사용하고있는 캐릭터에대한 정보를 받아온 후, 그 캐릭터를 생성.
@@ -32,6 +35,10 @@ public class MainManager : MonoBehaviour
         GameManager.Instance.Set_Stat();
 
         GameObject.Find("UI").transform.Find("Panel_Difficulty").gameObject.SetActive(false);
+        temp_diff = GameManager.Data.Diff_LV;
+
+        GameObject.Find("UI/Button_Difficulty/Text").GetComponent<Text>().text = 
+            GameObject.Find("UI").transform.Find("Panel_Difficulty/Scroll View/Viewport/Content/Button_DIff_" + GameManager.Data.Diff_LV.ToString() + "/Text_Diff").GetComponent<Text>().text;
 
     }
 
@@ -80,11 +87,11 @@ public class MainManager : MonoBehaviour
     public void OnDiff() // 난이도 패널 오픈
     {
         GameObject.Find("UI").transform.Find("Panel_Difficulty").gameObject.SetActive(true);
-        for (int i = 1; i <= 10; i++)
+        for (int i = 0; i < 10; i++)
         {
-            string p = "UI/Panel_Difficulty/Button_DIff_" + i.ToString();
+            string p = "UI/Panel_Difficulty/Scroll View/Viewport/Content/Button_DIff_" + i.ToString();
             Debug.Log(p);
-            Level[i - 1] = GameObject.Find(p).GetComponent<Button>();
+            Level[i] = GameObject.Find(p).GetComponent<Button>();
         }
 
         for (int j = 0; j < 10; j++)
@@ -93,13 +100,26 @@ public class MainManager : MonoBehaviour
             Level[j].onClick.RemoveAllListeners();
             Level[j].onClick.AddListener(() => SetDiff(temp));
         }
+
+        Select_Diff = GameObject.Find("UI/Panel_Difficulty/Panel_Info/Button_Select").GetComponent<Button>();
+        Select_Diff.onClick.RemoveAllListeners();
+        Select_Diff.onClick.AddListener(Select);
+        SetDiff(temp_diff);
+    }
+    void Select()
+    {
+        GameManager.Data.Diff_LV = temp_diff;
+        GameManager.Instance.Set_Stat();
+        GameObject.Find("UI").transform.Find("Panel_Difficulty").gameObject.SetActive(false);
     }
 
-    public void SetDiff(int i) //난이도 설정.
+    void SetDiff(int i) //난이도 설정.
     {
-        GameManager.Data.Diff_LV = i;
-        GameManager.Instance.Set_Stat();
-        Text info = GameObject.Find("UI/Panel_Difficulty/Panel_Info/Text").GetComponent<Text>();
+        temp_diff = i;
+        string difficulty = GameObject.Find("UI/Panel_Difficulty/Scroll View/Viewport/Content/Button_DIff_" + i.ToString() + "/Text_Diff").GetComponent<Text>().text;
+        Text info = GameObject.Find("UI/Panel_Difficulty/Panel_Info/Text_info").GetComponent<Text>();
+        GameObject.Find("UI/Panel_Difficulty/Panel_Info/Text_Diff").GetComponent<Text>().text = difficulty;
+        GameObject.Find("UI/Button_Difficulty/Text").GetComponent<Text>().text = difficulty;
         switch (GameManager.Data.Theme)
         {
             case DataManager.Themes.Forest:
@@ -110,25 +130,14 @@ public class MainManager : MonoBehaviour
                     GameManager.Data.EXP[j] += GameManager.Data.Forest_Diff[i].EXP;
                 }
                 info.text =
-                    $"난이도      :{i} \n" +
-                    $"피격 데미지 :{GameManager.Data.Forest_Diff[i].DMG}\n" +
-                    $"코인 획득량 :{GameManager.Data.Forest_Diff[i].COIN}\n" +
-                    $"회복효율감소:{GameManager.Data.Forest_Diff[i].RESTORE}\n" +
-                    $"행운감소    :{GameManager.Data.Forest_Diff[i].LUK}\n" +
-                    $"방어력감소  :{GameManager.Data.Forest_Diff[i].DEF}\n" +
-                    $"속도 증가   :{GameManager.Data.Forest_Diff[i].SPEED}\n" +
-                    $"필요경험치업:{GameManager.Data.Forest_Diff[i].EXP}\n" +
-                    $"MAXHP{GameManager.Data.max_hp}\n" +
-                    $"SPEED{GameManager.Data.speed}\n" +
-                    $"JUMP{GameManager.Data.jump}\n" +
-                    $"down{GameManager.Data.down}\n" +
-                    $"max_jump{GameManager.Data.max_jump}\n" +
-                    $"defense{GameManager.Data.defense}\n" +
-                    $"luck{GameManager.Data.luck}\n" +
-                    $"active{GameManager.Data.active}\n" +
-                    $"restore_eff{GameManager.Data.restore_eff}\n" +
-                    $"damage{GameManager.Data.damage}\n" +
-                    $"multi_coin{GameManager.Data.multi_coin}\n";
+                    $"[피격 데미지]\n - {GameManager.Data.Forest_Diff[i].DMG} 증가\n" +
+                    $"[골드 획득량]\n - {GameManager.Data.Forest_Diff[i].COIN * 100}% 증가\n" +
+                    $"[회복효율]\n - {GameManager.Data.Forest_Diff[i].RESTORE * 100}% 감소\n" +
+                    $"[행운]\n - {GameManager.Data.Forest_Diff[i].LUK} 증가\n" +
+                    $"[방어력]\n - {GameManager.Data.Forest_Diff[i].DEF * 100}% 감소 \n" +
+                    $"[속력]\n - {GameManager.Data.Forest_Diff[i].SPEED * 100} 증가\n" +
+                    $"[필요경험치]\n - {GameManager.Data.Forest_Diff[i].EXP} 증가\n";
+                    
                 break;
         }
     }
