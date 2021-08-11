@@ -67,9 +67,6 @@ TagManager:
   - name: BG1
     uniqueID: 276210623
     locked: 0
-  - name: Skil
-    uniqueID: 3740690245
-    locked: 0
   - name: Trap_OffTile
     uniqueID: 3389244869
     locked: 0
@@ -81,6 +78,9 @@ TagManager:
     locked: 0
   - name: Character
     uniqueID: 2861635991
+    locked: 0
+  - name: Skil
+    uniqueID: 3740690245
     locked: 0
   - name: MISS
     uniqueID: 3782207295

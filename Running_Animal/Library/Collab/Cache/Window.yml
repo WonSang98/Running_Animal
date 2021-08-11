@@ -14,10 +14,58 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Resources/Image/BackGround/HELL.jpg
-    - Assets/Resources/Image/BackGround/HELL.jpg.meta
+    - Assets/Resources/Character/0.prefab
+    - Assets/Resources/Character/1.prefab
+    - Assets/Resources/Character/2.prefab
+    - Assets/Resources/Character/3.prefab
+    - Assets/Resources/Image/BackGround/Temp_Character_Select.jpg
+    - Assets/Resources/Image/BackGround/Temp_Character_Select.jpg.meta
+    - Assets/Resources/Image/Character/Character_Cat_Foot.png
+    - Assets/Resources/Image/Character/Character_Cat_Foot.png.meta
+    - Assets/Resources/Image/Character/Character_Rabbit_Foot.png
+    - Assets/Resources/Image/Character/Character_Rabbit_Foot.png.meta
+    - Assets/Resources/Image/Character/Charater_Foot.png
+    - Assets/Resources/Image/Character/Charater_Foot.png.meta
+    - Assets/Resources/Image/Character/Charater_Monkey_Foot.png
+    - Assets/Resources/Image/Character/Charater_Monkey_Foot.png.meta
+    - Assets/Resources/Image/Character/Charater_Pig_Foot.png
+    - Assets/Resources/Image/Character/Charater_Pig_Foot.png.meta
+    - Assets/Resources/Image/Character/Foot.png
+    - Assets/Resources/Image/Character/Foot.png.meta
+    - Assets/Resources/Image/GUI/Character_Select.meta
+    - Assets/Resources/Image/GUI/Character_Select/Button_Buy.png
+    - Assets/Resources/Image/GUI/Character_Select/Button_Buy.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Button_LevelUP.png
+    - Assets/Resources/Image/GUI/Character_Select/Button_LevelUP.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Button_Reset.png
+    - Assets/Resources/Image/GUI/Character_Select/Button_Reset.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Button_Select.png
+    - Assets/Resources/Image/GUI/Character_Select/Button_Select.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Button_SixStar.png
+    - Assets/Resources/Image/GUI/Character_Select/Button_SixStar.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Button_Up.png
+    - Assets/Resources/Image/GUI/Character_Select/Button_Up.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Gage_Bar.png
+    - Assets/Resources/Image/GUI/Character_Select/Gage_Bar.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Gage_None.png
+    - Assets/Resources/Image/GUI/Character_Select/Gage_None.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Gage_Normal.png
+    - Assets/Resources/Image/GUI/Character_Select/Gage_Normal.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Gage_Talent.png
+    - Assets/Resources/Image/GUI/Character_Select/Gage_Talent.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Gage_Upgrade.png
+    - Assets/Resources/Image/GUI/Character_Select/Gage_Upgrade.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Show_Level.png
+    - Assets/Resources/Image/GUI/Character_Select/Show_Level.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Show_SP.png
+    - Assets/Resources/Image/GUI/Character_Select/Show_SP.png.meta
+    - Assets/Resources/Image/GUI/Character_Select/Upgrade.png
+    - Assets/Resources/Image/GUI/Character_Select/Upgrade.png.meta
+    - Assets/Scenes/Character.unity
+    - Assets/Script/SelectCharacter.cs
+    - ProjectSettings/TagManager.asset
     - 
-    m_Values: 010101
+    m_Values: 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

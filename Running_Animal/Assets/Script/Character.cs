@@ -57,6 +57,27 @@ public class Character
 
     Character() { }
 
+    public Character(Character c)
+    {
+        LV = c.LV;
+        STAT_POINT = c.STAT_POINT;
+        MAX_HP = c.MAX_HP;
+        LV_MAX_HP = c.LV_MAX_HP;
+        SPEED = c.SPEED;
+        LV_SPEED = c.LV_SPEED;
+        JUMP_POWER = c.JUMP_POWER;
+        LV_JUMP_POWER = c.LV_JUMP_POWER;
+        DOWN_POWER = c.DOWN_POWER;
+        LV_DOWN_POWER = c.LV_DOWN_POWER;
+        JUMP_COUNT = c.JUMP_COUNT;
+        LV_JUMP_COUNT = c.LV_JUMP_COUNT;
+        DEF = c.DEF;
+        LV_DEF = c.LV_DEF;
+        LUK = c.LUK;
+        LV_LUK = c.LV_LUK;
+        ACTIVE = c.ACTIVE;
+    }
+
 
 
 

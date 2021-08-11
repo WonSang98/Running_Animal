@@ -74,6 +74,22 @@ public class TalentManager : MonoBehaviour
             {
                 GameManager.Data.Gold -= costs[GameManager.Data.Talent_LV[Select] - 1];
                 GameManager.Data.Talent_LV[Select] += 1;
+
+                switch (Select)
+                {
+                    case 0: //HP
+                        GameManager.Data.Talent_HP = Ability[Select, GameManager.Data.Talent_LV[Select] - 1];
+                        break;
+                    case 1: //DEF
+                        GameManager.Data.Talent_DEF = Ability[Select, GameManager.Data.Talent_LV[Select] - 1];
+                        break;
+                    case 2: //LUK
+                        GameManager.Data.Talent_LUK = (int)Ability[Select, GameManager.Data.Talent_LV[Select] - 1];
+                        break;
+                    case 3: //RESTORE
+                        GameManager.Data.Talent_Restore = Ability[Select, GameManager.Data.Talent_LV[Select] - 1];
+                        break;
+                }
                 if (GameManager.Data.Talent_LV[Select] == 10)
                 {
                     Upgrade.text = "LV.MAX";
