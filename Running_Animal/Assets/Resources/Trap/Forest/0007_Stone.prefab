@@ -71,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1595912939
-  m_SortingLayer: 8
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 547522226512259193}
   - component: {fileID: 4195795212219751087}
   - component: {fileID: 2951875754467440924}
+  - component: {fileID: 7928890995937495126}
   m_Layer: 8
   m_Name: realitystone
   m_TagString: Trap
@@ -169,7 +170,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1595912939
-  m_SortingLayer: 8
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 893c4c582a68e864e91c7a7c7b670450, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -210,3 +211,16 @@ CircleCollider2D:
   m_Offset: {x: 2.6186526, y: 0.06570101}
   serializedVersion: 2
   m_Radius: 0.63442063
+--- !u!114 &7928890995937495126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6198367976795231041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25571c77547bfdb49a5e5923ccfe2a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CODE: 7

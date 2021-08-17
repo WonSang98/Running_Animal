@@ -26,6 +26,7 @@ public class MainManager : MonoBehaviour
         // Data에 저장되어있는 사용하고있는 캐릭터에대한 정보를 받아온 후, 그 캐릭터를 생성.
         var path_character = Resources.Load("Character/" + (int)GameManager.Data.Now_Character, typeof(GameObject));
         character = Instantiate(path_character) as GameObject;
+        character.transform.localPosition = new Vector3(0, -3.5f, 0);
         character.GetComponent<Rigidbody2D>().gravityScale = 0;
 
         // 기존에 선택해서 즐기고있던 테마를 로드한다.

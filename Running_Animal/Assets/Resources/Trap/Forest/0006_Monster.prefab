@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4423729136244294311}
   - component: {fileID: 4423729136244294308}
   - component: {fileID: 6927709657675019608}
+  - component: {fileID: -7595766174649735015}
   m_Layer: 8
   m_Name: 0006_Monster
   m_TagString: Jump
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1595912939
-  m_SortingLayer: 8
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -6737977631477542574, guid: 54563cd4fa184f6449af49beb58bf92b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -161,3 +162,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-7595766174649735015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4423729136244294309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25571c77547bfdb49a5e5923ccfe2a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CODE: 6

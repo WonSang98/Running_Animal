@@ -74,6 +74,9 @@ TextureImporter:
   - first:
       213: 3350170934955858258
     second: Charater_RabbitSprite2_23
+  - first:
+      213: 9194897074290017429
+    second: Charater_RabbitSprite2_24
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -182,8 +185,8 @@ TextureImporter:
         y: 1630
         width: 180
         height: 340
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -203,8 +206,8 @@ TextureImporter:
         y: 1630
         width: 180
         height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -224,8 +227,8 @@ TextureImporter:
         y: 1630
         width: 180
         height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -245,8 +248,8 @@ TextureImporter:
         y: 1630
         width: 180
         height: 290
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -266,8 +269,8 @@ TextureImporter:
         y: 1620
         width: 180
         height: 320
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -283,12 +286,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_5
       rect:
         serializedVersion: 2
-        x: 220
-        y: 1230
+        x: 20
+        y: 1220
         width: 180
-        height: 320
+        height: 340
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -304,12 +307,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_6
       rect:
         serializedVersion: 2
-        x: 420
-        y: 1240
+        x: 220
+        y: 1230
         width: 180
-        height: 300
+        height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -325,12 +328,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_7
       rect:
         serializedVersion: 2
-        x: 650
-        y: 1220
+        x: 420
+        y: 1240
         width: 180
-        height: 340
+        height: 300
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -346,12 +349,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_8
       rect:
         serializedVersion: 2
-        x: 870
+        x: 650
         y: 1220
-        width: 200
+        width: 180
         height: 340
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -367,12 +370,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_9
       rect:
         serializedVersion: 2
-        x: 1090
-        y: 1210
+        x: 870
+        y: 1220
         width: 200
-        height: 360
+        height: 340
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -388,12 +391,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_10
       rect:
         serializedVersion: 2
-        x: 1320
+        x: 1090
         y: 1210
-        width: 180
-        height: 320
+        width: 200
+        height: 360
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -409,12 +412,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_11
       rect:
         serializedVersion: 2
-        x: 230
-        y: 830
+        x: 1320
+        y: 1210
         width: 180
         height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -430,12 +433,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_12
       rect:
         serializedVersion: 2
-        x: 440
-        y: 840
-        width: 200
+        x: 230
+        y: 830
+        width: 180
         height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -451,12 +454,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_13
       rect:
         serializedVersion: 2
-        x: 700
-        y: 830
-        width: 180
-        height: 340
+        x: 440
+        y: 840
+        width: 200
+        height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -472,12 +475,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_14
       rect:
         serializedVersion: 2
-        x: 930
-        y: 850
+        x: 700
+        y: 830
         width: 180
-        height: 320
+        height: 340
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -493,12 +496,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_15
       rect:
         serializedVersion: 2
-        x: 1160
-        y: 860
+        x: 930
+        y: 850
         width: 180
         height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -514,12 +517,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_16
       rect:
         serializedVersion: 2
-        x: 240
-        y: 420
+        x: 1160
+        y: 860
         width: 180
-        height: 340
+        height: 320
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -535,12 +538,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_17
       rect:
         serializedVersion: 2
-        x: 440
+        x: 240
         y: 420
         width: 180
         height: 340
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -556,12 +559,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_18
       rect:
         serializedVersion: 2
-        x: 640
+        x: 440
         y: 420
-        width: 190
+        width: 180
         height: 340
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -577,12 +580,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_19
       rect:
         serializedVersion: 2
-        x: 850
+        x: 640
         y: 420
         width: 190
         height: 340
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -598,12 +601,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_20
       rect:
         serializedVersion: 2
-        x: 240
-        y: 60
-        width: 180
+        x: 850
+        y: 420
+        width: 190
         height: 340
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -619,12 +622,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_21
       rect:
         serializedVersion: 2
-        x: 440
-        y: 100
-        width: 300
-        height: 270
+        x: 240
+        y: 60
+        width: 180
+        height: 340
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -640,12 +643,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_22
       rect:
         serializedVersion: 2
-        x: 760
-        y: 120
+        x: 440
+        y: 100
         width: 300
         height: 270
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -661,12 +664,12 @@ TextureImporter:
       name: Charater_RabbitSprite2_23
       rect:
         serializedVersion: 2
-        x: 1080
-        y: 80
-        width: 350
-        height: 100
+        x: 760
+        y: 120
+        width: 300
+        height: 270
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -674,6 +677,27 @@ TextureImporter:
       bones: []
       spriteID: 259d1e227b23e7e20800000000000000
       internalID: 3350170934955858258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Charater_RabbitSprite2_24
+      rect:
+        serializedVersion: 2
+        x: 1110
+        y: 80
+        width: 360
+        height: 120
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 594c5532c26da9f70800000000000000
+      internalID: 9194897074290017429
       vertices: []
       indices: 
       edges: []

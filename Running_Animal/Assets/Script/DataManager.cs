@@ -165,7 +165,11 @@ public class DataManager
     public bool playing = false;
 
     public Active_Skil active = Active_Skil.None;
-    public Passive_Skil[] passive = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    public Passive_Skil[] passive = {
+        0, 0, 0, 0,
+        0, 0, 0, 0, 
+        0, 0, 0, 0,
+        0, 0 };// 14칸 
     public float[] EXP = { 0, 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999 }; //레벨
     public bool lvup;
     public int lv = 1;
@@ -202,4 +206,5 @@ public class DataManager
     public List<int> pattern = new List<int>();
 
     public short change_chance = 0; // 스킬 선택에서 바꿀 수 있는 기회.
+    public bool no_hit = false;
 }

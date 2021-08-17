@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2454180054052307486}
   - component: {fileID: 2454180054052307487}
   - component: {fileID: 2454180054052307472}
+  - component: {fileID: 42867490884721202}
   m_Layer: 8
   m_Name: 0004_Bird
   m_TagString: Trap
@@ -71,7 +72,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1595912939
-  m_SortingLayer: 8
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 4809951491872171115, guid: 54563cd4fa184f6449af49beb58bf92b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -114,3 +115,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0.06647169, y: -0.05816719}
   m_Size: {x: 1.6323122, y: 0.88447356}
   m_Direction: 1
+--- !u!114 &42867490884721202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2454180054052307473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25571c77547bfdb49a5e5923ccfe2a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CODE: 4

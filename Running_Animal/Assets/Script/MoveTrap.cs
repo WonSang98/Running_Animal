@@ -9,6 +9,7 @@ public class MoveTrap : MonoBehaviour
     public float speed;
     public float more_speed;
 
+
     // Start is called before the first frame update
     void Start()
     {

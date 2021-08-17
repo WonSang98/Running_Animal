@@ -31,7 +31,6 @@ public class SelectCharacter : MonoBehaviour
     GameObject Text_Name; // 선택된 캐릭터의 이름 표시.
 
     bool flag_ON; // 육성창을 눌렀는지 안눌렀는지 확인용 
-    Image Fill_PU; // Panel_Upgrade Filled 조절용.
 
     // 게이지 채우기 위한 이미지
     Sprite Gage_None;
@@ -47,7 +46,7 @@ public class SelectCharacter : MonoBehaviour
     Text Text_LVUP_S;
     Text Text_RESET_S;
 
-
+    Animator Animator_UPanel; // Panel_Upgrade 관련 애니메이터
     // 레벨 업 비용
     cost[] LV_COST = {new cost(500, 1),
                       new cost(1000, 2),
@@ -73,7 +72,7 @@ public class SelectCharacter : MonoBehaviour
         characters = Resources.LoadAll<GameObject>("Character/");
         idx = (int)GameManager.Data.Now_Character;
         Show_Character = Instantiate(characters[idx]) as GameObject;
-        Show_Character.transform.localPosition = Vector3.zero;
+        Show_Character.transform.localPosition = new Vector3(0, -2.5f, 0);
         Show_Character.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         Show_Character.transform.Find("Foot").gameObject.SetActive(true);
         Show_Character.GetComponent<Rigidbody2D>().gravityScale = 0;
@@ -83,9 +82,7 @@ public class SelectCharacter : MonoBehaviour
 
         //Panel Upgrade 변수화, 그리고 비활성화.
         Panel_Upgrade = GameObject.Find("UI").transform.Find("Panel_Upgrade").gameObject;
-        Fill_PU = Panel_Upgrade.GetComponent<Image>();
-        Fill_PU.fillAmount = 0;
-        Panel_Upgrade.GetComponent<Image>().fillAmount = Fill_PU.fillAmount;
+        Animator_UPanel = Panel_Upgrade.GetComponent<Animator>();
         Panel_Upgrade.SetActive(false);
 
         //GageBar 채우기 위한 이미지 리소스 불러오기
@@ -195,13 +192,11 @@ public class SelectCharacter : MonoBehaviour
     {
         Panel_Upgrade.transform.Find("CONTENTS").gameObject.SetActive(false);
         Panel_Upgrade.SetActive(true);
-        while(Panel_Upgrade.GetComponent<Image>().fillAmount < 1)
+        
+        for (int i = 0; i < 1; i++)
         {
-            Fill_PU = Panel_Upgrade.GetComponent<Image>();
-            Fill_PU.fillAmount += Time.deltaTime;
-            Panel_Upgrade.GetComponent<Image>().fillAmount = Fill_PU.fillAmount;
-
-            yield return null;
+            Animator_UPanel.SetBool("Window_Open", true);
+            yield return new WaitForSeconds(1.0f);
         }
         Panel_Upgrade.transform.Find("CONTENTS").gameObject.SetActive(true);
         SetGage();
@@ -210,13 +205,10 @@ public class SelectCharacter : MonoBehaviour
     IEnumerator ClosePanel()
     {
         Panel_Upgrade.transform.Find("CONTENTS").gameObject.SetActive(false);
-        while (Panel_Upgrade.GetComponent<Image>().fillAmount > 0)
+        for (int i = 0; i < 1; i++)
         {
-            Fill_PU = Panel_Upgrade.GetComponent<Image>();
-            Fill_PU.fillAmount -= Time.deltaTime;
-            Panel_Upgrade.GetComponent<Image>().fillAmount = Fill_PU.fillAmount;
-
-            yield return null;
+            Animator_UPanel.SetBool("Window_Open", false);
+            yield return new WaitForSeconds(1.0f);
         }
         Panel_Upgrade.SetActive(false);
     }
@@ -325,15 +317,12 @@ public class SelectCharacter : MonoBehaviour
     {
         Destroy(Show_Character);
         Show_Character = Instantiate(characters[idx]) as GameObject;
-        Show_Character.transform.localPosition = Vector3.zero;
+        Show_Character.transform.localPosition = new Vector3(0, -2.5f, 0);
         Show_Character.GetComponent<Rigidbody2D>().gravityScale = 0;
         Show_Character.transform.Find("Foot").gameObject.SetActive(true);
         Panel_Upgrade.transform.Find("CONTENTS").gameObject.SetActive(false);
         Text_Name.SetActive(true);
         Panel_Upgrade.SetActive(false);
-        Fill_PU = Panel_Upgrade.GetComponent<Image>();
-        Fill_PU.fillAmount = 0;
-        Panel_Upgrade.GetComponent<Image>().fillAmount = Fill_PU.fillAmount;
         show_info();
     }
     public void nextCharacter()

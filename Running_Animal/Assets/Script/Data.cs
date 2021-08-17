@@ -117,4 +117,6 @@ public class Data
 
     public short change_chance = 0; // 29.스킬 선택에서 바꿀 수 있는 기회.
 
+    public bool no_hit = false; // 30. 스테이지간 맞았는지 안 맞았는지.
+    
 }

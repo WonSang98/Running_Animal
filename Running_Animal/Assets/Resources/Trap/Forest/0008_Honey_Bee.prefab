@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1162267733549187984}
   - component: {fileID: 6271934739665784869}
   - component: {fileID: 5573433247577083275}
+  - component: {fileID: -4482914765257873441}
   m_Layer: 8
   m_Name: 0008_Honey_Bee
   m_TagString: Trap
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1595912939
-  m_SortingLayer: 8
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -7317790261048627795, guid: 54563cd4fa184f6449af49beb58bf92b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -161,3 +162,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-4482914765257873441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5790576199615003174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25571c77547bfdb49a5e5923ccfe2a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CODE: 8

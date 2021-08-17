@@ -20,6 +20,13 @@ public class GameManager : MonoBehaviour
     public static Image HP_Bar;
     public static Image EXP_Bar;
 
+    //Buttons
+    GameObject[] Get_Passive;
+
+    //Sprites
+    Sprite[] passive_sprite; // Pause 시에 이미지 보여주기.
+
+
     IEnumerator Coroutine_Combo;
 
     private void OnApplicationPause(bool pause)
@@ -58,7 +65,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("아아...소환되었따");
             Load(); }
 
-        if(SceneManager.GetActiveScene().name == "Play")
+        if (SceneManager.GetActiveScene().name == "Play")
         {
             Debug.Log("글자 불러오기 완료");
             combo = GameObject.Find("UI/Text_Combo");
@@ -66,8 +73,18 @@ public class GameManager : MonoBehaviour
             Coroutine_Combo = ComboEffect();
             HP_Bar = GameObject.Find("UI/Bar_HP/Gage_HP").GetComponent<Image>();
             EXP_Bar = GameObject.Find("UI/Bar_EXP/Gage_EXP").GetComponent<Image>();
+            
             BAR_HP();
             BAR_EXP();
+
+            passive_sprite = Resources.LoadAll<Sprite>("Passive_Buttons/");
+            Get_Passive = new GameObject[14];
+            for (int i = 0; i < 14; i++)
+            {
+                Get_Passive[i] = GameObject.Find("UI").transform.Find("Panel_Pause/PASSIVE/Button" + i.ToString()).gameObject;
+            }
+
+            
         }
     }
 
@@ -78,6 +95,19 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             GameObject.Find("UI").transform.Find("Panel_Pause").gameObject.SetActive(true);
+            
+            // 현재 획득한 패시브 아이템 내역 보여주기.
+            for(int i = 0; i < Data.passive.Length; i++)
+            {
+                if(Data.passive[i] == 0)
+                {
+                    break;
+                }
+                else
+                {
+                    Get_Passive[i].GetComponent<Image>().sprite = passive_sprite[(int)Data.passive[i]];
+                }
+            }
         }
     }
 
@@ -184,6 +214,7 @@ public class GameManager : MonoBehaviour
         saveData.max_active = Data.max_active;
         saveData.use_active = Data.use_active;
         saveData.dodge_time = Data.dodge_time;
+        saveData.no_hit = Data.no_hit;
 
         // 패시브
         saveData.magnet = Data.magnet;
@@ -278,6 +309,7 @@ public class GameManager : MonoBehaviour
         Data.max_active = saveData.max_active;
         Data.use_active = saveData.use_active;
         Data.dodge_time = saveData.dodge_time;
+        Data.no_hit = saveData.no_hit;
         
         //패시브
         Data.magnet = saveData.magnet;
@@ -480,6 +512,8 @@ public class GameManager : MonoBehaviour
         Data.passive_active = false; // 패시브 액티브 사용횟수 + 1
         Data.passive_buwhal = false;
 
+        // 패시브 아이템 초기화
+        Data.passive = new DataManager.Passive_Skil[14];
         // 시작 전 구매 아이템 초기화
         /*
         Data.Pre_HP = false;
