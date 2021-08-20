@@ -1,0 +1,419 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class UI_Play : MonoBehaviour
+{
+    public Image Image_HpBar;
+    public Image Image_ExpBar;
+
+    public GameObject combo;
+    public GameObject combo_Count;
+    public GameObject Cam;
+    public GameObject Miss;
+    
+    public GameObject Fail;
+    public GameObject Fail_Content;
+    public GameObject Success;
+    public GameObject Success_Content;
+
+    public GameObject Count;
+
+    public GameObject Pause;
+    public Button PauseYes;
+    public Button PauseNo;
+    public Image[] GetPassives;
+
+    public GameObject Button_Skill;
+    public Button Button_Jump;
+    public Button Button_Down;
+
+    public EventTrigger.Entry Entry_Jump;
+    public EventTrigger.Entry Entry_Down;
+    public EventTrigger Event_jump;
+    public EventTrigger Event_down;
+
+    public Text Text_gold;
+
+    public Color player_opacity;
+
+    IEnumerator Coroutine_Combo;
+    public void SetUI()
+    {
+        Image_HpBar = GameObject.Find("UI/Bar_HP/Gage_HP").GetComponent<Image>();
+        Image_ExpBar = GameObject.Find("UI/Bar_EXP/Gage_EXP").GetComponent<Image>();
+
+        combo = GameObject.Find("UI/Text_Combo");
+        combo_Count = GameObject.Find("UI/Text_Combo/Text_Count");
+        Cam = GameObject.Find("Main Camera");
+        Miss = Resources.Load<GameObject>("Item/Miss");
+
+        Fail = GameObject.Find("UI").transform.Find("Panel_Fail").gameObject;
+        Fail_Content = Fail.transform.Find("Content").gameObject;
+
+        Success = GameObject.Find("UI").transform.Find("Panel_Success").gameObject;
+        Success_Content = Fail.transform.Find("Content").gameObject;
+
+        Count = GameObject.Find("UI").transform.Find("Text_Count").gameObject;
+
+        Pause = GameObject.Find("UI").transform.Find("Button_Back").gameObject;
+        Pause.GetComponent<Button>().onClick.AddListener(() => OnPause());
+        PauseYes = GameObject.Find("UI").transform.Find("Panel_Pause/Button_Yes").GetComponent<Button>();
+        PauseYes.onClick.AddListener(() => gameObject.GetComponent<LoadScene>().EndGame());
+        PauseNo = GameObject.Find("UI").transform.Find("Panel_Pause/Button_No").GetComponent<Button>();
+        PauseNo.onClick.AddListener(() => OffPause());
+        GetPassives = new Image[14];
+        for(int j = 0; j < 14; j++)
+        {
+            GetPassives[j] = GameObject.Find("UI").transform.Find("Panel_Pause/PASSIVE/Image" + j.ToString()).GetComponent<Image>();
+        }
+
+        Button_Skill = GameObject.Find("UI/Button_Skill").gameObject;
+        Button_Skill.GetComponent<Image>().sprite = gameObject.GetComponent<Active>().Active_Sprites[(int)GameManager.Play.Status.ACTIVE];
+        Button_Skill.GetComponent<Button>().onClick.AddListener(Use_Active);
+        Button_Jump = GameObject.Find("UI/Button_Jump").GetComponent<Button>();
+        Button_Down = GameObject.Find("UI/Button_Down").GetComponent<Button>();
+
+        Event_jump = GameObject.Find("UI/Button_Jump").GetComponent<EventTrigger>();
+        Event_down = GameObject.Find("UI/Button_Down").GetComponent<EventTrigger>();
+
+        Entry_Jump = new EventTrigger.Entry();
+        Entry_Jump.eventID = EventTriggerType.PointerDown;
+        Entry_Jump.callback.AddListener((data) => { OnJump((PointerEventData)data); });
+        Event_jump.triggers.Add(Entry_Jump);
+
+        Entry_Down = new EventTrigger.Entry();
+        Entry_Down.eventID = EventTriggerType.PointerDown;
+        Entry_Down.callback.AddListener((data) => { OnDown((PointerEventData)data); });
+        Event_down.triggers.Add(Entry_Down);
+
+        Text_gold = GameObject.Find("UI/Image_GOLD/Text_Gold").GetComponent<Text>();
+        Text_gold.text = $"{GameManager.Play.DC.goldNow}";
+
+        player_opacity = GameManager.Play.Player.GetComponent<SpriteRenderer>().color;
+
+    }
+
+    // 점프 버튼
+    void OnJump(PointerEventData data)
+    {
+        if (GameManager.Play.DS.jumpNow < GameManager.Play.Status.ability.MAX_JUMP.value)
+        {
+            GameManager.Play.Player.GetComponent<Rigidbody2D>().velocity = new Vector3(0, GameManager.Play.Status.ability.JUMP.value, 0);
+            GameManager.Play.DS.jumpNow += 1;
+            GameManager.Play.Player.GetComponent<Animator>().SetTrigger("Jumping");
+            GameManager.Play.Player.GetComponent<Animator>().SetBool("Landing", false);
+        }
+    }
+
+    // 하강 버튼
+    void OnDown(PointerEventData data)
+    {
+        if (GameManager.Play.Player.transform.position.y > -2.62f)
+        {
+            GameManager.Play.Player.GetComponent<Rigidbody2D>().velocity = new Vector3(0, -1 * GameManager.Play.Status.ability.DOWN.value, 0);
+        }
+    }
+
+    // 스킬 사용.
+    public void Use_Active()
+    {
+        GameManager.Play.DS.activeUse -= 1;
+        switch (GameManager.Play.Status.ACTIVE)
+        {
+            case Active.ACTIVE_CODE.None:
+                break;
+            case Active.ACTIVE_CODE.Defense:
+                gameObject.GetComponent<Active>().OnDefense();
+                StartCoroutine(CoolTime(15));
+                break;
+            case Active.ACTIVE_CODE.Flash:
+                StartCoroutine(gameObject.GetComponent<Active>().OnFlash());
+                StartCoroutine(CoolTime(15));
+                break;
+            case Active.ACTIVE_CODE.Ghost:
+                gameObject.GetComponent<Active>().OnGhost();
+                StartCoroutine(CoolTime(15));
+                break;
+            case Active.ACTIVE_CODE.Heal:
+                gameObject.GetComponent<Active>().OnHeal();
+                //체력바 UI UPDATE!
+                StartCoroutine(CoolTime(20));
+                break;
+            case Active.ACTIVE_CODE.Item_Change:
+                gameObject.GetComponent<Active>().Item_Change();
+                StartCoroutine(CoolTime(20));
+                break;
+            case Active.ACTIVE_CODE.Change_Coin:
+                gameObject.GetComponent<Active>().Change_Coin();
+                StartCoroutine(CoolTime(20));
+                break;
+            case Active.ACTIVE_CODE.The_World:
+                StartCoroutine(gameObject.GetComponent<Active>().OnSlow());
+                StartCoroutine(CoolTime(10));
+                break;
+            case Active.ACTIVE_CODE.Multiple_Combo:
+                StartCoroutine(gameObject.GetComponent<Active>().MultiCombo());
+                StartCoroutine(CoolTime(5));
+                break;
+            case Active.ACTIVE_CODE.Fly:
+                StartCoroutine(gameObject.GetComponent<Active>().OnFly());
+                StartCoroutine(CoolTime(15));
+                break;
+               
+         /* case Active.ID.Run:
+                StartCoroutine(OnRun);
+                StartCoroutine(CoolTime(15));
+                + 경험치 바 UI 넣어주세요~
+                break;
+                 */
+        }
+        Button_Skill.GetComponent<Image>().fillAmount = 0;
+
+    }
+    public IEnumerator CoolTime(float t)
+    {
+        if (GameManager.Play.DS.activeUse < GameManager.Play.DC.activeMax)
+        {
+            for (float i = 0; i <= t; i++)
+            {
+                if (i == t)
+                {
+                    Button_Skill.GetComponent<Button>().interactable = true;
+                }
+                Button_Skill.GetComponent<Image>().fillAmount += (1.0f / t);
+                yield return new WaitForSeconds(1);
+            }
+        }
+    }
+   
+    //체력 바 
+    public void BAR_HP()
+    {
+        Image_HpBar.fillAmount = GameManager.Play.Status.ability.HP.value / GameManager.Play.Status.ability.MAX_HP.value;
+    }
+
+    // 경험치 바
+    public void BAR_EXP()
+    {
+        Image_ExpBar.fillAmount = (GameManager.Play.DC.expNow / GameManager.Play.DC.expNeed[GameManager.Play.DC.lv]);
+    }
+
+    public void OnPause()
+    {
+        if (SceneManager.GetActiveScene().name == "Play")
+        {
+            Time.timeScale = 0;
+            GameObject.Find("UI").transform.Find("Panel_Pause").gameObject.SetActive(true);
+
+            ShowPassive();
+            // 현재 획득한 패시브 아이템 내역 보여주기.
+        }
+    }
+
+    public void OffPause()
+    {
+        Debug.Log("offpause");
+        if (SceneManager.GetActiveScene().name == "Play")
+        {
+            Time.timeScale = 1;
+            GameObject.Find("UI").transform.Find("Panel_Pause").gameObject.SetActive(false);
+            GameObject.Find("UI").transform.Find("Text_Count").gameObject.SetActive(true);
+            StartCoroutine("Count_Time");
+        }
+    }
+
+    public IEnumerator Count_Time()
+    {
+        float temp_speed = 0.0f;
+        for (int i = 3; i > -1; i--)
+        {
+            if (i == 3)
+            {
+                temp_speed = GameManager.Play.Status.ability.SPEED.value;
+                GameManager.Play.Status.ability.SPEED.value = 0.0f;
+            }
+            GameObject.Find("UI/Text_Count").GetComponent<Text>().text = $"{i}";
+            if (i == 0)
+            {
+                GameObject.Find("UI/Text_Count").SetActive(false);
+                GameManager.Play.Status.ability.SPEED.value = temp_speed;
+            }
+
+
+            yield return new WaitForSeconds(1.0f);
+        }
+    }
+
+    public IEnumerator ComboEffect()
+    {
+        for (int i = 0; i <= 100; i++)
+        {
+            if (SceneManager.GetActiveScene().name == "Play")
+            {
+                if (i == 0)
+                {
+                    combo.transform.localScale = new Vector3(1.5f, 1.5f, 0);
+                }
+                else
+                {
+                    combo.transform.localScale -= new Vector3(0.005f, 0.005f, 0);
+                }
+            }
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    // 트랩 파괴 시 콤보 적용
+    public void Trap_Combo(Transform other)
+    {
+        gameObject.GetComponent<InterAction>().MakeCoin(other.transform);
+        Destroy(other.gameObject); // 그 장애물을 파! 괘!
+        int per = Random.Range(0, 100);
+        if (per < GameManager.Play.Status.ability.LUK.value) // 행운 수치에 따라 크리티컬 적용.
+        {
+            GameManager.Play.DC.combo += GameManager.Play.DC.comboMulti * 2;
+            combo.GetComponent<Text>().color = Color.red;
+            combo_Count.GetComponent<Text>().color = Color.red;
+            combo.GetComponent<Text>().text = "ComboX2";
+            combo_Count.GetComponent<Text>().text = $"{GameManager.Play.DC.combo}!";
+            if (Coroutine_Combo != null)
+            {
+                StopCoroutine(Coroutine_Combo);
+                Coroutine_Combo = ComboEffect();
+                StartCoroutine(Coroutine_Combo);
+            }
+            else
+            {
+                Coroutine_Combo = ComboEffect();
+                StartCoroutine(Coroutine_Combo);
+            }
+        }
+        else
+        {
+            GameManager.Play.DC.combo += GameManager.Play.DC.comboMulti;
+            combo.GetComponent<Text>().color = Color.white;
+            combo_Count.GetComponent<Text>().color = Color.white;
+            combo.GetComponent<Text>().text = "Combo";
+            combo_Count.GetComponent<Text>().text = $"{GameManager.Play.DC.combo}!";
+            if (Coroutine_Combo != null)
+            {
+                StopCoroutine(Coroutine_Combo);
+                Coroutine_Combo = ComboEffect();
+                StartCoroutine(Coroutine_Combo);
+            }
+            else
+            {
+                Coroutine_Combo = ComboEffect();
+                StartCoroutine(Coroutine_Combo);
+            }
+        }
+    }
+    // 피격시 카메라 흔들
+    public IEnumerator Cam_Hit()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if (i == 0)
+            {
+                Cam.transform.Translate(-0.25f, -0.25f, 0);
+            }
+            else
+            {
+                Cam.transform.Translate(0.25f, 0.25f, 0);
+            }
+            yield return new WaitForSeconds(0.0125f);
+        }
+    }
+
+    // 타격시 카메라 흔들
+    public IEnumerator Cam_ATT()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            if (i == 0)
+            {
+                Cam.GetComponent<Camera>().orthographicSize = 4.75f;
+            }
+            else
+            {
+                Cam.GetComponent<Camera>().orthographicSize = 5.0f;
+            }
+            yield return new WaitForSeconds(0.0125f);
+        }
+    }
+
+    // 게임 오버.
+    public IEnumerator GameOver()
+    {
+        float temp_speed = GameManager.Play.Status.ability.SPEED.value;
+        GameManager.Play.Status.ability.SPEED.value = 0;
+        Button_Jump.interactable = false;
+        Button_Down.interactable = false;
+
+        Count.SetActive(true);
+        for (int i = 5; i > 0; i--)
+        {
+           Count.GetComponent<Text>().text = i.ToString();
+            yield return new WaitForSeconds(1.0f);
+        }
+        Count.SetActive(false);
+        OnFail();
+    }
+
+    public IEnumerator ReGame()
+    {
+        float temp_speed = GameManager.Play.Status.ability.SPEED.value;
+        GameManager.Play.Status.ability.SPEED.value = 0;
+        Count.SetActive(true);
+        for (int i = 3; i > 0; i--)
+        {
+            Count.GetComponent<Text>().text = i.ToString();
+            yield return new WaitForSeconds(1.0f);
+        }
+        Count.SetActive(false);
+        GameManager.Play.Status.ability.SPEED.value = temp_speed;
+    }
+
+    // 실패 시 실패 족자 열기.
+    // 애니메이션 추가 후 코드 수정하기.
+    public void OnFail()
+    {
+        gameObject.GetComponent<SetPlayer>().Re_Stat();
+        Fail.SetActive(true);
+        Fail_Content.SetActive(true);
+    }
+
+    public void OnSuccess()
+    {
+        gameObject.GetComponent<SetPlayer>().Re_Stat();
+        Success.SetActive(true);
+        Success_Content.SetActive(true);
+    }
+
+    // 얻은 패시브 보여주기...
+    public void ShowPassive()
+    {
+        for (int i = 0; i < 14; i++)
+        {
+            if (i < GameManager.Play.DC.passiveGet.Count)
+            {
+                Color temp = GetPassives[i].color;
+                temp.a = 1;
+                GetPassives[i].color = temp;
+                GetPassives[i].sprite = gameObject.GetComponent<Passive>().Passive_Sprites[(int)GameManager.Play.DC.passiveGet[i]];
+            }
+            else
+            {
+                Color temp = GetPassives[i].color;
+                temp.a = 0;
+                GetPassives[i].color = temp;
+            }
+        }
+    }
+
+
+}

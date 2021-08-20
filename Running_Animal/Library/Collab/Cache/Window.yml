@@ -14,34 +14,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Resources/Image/BackGround/EGBACKGROUND.png
-    - Assets/Resources/Image/BackGround/EGBACKGROUND.png.meta
-    - Assets/Resources/Image/GUI/EndGame.meta
-    - Assets/Resources/Image/GUI/EndGame/Back_IMAGE.png
-    - Assets/Resources/Image/GUI/EndGame/Back_IMAGE.png.meta
-    - Assets/Resources/Image/GUI/EndGame/Button.png
-    - Assets/Resources/Image/GUI/EndGame/Button.png.meta
-    - Assets/Resources/Image/GUI/EndGame/Die_Monkey.prefab
-    - Assets/Resources/Image/GUI/EndGame/Die_Monkey.prefab.meta
-    - Assets/Resources/Image/GUI/EndGame/Fail_Image.png
-    - Assets/Resources/Image/GUI/EndGame/Fail_Image.png.meta
-    - Assets/Resources/Image/GUI/EndGame/KillTrap.png
-    - Assets/Resources/Image/GUI/EndGame/KillTrap.png.meta
-    - Assets/Resources/Image/GUI/EndGame/Success.png
-    - Assets/Resources/Image/GUI/EndGame/Success.png.meta
-    - Assets/Resources/Trap/Forest/0002_Stump.prefab
-    - Assets/Resources/Trap/Forest/0003_Banana.prefab
-    - Assets/Resources/Trap/Forest/0004_Bird.prefab
-    - Assets/Resources/Trap/Forest/0005_Shot.prefab
-    - Assets/Resources/Trap/Forest/0006_Monster.prefab
-    - Assets/Scenes/End_Game.unity
-    - Assets/Scenes/Play.unity
-    - Assets/Script/MoveTrap.cs
-    - Assets/fonts/KCCAhnjunggeun.ttf
-    - Assets/fonts/KCCAhnjunggeun.ttf.meta
-    - ProjectSettings/ProjectVersion.txt
+    - Assets/Script/Data.cs
+    - Assets/Script/Data.meta
+    - Assets/Script/Data/Ability.cs
+    - Assets/Script/Data/Ability.cs.meta
+    - Assets/Script/Data/Character.cs
+    - Assets/Script/Data/Character.cs.meta
+    - Assets/Script/Data/Skill.cs
+    - Assets/Script/Data/Skill.cs.meta
+    - Assets/Script/Data/Status.cs
+    - Assets/Script/Data/Status.cs.meta
+    - Assets/Script/DataManager.cs
+    - Assets/Script/GameManager.cs
+    - Assets/Script/Play.meta
+    - Assets/Script/Play/PlayManager.cs
+    - Assets/Script/Play/PlayManager.cs.meta
+    - Assets/Script/Pre_BuyItem.cs
+    - Assets/Script/SelectCharacter.cs
+    - Assets/Script/SelectSkil.cs
+    - Assets/Script/SkilManager.cs
+    - Assets/Script/SpawnPlayer.cs
     - 
-    m_Values: 000000000000000000000000000000000000000000000000000000
+    m_Values: 000000000000000000000000000000000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
