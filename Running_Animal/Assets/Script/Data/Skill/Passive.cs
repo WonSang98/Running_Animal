@@ -235,17 +235,17 @@ public class Passive : MonoBehaviour
         {
             if (i == 0)
             {
-                gameObject.tag = "God";
+                GameManager.Play.Player.tag = "God";
                 player_opacity = GameManager.Play.Player.GetComponent<SpriteRenderer>().color;
                 player_opacity.a = 0.5f;
-                gameObject.GetComponent<SpriteRenderer>().color = player_opacity;
+                GameManager.Play.Player.GetComponent<SpriteRenderer>().color = player_opacity;
             }
             else
             {
                 player_opacity = GameManager.Play.Player.GetComponent<SpriteRenderer>().color;
                 player_opacity.a = 1.0f;
-                gameObject.GetComponent<SpriteRenderer>().color = player_opacity;
-                gameObject.tag = "Player";
+                GameManager.Play.Player.GetComponent<SpriteRenderer>().color = player_opacity;
+                GameManager.Play.Player.tag = "Player";
             }
             yield return new WaitForSeconds(2f);
         }
@@ -264,5 +264,10 @@ public class Passive : MonoBehaviour
     public void save_passive(int num)
     {
         GameManager.Play.DC.passiveGet.Add((PASSIVE_CODE)(num));
+    }
+
+    public void Stop_Passive()
+    {
+        StopAllCoroutines();
     }
 }

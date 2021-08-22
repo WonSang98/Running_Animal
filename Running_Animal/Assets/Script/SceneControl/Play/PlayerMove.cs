@@ -79,6 +79,7 @@ public class PlayerMove : MonoBehaviour
                 GameManager.Play.DC.lvup = false;
             }
             GameManager.Instance.Save();
+            GameManager.Instance.AllStop();
             SceneManager.LoadScene("Select_Item");
         }
 

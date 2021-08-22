@@ -28,10 +28,10 @@ public class GameManager : MonoBehaviour
                 //만약 Manager Object를 생성 한 적이 없다.
                 go = new GameObject { name = "@Managers" };
                 go.AddComponent<GameManager>();
-                go.AddComponent<TrapForest>();
-                go.AddComponent<SetPlayer>();
-                go.AddComponent<UI_Play>();
-                go.AddComponent<InterAction>();
+                go.AddComponent<TrapForest>(); // 코루틴 
+                go.AddComponent<SetPlayer>(); // 코루틴
+                go.AddComponent<UI_Play>(); // 코루틴
+                go.AddComponent<InterAction>(); // 코루틴
                 go.AddComponent<Active>();
                 go.AddComponent<Passive>();
                 go.AddComponent<LoadScene>();
@@ -51,7 +51,17 @@ public class GameManager : MonoBehaviour
             Load(); }
     }
 
-
+    // Component로 부착된 스크립트들의 Coroutine 정지.
+    public void AllStop()
+    {
+        gameObject.GetComponent<TrapForest>().Stop_TrapForest();
+        gameObject.GetComponent<SetPlayer>().Stop_SetPlayer();
+        gameObject.GetComponent<UI_Play>().Stop_UiPlay();
+        gameObject.GetComponent<InterAction>().Stop_InterAction();
+        gameObject.GetComponent<Active>().Stop_Active();
+        gameObject.GetComponent<Passive>().Stop_Passive();
+        gameObject.GetComponent<LoadScene>().Stop_LoadScene();
+    }
     
     public void Save()
     {
@@ -100,6 +110,8 @@ public class GameManager : MonoBehaviour
     
     private void OnApplicationQuit()
     {
+        GameManager.Instance.AllStop();
+        GameManager.Play.Playing = false;
         Save();
     }
 

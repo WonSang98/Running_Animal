@@ -26,6 +26,7 @@ public class ControlCharacter : MonoBehaviour
     int idx; // 현재 보고 있는 캐릭터 순서
 
     Button Button_Upgrade;
+    Button Button_Main;
 
     GameObject Panel_Upgrade; // 육성 누를때만 보이게...
     GameObject Text_Name; // 선택된 캐릭터의 이름 표시.
@@ -72,6 +73,8 @@ public class ControlCharacter : MonoBehaviour
         Button_Upgrade = GameObject.Find("UI/Button_Upgrade").GetComponent<Button>();
         Button_Upgrade.onClick.AddListener(() => Click_Upgrade());
 
+        Button_Main = GameObject.Find("UI/Button_Back").GetComponent<Button>();
+        Button_Main.onClick.AddListener(() => gameObject.GetComponent<LoadScene>().OnMain());
         //Panel Upgrade 변수화, 그리고 비활성화.
         Panel_Upgrade = GameObject.Find("UI").transform.Find("Panel_Upgrade").gameObject;
         Animator_UPanel = Panel_Upgrade.GetComponent<Animator>();

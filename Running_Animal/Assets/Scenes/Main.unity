@@ -1279,6 +1279,7 @@ GameObject:
   - component: {fileID: 274971649}
   - component: {fileID: 274971651}
   - component: {fileID: 274971650}
+  - component: {fileID: 274971652}
   m_Layer: 5
   m_Name: Panel_Info
   m_TagString: Untagged
@@ -1329,7 +1330,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c1c5355c1e3c6334694365bb0d095194, type: 3}
+  m_Sprite: {fileID: 880453454740766906, guid: af7afc49431711a47be6dc3e38dfa031, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1347,6 +1348,25 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274971648}
   m_CullTransparentMesh: 1
+--- !u!95 &274971652
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274971648}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cd082253e5aefc8439aa4558cc53c39d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &293752295
 GameObject:
   m_ObjectHideFlags: 0
@@ -2736,7 +2756,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.0041, y: -22.50002}
+  m_AnchoredPosition: {x: 4.0040894, y: -22.50002}
   m_SizeDelta: {x: 498.01, y: 765}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &775234979
@@ -4769,7 +4789,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1488739276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20246b170f49e6247b6c10a21bfa960d, type: 3}
+  m_Script: {fileID: 11500000, guid: f002cc341f7996345b0e07c5877eabc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1488739278

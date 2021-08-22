@@ -63,6 +63,36 @@ public class DataContinue
         passiveGet = new List<Passive.PASSIVE_CODE>();
     }
 
+    public DataContinue DeepCopy()
+    {
+        DataContinue dc = new DataContinue();
+        dc.expNeed = new float[] { 0, 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999 };
+        dc.lv = 1;
+        dc.lvup = false;
+        dc.expNow = 0;
+        dc.expMulti = 1;
+        dc.goldNow = 0;
+        dc.goldMulti = 1;
+        dc.combo = 0;
+        dc.comboMax = 0;
+        dc.comboMulti = 1;
+
+        dc.damage = 1.0f;
+
+        dc.patternList = new List<int>();
+        dc.patternCnt = 0;
+
+        dc.activeMax = 1;
+
+        dc.dodge = 12;
+
+        dc.revive = 0;
+
+        dc.passiveGet = new List<Passive.PASSIVE_CODE>();
+
+        return dc;
+    }
+
 }
 
 public class DataShot
@@ -72,8 +102,8 @@ public class DataShot
     public int activeUse; //액티브 스킬 현재 사용 횟수.
     public bool nohit; // 스테이지에서 피격했는지 안했는지.
     public int time_change; // 스킬 선택창에서 REROLL 횟수.
-
     public float expRun; // RUN 달리기 할 때 한번에 경험치 적용하려고 한 건데 이거 쓸 지 말지 좀  다시 봐야함.
+    public float timer; // 장애물 생성 시간 측정 타이머, Trap_함수와 연관.
 
     public DataShot()
     {
@@ -82,6 +112,19 @@ public class DataShot
         nohit = true;
         time_change = 1;
         expRun = 0;
+        timer = 20.0f;
+    }
 
+    public DataShot DeepCopy()
+    {
+        DataShot ds = new DataShot();
+        ds.jumpNow = 0;
+        ds.activeUse = 0;
+        ds.nohit = true;
+        ds.time_change = 1;
+        ds.expRun = 0;
+        ds.timer = 20.0f;
+
+        return ds;
     }
 }

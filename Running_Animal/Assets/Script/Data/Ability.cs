@@ -49,6 +49,7 @@ public class Ability
         LUK = a.LUK;
         RESTORE = a.RESTORE;
     }
+
     Ability()
     {
     }

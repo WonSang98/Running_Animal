@@ -35,6 +35,7 @@ public class LoadScene : MonoBehaviour
     public void OnMain()
     {
         GameManager.Instance.Save();
+        GameManager.Instance.AllStop();
         SceneManager.LoadScene("Main");
         GameManager.Instance.Load();
     }
@@ -42,6 +43,7 @@ public class LoadScene : MonoBehaviour
     public void EndGame()
     {
         Time.timeScale = 1;
+        GameManager.Instance.AllStop();
         gameObject.GetComponent<SetPlayer>().Re_Stat();
         SceneManager.LoadScene("Main");
     }
@@ -58,5 +60,10 @@ public class LoadScene : MonoBehaviour
         GameManager.Instance.Save();
         SceneManager.LoadScene("Pre_Item");
         GameManager.Instance.Load();
+    }
+
+    public void Stop_LoadScene()
+    {
+        StopAllCoroutines();
     }
 }

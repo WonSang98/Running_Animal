@@ -16,8 +16,7 @@ public class SetPlayer : MonoBehaviour
         GameManager.Play.Player.transform.name = "Player";
         // Animator 실행
         GameManager.Play.Player.GetComponent<Animator>().SetBool("StartGame", true);
-        // 코루틴 있는 패시브 아이템 적용
-        gameObject.GetComponent<InterAction>().Apply_Passive();
+
         Clear_DS();
     }
 
@@ -32,6 +31,7 @@ public class SetPlayer : MonoBehaviour
 
     public void ForestPattern()
     {
+        GameManager.Play.DC.patternList = null;
         GameManager.Play.DC.patternList = new List<int>();
         for(int i=0; i< gameObject.GetComponent<TrapForest>().num_pattern; i++)
         {
@@ -42,13 +42,23 @@ public class SetPlayer : MonoBehaviour
     void GetStatus()
     {
         //현재 설정된 캐릭터의 능력치를 가져온다.
-        GameManager.Play.Status = GameManager.Data.Character_STAT[(int)GameManager.Data.Preset.Character];
+        Ability ab = GameManager.Data.Character_STAT[(int)GameManager.Data.Preset.Character].ability;
+        GameManager.Play.Status.ability.MAX_HP.value = ab.MAX_HP.value;
+        GameManager.Play.Status.ability.HP.value = ab.HP.value;
+        GameManager.Play.Status.ability.SPEED.value = ab.SPEED.value;
+        GameManager.Play.Status.ability.MAX_JUMP.value = ab.MAX_JUMP.value;
+        GameManager.Play.Status.ability.JUMP.value = ab.JUMP.value;
+        GameManager.Play.Status.ability.DOWN.value = ab.DOWN.value;
+        GameManager.Play.Status.ability.DEF.value = ab.DEF.value;
+        GameManager.Play.Status.ability.LUK.value = ab.LUK.value;
+        GameManager.Play.Status.ability.RESTORE.value = ab.RESTORE.value;
     }
 
     void GetTalent()
     {
         //재능 적용
         GameManager.Play.Status.ability.MAX_HP.value += GameManager.Data.Talent.HP.value;
+        GameManager.Play.Status.ability.HP.value = GameManager.Play.Status.ability.MAX_HP.value;
         GameManager.Play.Status.ability.DEF.value += GameManager.Data.Talent.DEF.value;
         GameManager.Play.Status.ability.LUK.value += (short)GameManager.Data.Talent.LUK.value;
         GameManager.Play.Status.ability.RESTORE.value += GameManager.Data.Talent.RESTORE.value;
@@ -97,7 +107,7 @@ public class SetPlayer : MonoBehaviour
         if (GameManager.Data.PreItem.Pre_HP.USE)
         {
             GameManager.Play.Status.ability.MAX_HP.value *= 1.1f;
-            GameManager.Play.Status.ability.HP.value *= GameManager.Play.Status.ability.MAX_HP.value;
+            GameManager.Play.Status.ability.HP.value = GameManager.Play.Status.ability.MAX_HP.value;
             GameManager.Data.PreItem.Pre_HP.USE = false;
         }
         if (GameManager.Data.PreItem.Pre_Shield.USE)
@@ -186,12 +196,14 @@ public class SetPlayer : MonoBehaviour
     //Stage 넘어가고 초기화 할 데이터 초기화 하기...
     public void Clear_DS()
     {
-        GameManager.Play.DS = new DataShot();
+        DataShot temp = new DataShot();
+        GameManager.Play.DS = temp.DeepCopy();
     }
 
     public void Clear_DC()
     {
-        GameManager.Play.DC = new DataContinue();
+        DataContinue temp = new DataContinue();
+        GameManager.Play.DC = temp.DeepCopy();
     }
 
     public void Re_Stat()
@@ -202,5 +214,11 @@ public class SetPlayer : MonoBehaviour
         GetDiff();
         Clear_DC();
         Clear_DS();
+        GameManager.Play.Playing = false;
+    }
+
+    public void Stop_SetPlayer()
+    {
+        StopAllCoroutines();
     }
 }

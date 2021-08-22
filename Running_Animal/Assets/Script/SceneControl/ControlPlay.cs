@@ -7,6 +7,7 @@ public class ControlPlay : MonoBehaviour
     TrapForest TrapForest;
     SetPlayer SetPlayer;
     UI_Play UI_Play;
+    InterAction InterAction;
 
     void Start()
     {
@@ -14,6 +15,7 @@ public class ControlPlay : MonoBehaviour
         TrapForest = GameObject.Find("@Managers").GetComponent<TrapForest>();
         SetPlayer = GameObject.Find("@Managers").GetComponent<SetPlayer>();
         UI_Play = GameObject.Find("@Managers").GetComponent<UI_Play>();
+        InterAction = GameObject.Find("@Managers").GetComponent<InterAction>();
         //Trap Resource 불러오기.
         TrapForest.GetResource();
         //플레이어 지정된 위치에 생성
@@ -26,7 +28,8 @@ public class ControlPlay : MonoBehaviour
         //UI내 스크립트 지정.
         UI_Play.SetUI();
 
-        
+        // 코루틴 있는 패시브 아이템 적용
+        InterAction.Apply_Passive();
     }
 
     void Update()

@@ -4526,7 +4526,6 @@ MonoBehaviour:
   coin: {fileID: 0}
   hp: {fileID: 0}
   num_pattern: 256
-  timer: 20
 --- !u!4 &952893338
 Transform:
   m_ObjectHideFlags: 0

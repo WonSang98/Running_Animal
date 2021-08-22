@@ -14,28 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Script/Data.cs
-    - Assets/Script/Data.meta
-    - Assets/Script/Data/Ability.cs
-    - Assets/Script/Data/Ability.cs.meta
-    - Assets/Script/Data/Character.cs
-    - Assets/Script/Data/Character.cs.meta
-    - Assets/Script/Data/Skill.cs
-    - Assets/Script/Data/Skill.cs.meta
-    - Assets/Script/Data/Status.cs
-    - Assets/Script/Data/Status.cs.meta
-    - Assets/Script/DataManager.cs
-    - Assets/Script/GameManager.cs
-    - Assets/Script/Play.meta
-    - Assets/Script/Play/PlayManager.cs
-    - Assets/Script/Play/PlayManager.cs.meta
-    - Assets/Script/Pre_BuyItem.cs
-    - Assets/Script/SelectCharacter.cs
-    - Assets/Script/SelectSkil.cs
-    - Assets/Script/SkilManager.cs
-    - Assets/Script/SpawnPlayer.cs
+    - Assets/Script/Data/Skill/Passive.cs
+    - Assets/Script/Data/TrapForest.cs
+    - Assets/Script/SceneControl/ControlPlay.cs
+    - Assets/Script/SceneControl/Play/Coin.cs
+    - Assets/Script/SceneControl/Play/InterAction.cs
+    - Assets/Script/SceneControl/Play/SetPlayer.cs
     - 
-    m_Values: 000000000000000000000000000000000000000000
+    m_Values: 00000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

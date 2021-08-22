@@ -127,7 +127,8 @@ public class InterAction : MonoBehaviour
             else
             {
                 GameManager.Play.Player.GetComponent<Animator>().SetBool("StartGame", false);
-                gameObject.GetComponent<UI_Play>().GameOver();
+                GameManager.Instance.AllStop();
+                StartCoroutine(gameObject.GetComponent<UI_Play>().GameOver());
             }
         }
     }
@@ -149,5 +150,10 @@ public class InterAction : MonoBehaviour
             StartCoroutine(gameObject.GetComponent<Passive>().Auto_Restore());
         }
         StartCoroutine(gameObject.GetComponent<TrapForest>().hptime());
+    }
+
+    public void Stop_InterAction()
+    {
+        StopAllCoroutines();
     }
 }

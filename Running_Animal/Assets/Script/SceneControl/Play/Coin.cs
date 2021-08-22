@@ -19,7 +19,7 @@ public class Coin : MonoBehaviour
     {
         if (GameManager.Skill.passive_once[Passive.PASSIVE_CODE.Magenet])
         {
-            transform.position = Vector3.SmoothDamp(gameObject.transform.position, GameManager.Play.Player.transform.position, ref vel, 0.2f);
+            transform.position = Vector3.SmoothDamp(gameObject.transform.position, GameManager.Play.Player.transform.position, ref vel, 0.1f);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

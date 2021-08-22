@@ -31,6 +31,8 @@ public class UI_Play : MonoBehaviour
     public Button Button_Jump;
     public Button Button_Down;
 
+    public Button Button_FailMain; // 실패시 메인으로 가는 버튼~
+
     public EventTrigger.Entry Entry_Jump;
     public EventTrigger.Entry Entry_Down;
     public EventTrigger Event_jump;
@@ -77,6 +79,8 @@ public class UI_Play : MonoBehaviour
         Button_Jump = GameObject.Find("UI/Button_Jump").GetComponent<Button>();
         Button_Down = GameObject.Find("UI/Button_Down").GetComponent<Button>();
 
+        Button_FailMain = GameObject.Find("UI").transform.Find("Panel_Fail/Content/Button_MAIN").GetComponent<Button>();
+        Button_FailMain.onClick.AddListener(() => gameObject.GetComponent<LoadScene>().EndGame());
         Event_jump = GameObject.Find("UI/Button_Jump").GetComponent<EventTrigger>();
         Event_down = GameObject.Find("UI/Button_Down").GetComponent<EventTrigger>();
 
@@ -95,6 +99,8 @@ public class UI_Play : MonoBehaviour
 
         player_opacity = GameManager.Play.Player.GetComponent<SpriteRenderer>().color;
 
+        BAR_EXP();
+        BAR_HP();
     }
 
     // 점프 버튼
@@ -382,7 +388,6 @@ public class UI_Play : MonoBehaviour
     // 애니메이션 추가 후 코드 수정하기.
     public void OnFail()
     {
-        gameObject.GetComponent<SetPlayer>().Re_Stat();
         Fail.SetActive(true);
         Fail_Content.SetActive(true);
     }
@@ -415,5 +420,9 @@ public class UI_Play : MonoBehaviour
         }
     }
 
+    public void Stop_UiPlay()
+    {
+        StopAllCoroutines();
+    }
 
 }

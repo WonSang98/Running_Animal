@@ -28,7 +28,6 @@ public class TrapForest : MonoBehaviour
     public GameObject hp;
 
     public int num_pattern = 256; // 패턴의 수.
-    public float timer = 20.0f; // 0이 되면 새로운 패턴을 생성하는 일종의 타이머.
     public void GetResource() // 필요한 리소스 가져오기~
     {
 
@@ -43,10 +42,11 @@ public class TrapForest : MonoBehaviour
 
     public void TrapUpdate()
     {
-        timer -= GameManager.Play.Status.ability.SPEED.value * Time.deltaTime;
-        if (timer <= 0)
+        GameManager.Play.DS.timer -= GameManager.Play.Status.ability.SPEED.value * Time.deltaTime;
+        Debug.Log(GameManager.Play.DS.timer);
+        if (GameManager.Play.DS.timer <= 0)
         {
-            timer = 20.0f;
+            GameManager.Play.DS.timer = 25.0f;
             if (GameManager.Play.DC.lvup == true) // 다음 스테이지로 가는 조건이 충족되었을시.
             {
                 LevelUP();
@@ -62,7 +62,13 @@ public class TrapForest : MonoBehaviour
             }
         }
     }
-    
+    // 현재 진행중인 모든 코루틴 정지
+    public void Stop_TrapForest()
+    {
+        StopAllCoroutines();
+    }
+
+
     //trap_num 순서의 함정을 pos에 생성한다.
     public void MakeTrap(int trap_num, Vector3 pos)
     {

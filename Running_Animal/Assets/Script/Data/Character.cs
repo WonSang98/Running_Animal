@@ -48,7 +48,7 @@ public class Character
             new Status<float>(0, 20),
             new Status<float>(0, 0),
             new Status<short>(0, 5),
-            new Status<float>(0, 0))
+            new Status<float>(0, 1))
             , Active.ACTIVE_CODE.None),
         new Character(0, 0,new Ability(
             new Status<float>(0, 100),
@@ -59,7 +59,7 @@ public class Character
             new Status<float>(0, 20),
             new Status<float>(0, 0),
             new Status<short>(0, 5),
-            new Status<float>(0, 0))
+            new Status<float>(0, 1))
             , Active.ACTIVE_CODE.None),
         new Character(0, 0,new Ability(
             new Status<float>(0, 100),
@@ -70,7 +70,7 @@ public class Character
             new Status<float>(0, 20),
             new Status<float>(0, 0),
             new Status<short>(0, 5),
-            new Status<float>(0, 0))
+            new Status<float>(0, 1))
             , Active.ACTIVE_CODE.None),
         new Character(0, 0,new Ability(
             new Status<float>(0, 100),
@@ -81,7 +81,7 @@ public class Character
             new Status<float>(0, 20),
             new Status<float>(0, 0),
             new Status<short>(0, 5),
-            new Status<float>(0, 0))
+            new Status<float>(0, 1))
             , Active.ACTIVE_CODE.None)
     };
 
