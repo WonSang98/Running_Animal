@@ -26,12 +26,15 @@ public class UI_Play : MonoBehaviour
     public Button PauseYes;
     public Button PauseNo;
     public Image[] GetPassives;
+    public Image[] Image_Fail;
+    public Image[] Image_Success;
 
     public GameObject Button_Skill;
     public Button Button_Jump;
     public Button Button_Down;
 
     public Button Button_FailMain; // 실패시 메인으로 가는 버튼~
+    public Button Button_SuccessMain;
 
     public EventTrigger.Entry Entry_Jump;
     public EventTrigger.Entry Entry_Down;
@@ -39,6 +42,8 @@ public class UI_Play : MonoBehaviour
     public EventTrigger Event_down;
 
     public Text Text_gold;
+    public Text[] Text_Fail;
+    public Text[] Text_Success;
 
     public Color player_opacity;
 
@@ -72,6 +77,13 @@ public class UI_Play : MonoBehaviour
         {
             GetPassives[j] = GameObject.Find("UI").transform.Find("Panel_Pause/PASSIVE/Image" + j.ToString()).GetComponent<Image>();
         }
+        
+        Image_Fail = new Image[2];
+        Image_Fail[0] = GameObject.Find("UI").transform.Find("Panel_Fail/Content/Image_DIE").GetComponent<Image>();
+        Image_Fail[1] = GameObject.Find("UI").transform.Find("Panel_Fail/Content/Image_Trap/Image_Trap").GetComponent<Image>();
+
+        Image_Success = new Image[1];
+        Image_Success[0] = GameObject.Find("UI").transform.Find("Panel_Success/Content/Image_SUCCESS").GetComponent<Image>();
 
         Button_Skill = GameObject.Find("UI/Button_Skill").gameObject;
         Button_Skill.GetComponent<Image>().sprite = gameObject.GetComponent<Active>().Active_Sprites[(int)GameManager.Play.Status.ACTIVE];
@@ -81,6 +93,10 @@ public class UI_Play : MonoBehaviour
 
         Button_FailMain = GameObject.Find("UI").transform.Find("Panel_Fail/Content/Button_MAIN").GetComponent<Button>();
         Button_FailMain.onClick.AddListener(() => gameObject.GetComponent<LoadScene>().EndGame());
+        
+        Button_SuccessMain = GameObject.Find("UI").transform.Find("Panel_Success/Content/Button_MAIN").GetComponent<Button>();
+        Button_FailMain.onClick.AddListener(() => gameObject.GetComponent<LoadScene>().EndGame());
+
         Event_jump = GameObject.Find("UI/Button_Jump").GetComponent<EventTrigger>();
         Event_down = GameObject.Find("UI/Button_Down").GetComponent<EventTrigger>();
 
@@ -96,6 +112,28 @@ public class UI_Play : MonoBehaviour
 
         Text_gold = GameObject.Find("UI/Image_GOLD/Text_Gold").GetComponent<Text>();
         Text_gold.text = $"{GameManager.Play.DC.goldNow}";
+
+        Text_Fail = new Text[8];
+        string path_TF = "Panel_Fail/Content/Result_Unit/";
+        Text_Fail[0] = GameObject.Find("UI").transform.Find(path_TF + "Text_Stage/Text_Value").GetComponent<Text>();
+        Text_Fail[1] = GameObject.Find("UI").transform.Find(path_TF + "Text_Stage_NoHit/Text_Value").GetComponent<Text>();
+        Text_Fail[2] = GameObject.Find("UI").transform.Find(path_TF + "Text_Difficult/Text_Value").GetComponent<Text>();
+        Text_Fail[3] = GameObject.Find("UI").transform.Find(path_TF + "Text_Combo/Text_Value").GetComponent<Text>();
+        Text_Fail[4] = GameObject.Find("UI").transform.Find(path_TF + "Text_Trap/Text_Value").GetComponent<Text>();
+        Text_Fail[5] = GameObject.Find("UI").transform.Find(path_TF + "Text_Result").GetComponent<Text>();
+        Text_Fail[6] = GameObject.Find("UI").transform.Find("Panel_Fail/Content/Image_Gold/Text_Value").GetComponent<Text>();
+        Text_Fail[7] = GameObject.Find("UI").transform.Find("Panel_Fail/Content/Image_Speacial/Text_Value").GetComponent<Text>();
+
+        Text_Success = new Text[8];
+        string path_TS = "Panel_Success/Content/Result_Unit/";
+        Text_Success[0] = GameObject.Find("UI").transform.Find(path_TS + "Text_Stage/Text_Value").GetComponent<Text>();
+        Text_Success[1] = GameObject.Find("UI").transform.Find(path_TS + "Text_Stage_NoHit/Text_Value").GetComponent<Text>();
+        Text_Success[2] = GameObject.Find("UI").transform.Find(path_TS + "Text_Difficult/Text_Value").GetComponent<Text>();
+        Text_Success[3] = GameObject.Find("UI").transform.Find(path_TS + "Text_Combo/Text_Value").GetComponent<Text>();
+        Text_Success[4] = GameObject.Find("UI").transform.Find(path_TS + "Text_Trap/Text_Value").GetComponent<Text>();
+        Text_Success[5] = GameObject.Find("UI").transform.Find(path_TS + "Text_Result").GetComponent<Text>();
+        Text_Success[6] = GameObject.Find("UI").transform.Find("Panel_Success/Content/Image_Gold/Text_Value").GetComponent<Text>();
+        Text_Success[7] = GameObject.Find("UI").transform.Find("Panel_Success/Content/Image_Speacial/Text_Value").GetComponent<Text>();
 
         player_opacity = GameManager.Play.Player.GetComponent<SpriteRenderer>().color;
 
@@ -127,57 +165,60 @@ public class UI_Play : MonoBehaviour
     // 스킬 사용.
     public void Use_Active()
     {
-        GameManager.Play.DS.activeUse -= 1;
-        switch (GameManager.Play.Status.ACTIVE)
+        if (GameManager.Play.DS.activeUse < GameManager.Play.DC.activeMax)
         {
-            case Active.ACTIVE_CODE.None:
-                break;
-            case Active.ACTIVE_CODE.Defense:
-                gameObject.GetComponent<Active>().OnDefense();
-                StartCoroutine(CoolTime(15));
-                break;
-            case Active.ACTIVE_CODE.Flash:
-                StartCoroutine(gameObject.GetComponent<Active>().OnFlash());
-                StartCoroutine(CoolTime(15));
-                break;
-            case Active.ACTIVE_CODE.Ghost:
-                gameObject.GetComponent<Active>().OnGhost();
-                StartCoroutine(CoolTime(15));
-                break;
-            case Active.ACTIVE_CODE.Heal:
-                gameObject.GetComponent<Active>().OnHeal();
-                //체력바 UI UPDATE!
-                StartCoroutine(CoolTime(20));
-                break;
-            case Active.ACTIVE_CODE.Item_Change:
-                gameObject.GetComponent<Active>().Item_Change();
-                StartCoroutine(CoolTime(20));
-                break;
-            case Active.ACTIVE_CODE.Change_Coin:
-                gameObject.GetComponent<Active>().Change_Coin();
-                StartCoroutine(CoolTime(20));
-                break;
-            case Active.ACTIVE_CODE.The_World:
-                StartCoroutine(gameObject.GetComponent<Active>().OnSlow());
-                StartCoroutine(CoolTime(10));
-                break;
-            case Active.ACTIVE_CODE.Multiple_Combo:
-                StartCoroutine(gameObject.GetComponent<Active>().MultiCombo());
-                StartCoroutine(CoolTime(5));
-                break;
-            case Active.ACTIVE_CODE.Fly:
-                StartCoroutine(gameObject.GetComponent<Active>().OnFly());
-                StartCoroutine(CoolTime(15));
-                break;
-               
-         /* case Active.ID.Run:
-                StartCoroutine(OnRun);
-                StartCoroutine(CoolTime(15));
-                + 경험치 바 UI 넣어주세요~
-                break;
-                 */
+            GameManager.Play.DS.activeUse += 1;
+            switch (GameManager.Play.Status.ACTIVE)
+            {
+                case Active.ACTIVE_CODE.None:
+                    break;
+                case Active.ACTIVE_CODE.Defense:
+                    gameObject.GetComponent<Active>().OnDefense();
+                    StartCoroutine(CoolTime(15));
+                    break;
+                case Active.ACTIVE_CODE.Flash:
+                    StartCoroutine(gameObject.GetComponent<Active>().OnFlash());
+                    StartCoroutine(CoolTime(15));
+                    break;
+                case Active.ACTIVE_CODE.Ghost:
+                    gameObject.GetComponent<Active>().OnGhost();
+                    StartCoroutine(CoolTime(15));
+                    break;
+                case Active.ACTIVE_CODE.Heal:
+                    gameObject.GetComponent<Active>().OnHeal();
+                    //체력바 UI UPDATE!
+                    StartCoroutine(CoolTime(20));
+                    break;
+                case Active.ACTIVE_CODE.Item_Change:
+                    gameObject.GetComponent<Active>().Item_Change();
+                    StartCoroutine(CoolTime(20));
+                    break;
+                case Active.ACTIVE_CODE.Change_Coin:
+                    gameObject.GetComponent<Active>().Change_Coin();
+                    StartCoroutine(CoolTime(20));
+                    break;
+                case Active.ACTIVE_CODE.The_World:
+                    StartCoroutine(gameObject.GetComponent<Active>().OnSlow());
+                    StartCoroutine(CoolTime(10));
+                    break;
+                case Active.ACTIVE_CODE.Multiple_Combo:
+                    StartCoroutine(gameObject.GetComponent<Active>().MultiCombo());
+                    StartCoroutine(CoolTime(5));
+                    break;
+                case Active.ACTIVE_CODE.Fly:
+                    StartCoroutine(gameObject.GetComponent<Active>().OnFly());
+                    StartCoroutine(CoolTime(15));
+                    break;
+
+                    /* case Active.ID.Run:
+                           StartCoroutine(OnRun);
+                           StartCoroutine(CoolTime(15));
+                           + 경험치 바 UI 넣어주세요~
+                           break;
+                            */
+            }
+            Button_Skill.GetComponent<Image>().fillAmount = 0;
         }
-        Button_Skill.GetComponent<Image>().fillAmount = 0;
 
     }
     public IEnumerator CoolTime(float t)
@@ -222,7 +263,6 @@ public class UI_Play : MonoBehaviour
 
     public void OffPause()
     {
-        Debug.Log("offpause");
         if (SceneManager.GetActiveScene().name == "Play")
         {
             Time.timeScale = 1;
@@ -388,13 +428,14 @@ public class UI_Play : MonoBehaviour
     // 애니메이션 추가 후 코드 수정하기.
     public void OnFail()
     {
+        ShowFail();
         Fail.SetActive(true);
         Fail_Content.SetActive(true);
     }
 
     public void OnSuccess()
     {
-        gameObject.GetComponent<SetPlayer>().Re_Stat();
+        ShowSuccess();
         Success.SetActive(true);
         Success_Content.SetActive(true);
     }
@@ -418,6 +459,48 @@ public class UI_Play : MonoBehaviour
                 GetPassives[i].color = temp;
             }
         }
+    }
+
+    //실패시 족자에 보여질 내역.
+    public void ShowFail()
+    {
+        Debug.Log("결과창값 설정");
+        int result = GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (GameManager.Data.Preset.Difficult + 1) + GameManager.Play.DC.comboMax * 10000 + (int)GameManager.Play.DC.goldNow * 10; // 게임 결과점수.
+        int money_speacial = 0; // 특수재화 얻는 갯수.
+        Text_Fail[0].text = GameManager.Play.DC.stage.ToString();
+        Text_Fail[1].text = $"{GameManager.Play.DC.noHitStage}";
+        Text_Fail[2].text = Difficulty.DIFF_CODE[GameManager.Data.Preset.Difficult];
+        Text_Fail[3].text = $"{GameManager.Play.DC.comboMax}";
+        Text_Fail[4].text = $"{GameManager.Play.DC.passTrap}";
+        Text_Fail[5].text = $"{result}";
+        Text_Fail[6].text = $"{(int)GameManager.Play.DC.goldNow}G";
+        Text_Fail[7].text = $"{money_speacial}개";
+
+        Image_Fail[0].sprite = Resources.Load<Sprite>("Image/GUI/Play/CharacterDead/" + ((int)GameManager.Data.Preset.Character).ToString());
+        Image_Fail[1].sprite = Resources.Load<Sprite>("Image/GUI/Play/CauseDead/" + GameManager.Play.DC.lastHit.ToString());
+
+        GameManager.Data.Money.Gold += (int)GameManager.Play.DC.goldNow;
+        GameManager.Data.Money.Speacial[0] += money_speacial;
+
+    }
+
+    public void ShowSuccess()
+    {
+        int result = GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (GameManager.Data.Preset.Difficult + 1) + GameManager.Play.DC.comboMax * 10000 + (int)GameManager.Play.DC.goldNow * 10; // 게임 결과점수.
+        int money_speacial =result/10; // 특수재화 얻는 갯수.
+        Text_Success[0].text = $"{GameManager.Play.DC.stage}";
+        Text_Success[1].text = $"{GameManager.Play.DC.noHitStage}";
+        Text_Success[2].text = Difficulty.DIFF_CODE[GameManager.Data.Preset.Difficult];
+        Text_Success[3].text = $"{GameManager.Play.DC.comboMax}";
+        Text_Success[4].text = $"{GameManager.Play.DC.passTrap}";
+        Text_Success[5].text = $"{result}";
+        Text_Success[6].text = $"{(int)GameManager.Play.DC.goldNow}G";
+        Text_Success[7].text = $"{money_speacial}개";
+
+        Image_Success[0] = Resources.Load<Image>("GUI/Play/CharacterDead/" + ((int)GameManager.Data.Preset.Character).ToString());
+
+        GameManager.Data.Money.Gold += (int)GameManager.Play.DC.goldNow;
+        GameManager.Data.Money.Speacial[0] += money_speacial;
     }
 
     public void Stop_UiPlay()

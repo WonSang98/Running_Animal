@@ -50,6 +50,10 @@ public class InterAction : MonoBehaviour
     {
         for (int i = 0; i < 5; i++)
         {
+            if (GameManager.Play.Player.CompareTag("Die"))
+            {
+                break;
+            }
             GameManager.Play.Status.ability.HP.value -= 3;
             StartCoroutine(gameObject.GetComponent<UI_Play>().Cam_Hit());
             gameObject.GetComponent<UI_Play>().BAR_HP();
@@ -62,6 +66,10 @@ public class InterAction : MonoBehaviour
     {
         for (int i = 0; i < 2; i++)
         {
+            if (GameManager.Play.Player.CompareTag("Die"))
+            {
+                break;
+            }
             if (i == 0)
             {
                 gameObject.GetComponent<UI_Play>().Event_jump.triggers.Remove(gameObject.GetComponent<UI_Play>().Entry_Jump);
@@ -77,13 +85,13 @@ public class InterAction : MonoBehaviour
                 gameObject.GetComponent<UI_Play>().Button_Down.interactable = true;
             }
 
-            yield return new WaitForSeconds(3.0f);
+            yield return new WaitForSeconds(1.5f);
         }
     }
 
 
     // 피격시 
-    public void OnHit(float DMG)
+    public bool OnHit(float DMG)
     {
         StartCoroutine(OnDodge(GameManager.Play.DC.dodge));
         Animator animator = GameManager.Play.Player.GetComponent<Animator>();
@@ -97,6 +105,7 @@ public class InterAction : MonoBehaviour
                 GameManager.Play.DC.comboMax = GameManager.Play.DC.combo;
             }
             GameManager.Play.DC.combo = 0;
+            GameManager.Play.DS.nohit = false;
 
             GameManager.Play.Status.ability.HP.value -= DMG;
             Debug.Log(DMG + "만큼의 피해! 현재 체력 " + GameManager.Play.Status.ability.HP.value);
@@ -104,10 +113,12 @@ public class InterAction : MonoBehaviour
             gameObject.GetComponent<UI_Play>().BAR_HP();
             Die();
             animator.SetTrigger("Attacked");
+            return true;
         }
         else // 회피함. ㅎㅎ
         {
             Instantiate(gameObject.GetComponent<UI_Play>().Miss, GameManager.Play.Player.transform);
+            return false;
         }
     }
 
@@ -115,6 +126,8 @@ public class InterAction : MonoBehaviour
     {
         if (GameManager.Play.Status.ability.HP.value <= 0)
         {
+            GameManager.Play.Player.tag = "Die";
+            GameManager.Instance.AllStop();
             GameManager.Play.Player.GetComponent<Animator>().SetTrigger("Die");
             
             if (GameManager.Play.DC.revive > 0)
@@ -127,7 +140,6 @@ public class InterAction : MonoBehaviour
             else
             {
                 GameManager.Play.Player.GetComponent<Animator>().SetBool("StartGame", false);
-                GameManager.Instance.AllStop();
                 StartCoroutine(gameObject.GetComponent<UI_Play>().GameOver());
             }
         }

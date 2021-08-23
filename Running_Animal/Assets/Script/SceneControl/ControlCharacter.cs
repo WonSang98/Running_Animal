@@ -66,7 +66,7 @@ public class ControlCharacter : MonoBehaviour
         idx = (int)GameManager.Data.Preset.Character;
         Show_Character = Instantiate(characters[idx]) as GameObject;
         Show_Character.transform.localPosition = new Vector3(0, -2.5f, 0);
-        Show_Character.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        Show_Character.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         Show_Character.transform.Find("Foot").gameObject.SetActive(true);
         Show_Character.GetComponent<Rigidbody2D>().gravityScale = 0;
 
@@ -139,9 +139,9 @@ public class ControlCharacter : MonoBehaviour
         Text_Name.SetActive(false);
         Vector3 temp_Scale;
         Show_Character.GetComponent<SpriteRenderer>().flipX = true;
-        while (Show_Character.transform.position.x > -8.1f)
+        while (Show_Character.transform.position.x > -7.0f)
         {
-            if(Show_Character.transform.position.x > -4)
+            if(Show_Character.transform.position.x > -3.5f)
             {
                 temp_Scale = Show_Character.transform.localScale;
                 Show_Character.transform.localScale = new Vector3(temp_Scale.x - Time.deltaTime, temp_Scale.y - Time.deltaTime, temp_Scale.z - Time.deltaTime);
@@ -156,7 +156,7 @@ public class ControlCharacter : MonoBehaviour
             yield return null;
         }
         Show_Character.GetComponent<SpriteRenderer>().flipX = false;
-        Show_Character.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        Show_Character.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
 
     }
 
@@ -166,7 +166,7 @@ public class ControlCharacter : MonoBehaviour
         Vector3 temp_Scale;
         while (Show_Character.transform.position.x < 0)
         {
-            if (Show_Character.transform.position.x < -4)
+            if (Show_Character.transform.position.x < -3.5f)
             {
                 temp_Scale = Show_Character.transform.localScale;
                 Show_Character.transform.localScale = new Vector3(temp_Scale.x - Time.deltaTime, temp_Scale.y - Time.deltaTime, temp_Scale.z - Time.deltaTime);
@@ -181,7 +181,7 @@ public class ControlCharacter : MonoBehaviour
             yield return null;
         }
         Show_Character.GetComponent<SpriteRenderer>().flipX = true;
-        Show_Character.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        Show_Character.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
     }
     IEnumerator OpenPanel()
     {
@@ -273,7 +273,6 @@ public class ControlCharacter : MonoBehaviour
                     }
                     else if(i + j - 10 < idx_talent)
                     {
-                        Debug.Log("Talent GAGE");
                         GameObject.Find(gage_path + "/Gage" + j.ToString()).GetComponent<Image>().sprite = Gage_Talent;
                     }
                     else
@@ -362,9 +361,8 @@ public class ControlCharacter : MonoBehaviour
 
     public void select()
     {
-
         GameManager.Data.Preset.Character = (Character.CHARACTER_CODE)(idx);
-        
+        Debug.Log(GameManager.Data.Preset.Character);
         show_info();
     }
 

@@ -209,6 +209,8 @@ public class Passive : MonoBehaviour
                 gameObject.GetComponent<UI_Play>().Button_Jump.interactable = true;
                 gameObject.GetComponent<UI_Play>().Button_Down.interactable = true;
                 StartCoroutine(gameObject.GetComponent<InterAction>().OnDodge(GameManager.Play.DC.dodge));
+                gameObject.GetComponent<InterAction>().Apply_Passive();
+                GameManager.Play.Player.tag = "Player";
                 
             }
             yield return new WaitForSeconds(3.0f);

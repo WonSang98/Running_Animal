@@ -23,6 +23,11 @@ public class DataContinue
 
     public float damage; // 함정 피격 데미지.
 
+    public short stage; // 클리어한 스테이지 수.
+    public short noHitStage; // 아무 피해 없이 스테이지 클리어.
+    public short lastHit; // 마지막에 맞은 장애물CODE.
+    public int passTrap; // 통과한 트랩의 갯수;
+
     public List<int> patternList; // 게임 진행하는 패턴. 함정의 패턴...
     public short patternCnt; //통과한 패턴의 수.
 
@@ -51,6 +56,11 @@ public class DataContinue
 
         damage = 1.0f;
 
+        stage = 0;
+        noHitStage = 0;
+        lastHit = 0;
+        passTrap = 0;
+
         patternList = new List<int>();
         patternCnt = 0;
 
@@ -78,6 +88,11 @@ public class DataContinue
         dc.comboMulti = 1;
 
         dc.damage = 1.0f;
+
+        dc.stage = 0;
+        dc.noHitStage = 0;
+        dc.lastHit = 0;
+        dc.passTrap = 0;
 
         dc.patternList = new List<int>();
         dc.patternCnt = 0;

@@ -24,6 +24,7 @@ public class ControlMain : MonoBehaviour
     void Start()
     {
         // Data에 저장되어있는 사용하고있는 캐릭터에대한 정보를 받아온 후, 그 캐릭터를 생성.
+        Debug.Log((int)GameManager.Data.Preset.Character);
         var path_character = Resources.Load("Character/" + (int)GameManager.Data.Preset.Character, typeof(GameObject));
         character = Instantiate(path_character) as GameObject;
         character.transform.localPosition = new Vector3(0, -3.5f, 0);
@@ -78,7 +79,6 @@ public class ControlMain : MonoBehaviour
     {
         GameManager.Data.Preset.Theme = t;
         string path = "Image/Select_Theme/" + t.ToString();
-        Debug.Log(path);
         theme.GetComponent<Image>().sprite = Resources.Load<Sprite>(path) as Sprite;
     }
 
@@ -88,7 +88,6 @@ public class ControlMain : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             string p = "UI/Panel_Difficulty/Scroll View/Viewport/Content/Button_DIff_" + i.ToString();
-            Debug.Log(p);
             Level[i] = GameObject.Find(p).GetComponent<Button>();
         }
 

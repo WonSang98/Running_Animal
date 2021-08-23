@@ -6,7 +6,8 @@ public class TRAP_CODE : MonoBehaviour
 {
     public enum TRAPCODE
     {
-        BEARTRAP = 0,
+        None = 0,
+        BEARTRAP,
         MOLE,
         STUMP,
         BANANA,

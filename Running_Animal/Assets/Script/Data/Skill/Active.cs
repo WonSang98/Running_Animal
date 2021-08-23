@@ -104,7 +104,6 @@ public class Active : MonoBehaviour
     // Skill ID : 4 Heal
     public void OnHeal()
     {
-        Debug.Log("히이이이일!!!");
         float plus_hp; // 회복할 체력의 양
         plus_hp = 50 * GameManager.Play.Status.ability.RESTORE.value; // 기본 회복량 50, 재능 및 다른 요소에 의해 회복량 변동될것
         if (GameManager.Play.Status.ability.HP.value + plus_hp >= GameManager.Play.Status.ability.MAX_HP.value)

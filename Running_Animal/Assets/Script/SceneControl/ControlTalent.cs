@@ -30,7 +30,6 @@ public class ControlTalent : MonoBehaviour
             Infos[i] = GameObject.Find("UI/Panel/Panel_" + i.ToString() + "/Info/Text").GetComponent<Text>();
             Kinds[i] = GameObject.Find("UI/Button_Ability/Button_" + i.ToString()).GetComponent<Button>();
             Kinds[i].onClick.AddListener(() => Choice(temp));
-            Debug.Log("i is...." + i);
             Effects[i] = GameObject.Find("UI/Select_Effect").transform.Find("Effect_" + i.ToString()).gameObject;
             Effects[i].SetActive(false);
         }

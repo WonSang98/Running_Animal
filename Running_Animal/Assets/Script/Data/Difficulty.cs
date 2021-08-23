@@ -22,6 +22,8 @@ public class Difficulty
     public float SPEED;
     public float EXP;
 
+    public static string[] DIFF_CODE = { "입춘", "경칩", "입하", "하지", "대서", "입추", "추분", "입동", "대설", "동지"};
+
     public Difficulty(float _DMG, float _COIN, float _RESTORE, short _LUK, float _DEF, float _SPEED, float _EXP)
     {
         DMG = _DMG;

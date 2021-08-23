@@ -71,6 +71,6 @@ public class DataManager
                                         PreItem.Random_Item.None);
 
     // 프리셋 유저기반 데이터
-    public Preset Preset = new Preset(Character.CHARACTER_CODE.Rabbit, Theme.THEME_CODE.Forest, 0);
+    public Preset Preset = new Preset(Character.CHARACTER_CODE.Pig, Theme.THEME_CODE.Forest, 0);
 
 }

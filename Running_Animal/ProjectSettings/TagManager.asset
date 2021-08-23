@@ -18,6 +18,7 @@ TagManager:
   - LevelUp
   - Run
   - NonTrap
+  - Die
   layers:
   - Default
   - TransparentFX
@@ -84,4 +85,7 @@ TagManager:
     locked: 0
   - name: MISS
     uniqueID: 3782207295
+    locked: 0
+  - name: UI
+    uniqueID: 1265828523
     locked: 0

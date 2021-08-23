@@ -41,7 +41,6 @@ public class ControlPreItem : MonoBehaviour
         for (short i = 0; i < Num_ID; i++)
         {
             short temp = i;
-            Debug.Log(((ID)(temp)).ToString());
             Item_Button[temp] = GameObject.Find(path_button + ((ID)(temp)).ToString()).gameObject.GetComponent<Button>();
             Item_Button[i].onClick.AddListener(() => Buy(temp));
             if (temp < Num_ID - 2)
@@ -68,26 +67,26 @@ public class ControlPreItem : MonoBehaviour
 
         if (GameManager.Data.PreItem.Pre_Shield.USE)
         {
-            Text_info.text += $"우사로부터 가호를 받았습니다.\n ";
+            Text_info.text += $"우사로부터 가호를 받았습니다.\n";
         }
 
         if (GameManager.Data.PreItem.Pre_100.USE)
         {
-            Text_info.text += $"풍백으로부터 작은 축복을 받았습니다.\n ";
+            Text_info.text += $"풍백으로부터 작은 축복을 받았습니다.\n";
         }
 
         if (GameManager.Data.PreItem.Pre_300.USE)
         {
-            Text_info.text += $"풍백으로부터 큰 축복을 받았습니다.\n ";
+            Text_info.text += $"풍백으로부터 큰 축복을 받았습니다.\n";
         }
         if (GameManager.Data.PreItem.Pre_Active != Active.ACTIVE_CODE.None)
         {
-            Text_info.text += $"쑥과 마늘을 먹었습니다. \n '{GameManager.Data.PreItem.Pre_Active}' 능력이 생겼습니다.";
+            Text_info.text += $"쑥과 마늘을 먹었습니다.\n'{GameManager.Data.PreItem.Pre_Active}' 능력이 생겼습니다.\n";
         }
 
         if (GameManager.Data.PreItem.Pre_Random != PreItem.Random_Item.None)
         {
-            Text_info.text += $"환인으로부터 선물을 받았습니다. \n {GameManager.Data.PreItem.Pre_Random} 가 됩니다.";
+            Text_info.text += $"환인으로부터 선물을 받았습니다.\n'{GameManager.Data.PreItem.Pre_Random}' 가 됩니다.";
         }
         GameManager.Instance.Save();
     }

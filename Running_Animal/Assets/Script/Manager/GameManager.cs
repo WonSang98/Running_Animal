@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
         Init();
         string path = Application.persistentDataPath + "/save.xml";
         if (System.IO.File.Exists(path)) {
-            Debug.Log("아아...소환되었따");
             Load(); }
     }
 
@@ -55,12 +54,19 @@ public class GameManager : MonoBehaviour
     public void AllStop()
     {
         gameObject.GetComponent<TrapForest>().Stop_TrapForest();
+        Debug.Log("STOP TRAPFOREST\n");
         gameObject.GetComponent<SetPlayer>().Stop_SetPlayer();
+        Debug.Log("STOP SetPlayer\n");
         gameObject.GetComponent<UI_Play>().Stop_UiPlay();
+        Debug.Log("STOP UI_Play\n");
         gameObject.GetComponent<InterAction>().Stop_InterAction();
+        Debug.Log("STOP InterAction\n");
         gameObject.GetComponent<Active>().Stop_Active();
+        Debug.Log("STOP Active\n");
         gameObject.GetComponent<Passive>().Stop_Passive();
+        Debug.Log("STOP Passive\n");
         gameObject.GetComponent<LoadScene>().Stop_LoadScene();
+        Debug.Log("STOP LoadScene\n");
     }
     
     public void Save()
@@ -77,11 +83,11 @@ public class GameManager : MonoBehaviour
         //시작 전 구매 아이템 데이터
         saveData.PreItem = Data.PreItem;
         //프리셋 유저기반 데이터
+        saveData.Preset = Data.Preset;
 
         string path = Application.persistentDataPath + "/save.xml";
         XmlManager.XmlSave<Data>(saveData, path);
 
-        Debug.Log("SAVE!");
         Debug.Log(path);
     }
 
@@ -102,8 +108,8 @@ public class GameManager : MonoBehaviour
         //시작 전 구매 아이템 데이터
         Data.PreItem = saveData.PreItem;
         //프리셋 유저기반 데이터
+        Data.Preset = saveData.Preset;
 
-        Debug.Log("LOAD!");
 
     }
 

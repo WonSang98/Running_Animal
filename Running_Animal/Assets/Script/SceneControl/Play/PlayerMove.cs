@@ -33,18 +33,27 @@ public class PlayerMove : MonoBehaviour
             {
                 
                 other.GetComponent<Animator>().SetTrigger("Bear");
-                InterAction.OnHit(GameManager.Play.DC.damage);
-                StartCoroutine(InterAction.OnBlood());
+                if (InterAction.OnHit(GameManager.Play.DC.damage))
+                {
+                    GameManager.Play.DC.lastHit = other.GetComponent<TRAP_CODE>().ID;
+                    StartCoroutine(InterAction.OnBlood());
+                }
 
             }
             if (other.gameObject.CompareTag("Trap_Stun"))
             {
-                InterAction.OnHit(GameManager.Play.DC.damage);
-                StartCoroutine(InterAction.OnStun());
+                if (InterAction.OnHit(GameManager.Play.DC.damage))
+                {
+                    StartCoroutine(InterAction.OnStun());
+                    GameManager.Play.DC.lastHit = other.GetComponent<TRAP_CODE>().ID;
+                }
             }
             if (other.gameObject.CompareTag("Trap") || other.gameObject.CompareTag("Jump"))
             {
-                InterAction.OnHit(GameManager.Play.DC.damage);
+                if (InterAction.OnHit(GameManager.Play.DC.damage))
+                {
+                    GameManager.Play.DC.lastHit = other.GetComponent<TRAP_CODE>().ID;
+                }
             }
         }
 
@@ -70,6 +79,11 @@ public class PlayerMove : MonoBehaviour
         {
             GameManager.Play.DC.expNow -= GameManager.Play.DC.expNeed[GameManager.Play.DC.lv];
             GameManager.Play.DC.lv += 1;
+            GameManager.Play.DC.stage += 1;
+            if (GameManager.Play.DS.nohit)
+            {
+                GameManager.Play.DC.noHitStage += 1;
+            }
             if(GameManager.Play.DC.expNow >= GameManager.Play.DC.expNeed[GameManager.Play.DC.lv])
             {
                 GameManager.Play.DC.lvup = true;
@@ -85,7 +99,6 @@ public class PlayerMove : MonoBehaviour
 
         if (other.gameObject.CompareTag("Coin"))
         {
-            Debug.Log("µ·!!!!");
             GameManager.Play.DC.goldNow += 10 * GameManager.Play.DC.goldMulti;
             UI_Play.Text_gold.text = $"{GameManager.Play.DC.goldNow}g";
             Destroy(other.gameObject);
@@ -108,6 +121,7 @@ public class PlayerMove : MonoBehaviour
             StartCoroutine(UI_Play.Cam_ATT());
             UI_Play.Trap_Combo(collision.transform);
             GameManager.Play.DC.expNow += GameManager.Play.DC.expMulti;
+            GameManager.Play.DC.passTrap += 1;
             UI_Play.BAR_EXP();
         }
 
@@ -119,7 +133,6 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Coin"))
         {
-            Debug.Log("µ·!!!!");
             GameManager.Play.DC.goldNow += 10 * GameManager.Play.DC.goldMulti;
             UI_Play.Text_gold.text = $"{GameManager.Play.DC.goldNow}g";
             Destroy(collision.gameObject);

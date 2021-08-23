@@ -19,6 +19,7 @@ public class DestroyTrap : MonoBehaviour
             if (GameManager.Play.DC.lv != 13)
             {
                 GameManager.Play.DS.expRun += GameManager.Play.DC.expMulti;
+                GameManager.Play.DC.passTrap += 1;
             }
         }
         else
@@ -26,6 +27,8 @@ public class DestroyTrap : MonoBehaviour
             if (!other.CompareTag("NonTrap"))
             {
                 GameManager.Play.DC.expNow += GameManager.Play.DC.expMulti;
+                GameManager.Play.DC.passTrap += 1;
+
                 UI_Play.BAR_EXP();
                 if (GameManager.Play.DC.expNow >= GameManager.Play.DC.expNeed[GameManager.Play.DC.lv])
                 {

@@ -43,7 +43,6 @@ public class TrapForest : MonoBehaviour
     public void TrapUpdate()
     {
         GameManager.Play.DS.timer -= GameManager.Play.Status.ability.SPEED.value * Time.deltaTime;
-        Debug.Log(GameManager.Play.DS.timer);
         if (GameManager.Play.DS.timer <= 0)
         {
             GameManager.Play.DS.timer = 25.0f;
@@ -94,7 +93,7 @@ public class TrapForest : MonoBehaviour
             if (i == 0) // 版绊 积己.
             {
                 warn = Instantiate(warning_bird);
-                warn.transform.position = new Vector3(-7, rand_y, 0);
+                warn.transform.position = new Vector3(-8, rand_y, 0);
             }
             else if(i == 1)
             {
@@ -114,6 +113,10 @@ public class TrapForest : MonoBehaviour
         for (int i = 0; i < 450; i++)
         {
             float y = GameManager.Play.Player.transform.position.y;
+            if(y > 4)
+            {
+                y = 4;
+            }
             if (i < 300) // 版绊 积己.
             {
                 Destroy(warn);

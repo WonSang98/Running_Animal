@@ -14,15 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Script/Data/Skill/Passive.cs
-    - Assets/Script/Data/TrapForest.cs
-    - Assets/Script/SceneControl/ControlPlay.cs
-    - Assets/Script/SceneControl/Play/Coin.cs
-    - Assets/Script/SceneControl/Play/InterAction.cs
-    - Assets/Script/SceneControl/Play/SetPlayer.cs
+    - Assets/Scenes/Main.unity
     - 
-    m_Values: 00000000000000
-  RevisionSummary: 
+    m_Values: 0101
+  RevisionSummary: "\uC9D1\uB098\uAC04 \uC9D1 \uB4E4\uC5B4\uC634"
   ChangesSearchValue: 
   SelectedHistoryRevision: 
   HistoryPageNumber: 0
