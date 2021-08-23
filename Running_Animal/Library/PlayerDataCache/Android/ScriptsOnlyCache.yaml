@@ -41,6 +41,8 @@ ScriptsOnlyBuild:
     - Unity.Cloud.Collaborate.UserInterface.WindowCache
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    Unity.Timeline.Editor.dll:
+    - TimelinePreferences
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
@@ -196,6 +198,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 2720}
     - Class: 114
       Script: {instanceID: 2786}
+    - Class: 114
+      Script: {instanceID: 2850}
     - Class: 114
       Script: {instanceID: 3008}
     - Class: 114
@@ -897,7 +901,7 @@ ScriptsOnlyBuild:
     className: LoadScene
   - hash:
       serializedVersion: 2
-      Hash: 2469b1c1e32de5d909f17366c0cae256
+      Hash: 6a7a6de0f22b025a66bd81f629eb5779
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UI_Play
@@ -1289,4 +1293,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Talent.unity
   - Assets/Scenes/Play.unity
   - Assets/Scenes/Select_Item.unity
-  playerPath: D:/tt/169ratiotest2.apk
+  playerPath: D:/tt/23.apk

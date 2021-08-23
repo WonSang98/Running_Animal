@@ -108,7 +108,6 @@ public class InterAction : MonoBehaviour
             GameManager.Play.DS.nohit = false;
 
             GameManager.Play.Status.ability.HP.value -= DMG;
-            Debug.Log(DMG + "만큼의 피해! 현재 체력 " + GameManager.Play.Status.ability.HP.value);
             StartCoroutine(gameObject.GetComponent<UI_Play>().Cam_Hit());
             gameObject.GetComponent<UI_Play>().BAR_HP();
             Die();

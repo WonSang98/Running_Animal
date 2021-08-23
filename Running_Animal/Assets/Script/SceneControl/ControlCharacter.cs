@@ -137,6 +137,7 @@ public class ControlCharacter : MonoBehaviour
     IEnumerator MoveLeft() // 캐릭터 좌측으로 밀어넣는 루틴
     {
         Text_Name.SetActive(false);
+        Button_Upgrade.interactable = false;
         Vector3 temp_Scale;
         Show_Character.GetComponent<SpriteRenderer>().flipX = true;
         while (Show_Character.transform.position.x > -7.0f)
@@ -162,6 +163,7 @@ public class ControlCharacter : MonoBehaviour
 
     IEnumerator MoveRight()
     {
+        Button_Upgrade.interactable = false;
         Text_Name.SetActive(true);
         Vector3 temp_Scale;
         while (Show_Character.transform.position.x < 0)
@@ -195,6 +197,7 @@ public class ControlCharacter : MonoBehaviour
         }
         Panel_Upgrade.transform.Find("CONTENTS").gameObject.SetActive(true);
         SetGage();
+        Button_Upgrade.interactable = true;
     }
 
     IEnumerator ClosePanel()
@@ -206,6 +209,7 @@ public class ControlCharacter : MonoBehaviour
             yield return new WaitForSeconds(1.0f);
         }
         Panel_Upgrade.SetActive(false);
+        Button_Upgrade.interactable = true;
     }
 
     void SetGage() // 능력치 게이지를 현재 캐릭터 능력치에 맞추어 적용한다.
@@ -253,6 +257,7 @@ public class ControlCharacter : MonoBehaviour
                 case "DEF":
                     idx_normal = (int)(Character.Natural[idx].ability.DEF.value * 100);
                     idx_upgrade = idx_normal + (int)((GameManager.Data.Character_STAT[idx].ability.DEF.value - Character.Natural[idx].ability.DEF.value) * 100);
+                    Debug.Log(GameManager.Data.Character_STAT[idx].ability.DEF.value);
                     idx_talent = idx_upgrade + (int)(GameManager.Data.Talent.DEF.value * 100);
                     break;
             }
@@ -295,8 +300,8 @@ public class ControlCharacter : MonoBehaviour
         Text_Points[4].text = $"X{GameManager.Data.Character_STAT[idx].ability.DOWN.level}";
         Text_Points[5].text = $"X{GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level * 15}";
         Text_Points[6].text = $"X{GameManager.Data.Character_STAT[idx].ability.DEF.level}";
-        Text_Level.text = $"X{GameManager.Data.Character_STAT[idx].LV}";
-        Text_SP.text = $"X{GameManager.Data.Character_STAT[idx].STAT_POINT}";
+        Text_Level.text = $"{GameManager.Data.Character_STAT[idx].LV}";
+        Text_SP.text = $"{GameManager.Data.Character_STAT[idx].STAT_POINT}";
         Text_LVUP_G.text = $"X{LV_COST[GameManager.Data.Character_STAT[idx].LV].gold}";
         Text_LVUP_S.text = $"X{LV_COST[GameManager.Data.Character_STAT[idx].LV].Money_Forest}";
         Text_RESET_S.text = "X5";
@@ -362,7 +367,6 @@ public class ControlCharacter : MonoBehaviour
     public void select()
     {
         GameManager.Data.Preset.Character = (Character.CHARACTER_CODE)(idx);
-        Debug.Log(GameManager.Data.Preset.Character);
         show_info();
     }
 
@@ -397,10 +401,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_HP()
     {
-        if(GameManager.Data.Character_STAT[idx].STAT_POINT >= GameManager.Data.Character_STAT[idx].ability.MAX_HP.level)
+        if(GameManager.Data.Character_STAT[idx].STAT_POINT >= (GameManager.Data.Character_STAT[idx].ability.MAX_HP.level + 1))
         {
-            GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].ability.MAX_HP.level;
-            GameManager.Data.Character_STAT[idx].ability.MAX_HP.value += GameManager.Data.Character_STAT[idx].ability.MAX_HP.level * 10;
+            GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.MAX_HP.level + 1);
+            GameManager.Data.Character_STAT[idx].ability.MAX_HP.value += (GameManager.Data.Character_STAT[idx].ability.MAX_HP.level+1) * 10;
             GameManager.Data.Character_STAT[idx].ability.MAX_HP.level += 1;
             
         }
@@ -409,10 +413,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_SPEED()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= GameManager.Data.Character_STAT[idx].ability.SPEED.level)
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (GameManager.Data.Character_STAT[idx].ability.SPEED.level + 1))
         {
-            GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].ability.SPEED.level;
-            GameManager.Data.Character_STAT[idx].ability.SPEED.value += GameManager.Data.Character_STAT[idx].ability.SPEED.level * 0.5f;
+            GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.SPEED.level + 1);
+            GameManager.Data.Character_STAT[idx].ability.SPEED.value += (GameManager.Data.Character_STAT[idx].ability.SPEED.level + 1) * 0.5f;
             GameManager.Data.Character_STAT[idx].ability.SPEED.level += 1;
             
         }
@@ -421,10 +425,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_JUMP_P()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= GameManager.Data.Character_STAT[idx].ability.JUMP.level)
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.JUMP.level + 1))
         {
-            GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].ability.JUMP.level;
-            GameManager.Data.Character_STAT[idx].ability.JUMP.value += GameManager.Data.Character_STAT[idx].ability.JUMP.level * 0.5f;
+            GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.JUMP.level + 1);
+            GameManager.Data.Character_STAT[idx].ability.JUMP.value += (GameManager.Data.Character_STAT[idx].ability.JUMP.level + 1) * 0.5f;
             GameManager.Data.Character_STAT[idx].ability.JUMP.level += 1;
         }
         SetGage();
@@ -433,10 +437,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_DOWN_P()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= GameManager.Data.Character_STAT[idx].ability.DOWN.level)
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.DOWN.level + 1))
         {
-            GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].ability.DOWN.level;
-            GameManager.Data.Character_STAT[idx].ability.DOWN.value += GameManager.Data.Character_STAT[idx].ability.DOWN.level * 0.5f;
+            GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.DOWN.level + 1);
+            GameManager.Data.Character_STAT[idx].ability.DOWN.value += (GameManager.Data.Character_STAT[idx].ability.DOWN.level + 1) * 0.5f;
             GameManager.Data.Character_STAT[idx].ability.DOWN.level += 1;
         }
         SetGage();
@@ -445,7 +449,7 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_JUMP_C()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level * 15))
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= ((GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level+1) * 15))
         {
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level * 15);
             GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.value += 1;
@@ -457,10 +461,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_DEF()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= GameManager.Data.Character_STAT[idx].ability.DEF.level)
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.DEF.level + 1))
         {
-            GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].ability.DEF.level;
-            GameManager.Data.Character_STAT[idx].ability.DEF.value += GameManager.Data.Character_STAT[idx].ability.DEF.level * 0.01f;
+            GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.DEF.level + 1);
+            GameManager.Data.Character_STAT[idx].ability.DEF.value += ((short)(GameManager.Data.Character_STAT[idx].ability.DEF.level + 1) * 0.01f);
             GameManager.Data.Character_STAT[idx].ability.DEF.level += 1;
         }
         SetGage();
@@ -469,10 +473,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_LUK()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= GameManager.Data.Character_STAT[idx].ability.LUK.level)
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.LUK.level + 1))
         {
-            GameManager.Data.Character_STAT[idx].STAT_POINT -= GameManager.Data.Character_STAT[idx].ability.LUK.level;
-            GameManager.Data.Character_STAT[idx].ability.LUK.value += (short)(GameManager.Data.Character_STAT[idx].ability.LUK.level * 1);
+            GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.LUK.level + 1);
+            GameManager.Data.Character_STAT[idx].ability.LUK.value += (short)((GameManager.Data.Character_STAT[idx].ability.LUK.level + 1) * 1);
             GameManager.Data.Character_STAT[idx].ability.LUK.level += 1;
         }
         SetGage();
@@ -481,9 +485,9 @@ public class ControlCharacter : MonoBehaviour
 
     public void Reset_SP()
     {
-        if(GameManager.Data.Money.Speacial[0] >= 5)
+        if(GameManager.Data.Money.Speacial[0] >= (GameManager.Data.Character_STAT[idx].LV + 1))
         {
-            GameManager.Data.Money.Speacial[0] -= 5;
+            GameManager.Data.Money.Speacial[0] -= (GameManager.Data.Character_STAT[idx].LV + 1);
             GameManager.Data.Character_STAT[idx].STAT_POINT = 0;
 
             ToNatural();

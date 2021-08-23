@@ -54,19 +54,12 @@ public class GameManager : MonoBehaviour
     public void AllStop()
     {
         gameObject.GetComponent<TrapForest>().Stop_TrapForest();
-        Debug.Log("STOP TRAPFOREST\n");
         gameObject.GetComponent<SetPlayer>().Stop_SetPlayer();
-        Debug.Log("STOP SetPlayer\n");
         gameObject.GetComponent<UI_Play>().Stop_UiPlay();
-        Debug.Log("STOP UI_Play\n");
         gameObject.GetComponent<InterAction>().Stop_InterAction();
-        Debug.Log("STOP InterAction\n");
         gameObject.GetComponent<Active>().Stop_Active();
-        Debug.Log("STOP Active\n");
         gameObject.GetComponent<Passive>().Stop_Passive();
-        Debug.Log("STOP Passive\n");
         gameObject.GetComponent<LoadScene>().Stop_LoadScene();
-        Debug.Log("STOP LoadScene\n");
     }
     
     public void Save()

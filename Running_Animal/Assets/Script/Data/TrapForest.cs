@@ -27,7 +27,7 @@ public class TrapForest : MonoBehaviour
     public GameObject coin;
     public GameObject hp;
 
-    public int num_pattern = 256; // 패턴의 수.
+    public int num_pattern = 254; // 패턴의 수.
     public void GetResource() // 필요한 리소스 가져오기~
     {
 

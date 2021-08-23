@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Scenes/Main.unity
+    - Assets/Script/SceneControl/ControlCharacter.cs
     - 
-    m_Values: 0101
-  RevisionSummary: "\uC9D1\uB098\uAC04 \uC9D1 \uB4E4\uC5B4\uC634"
+    m_Values: 0000
+  RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
   HistoryPageNumber: 0

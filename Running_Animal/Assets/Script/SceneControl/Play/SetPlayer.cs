@@ -206,6 +206,18 @@ public class SetPlayer : MonoBehaviour
         GameManager.Play.DC = temp.DeepCopy();
     }
 
+    public void Clear_Skill()
+    {
+        GameManager.Skill.passive_once = new Dictionary<Passive.PASSIVE_CODE, bool>()
+    {
+        {Passive.PASSIVE_CODE.Active_Twice, false},
+        {Passive.PASSIVE_CODE.Magenet, false},
+        {Passive.PASSIVE_CODE.Resurrection, false},
+        {Passive.PASSIVE_CODE.Auto_Jump, false},
+        {Passive.PASSIVE_CODE.Random_God, false},
+        {Passive.PASSIVE_CODE.Auto_Restore, false},
+    };
+    }
     public void Re_Stat()
     {
         GetStatus();
@@ -214,6 +226,7 @@ public class SetPlayer : MonoBehaviour
         GetDiff();
         Clear_DC();
         Clear_DS();
+        Clear_Skill();
         GameManager.Play.Playing = false;
     }
 

@@ -84,6 +84,7 @@ public class Active : MonoBehaviour
         {
             if(i == 0)
             {
+                spr = GameManager.Play.Player.GetComponent<SpriteRenderer>();
                 Color c = spr.color;
                 c.a = 0.5f;
                 spr.color = c;
@@ -91,13 +92,14 @@ public class Active : MonoBehaviour
             }
             else if(i == 1)
             {
+                spr = GameManager.Play.Player.GetComponent<SpriteRenderer>();
                 Color c = spr.color;
                 c.a = 1.0f;
                 spr.color = c;
 
                 GameManager.Play.Player.tag = "Player";
             }
-            yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(5);
         }
     }
 

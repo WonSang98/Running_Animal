@@ -181,7 +181,7 @@ public class UI_Play : MonoBehaviour
                     StartCoroutine(CoolTime(15));
                     break;
                 case Active.ACTIVE_CODE.Ghost:
-                    gameObject.GetComponent<Active>().OnGhost();
+                    StartCoroutine(gameObject.GetComponent<Active>().OnGhost());
                     StartCoroutine(CoolTime(15));
                     break;
                 case Active.ACTIVE_CODE.Heal:
@@ -464,7 +464,6 @@ public class UI_Play : MonoBehaviour
     //실패시 족자에 보여질 내역.
     public void ShowFail()
     {
-        Debug.Log("결과창값 설정");
         int result = GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (GameManager.Data.Preset.Difficult + 1) + GameManager.Play.DC.comboMax * 10000 + (int)GameManager.Play.DC.goldNow * 10; // 게임 결과점수.
         int money_speacial = 0; // 특수재화 얻는 갯수.
         Text_Fail[0].text = GameManager.Play.DC.stage.ToString();
