@@ -31,9 +31,10 @@ public class SetPlayer : MonoBehaviour
 
     public void ForestPattern()
     {
+        TrapForest TF = gameObject.GetComponent<TrapForest>();
         GameManager.Play.DC.patternList = null;
         GameManager.Play.DC.patternList = new List<int>();
-        for(int i=0; i< gameObject.GetComponent<TrapForest>().num_pattern; i++)
+        for(int i=0; i< TF.num_pattern; i++)
         {
             GameManager.Play.DC.patternList.Add(i);
         }

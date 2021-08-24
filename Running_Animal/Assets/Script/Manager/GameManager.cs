@@ -15,7 +15,11 @@ public class GameManager : MonoBehaviour
     SkillManager _Skill = new SkillManager();
     public static SkillManager Skill { get { return Instance._Skill; } }
 
-    
+    SoundManager _Sound = new SoundManager();
+    public static SoundManager Sound { get { return Instance._Sound; } }
+
+    public string goScene = "Main";
+
     static void Init()
     {
         if (s_Instance == null)
@@ -38,6 +42,7 @@ public class GameManager : MonoBehaviour
             };
             DontDestroyOnLoad(go);
             s_Instance = go.GetComponent<GameManager>();
+            s_Instance._Sound.Init();
         }
     }
 
@@ -48,6 +53,7 @@ public class GameManager : MonoBehaviour
         string path = Application.persistentDataPath + "/save.xml";
         if (System.IO.File.Exists(path)) {
             Load(); }
+
     }
 
     // Component로 부착된 스크립트들의 Coroutine 정지.

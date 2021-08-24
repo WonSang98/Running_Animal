@@ -17,9 +17,15 @@ public class ControlMain : MonoBehaviour
     Text Level_info;
     GameObject character; // 화면 중앙에 표시할 캐릭터
     GameObject theme;
+    
     Button[] Level = new Button[10]; // Level 선택 버튼
     Button Select_Diff;
 
+    // Sound 변수 선언
+    AudioClip clip; //사운드 클립 <- *변수명 변경 추천* + 여러개를 넣어야한다면 배열을 사용하자.
+    AudioClip clip2;
+    AudioClip Clip_BGM; // BackGroundMusic
+    
     int temp_diff; // 임시로 선택되어있는 난이도
     void Start()
     {
@@ -37,8 +43,17 @@ public class ControlMain : MonoBehaviour
         temp_diff = GameManager.Data.Preset.Difficult;
 
         GameObject.Find("UI/Button_Difficulty/Text").GetComponent<Text>().text = 
-            GameObject.Find("UI").transform.Find("Panel_Difficulty/Scroll View/Viewport/Content/Button_DIff_" + GameManager.Data.Preset.Difficult.ToString() + "/Text_Diff").GetComponent<Text>().text;
+        GameObject.Find("UI").transform.Find("Panel_Difficulty/Scroll View/Viewport/Content/Button_DIff_" + GameManager.Data.Preset.Difficult.ToString() + "/Text_Diff").GetComponent<Text>().text;
 
+        LoadSound();
+        GameManager.Sound.BGMPlay(Clip_BGM);
+    }
+
+    void LoadSound() //Sound Resoucres 경로 찾아와서 불러와놓기.
+    {
+        clip = Resources.Load<AudioClip>("Sound/Common/000_Manu_Sound");
+        clip2 = Resources.Load<AudioClip>("Sound/Common/002_Paper");
+        Clip_BGM = Resources.Load<AudioClip>("Sound/BGM/000_Main_BGM");
     }
 
     public void nextTheme()
@@ -83,6 +98,8 @@ public class ControlMain : MonoBehaviour
 
     public void OnDiff() // 난이도 패널 오픈
     {
+        GameManager.Sound.SFXPlay(clip); // 난이도 패널 오픈 시 버튼 클릭 소리 재생
+        GameManager.Sound.SFXPlay(clip2);
         GameObject.Find("UI").transform.Find("Panel_Difficulty").gameObject.SetActive(true);
         for (int i = 0; i < 10; i++)
         {

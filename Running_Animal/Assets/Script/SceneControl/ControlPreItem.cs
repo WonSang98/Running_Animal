@@ -7,6 +7,9 @@ using Random = UnityEngine.Random;
 
 public class ControlPreItem : MonoBehaviour
 {
+    AudioClip clip;
+    AudioClip clip1;
+    AudioClip clip2;
     enum ID
     {
         HP = 0,
@@ -55,6 +58,7 @@ public class ControlPreItem : MonoBehaviour
 
         Check_Select();
         Info();
+        LoadSound();
 
     }
     public void Info()
@@ -136,6 +140,7 @@ public class ControlPreItem : MonoBehaviour
                 {
                     GameManager.Data.PreItem.Pre_HP.CNT += 1;
                     GameManager.Data.PreItem.Pre_HP.USE = false;
+                    GameManager.Sound.SFXPlay(clip2);
                     Shop_Owner.text = "나중에 다시 찾으러 오라고.";
                 }
                 else // 아직 사용하기로 하지 않았을 때
@@ -144,12 +149,14 @@ public class ControlPreItem : MonoBehaviour
                     {
                         GameManager.Data.PreItem.Pre_HP.CNT -= 1;
                         GameManager.Data.PreItem.Pre_HP.USE = true;
+                        GameManager.Sound.SFXPlay(clip);
                         Shop_Owner.text = "여기, 맡아놨던 물건이야.";
                     }
                     else if (GameManager.Data.Money.Gold > normal_price)
                     {
                         GameManager.Data.Money.Gold -= normal_price;
                         GameManager.Data.PreItem.Pre_HP.USE = true;
+                        GameManager.Sound.SFXPlay(clip1);
                         Shop_Owner.text = "좋은 선택이야.";
                     }
                 }
@@ -160,6 +167,7 @@ public class ControlPreItem : MonoBehaviour
                 {
                     GameManager.Data.PreItem.Pre_Shield.CNT += 1;
                     GameManager.Data.PreItem.Pre_Shield.USE = false;
+                    GameManager.Sound.SFXPlay(clip2);
                     Shop_Owner.text = "나중에 다시 찾으러 오라고.";
                 }
                 else // 아직 사용하기로 하지 않았을 때
@@ -168,12 +176,14 @@ public class ControlPreItem : MonoBehaviour
                     {
                         GameManager.Data.PreItem.Pre_Shield.CNT -= 1;
                         GameManager.Data.PreItem.Pre_Shield.USE = true;
+                        GameManager.Sound.SFXPlay(clip);
                         Shop_Owner.text = "여기, 맡아놨던 물건이야.";
                     }
                     else if (GameManager.Data.Money.Gold > normal_price)
                     {
                         GameManager.Data.Money.Gold -= normal_price;
                         GameManager.Data.PreItem.Pre_Shield.USE = true;
+                        GameManager.Sound.SFXPlay(clip1);
                         Shop_Owner.text = "좋은 선택이야.";
                     }
                 }
@@ -190,6 +200,7 @@ public class ControlPreItem : MonoBehaviour
                     {
                         GameManager.Data.PreItem.Pre_100.CNT += 1;
                         GameManager.Data.PreItem.Pre_100.USE = false;
+                        GameManager.Sound.SFXPlay(clip2);
                         Shop_Owner.text = "나중에 다시 찾으러 오라고.";
                     }
                     else // 아직 사용하기로 하지 않았을 때
@@ -198,12 +209,14 @@ public class ControlPreItem : MonoBehaviour
                         {
                             GameManager.Data.PreItem.Pre_100.CNT -= 1;
                             GameManager.Data.PreItem.Pre_100.USE = true;
+                            GameManager.Sound.SFXPlay(clip);
                             Shop_Owner.text = "여기, 맡아놨던 물건이야.";
                         }
                         else if (GameManager.Data.Money.Gold > normal_price)
                         {
                             GameManager.Data.Money.Gold -= normal_price;
                             GameManager.Data.PreItem.Pre_100.USE = true;
+                            GameManager.Sound.SFXPlay(clip1);
                             Shop_Owner.text = "좋은 선택이야.";
                         }
                     }
@@ -221,6 +234,7 @@ public class ControlPreItem : MonoBehaviour
                     {
                         GameManager.Data.PreItem.Pre_300.CNT += 1;
                         GameManager.Data.PreItem.Pre_300.USE = false;
+                        GameManager.Sound.SFXPlay(clip2);
                         Shop_Owner.text = "나중에 다시 찾으러 오라고.";
                     }
                     else // 아직 사용하기로 하지 않았을 때
@@ -229,12 +243,14 @@ public class ControlPreItem : MonoBehaviour
                         {
                             GameManager.Data.PreItem.Pre_300.CNT -= 1;
                             GameManager.Data.PreItem.Pre_300.USE = true;
+                            GameManager.Sound.SFXPlay(clip);
                             Shop_Owner.text = "여기, 맡아놨던 물건이야.";
                         }
                         else if (GameManager.Data.Money.Gold > normal_price)
                         {
                             GameManager.Data.Money.Gold -= normal_price;
                             GameManager.Data.PreItem.Pre_300.USE = true;
+                            GameManager.Sound.SFXPlay(clip1);
                             Shop_Owner.text = "좋은 선택이야.";
                         }
                     }
@@ -247,6 +263,7 @@ public class ControlPreItem : MonoBehaviour
                     GameManager.Data.Money.Gold -= normal_price;
                     int idx = Random.Range(1, Enum.GetNames(typeof(Active.ACTIVE_CODE)).Length);
                     GameManager.Data.PreItem.Pre_Active = (Active.ACTIVE_CODE)idx;
+                    GameManager.Sound.SFXPlay(clip1);
                 }
                 break;
             case 5:
@@ -255,11 +272,18 @@ public class ControlPreItem : MonoBehaviour
                     GameManager.Data.Money.Gold -= random_price;
                     int idx = Random.Range(1, Enum.GetNames(typeof(PreItem.Random_Item)).Length);
                     GameManager.Data.PreItem.Pre_Random = (PreItem.Random_Item)idx;
+                    GameManager.Sound.SFXPlay(clip1);
                 }
                 break;
 
         }
         Check_Select();
         Info();
+    }
+    void LoadSound() //Sound Resoucres 경로 찾아와서 불러와놓기.
+    {
+        clip = Resources.Load<AudioClip>("Sound/Common/004_Manu_Sound2");
+        clip1 = Resources.Load<AudioClip>("Sound/Common/005_Cash");
+        clip2 = Resources.Load<AudioClip>("Sound/Common/001_CharacterUp");
     }
 }

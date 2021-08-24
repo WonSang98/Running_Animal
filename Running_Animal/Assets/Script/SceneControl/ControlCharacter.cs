@@ -48,6 +48,12 @@ public class ControlCharacter : MonoBehaviour
     Text Text_RESET_S;
 
     Animator Animator_UPanel; // Panel_Upgrade 관련 애니메이터
+    AudioClip clip; // 메뉴사운드
+    AudioClip clip2; // 족자 사운드
+    AudioClip clip3; // 강화시 글써지는 사운드
+    AudioClip clip4; // 레벨업, 초기화 사운드
+    AudioClip clip5; // 메뉴 사운드2
+    AudioClip clip6; // 구매 사운드
     // 레벨 업 비용
     cost[] LV_COST = {new cost(500, 1),
                       new cost(1000, 2),
@@ -61,6 +67,7 @@ public class ControlCharacter : MonoBehaviour
 
     void Start()
     {
+        LoadSound();
         //모든 캐릭터 프리팹을 불러와서... ㅇㅇ
         characters = Resources.LoadAll<GameObject>("Character/");
         idx = (int)GameManager.Data.Preset.Character;
@@ -72,6 +79,7 @@ public class ControlCharacter : MonoBehaviour
 
         Button_Upgrade = GameObject.Find("UI/Button_Upgrade").GetComponent<Button>();
         Button_Upgrade.onClick.AddListener(() => Click_Upgrade());
+        
 
         Button_Main = GameObject.Find("UI/Button_Back").GetComponent<Button>();
         Button_Main.onClick.AddListener(() => gameObject.GetComponent<LoadScene>().OnMain());
@@ -124,6 +132,7 @@ public class ControlCharacter : MonoBehaviour
         StartCoroutine(MoveLeft());
         // 2. 업그레이드 패널을 열어준다
         StartCoroutine(OpenPanel());
+        GameManager.Sound.SFXPlay(clip2);
         flag_ON = true;
     }
 
@@ -131,6 +140,7 @@ public class ControlCharacter : MonoBehaviour
     {
         StartCoroutine(MoveRight());
         StartCoroutine(ClosePanel());
+        GameManager.Sound.SFXPlay(clip2);
         flag_ON = false;
     }
 
@@ -325,6 +335,7 @@ public class ControlCharacter : MonoBehaviour
     }
     public void nextCharacter()
     {
+        GameManager.Sound.SFXPlay(clip);
         if (++idx == characters.Length) idx = 0;
         Change(idx);
         
@@ -333,6 +344,7 @@ public class ControlCharacter : MonoBehaviour
 
     public void prevCharacter()
     {
+        GameManager.Sound.SFXPlay(clip);
         if (--idx == -1) idx = characters.Length - 1;
         Change(idx);
     }
@@ -368,6 +380,7 @@ public class ControlCharacter : MonoBehaviour
     {
         GameManager.Data.Preset.Character = (Character.CHARACTER_CODE)(idx);
         show_info();
+        GameManager.Sound.SFXPlay(clip5);
     }
 
     public void buy()
@@ -379,6 +392,7 @@ public class ControlCharacter : MonoBehaviour
             GameObject.Find("UI").transform.Find("Button_Buy").gameObject.SetActive(false);
             GameObject.Find("UI").transform.Find("Button_Select").gameObject.SetActive(true);
             show_info();
+            GameManager.Sound.SFXPlay(clip6);
         }
     }
 
@@ -394,7 +408,7 @@ public class ControlCharacter : MonoBehaviour
             
             GameManager.Data.Character_STAT[idx].STAT_POINT += SP[GameManager.Data.Character_STAT[idx].LV];
             GameManager.Data.Character_STAT[idx].LV += 1;
-            
+            GameManager.Sound.SFXPlay(clip4);
         }
         SetGage();
     }
@@ -406,7 +420,7 @@ public class ControlCharacter : MonoBehaviour
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.MAX_HP.level + 1);
             GameManager.Data.Character_STAT[idx].ability.MAX_HP.value += (GameManager.Data.Character_STAT[idx].ability.MAX_HP.level+1) * 10;
             GameManager.Data.Character_STAT[idx].ability.MAX_HP.level += 1;
-            
+            GameManager.Sound.SFXPlay(clip3);
         }
         SetGage();
     }
@@ -418,7 +432,8 @@ public class ControlCharacter : MonoBehaviour
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.SPEED.level + 1);
             GameManager.Data.Character_STAT[idx].ability.SPEED.value += (GameManager.Data.Character_STAT[idx].ability.SPEED.level + 1) * 0.5f;
             GameManager.Data.Character_STAT[idx].ability.SPEED.level += 1;
-            
+            GameManager.Sound.SFXPlay(clip3);
+
         }
         SetGage();
     }
@@ -430,6 +445,7 @@ public class ControlCharacter : MonoBehaviour
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.JUMP.level + 1);
             GameManager.Data.Character_STAT[idx].ability.JUMP.value += (GameManager.Data.Character_STAT[idx].ability.JUMP.level + 1) * 0.5f;
             GameManager.Data.Character_STAT[idx].ability.JUMP.level += 1;
+            GameManager.Sound.SFXPlay(clip3);
         }
         SetGage();
 
@@ -442,6 +458,7 @@ public class ControlCharacter : MonoBehaviour
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.DOWN.level + 1);
             GameManager.Data.Character_STAT[idx].ability.DOWN.value += (GameManager.Data.Character_STAT[idx].ability.DOWN.level + 1) * 0.5f;
             GameManager.Data.Character_STAT[idx].ability.DOWN.level += 1;
+            GameManager.Sound.SFXPlay(clip3);
         }
         SetGage();
 
@@ -454,6 +471,7 @@ public class ControlCharacter : MonoBehaviour
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level * 15);
             GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.value += 1;
             GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level += 1;
+            GameManager.Sound.SFXPlay(clip3);
         }
             SetGage();
 
@@ -466,6 +484,7 @@ public class ControlCharacter : MonoBehaviour
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.DEF.level + 1);
             GameManager.Data.Character_STAT[idx].ability.DEF.value += ((short)(GameManager.Data.Character_STAT[idx].ability.DEF.level + 1) * 0.01f);
             GameManager.Data.Character_STAT[idx].ability.DEF.level += 1;
+            GameManager.Sound.SFXPlay(clip3);
         }
         SetGage();
 
@@ -478,6 +497,7 @@ public class ControlCharacter : MonoBehaviour
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.LUK.level + 1);
             GameManager.Data.Character_STAT[idx].ability.LUK.value += (short)((GameManager.Data.Character_STAT[idx].ability.LUK.level + 1) * 1);
             GameManager.Data.Character_STAT[idx].ability.LUK.level += 1;
+            GameManager.Sound.SFXPlay(clip3);
         }
         SetGage();
 
@@ -489,6 +509,7 @@ public class ControlCharacter : MonoBehaviour
         {
             GameManager.Data.Money.Speacial[0] -= (GameManager.Data.Character_STAT[idx].LV + 1);
             GameManager.Data.Character_STAT[idx].STAT_POINT = 0;
+            GameManager.Sound.SFXPlay(clip4);
 
             ToNatural();
             for (int i = 0; i < GameManager.Data.Character_STAT[idx].LV; i++)
@@ -530,6 +551,15 @@ public class ControlCharacter : MonoBehaviour
 
         GameManager.Data.Character_STAT[idx].ability.RESTORE.level = Character.Natural[idx].ability.RESTORE.level;
         GameManager.Data.Character_STAT[idx].ability.RESTORE.value = Character.Natural[idx].ability.RESTORE.value;
+    }
+    void LoadSound() //Sound Resoucres 경로 찾아와서 불러와놓기.
+    {
+        clip = Resources.Load<AudioClip>("Sound/Common/000_Manu_Sound");
+        clip2 = Resources.Load<AudioClip>("Sound/Common/002_Paper");
+        clip3 = Resources.Load<AudioClip>("Sound/Common/003_Write");
+        clip4 = Resources.Load<AudioClip>("Sound/Common/001_CharacterUp");
+        clip5 = Resources.Load<AudioClip>("Sound/Common/004_Manu_Sound2");
+        clip6 = Resources.Load<AudioClip>("Sound/Common/005_Cash");
     }
 
 }

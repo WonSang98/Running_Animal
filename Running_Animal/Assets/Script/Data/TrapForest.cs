@@ -52,6 +52,7 @@ public class TrapForest : MonoBehaviour
             }
             else
             {
+                GameManager.Play.DC.passTrap++;
                 Invoke("pattern" + GameManager.Play.DC.patternList[GameManager.Play.DC.patternCnt++], 0); // 함정 호출
                 if (GameManager.Play.DC.patternCnt == (num_pattern + 1)) // 모든 함정이 1회씩 다 나왔을 경우.
                 {
@@ -110,36 +111,22 @@ public class TrapForest : MonoBehaviour
         GameObject shot;
         GameObject warn = null; // 실시간 좌표 수정
         float shot_y = 0;
-        for (int i = 0; i < 450; i++)
+        for (int i = 0; i < 3; i++)
         {
-            float y = GameManager.Play.Player.transform.position.y;
-            if(y > 4)
+            if(i == 1)
             {
-                y = 4;
-            }
-            if (i < 300) // 경고 생성.
-            {
-                Destroy(warn);
-                warn = Instantiate(warning_shot);
-                warn.transform.position = new Vector3(warn.transform.position.x, y, warn.transform.position.z);
-                shot_y = y;
-            }
-            else if (i < 360)
-            {
-                Destroy(warn);
+                shot_y = GameManager.Play.Player.transform.position.y;
                 warn = Instantiate(warning_shot2);
                 warn.transform.position = new Vector3(warn.transform.position.x, shot_y, warn.transform.position.z);
             }
-            else if( i == 375)
+            else if(i == 2)
             {
                 Destroy(warn);
-            }
-            else if (i == 435)
-            {
                 shot = Instantiate(traps[(int)ID.Fly_Shot]);
                 shot.transform.position = new Vector3(37, shot_y, 0);
             }
-            yield return new WaitForSeconds(0.01f);
+           
+            yield return new WaitForSeconds(1.5f);
         }
     }
 

@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Script/SceneControl/ControlCharacter.cs
+    - Assets/Scenes/Play.unity
+    - Assets/Script/SceneControl/Play/UI_Play.cs
     - 
-    m_Values: 0000
+    m_Values: 000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

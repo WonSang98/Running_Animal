@@ -10,14 +10,23 @@ public class PlayerMove : MonoBehaviour
     UI_Play UI_Play;
     InterAction InterAction;
     Active Active;
+
+    Animator Ani_Player;
+    Rigidbody2D Rig_Player;
     private void Start()
     {
         UI_Play = GameObject.Find("@Managers").GetComponent<UI_Play>();
         InterAction = GameObject.Find("@Managers").GetComponent<InterAction>();
         Active = GameObject.Find("@Managers").GetComponent<Active>();
+        Ani_Player = gameObject.GetComponent<Animator>();
+        Rig_Player = gameObject.GetComponent<Rigidbody2D>();
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (Ani_Player == null)
+        {
+            Ani_Player = gameObject.GetComponent<Animator>();
+        }
         if (gameObject.CompareTag("Shield"))
         {
             if (other.gameObject.CompareTag("Trap_Blood") || other.gameObject.CompareTag("Trap_Stun") || other.gameObject.CompareTag("Trap") || other.gameObject.CompareTag("Jump"))
@@ -108,26 +117,30 @@ public class PlayerMove : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(Ani_Player == null)
+        {
+            Ani_Player = gameObject.GetComponent<Animator>();
+        }
         if (collision.gameObject.CompareTag("Tile"))
         {
-            GetComponent<Animator>().SetBool("Landing", true);
+            
+            Ani_Player.SetBool("Landing", true);
             GameManager.Play.DS.jumpNow = 0;
         }
         if (collision.gameObject.CompareTag("Jump"))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 4, 0);
-            GetComponent<Animator>().SetBool("Landing", true);
+            Rig_Player.velocity = new Vector3(0, 4, 0);
+            Ani_Player.SetBool("Landing", true);
             GameManager.Play.DS.jumpNow = 0;
             StartCoroutine(UI_Play.Cam_ATT());
             UI_Play.Trap_Combo(collision.transform);
             GameManager.Play.DC.expNow += GameManager.Play.DC.expMulti;
-            GameManager.Play.DC.passTrap += 1;
             UI_Play.BAR_EXP();
         }
 
         if (collision.gameObject.CompareTag("Jump2"))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector3(0, 10, 0);
+            Rig_Player.velocity = new Vector3(0, 10, 0);
             GameManager.Play.DS.jumpNow = 0;
         }
 
