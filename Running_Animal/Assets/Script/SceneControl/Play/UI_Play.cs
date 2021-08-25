@@ -49,6 +49,7 @@ public class UI_Play : MonoBehaviour
 
     public InterAction InterAction;
     public Passive Passive;
+    public Active Active;
     IEnumerator Coroutine_Combo;
 
     AudioClip clip;
@@ -63,6 +64,7 @@ public class UI_Play : MonoBehaviour
     {
         Passive = gameObject.GetComponent<Passive>();
         InterAction = gameObject.GetComponent<InterAction>();
+        Active = gameObject.GetComponent<Active>();
         Image_HpBar = GameObject.Find("UI/Bar_HP/Gage_HP").GetComponent<Image>();
         Image_ExpBar = GameObject.Find("UI/Bar_EXP/Gage_EXP").GetComponent<Image>();
 
@@ -158,41 +160,40 @@ public class UI_Play : MonoBehaviour
                 case Active.ACTIVE_CODE.None:
                     break;
                 case Active.ACTIVE_CODE.Defense:
-                    gameObject.GetComponent<Active>().OnDefense();
-                    StartCoroutine(CoolTime(15));
+                    Active.OnDefense();
+                    StartCoroutine(CoolTime(10));
                     break;
                 case Active.ACTIVE_CODE.Flash:
-                    StartCoroutine(gameObject.GetComponent<Active>().OnFlash());
-                    StartCoroutine(CoolTime(15));
+                    StartCoroutine(Active.OnFlash());
+                    StartCoroutine(CoolTime(10));
                     break;
                 case Active.ACTIVE_CODE.Ghost:
-                    StartCoroutine(gameObject.GetComponent<Active>().OnGhost());
-                    StartCoroutine(CoolTime(15));
+                    StartCoroutine(Active.OnGhost());
+                    StartCoroutine(CoolTime(10));
                     break;
                 case Active.ACTIVE_CODE.Heal:
-                    gameObject.GetComponent<Active>().OnHeal();
+                    Active.OnHeal();
                     //체력바 UI UPDATE!
-                    StartCoroutine(CoolTime(20));
+                    StartCoroutine(CoolTime(10));
                     break;
                 case Active.ACTIVE_CODE.Item_Change:
-                    gameObject.GetComponent<Active>().Item_Change();
-                    StartCoroutine(CoolTime(20));
+                    Active.Item_Change();
                     break;
                 case Active.ACTIVE_CODE.Change_Coin:
-                    gameObject.GetComponent<Active>().Change_Coin();
-                    StartCoroutine(CoolTime(20));
+                    Active.Change_Coin();
+                    StartCoroutine(CoolTime(10));
                     break;
                 case Active.ACTIVE_CODE.The_World:
-                    StartCoroutine(gameObject.GetComponent<Active>().OnSlow());
+                    StartCoroutine(Active.OnSlow());
                     StartCoroutine(CoolTime(10));
                     break;
                 case Active.ACTIVE_CODE.Multiple_Combo:
-                    StartCoroutine(gameObject.GetComponent<Active>().MultiCombo());
-                    StartCoroutine(CoolTime(5));
+                    StartCoroutine(Active.MultiCombo());
+                    StartCoroutine(CoolTime(10));
                     break;
                 case Active.ACTIVE_CODE.Fly:
-                    StartCoroutine(gameObject.GetComponent<Active>().OnFly());
-                    StartCoroutine(CoolTime(15));
+                    StartCoroutine(Active.OnFly());
+                    StartCoroutine(CoolTime(10));
                     break;
 
                     /* case Active.ID.Run:
@@ -202,22 +203,20 @@ public class UI_Play : MonoBehaviour
                            break;
                             */
             }
-            Image_Skill.fillAmount = 0;
         }
 
     }
     public IEnumerator CoolTime(float t)
     {
+        Image_Skill.fillAmount = 0;
+        float time = 0;
         if (GameManager.Play.DS.activeUse < GameManager.Play.DC.activeMax)
         {
-            for (float i = 0; i <= t; i++)
+            while(time < t)
             {
-                if (i == t)
-                {
-                    Button_Skill.interactable = true;
-                }
-                Image_Skill.fillAmount += (1.0f / t);
-                yield return new WaitForSeconds(1);
+                Image_Skill.fillAmount = (time / t);
+                time += Time.deltaTime;
+                yield return null;
             }
         }
     }
@@ -306,7 +305,7 @@ public class UI_Play : MonoBehaviour
         int per = Random.Range(0, 100);
         if (per < GameManager.Play.Status.ability.LUK.value) // 행운 수치에 따라 크리티컬 적용.
         {
-            GameManager.Play.DC.combo += GameManager.Play.DC.comboMulti * 2;
+            GameManager.Play.DC.combo += GameManager.Play.DC.comboMulti *  GameManager.Play.DS.AC_multicombo * 2;
             Text_Combo.color = Color.red;
             Text_ComboCNT.color = Color.red;
             Text_Combo.text = "ComboX2";
@@ -325,7 +324,7 @@ public class UI_Play : MonoBehaviour
         }
         else
         {
-            GameManager.Play.DC.combo += GameManager.Play.DC.comboMulti;
+            GameManager.Play.DC.combo += GameManager.Play.DC.comboMulti * GameManager.Play.DS.AC_multicombo;
             Text_Combo.color = Color.white;
             Text_ComboCNT.color = Color.white;
             Text_Combo.text = "Combo";

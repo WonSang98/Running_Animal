@@ -14,12 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Resources/Trap/Forest/0178_Pattern.prefab
-    - Assets/Resources/Trap/Forest/0187_Pattern.prefab
-    - Assets/Script/SceneControl/Play/InterAction.cs
+    - Assets/Scenes/Talent.unity
+    - Assets/Script/Data/Skill/Active.cs
+    - Assets/Script/Data/TrapForest.cs
+    - Assets/Script/Play/PlayData.cs
+    - Assets/Script/SceneControl/LoadScene.cs
+    - Assets/Script/SceneControl/Play/SetPlayer.cs
+    - Assets/Script/SceneControl/Play/UI_Play.cs
     - 
-    m_Values: 01010101
-  RevisionSummary: "+ \uC77C\uBD80 \uD328\uD134 \uBC84\uADF8 \uC218\uC815\n+ "
+    m_Values: 0000000000000000
+  RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
   HistoryPageNumber: 0

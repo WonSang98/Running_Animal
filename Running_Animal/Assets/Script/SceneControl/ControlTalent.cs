@@ -15,7 +15,8 @@ public class ControlTalent : MonoBehaviour
 
     Button LevelUP;
 
-    
+    AudioClip clip;
+    AudioClip clip2;
 
     void Start()
     {
@@ -34,6 +35,7 @@ public class ControlTalent : MonoBehaviour
             Effects[i].SetActive(false);
         }
         Show_info();
+        LoadSound();
     }
     void Choice(int i)
     {
@@ -48,15 +50,19 @@ public class ControlTalent : MonoBehaviour
             {
                 case 0:
                     Upgrade.text = $"{Talent.COST[GameManager.Data.Talent.HP.level]}XG";
+                    GameManager.Sound.SFXPlay(clip);
                     break;
                 case 1:
                     Upgrade.text = $"{Talent.COST[GameManager.Data.Talent.DEF.level]}XG";
+                    GameManager.Sound.SFXPlay(clip);
                     break;
                 case 2:
                     Upgrade.text = $"{Talent.COST[GameManager.Data.Talent.LUK.level]}XG";
+                    GameManager.Sound.SFXPlay(clip);
                     break;
                 case 3:
                     Upgrade.text = $"{Talent.COST[GameManager.Data.Talent.RESTORE.level]}XG";
+                    GameManager.Sound.SFXPlay(clip);
                     break;
 
             }
@@ -146,6 +152,7 @@ public class ControlTalent : MonoBehaviour
             }
             Show_info();
         }
+        GameManager.Sound.SFXPlay(clip2);
     }
 
     void Show_info()
@@ -201,6 +208,11 @@ public class ControlTalent : MonoBehaviour
         Effects[i].GetComponent<Image>().color = pre_a;
         Effects[i].GetComponent<RectTransform>().localScale = pre_size;
         Effects[i].SetActive(false);
+    }
+    void LoadSound()
+    {
+        clip = Resources.Load<AudioClip>("Sound/Common/004_Manu_Sound2");
+        clip2 = Resources.Load<AudioClip>("Sound/Common/007_Stamp");
     }
 
 }

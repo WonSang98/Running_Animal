@@ -38,6 +38,8 @@ public class DataContinue
 
     public short revive; // 부활 가능 횟수.
 
+    public float pre_speed; // 액티브 스킬 대비해서 스킬 사용 전의 속도를 저장하는 변수이다.
+
     public List<Passive.PASSIVE_CODE> passiveGet; // 습득한 패시브 스킬 저장
 
 
@@ -73,6 +75,8 @@ public class DataContinue
         revive = 0;
 
         passiveGet = new List<Passive.PASSIVE_CODE>();
+
+        pre_speed = 8;
     }
 
     public DataContinue DeepCopy()
@@ -107,6 +111,8 @@ public class DataContinue
 
         dc.passiveGet = new List<Passive.PASSIVE_CODE>();
 
+        dc.pre_speed = 8;
+
         return dc;
     }
 
@@ -122,6 +128,8 @@ public class DataShot
     public float expRun; // RUN 달리기 할 때 한번에 경험치 적용하려고 한 건데 이거 쓸 지 말지 좀  다시 봐야함.
     public float timer; // 장애물 생성 시간 측정 타이머, Trap_함수와 연관.
 
+    public int AC_multicombo;
+
     public DataShot()
     {
         jumpNow = 0;
@@ -130,6 +138,8 @@ public class DataShot
         time_change = 1;
         expRun = 0;
         timer = 20.0f;
+
+        AC_multicombo = 1;
     }
 
     public DataShot DeepCopy()
@@ -141,6 +151,7 @@ public class DataShot
         ds.time_change = 1;
         ds.expRun = 0;
         ds.timer = 20.0f;
+        ds.AC_multicombo = 3;
 
         return ds;
     }

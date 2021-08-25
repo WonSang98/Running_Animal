@@ -74,18 +74,24 @@ public class Active : MonoBehaviour
     // Skill ID : 2 Flash
     public IEnumerator OnFlash()
     {
-        Vector3 pos_first = GameManager.Play.Player.transform.position;
-        float temp_Speed = GameManager.Play.Status.ability.SPEED.value;
-        GameManager.Play.Player.transform.Find("2").gameObject.SetActive(true);
-        GameManager.Play.Player.transform.Translate(temp_Speed, 0, 0);
-        GameManager.Play.Status.ability.SPEED.value = temp_Speed * 2;
-        while (GameManager.Play.Player.transform.position.x <= pos_first.x)
+        StartCoroutine(gameObject.GetComponent<InterAction>().OnDodge(20));
+        for (int i=0; i<2; i++)
         {
-            GameManager.Play.Player.transform.Translate(-1 * temp_Speed * Time.deltaTime, 0, 0);
-            yield return null;
+            if(i == 0)
+            {
+                GameManager.Play.Status.ability.SPEED.value = 150;
+                GameManager.Play.Player.GetComponent<Rigidbody2D>().gravityScale = 0;
+                GameManager.Play.Player.transform.Find("2").gameObject.SetActive(true);
+            }
+            else
+            {
+                GameManager.Play.Status.ability.SPEED.value = GameManager.Play.DC.pre_speed;
+                GameManager.Play.Player.GetComponent<Rigidbody2D>().gravityScale = 2;
+                GameManager.Play.Player.transform.Find("2").gameObject.SetActive(false);
+            }
+            yield return new WaitForSeconds(0.15f);
         }
-        GameManager.Play.Status.ability.SPEED.value = temp_Speed;
-        GameManager.Play.Player.transform.Find("2").gameObject.SetActive(false);
+
     }
 
     // Skill ID : 3 Ghost
@@ -141,6 +147,10 @@ public class Active : MonoBehaviour
         {
             GameObject.Find("SceneManager").GetComponent<ControlSelectSkill>().ReLoad();
             GameManager.Sound.SFXPlay(clip4);
+        }
+        else
+        {
+            GameManager.Play.DS.activeUse -= 1;
         }
     }
 
@@ -228,11 +238,11 @@ public class Active : MonoBehaviour
         {
             if (i == 0)
             {
-                GameManager.Play.DC.comboMulti *= 3;
+                GameManager.Play.DS.AC_multicombo = 3;
             }
             if (i == 1)
             {
-                GameManager.Play.DC.comboMulti /= 3;
+                GameManager.Play.DS.AC_multicombo = 1;
             }
 
             yield return new WaitForSeconds(10f);
@@ -244,18 +254,12 @@ public class Active : MonoBehaviour
     public IEnumerator OnFly()
     {
         GameManager.Sound.SFXPlay(clip8);
-        int temp = GameManager.Play.Status.ability.MAX_JUMP.value;
-        for (int i = 0; i < 2; i++)
+        float t = 0;
+        while(t <= 5.0f)
         {
-            if (i == 0)
-            {
-                GameManager.Play.Status.ability.MAX_JUMP.value = 999999;
-            }
-            else
-            {
-                GameManager.Play.Status.ability.MAX_JUMP.value = temp;
-            }
-            yield return new WaitForSeconds(5f);
+            t += Time.deltaTime;
+            GameManager.Play.DS.jumpNow = 0;
+            yield return null;
         }
     }
 
@@ -263,7 +267,7 @@ public class Active : MonoBehaviour
 
     public IEnumerator OnRun(float t)
     {
-        float pre_speed = GameManager.Play.Status.ability.SPEED.value;
+        bool isshield = (GameManager.Play.Player.CompareTag("Shield"));
         for (int i = 0; i < 2; i++)
         {
             if (i == 0)
@@ -273,8 +277,15 @@ public class Active : MonoBehaviour
             }
             if (i == 1)
             {
-                GameManager.Play.Status.ability.SPEED.value = pre_speed;
-                GameManager.Play.Player.tag = "Player";
+                GameManager.Play.Status.ability.SPEED.value = GameManager.Play.DC.pre_speed;
+                if (isshield)
+                {
+                    GameManager.Play.Player.tag = "Shield";
+                }
+                else
+                {
+                    GameManager.Play.Player.tag = "Player";
+                }
                 GameManager.Play.DC.expNow += GameManager.Play.DS.expRun;
                 GameManager.Play.DS.expRun = 0;
             }

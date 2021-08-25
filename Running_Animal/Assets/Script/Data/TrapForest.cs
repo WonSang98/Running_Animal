@@ -117,22 +117,32 @@ public class TrapForest : MonoBehaviour
         float rand_y = Random.Range(-0.25f, 3.0f);
         GameObject bird;
         GameObject warn = null;
-        for(int i=0; i<2; i++)
+        float time = 0;
+        bool set_warn = false;
+        bool ispawn = false;
+        while (true)
         {
-            if (i == 0) // 경고 생성.
+            time += GameManager.Play.Status.ability.SPEED.value * Time.deltaTime;
+            if (time >= 12)
             {
-                warn = Instantiate(warning_bird);
-                warn.transform.position = new Vector3(-8, rand_y, 0);
+                if(set_warn == false)
+                {
+                    warn = Instantiate(warning_bird);
+                    warn.transform.position = new Vector3(-8, rand_y, 0);
+                    warn.transform.parent = Parent.transform;
+                    set_warn = true;
+                }
+                if(time >= 24 && ispawn == false)
+                {
+                    Destroy(warn);
+                    bird = Instantiate(traps[(int)ID.Fly_Bird]);
+                    bird.transform.position = new Vector3(37, rand_y, 0);
+                    bird.transform.parent = Parent.transform;
+                    GameManager.Sound.SFXPlay(clip2);
+                    ispawn = true;
+                }
             }
-            else if(i == 1)
-            {
-                Destroy(warn);
-                bird = Instantiate(traps[(int)ID.Fly_Bird]);
-                bird.transform.position = new Vector3(37, rand_y, 0);
-                bird.transform.parent = Parent.transform;
-                GameManager.Sound.SFXPlay(clip2);
-            }
-            yield return new WaitForSeconds(1.5f);
+            yield return null;
         }
     }
 
@@ -141,25 +151,44 @@ public class TrapForest : MonoBehaviour
         GameObject shot;
         GameObject warn = null; // 실시간 좌표 수정
         float shot_y = 0;
-        for (int i = 0; i < 3; i++)
+        float time = 0;
+
+        bool set_shot = false;
+        while(true)
         {
-            if(i == 1)
-            {
-                shot_y = GameManager.Play.Player.transform.position.y;
-                warn = Instantiate(warning_shot2);
-                warn.transform.position = new Vector3(warn.transform.position.x, shot_y, warn.transform.position.z);
-            }
-            else if(i == 2)
+            time += GameManager.Play.Status.ability.SPEED.value * Time.deltaTime;
+            if(time < 12)
             {
                 Destroy(warn);
-                shot = Instantiate(traps[(int)ID.Fly_Shot]);
-                shot.transform.position = new Vector3(37, shot_y, 0);
-                shot.transform.parent = Parent.transform;
-                GameManager.Sound.SFXPlay(clip);
+                shot_y = GameManager.Play.Player.transform.position.y;
+                warn = Instantiate(warning_shot);
+                warn.transform.position = new Vector3(warn.transform.position.x, shot_y, warn.transform.position.z);
+                warn.transform.parent = Parent.transform;
             }
-           
-            yield return new WaitForSeconds(1.5f);
+            else
+            {
+                if (set_shot == false)
+                {
+                    Destroy(warn);
+                    shot_y = GameManager.Play.Player.transform.position.y;
+                    warn = Instantiate(warning_shot2);
+                    warn.transform.position = new Vector3(warn.transform.position.x, shot_y, warn.transform.position.z);
+                    warn.transform.parent = Parent.transform;
+                    set_shot = true;
+                }
+                else if (time >= 24)
+                {
+                    Destroy(warn);
+                    shot = Instantiate(traps[(int)ID.Fly_Shot]);
+                    shot.transform.position = new Vector3(37, shot_y, 0);
+                    shot.transform.parent = Parent.transform;
+                    GameManager.Sound.SFXPlay(clip);
+                    break;
+                }
+            }
+            yield return null;
         }
+       
     }
 
     IEnumerator MakeSpecial()
@@ -198,7 +227,10 @@ public class TrapForest : MonoBehaviour
             }
 
             Brdige[i].transform.parent = Parent.transform;
-            Trap[i].transform.parent = Parent.transform;
+            if (Trap[i] != null)
+            {
+                Trap[i].transform.parent = Parent.transform;
+            }
             yield return null;
         }
     }
@@ -225,6 +257,7 @@ public class TrapForest : MonoBehaviour
     {
         GameObject tmp;
         active.Change_Coin();
+        Destroy(Parent);
         tmp = Instantiate(LvUp);
         tmp.transform.position = new Vector3(30, -1.8f, 0);
         Stop_TrapForest();
@@ -281,6 +314,7 @@ public class TrapForest : MonoBehaviour
     {
         GameObject tmp;
         active.Change_Coin();
+        Destroy(Parent);
         tmp = Instantiate(Clear);
         Stop_TrapForest();
         StartCoroutine(GoClear());

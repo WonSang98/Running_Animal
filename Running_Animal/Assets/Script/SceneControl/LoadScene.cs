@@ -104,8 +104,8 @@ public class LoadScene : MonoBehaviour
         GameManager.Instance.goScene = "End_Fail";
         GameManager.Instance.Save();
         SceneManager.LoadScene("Loading");
-        GameManager.Sound.SFXPlay(clip2);
         GameManager.Instance.Load();
+        GameManager.Sound.SFXPlay(clip2);
     }
 
     public void OnSuccess()
@@ -113,27 +113,27 @@ public class LoadScene : MonoBehaviour
         GameManager.Instance.goScene = "End_Success";
         GameManager.Instance.Save();
         SceneManager.LoadScene("Loading");
-        GameManager.Sound.SFXPlay(clip2);
         GameManager.Instance.Load();
+        GameManager.Sound.SFXPlay(clip2);
     }
 
     public void OnSelect()
     {
+        GameManager.Instance.AllStop();
         GameManager.Instance.goScene = "Select_Item";
         GameManager.Instance.Save();
         SceneManager.LoadScene("Loading");
         GameManager.Sound.SFXPlay(clip3);
-        GameManager.Instance.AllStop();
         GameManager.Instance.Load();
     }
 
     public void OnPlay()
     {
+        GameManager.Instance.AllStop();
         GameManager.Instance.goScene = "Play";
         GameManager.Instance.Save();
         SceneManager.LoadScene("Loading");
         GameManager.Sound.SFXPlay(clip4);
-        GameManager.Instance.AllStop();
         GameManager.Instance.Load();
     }
     public void Stop_LoadScene()
