@@ -49,6 +49,18 @@ public class SoundManager
         }
     }
 
+    public void BGMClear()
+    {
+        _audioSources[0].clip = null;
+        _audioSources[0].Stop();
+    }
+
+    public void SFXClear()
+    {
+        _audioSources[1].clip = null;
+        _audioSources[1].Stop();
+    }
+
     public void SFXPlay(AudioClip clip)
     {
         AudioSource audioSource = _audioSources[(int)Sound.Effect];
@@ -68,8 +80,6 @@ public class SoundManager
         audioSource.clip = clip;
         audioSource.Play();
     }
-
-   
 
 
 }

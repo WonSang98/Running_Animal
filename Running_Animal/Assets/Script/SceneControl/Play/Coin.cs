@@ -6,6 +6,7 @@ public class Coin : MonoBehaviour
 {
     Vector3 vel = Vector3.zero;
     bool cnt;
+
     // Start is called before the first frame update
     void Start()
     {

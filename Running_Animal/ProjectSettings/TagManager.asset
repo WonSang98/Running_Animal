@@ -19,6 +19,7 @@ TagManager:
   - Run
   - NonTrap
   - Die
+  - Clear
   layers:
   - Default
   - TransparentFX

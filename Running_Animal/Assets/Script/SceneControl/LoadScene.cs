@@ -10,6 +10,9 @@ public class LoadScene : MonoBehaviour
     AudioClip Clip_BGM3;
     AudioClip Clip_BGM4;
     AudioClip clip;
+    AudioClip clip2;
+    AudioClip clip3;
+    AudioClip clip4;
     private void Start()
     {
         LoadSound();
@@ -100,8 +103,8 @@ public class LoadScene : MonoBehaviour
     {
         GameManager.Instance.goScene = "End_Fail";
         GameManager.Instance.Save();
-        GameManager.Sound.SFXPlay(clip);
         SceneManager.LoadScene("Loading");
+        GameManager.Sound.SFXPlay(clip2);
         GameManager.Instance.Load();
     }
 
@@ -109,8 +112,28 @@ public class LoadScene : MonoBehaviour
     {
         GameManager.Instance.goScene = "End_Success";
         GameManager.Instance.Save();
-        GameManager.Sound.SFXPlay(clip);
         SceneManager.LoadScene("Loading");
+        GameManager.Sound.SFXPlay(clip2);
+        GameManager.Instance.Load();
+    }
+
+    public void OnSelect()
+    {
+        GameManager.Instance.goScene = "Select_Item";
+        GameManager.Instance.Save();
+        SceneManager.LoadScene("Loading");
+        GameManager.Sound.SFXPlay(clip3);
+        GameManager.Instance.AllStop();
+        GameManager.Instance.Load();
+    }
+
+    public void OnPlay()
+    {
+        GameManager.Instance.goScene = "Play";
+        GameManager.Instance.Save();
+        SceneManager.LoadScene("Loading");
+        GameManager.Sound.SFXPlay(clip4);
+        GameManager.Instance.AllStop();
         GameManager.Instance.Load();
     }
     public void Stop_LoadScene()
@@ -125,5 +148,8 @@ public class LoadScene : MonoBehaviour
         Clip_BGM3 = Resources.Load<AudioClip>("Sound/BGM/002_Character_BGM");
         Clip_BGM4 = Resources.Load<AudioClip>("Sound/BGM/003_Play_BGM");
         clip = Resources.Load<AudioClip>("Sound/Common/000_Manu_Sound");
+        clip2 = Resources.Load<AudioClip>("Sound/Common/002_Paper");
+        clip3 = Resources.Load<AudioClip>("Sound/Common/008_Levelup");
+        clip4 = Resources.Load<AudioClip>("Sound/Common/007_Stamp");
     }
 }

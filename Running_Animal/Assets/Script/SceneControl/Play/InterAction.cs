@@ -11,6 +11,16 @@ public class InterAction : MonoBehaviour
      * 피해 입음
      * 파괴 
      */
+
+    AudioClip clip;
+    GameObject Player;
+    UI_Play UP;
+    SpriteRenderer Player_Color;
+    private void Start()
+    {
+        UP = gameObject.GetComponent<UI_Play>();
+        LoadSound();
+    }
     public void MakeCoin(Transform other)
     {
         Instantiate(gameObject.GetComponent<TrapForest>().coin, new Vector3(other.position.x + 0.5f, other.position.y + 4.0f, other.position.z), Quaternion.identity);
@@ -18,45 +28,53 @@ public class InterAction : MonoBehaviour
 
     public IEnumerator OnDodge(int t) // 피격시 일정시간 무적
     {
+        Player = GameManager.Play.Player.gameObject;
+        Player_Color = Player.GetComponent<SpriteRenderer>();
+
         for (int i = 0; i < t; i++)
         {
             if (i == 0)
             {
-                GameManager.Play.Player.tag = "God";
+                Player.tag = "God";
             }
 
             if (i == (t - 1))
             {
-                gameObject.GetComponent<UI_Play>().player_opacity.a = 1.0f;
-                GameManager.Play.Player.GetComponent<SpriteRenderer>().color = gameObject.GetComponent<UI_Play>().player_opacity;
-                GameManager.Play.Player.tag = "Player";
+                UP.player_opacity.a = 1.0f;
+                Player_Color.color = UP.player_opacity;
+                Player.tag = "Player";
             }
 
             if (i % 2 == 0)
             {
-                gameObject.GetComponent<UI_Play>().player_opacity.a = 0.5f;
-                GameManager.Play.Player.GetComponent<SpriteRenderer>().color = gameObject.GetComponent<UI_Play>().player_opacity;
+                UP.player_opacity.a = 0.5f;
+                Player_Color.color = UP.player_opacity;
             }
             else
             {
-                gameObject.GetComponent<UI_Play>().player_opacity.a = 1.0f;
-                GameManager.Play.Player.GetComponent<SpriteRenderer>().color = gameObject.GetComponent<UI_Play>().player_opacity;
+                UP.player_opacity.a = 1.0f;
+                Player_Color.color = UP.player_opacity;
             }
             yield return new WaitForSeconds(0.1f);
         }
+        UP.player_opacity.a = 1.0f;
+        Player_Color.color = UP.player_opacity;
     }
 
     public IEnumerator OnBlood() // 피흘림
     {
+        Player = GameManager.Play.Player.gameObject;
+        Player_Color = Player.GetComponent<SpriteRenderer>();
+
         for (int i = 0; i < 5; i++)
         {
-            if (GameManager.Play.Player.CompareTag("Die"))
+            if (Player.CompareTag("Die"))
             {
                 break;
             }
             GameManager.Play.Status.ability.HP.value -= 3;
-            StartCoroutine(gameObject.GetComponent<UI_Play>().Cam_Hit());
-            gameObject.GetComponent<UI_Play>().BAR_HP();
+            StartCoroutine(UP.Cam_Hit());
+            UP.BAR_HP();
             Die();
             yield return new WaitForSeconds(2.0f);
         }
@@ -64,25 +82,28 @@ public class InterAction : MonoBehaviour
 
     public IEnumerator OnStun() //스턴
     {
+        Player = GameManager.Play.Player.gameObject;
+        Player_Color = Player.GetComponent<SpriteRenderer>();
+
         for (int i = 0; i < 2; i++)
         {
-            if (GameManager.Play.Player.CompareTag("Die"))
+            if (Player.CompareTag("Die"))
             {
                 break;
             }
             if (i == 0)
             {
-                gameObject.GetComponent<UI_Play>().Event_jump.triggers.Remove(gameObject.GetComponent<UI_Play>().Entry_Jump);
-                gameObject.GetComponent<UI_Play>().Event_down.triggers.Remove(gameObject.GetComponent<UI_Play>().Entry_Down);
-                gameObject.GetComponent<UI_Play>().Button_Jump.interactable = false;
-                gameObject.GetComponent<UI_Play>().Button_Down.interactable = false;
+                UP.Event_jump.triggers.Remove(UP.Entry_Jump);
+                UP.Event_down.triggers.Remove(UP.Entry_Down);
+                UP.Button_Jump.interactable = false;
+                UP.Button_Down.interactable = false;
             }
             else if (i == 1)
             {
-                gameObject.GetComponent<UI_Play>().Event_jump.triggers.Add(gameObject.GetComponent<UI_Play>().Entry_Jump);
-                gameObject.GetComponent<UI_Play>().Event_down.triggers.Add(gameObject.GetComponent<UI_Play>().Entry_Down);
-                gameObject.GetComponent<UI_Play>().Button_Jump.interactable = true;
-                gameObject.GetComponent<UI_Play>().Button_Down.interactable = true;
+                UP.Event_jump.triggers.Add(UP.Entry_Jump);
+                UP.Event_down.triggers.Add(UP.Entry_Down);
+                UP.Button_Jump.interactable = true;
+                UP.Button_Down.interactable = true;
             }
 
             yield return new WaitForSeconds(1.5f);
@@ -94,7 +115,9 @@ public class InterAction : MonoBehaviour
     public bool OnHit(float DMG)
     {
         StartCoroutine(OnDodge(GameManager.Play.DC.dodge));
-        Animator animator = GameManager.Play.Player.GetComponent<Animator>();
+        Animator animator = Player.GetComponent<Animator>();
+        Player = GameManager.Play.Player.gameObject;
+        Player_Color = Player.GetComponent<SpriteRenderer>();
 
         int per = Random.Range(0, 100);
         //회피 못함 ㅠ
@@ -108,21 +131,25 @@ public class InterAction : MonoBehaviour
             GameManager.Play.DS.nohit = false;
 
             GameManager.Play.Status.ability.HP.value -= DMG;
-            StartCoroutine(gameObject.GetComponent<UI_Play>().Cam_Hit());
-            gameObject.GetComponent<UI_Play>().BAR_HP();
+            StartCoroutine(UP.Cam_Hit());
+            UP.BAR_HP();
             Die();
             animator.SetTrigger("Attacked");
             return true;
         }
         else // 회피함. ㅎㅎ
         {
-            Instantiate(gameObject.GetComponent<UI_Play>().Miss, GameManager.Play.Player.transform);
+            Instantiate(UP.Miss, GameManager.Play.Player.transform);
+            GameManager.Sound.SFXPlay(clip);
             return false;
         }
     }
 
     public void Die()
     {
+        Player = GameManager.Play.Player.gameObject;
+        Player_Color = Player.GetComponent<SpriteRenderer>();
+
         if (GameManager.Play.Status.ability.HP.value <= 0)
         {
             GameManager.Play.Player.tag = "Die";
@@ -133,13 +160,12 @@ public class InterAction : MonoBehaviour
             {
                 // 부활 가능 횟수 있음.
                 StartCoroutine(gameObject.GetComponent<Passive>().Resurrection());
-
+                GameManager.Play.Player.GetComponent<Animator>().SetTrigger("Revive");
                 GameManager.Play.DC.revive -= 1;
             }
             else
             {
-                GameManager.Play.Player.GetComponent<Animator>().SetBool("StartGame", false);
-                StartCoroutine(gameObject.GetComponent<UI_Play>().GameOver());
+                StartCoroutine(UP.GameOver());
             }
         }
     }
@@ -166,5 +192,9 @@ public class InterAction : MonoBehaviour
     public void Stop_InterAction()
     {
         StopAllCoroutines();
+    }
+    void LoadSound()
+    {
+        clip = Resources.Load<AudioClip>("Sound/Play/011_Play");
     }
 }

@@ -44,6 +44,8 @@ public class DataContinue
     public DataContinue() //DEFAULT
     {
         expNeed = new float[]{ 0, 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999 };
+        //expNeed = new float[] { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 999999 };
+        //                     0   1   2   3   4   5   6  7    8   9    10  11   12   
         lv = 1;
         lvup = false;
         expNow = 0;

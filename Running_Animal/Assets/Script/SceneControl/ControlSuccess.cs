@@ -12,16 +12,19 @@ public class ControlSuccess : MonoBehaviour
 
     LoadScene LS;
 
+    AudioClip clip;
+
     void Start()
     {
         GameObject END = GameObject.Find("END");
         LS = GameManager.Instance.GetComponent<LoadScene>();
         Image_Success = new Image[1];
+        GameManager.Sound.SFXPlay(clip);
         Image_Success[0] = END.transform.Find("Panel_Success/Image_SUCCESS").GetComponent<Image>();
 
         Sprite_GoodCharacter = Resources.LoadAll<Sprite>("Image/GUI/Play/CharacterDead"); //Temp
         Button_SuccessMain = END.transform.Find("Panel_Success/Button_MAIN").GetComponent<Button>();
-        Button_SuccessMain.onClick.AddListener(() => gameObject.GetComponent<LoadScene>().EndGame());
+        Button_SuccessMain.onClick.AddListener(() => LS.EndGame());
         Text_Success = new Text[8];
         string path_TS = "Panel_Success/Result_Unit/";
         Text_Success[0] = END.transform.Find(path_TS + "Text_Stage/Text_Value").GetComponent<Text>();
@@ -34,7 +37,7 @@ public class ControlSuccess : MonoBehaviour
         Text_Success[7] = END.transform.Find("Panel_Success/Image_Speacial/Text_Value").GetComponent<Text>();
 
 
-        int result = GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (GameManager.Data.Preset.Difficult + 1) + GameManager.Play.DC.comboMax * 10000 + (int)GameManager.Play.DC.goldNow * 10; // 게임 결과점수.
+        int result = GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (GameManager.Data.Preset.Difficult + 1) + GameManager.Play.DC.comboMax * 100 + (int)GameManager.Play.DC.goldNow * 10; // 게임 결과점수.
         int money_speacial = result / 10; // 특수재화 얻는 갯수.
         Text_Success[0].text = $"{GameManager.Play.DC.stage}";
         Text_Success[1].text = $"{GameManager.Play.DC.noHitStage}";
@@ -49,5 +52,9 @@ public class ControlSuccess : MonoBehaviour
 
         GameManager.Data.Money.Gold += (int)GameManager.Play.DC.goldNow;
         GameManager.Data.Money.Speacial[0] += money_speacial;
+    }
+    void LoadSound() //Sound Resoucres 경로 찾아와서 불러와놓기.
+    {
+        clip = Resources.Load<AudioClip>("Sound/Common/002_Paper");
     }
 }

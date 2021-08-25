@@ -11,6 +11,7 @@ public class ControlSelectSkill : MonoBehaviour
     Button Button_Skill;
     GameObject[] Skill_Box = new GameObject[3];
     
+    
     GameObject[] Skill_Panel = new GameObject[3];
     Text[] Skill_Title = new Text[3];
     Text[] Skill_Info = new Text[3];
@@ -23,12 +24,18 @@ public class ControlSelectSkill : MonoBehaviour
     Active Active;
     Passive Passive;
     UI_Play UI_Play;
+    LoadScene LS;
+
+    AudioClip clip;
+    AudioClip clip2;
+    AudioClip clip3;
     void Start()
     {
         GameManager.Instance.Load();
         Active = GameObject.Find("@Managers").GetComponent<Active>();
         Passive = GameObject.Find("@Managers").GetComponent<Passive>();
         UI_Play = GameObject.Find("@Managers").GetComponent<UI_Play>();
+        LS = GameObject.Find("@Managers").GetComponent<LoadScene>();
         Skill_Box[0] = GameObject.Find("UI/Button_Item0");
         Skill_Box[1] = GameObject.Find("UI/Button_Item1");
         Skill_Box[2] = GameObject.Find("UI/Button_Item2");
@@ -48,6 +55,7 @@ public class ControlSelectSkill : MonoBehaviour
 
         StartCoroutine(Swing());
         change_all();
+        LoadSound();
     }
 
     // 스킬 이미지 흔들리는 효과
@@ -157,8 +165,7 @@ public class ControlSelectSkill : MonoBehaviour
         {
             Passive.set_passive(Skill_Num[0]);
         }
-        GameManager.Instance.Save();
-        SceneManager.LoadScene("Play");
+        LS.OnPlay();
     }
 
     public void button1()
@@ -171,8 +178,7 @@ public class ControlSelectSkill : MonoBehaviour
         {
             Passive.set_passive(Skill_Num[1]);
         }
-        GameManager.Instance.Save();
-        SceneManager.LoadScene("Play");
+        LS.OnPlay();
     }
 
     public void button2()
@@ -185,8 +191,7 @@ public class ControlSelectSkill : MonoBehaviour
         {
             Passive.set_passive(Skill_Num[2]);
         }
-        GameManager.Instance.Save();
-        SceneManager.LoadScene("Play");
+        LS.OnPlay();
     }
 
     void set_active(int num)
@@ -202,6 +207,7 @@ public class ControlSelectSkill : MonoBehaviour
             GameObject.Find("UI/Button_Item1").GetComponent<Button>().interactable = true;
             GameObject.Find("UI/Button_Item2").GetComponent<Button>().interactable = true;
             change_all();
+            GameManager.Sound.SFXPlay(clip3);
 
             GameManager.Play.DS.time_change -= 1;
         }
@@ -218,12 +224,14 @@ public class ControlSelectSkill : MonoBehaviour
             Skill_Panel[0].SetActive(true);
             Skill_Panel[1].SetActive(false);
             Skill_Panel[2].SetActive(false);
+            GameManager.Sound.SFXPlay(clip);
         }
         else
         {
             Skill_Panel[0].SetActive(false);
             Skill_Panel[1].SetActive(false);
             Skill_Panel[2].SetActive(false);
+            GameManager.Sound.SFXPlay(clip);
         }
     }
 
@@ -234,12 +242,14 @@ public class ControlSelectSkill : MonoBehaviour
             Skill_Panel[0].SetActive(false);
             Skill_Panel[1].SetActive(true);
             Skill_Panel[2].SetActive(false);
+            GameManager.Sound.SFXPlay(clip);
         }
         else
         {
             Skill_Panel[0].SetActive(false);
             Skill_Panel[1].SetActive(false);
             Skill_Panel[2].SetActive(false);
+            GameManager.Sound.SFXPlay(clip);
         }
     }
 
@@ -250,12 +260,21 @@ public class ControlSelectSkill : MonoBehaviour
             Skill_Panel[0].SetActive(false);
             Skill_Panel[1].SetActive(false);
             Skill_Panel[2].SetActive(true);
+            GameManager.Sound.SFXPlay(clip);
         }
         else
         {
             Skill_Panel[0].SetActive(false);
             Skill_Panel[1].SetActive(false);
             Skill_Panel[2].SetActive(false);
+            GameManager.Sound.SFXPlay(clip);
         }
+    }
+
+    void LoadSound()
+    {
+        clip = Resources.Load<AudioClip>("Sound/Common/004_Manu_Sound2");
+        clip2 = Resources.Load<AudioClip>("Sound/Common/007_Stamp");
+        clip3 = Resources.Load<AudioClip>("Sound/Common/005_Cash");
     }
 }

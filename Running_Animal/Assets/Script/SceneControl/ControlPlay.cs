@@ -30,12 +30,11 @@ public class ControlPlay : MonoBehaviour
 
         // 코루틴 있는 패시브 아이템 적용
         InterAction.Apply_Passive();
+        StartCoroutine(TrapForest.TrapUpdate());
     }
 
     void Update()
     {
-        TrapForest.TrapUpdate(); // 함정 소환
-
         //PC내 테스트 코드
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {

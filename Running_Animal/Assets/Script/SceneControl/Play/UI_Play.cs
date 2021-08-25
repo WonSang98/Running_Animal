@@ -51,6 +51,14 @@ public class UI_Play : MonoBehaviour
     public Passive Passive;
     IEnumerator Coroutine_Combo;
 
+    AudioClip clip;
+    AudioClip clip2;
+    AudioClip clip3;
+
+    private void Start()
+    {
+        LoadSound();
+    }
     public void SetUI()
     {
         Passive = gameObject.GetComponent<Passive>();
@@ -125,6 +133,7 @@ public class UI_Play : MonoBehaviour
             GameManager.Play.DS.jumpNow += 1;
             Ani_Player.SetTrigger("Jumping");
             Ani_Player.SetBool("Landing", false);
+            GameManager.Sound.SFXPlay(clip);
         }
     }
 
@@ -134,6 +143,7 @@ public class UI_Play : MonoBehaviour
         if (GameManager.Play.Player.transform.position.y > -2.62f)
         {
             Rig_Player.velocity = new Vector3(0, -1 * GameManager.Play.Status.ability.DOWN.value, 0);
+            GameManager.Sound.SFXPlay(clip2);
         }
     }
 
@@ -378,6 +388,7 @@ public class UI_Play : MonoBehaviour
         Count.SetActive(true);
         for (int i = 5; i > 0; i--)
         {
+            GameManager.Sound.SFXPlay(clip3);
             Text_Count.text = i.ToString();
             yield return new WaitForSeconds(1.0f);
         }
@@ -436,5 +447,10 @@ public class UI_Play : MonoBehaviour
     {
         StopAllCoroutines();
     }
-
+    void LoadSound()
+    {
+        clip = Resources.Load<AudioClip>("Sound/Play/006_Play");
+        clip2 = Resources.Load<AudioClip>("Sound/Play/008_Play");
+        clip3 = Resources.Load<AudioClip>("Sound/Common/009_Count");
+    }
 }

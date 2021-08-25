@@ -24,6 +24,8 @@ public class ControlMain : MonoBehaviour
     // Sound 변수 선언
     AudioClip clip; //사운드 클립 <- *변수명 변경 추천* + 여러개를 넣어야한다면 배열을 사용하자.
     AudioClip clip2;
+    AudioClip clip3;
+    AudioClip clip4;
     AudioClip Clip_BGM; // BackGroundMusic
     
     int temp_diff; // 임시로 선택되어있는 난이도
@@ -53,6 +55,8 @@ public class ControlMain : MonoBehaviour
     {
         clip = Resources.Load<AudioClip>("Sound/Common/000_Manu_Sound");
         clip2 = Resources.Load<AudioClip>("Sound/Common/002_Paper");
+        clip3 = Resources.Load<AudioClip>("Sound/Common/006_Glass");
+        clip4 = Resources.Load<AudioClip>("Sound/Common/007_Stamp");
         Clip_BGM = Resources.Load<AudioClip>("Sound/BGM/000_Main_BGM");
     }
 
@@ -123,6 +127,7 @@ public class ControlMain : MonoBehaviour
     {
         GameManager.Data.Preset.Difficult = temp_diff;
         GameObject.Find("UI").transform.Find("Panel_Difficulty").gameObject.SetActive(false);
+        GameManager.Sound.SFXPlay(clip4);
     }
 
     void SetDiff(int i) //난이도 설정.
@@ -132,6 +137,7 @@ public class ControlMain : MonoBehaviour
         Text info = GameObject.Find("UI/Panel_Difficulty/Panel_Info/Text_info").GetComponent<Text>();
         GameObject.Find("UI/Panel_Difficulty/Panel_Info/Text_Diff").GetComponent<Text>().text = difficulty;
         GameObject.Find("UI/Button_Difficulty/Text").GetComponent<Text>().text = difficulty;
+        GameManager.Sound.SFXPlay(clip3);
         switch (GameManager.Data.Preset.Theme)
         {
             case Theme.THEME_CODE.Forest:

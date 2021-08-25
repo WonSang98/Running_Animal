@@ -6,6 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class Active : MonoBehaviour
 {
+    AudioClip clip;
+    AudioClip clip2;
+    AudioClip clip3;
+    AudioClip clip4;
+    AudioClip clip5;
+    AudioClip clip6;
+    AudioClip clip7;
+    AudioClip clip8;
+    UI_Play UP;
     public enum ACTIVE_CODE
     {
         None = 0,
@@ -38,12 +47,15 @@ public class Active : MonoBehaviour
     private void Start()
     {
         Active_Sprites = Resources.LoadAll<Sprite>("Active_Buttons/");
+        UP = gameObject.GetComponent<UI_Play>();
+        LoadSound();
     }
 
     // Skill ID : 1 Defense
     public void OnDefense()
     {
         GameManager.Play.Player.transform.Find("1").gameObject.SetActive(true);
+        GameManager.Sound.SFXPlay(clip);
         GameManager.Play.Player.tag = "Shield";
         Invoke("OffDefense", 5.0f);
 
@@ -80,6 +92,7 @@ public class Active : MonoBehaviour
     public IEnumerator OnGhost()
     {
         SpriteRenderer spr = GameManager.Play.Player.GetComponent<SpriteRenderer>();
+        GameManager.Sound.SFXPlay(clip2);
         for (int i = 0; i < 2; i ++)
         {
             if(i == 0)
@@ -108,6 +121,7 @@ public class Active : MonoBehaviour
     {
         float plus_hp; // 회복할 체력의 양
         plus_hp = 50 * GameManager.Play.Status.ability.RESTORE.value; // 기본 회복량 50, 재능 및 다른 요소에 의해 회복량 변동될것
+        GameManager.Sound.SFXPlay(clip3);
         if (GameManager.Play.Status.ability.HP.value + plus_hp >= GameManager.Play.Status.ability.MAX_HP.value)
         {
             GameManager.Play.Status.ability.HP.value = GameManager.Play.Status.ability.MAX_HP.value;
@@ -126,6 +140,7 @@ public class Active : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Select_Item")
         {
             GameObject.Find("SceneManager").GetComponent<ControlSelectSkill>().ReLoad();
+            GameManager.Sound.SFXPlay(clip4);
         }
     }
 
@@ -133,6 +148,7 @@ public class Active : MonoBehaviour
     // 장애물을 코인으로 바꿔준다.
     public void Change_Coin()
     {
+        GameManager.Sound.SFXPlay(clip5);
         GameObject[] Trap = GameObject.FindGameObjectsWithTag("Trap");
         GameObject[] Trap_Blood = GameObject.FindGameObjectsWithTag("Trap_Blood");
         GameObject[] Trap_Stun = GameObject.FindGameObjectsWithTag("Trap_Stun");
@@ -145,7 +161,11 @@ public class Active : MonoBehaviour
             GameObject tmp;
             tmp = Instantiate(coin);
             tmp.transform.position = t.transform.position;
-            Destroy(t);
+
+            UP.Trap_Combo(t.transform);
+
+            GameManager.Play.DC.expNow += 1;
+            UP.BAR_EXP();
         }
 
         foreach (GameObject t in Trap_Blood)
@@ -153,7 +173,11 @@ public class Active : MonoBehaviour
             GameObject tmp;
             tmp = Instantiate(coin);
             tmp.transform.position = t.transform.position;
-            Destroy(t);
+            
+            UP.Trap_Combo(t.transform);
+
+            GameManager.Play.DC.expNow += 1;
+            UP.BAR_EXP();
         }
 
         foreach (GameObject t in Trap_Stun)
@@ -161,7 +185,11 @@ public class Active : MonoBehaviour
             GameObject tmp;
             tmp = Instantiate(coin);
             tmp.transform.position = t.transform.position;
-            Destroy(t);
+
+            UP.Trap_Combo(t.transform);
+
+            GameManager.Play.DC.expNow += 1;
+            UP.BAR_EXP();
         }
 
         foreach (GameObject t in Jump)
@@ -169,7 +197,11 @@ public class Active : MonoBehaviour
             GameObject tmp;
             tmp = Instantiate(coin);
             tmp.transform.position = t.transform.position;
-            Destroy(t);
+
+            UP.Trap_Combo(t.transform);
+
+            GameManager.Play.DC.expNow += 1;
+            UP.BAR_EXP();
         }
 
     }
@@ -177,6 +209,7 @@ public class Active : MonoBehaviour
     //Skill ID : 7 The_World
     public IEnumerator OnSlow()
     {
+        GameManager.Sound.SFXPlay(clip6);
         for (int i = 0; i < 2; i++)
         {
             if (i == 0) Time.timeScale = 0.5f;
@@ -190,6 +223,7 @@ public class Active : MonoBehaviour
 
     public IEnumerator MultiCombo()
     {
+        GameManager.Sound.SFXPlay(clip7);
         for (int i = 0; i < 2; i++)
         {
             if (i == 0)
@@ -209,6 +243,7 @@ public class Active : MonoBehaviour
 
     public IEnumerator OnFly()
     {
+        GameManager.Sound.SFXPlay(clip8);
         int temp = GameManager.Play.Status.ability.MAX_JUMP.value;
         for (int i = 0; i < 2; i++)
         {
@@ -250,5 +285,17 @@ public class Active : MonoBehaviour
     public void Stop_Active()
     {
         StopAllCoroutines();
+    }
+
+    void LoadSound() 
+    {
+        clip = Resources.Load<AudioClip>("Sound/Active_Skills/000_Skill01");
+        clip2 = Resources.Load<AudioClip>("Sound/Active_Skills/001_Skill03");
+        clip3 = Resources.Load<AudioClip>("Sound/Active_Skills/002_Skill04");
+        clip4 = Resources.Load<AudioClip>("Sound/Active_Skills/003_Skill05");
+        clip5 = Resources.Load<AudioClip>("Sound/Active_Skills/004_Skill06");
+        clip6 = Resources.Load<AudioClip>("Sound/Active_Skills/005_Skill07");
+        clip7 = Resources.Load<AudioClip>("Sound/Active_Skills/006_Skill08");
+        clip8 = Resources.Load<AudioClip>("Sound/Active_Skills/007_Skill09");
     }
 }

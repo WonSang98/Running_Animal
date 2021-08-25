@@ -12,13 +12,15 @@ public class ControlFail : MonoBehaviour
     Text[] Text_Fail;
 
     LoadScene LS;
-    
+
+    AudioClip clip;
 
 
     void Start()
     {
         LS = GameManager.Instance.GetComponent<LoadScene>();
         Image_Fail = new Image[2];
+        GameManager.Sound.SFXPlay(clip);
         Image_Fail[0] = GameObject.Find("END/Panel_Fail/Image_DIE").GetComponent<Image>();
         Image_Fail[1] = GameObject.Find("END/Panel_Fail/Image_Trap/Image_Trap").GetComponent<Image>();
         Sprite_DeadCharacter = Resources.LoadAll<Sprite>("Image/GUI/Play/CharacterDead");
@@ -38,7 +40,7 @@ public class ControlFail : MonoBehaviour
         Text_Fail[6] = GameObject.Find("Panel_Fail/Image_Gold/Text_Value").GetComponent<Text>();
         Text_Fail[7] = GameObject.Find("Panel_Fail/Image_Speacial/Text_Value").GetComponent<Text>();
 
-        int result = GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (GameManager.Data.Preset.Difficult + 1) + GameManager.Play.DC.comboMax * 10000 + (int)GameManager.Play.DC.goldNow * 10; // 게임 결과점수.
+        int result = GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (GameManager.Data.Preset.Difficult + 1) + GameManager.Play.DC.comboMax * 100 + (int)GameManager.Play.DC.goldNow * 10; // 게임 결과점수.
         int money_speacial = 0; // 특수재화 얻는 갯수.
         Text_Fail[0].text = GameManager.Play.DC.stage.ToString();
         Text_Fail[1].text = $"{GameManager.Play.DC.noHitStage}";
@@ -54,5 +56,9 @@ public class ControlFail : MonoBehaviour
 
         GameManager.Data.Money.Gold += (int)GameManager.Play.DC.goldNow;
         GameManager.Data.Money.Speacial[0] += money_speacial;
+    }
+    void LoadSound() //Sound Resoucres 경로 찾아와서 불러와놓기.
+    {
+        clip = Resources.Load<AudioClip>("Sound/Common/002_Paper");
     }
 }
