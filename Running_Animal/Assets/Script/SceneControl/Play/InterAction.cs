@@ -13,6 +13,7 @@ public class InterAction : MonoBehaviour
      */
 
     AudioClip clip;
+    AudioClip clip2;
     GameObject Player;
     UI_Play UP;
     SpriteRenderer Player_Color;
@@ -65,49 +66,62 @@ public class InterAction : MonoBehaviour
     {
         Player = GameManager.Play.Player.gameObject;
         Player_Color = Player.GetComponent<SpriteRenderer>();
+        UP.Cool_BearTrap.fillAmount = 1;
 
-        for (int i = 0; i < 5; i++)
+        float time_long = 0;
+        float time_short = 0;
+
+        while(time_long <= 10)
         {
+            time_short += Time.deltaTime;
+            if(time_short >= 2)
+            {
+                time_long += time_short;
+                time_short = 0;
+                GameManager.Play.Status.ability.HP.value -= 3;
+                StartCoroutine(UP.Cam_Hit());
+                GameManager.Sound.SFXPlay(clip2);
+                UP.BAR_HP();
+                Die();
+            }
             if (Player.CompareTag("Die"))
             {
                 break;
             }
-            GameManager.Play.Status.ability.HP.value -= 3;
-            StartCoroutine(UP.Cam_Hit());
-            UP.BAR_HP();
-            Die();
-            yield return new WaitForSeconds(2.0f);
+            UP.Cool_BearTrap.fillAmount -= (Time.deltaTime / 10);
+            yield return null;
         }
+        UP.Cool_BearTrap.fillAmount = 0;
     }
 
     public IEnumerator OnStun() //Ω∫≈œ
     {
         Player = GameManager.Play.Player.gameObject;
         Player_Color = Player.GetComponent<SpriteRenderer>();
+        UP.Cool_Banana.fillAmount = 1;
 
-        for (int i = 0; i < 2; i++)
+        float time = 0;
+
+        UP.Event_jump.triggers.Remove(UP.Entry_Jump);
+        UP.Event_down.triggers.Remove(UP.Entry_Down);
+        UP.Button_Jump.interactable = false;
+        UP.Button_Down.interactable = false;
+
+        while (time < 2)
         {
             if (Player.CompareTag("Die"))
             {
                 break;
             }
-            if (i == 0)
-            {
-                UP.Event_jump.triggers.Remove(UP.Entry_Jump);
-                UP.Event_down.triggers.Remove(UP.Entry_Down);
-                UP.Button_Jump.interactable = false;
-                UP.Button_Down.interactable = false;
-            }
-            else if (i == 1)
-            {
-                UP.Event_jump.triggers.Add(UP.Entry_Jump);
-                UP.Event_down.triggers.Add(UP.Entry_Down);
-                UP.Button_Jump.interactable = true;
-                UP.Button_Down.interactable = true;
-            }
-
-            yield return new WaitForSeconds(1.5f);
+            time += Time.deltaTime;
+            UP.Cool_Banana.fillAmount -= (Time.deltaTime / 2);
+            yield return null;
         }
+
+        UP.Event_jump.triggers.Add(UP.Entry_Jump);
+        UP.Event_down.triggers.Add(UP.Entry_Down);
+        UP.Button_Jump.interactable = true;
+        UP.Button_Down.interactable = true;
     }
 
 
@@ -196,5 +210,6 @@ public class InterAction : MonoBehaviour
     void LoadSound()
     {
         clip = Resources.Load<AudioClip>("Sound/Play/011_Play");
+        clip2 = Resources.Load<AudioClip>("Sound/Play/012_Play");
     }
 }

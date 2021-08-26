@@ -181,7 +181,7 @@ public class Passive : MonoBehaviour
         while (true)
         {
             int per = Random.Range(0, 100);
-            if (per < 20)
+            if (per < 20 + GameManager.Play.Status.ability.LUK.value)
             {
                 GameManager.Play.Player.GetComponent<Rigidbody2D>().velocity = new Vector3(0, GameManager.Play.Status.ability.JUMP.value, 0);
             }
@@ -233,24 +233,21 @@ public class Passive : MonoBehaviour
     public IEnumerator Small_God()
     {
         Color player_opacity;
-        for (int i = 0; i < 2; i++)
+        float time = 0;
+        player_opacity = GameManager.Play.Player.GetComponent<SpriteRenderer>().color;
+        player_opacity.a = 0.5f;
+        GameManager.Play.Player.GetComponent<SpriteRenderer>().color = player_opacity;
+        GameObject Player = GameManager.Play.Player.gameObject;
+        while (time < 2)
         {
-            if (i == 0)
-            {
-                GameManager.Play.Player.tag = "God";
-                player_opacity = GameManager.Play.Player.GetComponent<SpriteRenderer>().color;
-                player_opacity.a = 0.5f;
-                GameManager.Play.Player.GetComponent<SpriteRenderer>().color = player_opacity;
-            }
-            else
-            {
-                player_opacity = GameManager.Play.Player.GetComponent<SpriteRenderer>().color;
-                player_opacity.a = 1.0f;
-                GameManager.Play.Player.GetComponent<SpriteRenderer>().color = player_opacity;
-                GameManager.Play.Player.tag = "Player";
-            }
-            yield return new WaitForSeconds(2f);
+            time += Time.deltaTime;
+            Player.tag = "God";
+            yield return null;
         }
+        player_opacity = GameManager.Play.Player.GetComponent<SpriteRenderer>().color;
+        player_opacity.a = 1.0f;
+        GameManager.Play.Player.GetComponent<SpriteRenderer>().color = player_opacity;
+        Player.tag = "Player";
     }
 
     public IEnumerator Auto_Restore()

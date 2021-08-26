@@ -82,11 +82,11 @@ public class ControlTalent : MonoBehaviour
             switch (Select)
             {
                 case 0: //HP
-                    if (GameManager.Data.Talent.HP.level < 9 && GameManager.Data.Money.Gold > Talent.COST[GameManager.Data.Talent.HP.level])
+                    if (GameManager.Data.Talent.HP.level < 10 && GameManager.Data.Money.Gold > Talent.COST[GameManager.Data.Talent.HP.level])
                     {
                         GameManager.Data.Money.Gold -= Talent.COST[GameManager.Data.Talent.HP.level];
-                        GameManager.Data.Talent.HP.value = Talent.UPGRADE_POWER[Select, GameManager.Data.Talent.HP.level];
                         GameManager.Data.Talent.HP.level += 1;
+                        GameManager.Data.Talent.HP.value = Talent.UPGRADE_POWER[Select, GameManager.Data.Talent.HP.level];
 
                         if (GameManager.Data.Talent.HP.level == 10)
                         {
@@ -99,11 +99,11 @@ public class ControlTalent : MonoBehaviour
                     }
                         break;
                 case 1: //DEF
-                    if (GameManager.Data.Talent.DEF.level < 9 && GameManager.Data.Money.Gold > Talent.COST[GameManager.Data.Talent.DEF.level])
+                    if (GameManager.Data.Talent.DEF.level < 10 && GameManager.Data.Money.Gold > Talent.COST[GameManager.Data.Talent.DEF.level])
                     {
                         GameManager.Data.Money.Gold -= Talent.COST[GameManager.Data.Talent.DEF.level];
-                        GameManager.Data.Talent.DEF.value = Talent.UPGRADE_POWER[Select, GameManager.Data.Talent.DEF.level];
                         GameManager.Data.Talent.DEF.level += 1;
+                        GameManager.Data.Talent.DEF.value = Talent.UPGRADE_POWER[Select, GameManager.Data.Talent.DEF.level];
 
                         if (GameManager.Data.Talent.DEF.level == 10)
                         {
@@ -116,11 +116,11 @@ public class ControlTalent : MonoBehaviour
                     }
                     break;
                 case 2: //LUK
-                    if (GameManager.Data.Talent.LUK.level < 9 && GameManager.Data.Money.Gold > Talent.COST[GameManager.Data.Talent.LUK.level])
+                    if (GameManager.Data.Talent.LUK.level < 10 && GameManager.Data.Money.Gold > Talent.COST[GameManager.Data.Talent.LUK.level])
                     {
                         GameManager.Data.Money.Gold -= Talent.COST[GameManager.Data.Talent.LUK.level];
-                        GameManager.Data.Talent.LUK.value = (short)Talent.UPGRADE_POWER[Select, GameManager.Data.Talent.LUK.level];
                         GameManager.Data.Talent.LUK.level += 1;
+                        GameManager.Data.Talent.LUK.value = (short)Talent.UPGRADE_POWER[Select, GameManager.Data.Talent.LUK.level];
 
                         if (GameManager.Data.Talent.LUK.level == 10)
                         {
@@ -133,11 +133,11 @@ public class ControlTalent : MonoBehaviour
                     }
                     break;
                 case 3: //RESTORE
-                    if (GameManager.Data.Talent.RESTORE.level < 9 && GameManager.Data.Money.Gold > Talent.COST[GameManager.Data.Talent.RESTORE.level])
+                    if (GameManager.Data.Talent.RESTORE.level < 10 && GameManager.Data.Money.Gold > Talent.COST[GameManager.Data.Talent.RESTORE.level])
                     {
                         GameManager.Data.Money.Gold -= Talent.COST[GameManager.Data.Talent.RESTORE.level];
-                        GameManager.Data.Talent.RESTORE.value = Talent.UPGRADE_POWER[Select, GameManager.Data.Talent.RESTORE.level];
                         GameManager.Data.Talent.RESTORE.level += 1;
+                        GameManager.Data.Talent.RESTORE.value = Talent.UPGRADE_POWER[Select, GameManager.Data.Talent.RESTORE.level];
 
                         if (GameManager.Data.Talent.RESTORE.level == 10)
                         {
@@ -162,9 +162,9 @@ public class ControlTalent : MonoBehaviour
         Levels[2].text = (GameManager.Data.Talent.LUK.level == 10) ? "LV. MAX" : $"LV. {GameManager.Data.Talent.LUK.level}";
         Levels[3].text = (GameManager.Data.Talent.RESTORE.level == 10) ? "LV. MAX" : $"LV. {GameManager.Data.Talent.RESTORE.level}";
         Infos[0].text = $"체  력\n{Talent.UPGRADE_POWER[0, GameManager.Data.Talent.HP.level]} 증가.";
-        Infos[1].text = $"방어율\n{Talent.UPGRADE_POWER[1, GameManager.Data.Talent.DEF.level]} 증가.";
+        Infos[1].text = $"피해 \n{Talent.UPGRADE_POWER[1, GameManager.Data.Talent.DEF.level] * 100}% 감소.";
         Infos[2].text = $"행  운\n{Talent.UPGRADE_POWER[2, GameManager.Data.Talent.LUK.level]} 증가.";
-        Infos[3].text = $"회복율\n{Talent.UPGRADE_POWER[3, GameManager.Data.Talent.RESTORE.level]} 증가.";
+        Infos[3].text = $"회복율\n{Talent.UPGRADE_POWER[3, GameManager.Data.Talent.RESTORE.level] * 100}% 증가.";
     }
  
     IEnumerator Shine(int i)

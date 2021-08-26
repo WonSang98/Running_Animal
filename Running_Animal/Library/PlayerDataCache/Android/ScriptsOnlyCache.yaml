@@ -28,7 +28,6 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
-    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.IK.Runtime.dll:
     - UnityEditor.U2D.IK.IKEditorManagerHelper
     Unity.2D.Tilemap.Editor.dll:
@@ -190,6 +189,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 196
       Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
     - Class: 222
@@ -246,6 +247,8 @@ ScriptsOnlyBuild:
     - Class: 157
       Script: {instanceID: 0}
     - Class: 196
+      Script: {instanceID: 0}
+    - Class: 212
       Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
@@ -1126,13 +1129,13 @@ ScriptsOnlyBuild:
     className: LoadScene
   - hash:
       serializedVersion: 2
-      Hash: 7d0160b5d5d3bc78eed10d84334fe7f7
+      Hash: 81e3d67d1648833de17fd5e47497287c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UI_Play
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 9adee6415c1a19b0f03cc33b2ac7e921
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ControlPreItem
@@ -1468,7 +1471,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: d56902fa18c26df155a2520a0590de09
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ControlCharacter
@@ -1521,4 +1524,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Select_Item.unity
   - Assets/Scenes/End_Fail.unity
   - Assets/Scenes/End_Success.unity
-  playerPath: D:/tt/44.apk
+  playerPath: C:/Users/USER/OneDrive/Running_Animal_Build/50.apk

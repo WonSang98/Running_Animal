@@ -84,7 +84,6 @@ public class PlayerMove : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Trap_Blood") || other.gameObject.CompareTag("Trap_Stun") || other.gameObject.CompareTag("Trap") || other.gameObject.CompareTag("Jump"))
             {
-                Destroy(other.gameObject);
                 GameManager.Sound.SFXPlay(clip6);
                 UI_Play.Trap_Combo(other.transform);
                 GameManager.Play.DS.expRun += 1 * GameManager.Play.DC.expMulti; 
@@ -128,7 +127,7 @@ public class PlayerMove : MonoBehaviour
             GameManager.Play.DS.jumpNow = 0;
             StartCoroutine(UI_Play.Cam_ATT());
             UI_Play.Trap_Combo(collision.transform);
-            GameManager.Play.DC.expNow += GameManager.Play.DC.expMulti;
+            GameManager.Play.DS.expNow += GameManager.Play.DC.expMulti;
             GameManager.Sound.SFXPlay(clip6);
             UI_Play.BAR_EXP();
         }
@@ -153,7 +152,6 @@ public class PlayerMove : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Trap_Blood") || collision.gameObject.CompareTag("Trap_Stun") || collision.gameObject.CompareTag("Trap") || collision.gameObject.CompareTag("Jump"))
             {
-                Destroy(collision.gameObject);
                 GameManager.Sound.SFXPlay(clip6);
                 UI_Play.Trap_Combo(collision.transform);
                 GameManager.Play.DS.expRun += 1 * GameManager.Play.DC.expMulti;

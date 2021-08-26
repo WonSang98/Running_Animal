@@ -22,8 +22,6 @@ public class LoadingScene : MonoBehaviour
         while (!operation.isDone)
         {
             slider.value = operation.progress;
-            Debug.Log(slider.value);
-            Debug.Log(!operation.isDone);
             yield return null;
         }
 

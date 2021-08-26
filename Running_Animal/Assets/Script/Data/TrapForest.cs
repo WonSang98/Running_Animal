@@ -8,7 +8,7 @@ public class TrapForest : MonoBehaviour
     AudioClip clip2;
     AudioClip clip3;
     Active active;
-
+    UI_Play UP;
     private void Start()
     {
         LoadSound();
@@ -39,9 +39,10 @@ public class TrapForest : MonoBehaviour
     public GameObject Camera;
     public GameObject Parent; // 함정을 이 오브젝트 하위에 생성시키기 위함.
 
-    public int num_pattern = 254; // 패턴의 수.
+    public int num_pattern = 255; // 패턴의 수.
     public void GetResource() // 필요한 리소스 가져오기~
     {
+        UP = gameObject.GetComponent<UI_Play>();
         active = gameObject.GetComponent<Active>();
         traps = Resources.LoadAll<GameObject>("Trap/Forest");
         warning_bird = Resources.Load<GameObject>("Trap/Warning_Bird");
@@ -58,7 +59,7 @@ public class TrapForest : MonoBehaviour
     {
         while (true)
         {
-            if (GameManager.Play.DC.lvup == true) // 다음 스테이지로 가는 조건이 충족되었을시.
+            if (GameManager.Play.DS.lvup == true) // 다음 스테이지로 가는 조건이 충족되었을시.
             {
                 if (GameManager.Play.DC.lv != 12)
                 {
@@ -71,11 +72,11 @@ public class TrapForest : MonoBehaviour
                     break;
                 }
             }
+
             GameManager.Play.DS.timer -= GameManager.Play.Status.ability.SPEED.value * Time.deltaTime;
             if (GameManager.Play.DS.timer <= 0)
             {
                 GameManager.Play.DS.timer = 25.0f;
-                GameManager.Play.DC.passTrap++;
                 Invoke("pattern" + GameManager.Play.DC.patternList[GameManager.Play.DC.patternCnt++], 0); // 함정 호출
                 if (GameManager.Play.DC.patternCnt == (num_pattern + 1)) // 모든 함정이 1회씩 다 나왔을 경우.
                 {
@@ -257,17 +258,18 @@ public class TrapForest : MonoBehaviour
     {
         GameObject tmp;
         active.Change_Coin();
+        Stop_TrapForest();
         Destroy(Parent);
         tmp = Instantiate(LvUp);
         tmp.transform.position = new Vector3(30, -1.8f, 0);
-        Stop_TrapForest();
+        StartCoroutine(UP.ShowStage(12));
         StartCoroutine(GoLevelUp());
     }
 
     IEnumerator GoLevelUp()
     {
         bool flag = true;
-        float pre_speed = GameManager.Play.Status.ability.SPEED.value;
+        UP.Button_Skill.interactable= false;
         GameManager.Play.Status.ability.SPEED.value *= 0.5f;
         float temp_Speed = GameManager.Play.Status.ability.SPEED.value;
 
@@ -292,31 +294,26 @@ public class TrapForest : MonoBehaviour
                 yield return new WaitForSeconds(1);
             }
         }
-        GameManager.Play.DC.expNow -= GameManager.Play.DC.expNeed[GameManager.Play.DC.lv];
         GameManager.Play.DC.lv += 1;
         GameManager.Play.DC.stage += 1;
         if (GameManager.Play.DS.nohit)
         {
             GameManager.Play.DC.noHitStage += 1;
         }
-        if (GameManager.Play.DC.expNow >= GameManager.Play.DC.expNeed[GameManager.Play.DC.lv])
-        {
-            GameManager.Play.DC.lvup = true;
-        }
-        else
-        {
-            GameManager.Play.DC.lvup = false;
-        }
-        GameManager.Play.Status.ability.SPEED.value = pre_speed;
+        GameManager.Play.DS.expNow = 0;
+        GameManager.Play.DS.lvup = false;
+
+        GameManager.Play.Status.ability.SPEED.value = GameManager.Play.DC.pre_speed;
         gameObject.GetComponent<LoadScene>().OnSelect();
     }
     void SetClear()
     {
         GameObject tmp;
         active.Change_Coin();
+        Stop_TrapForest();
         Destroy(Parent);
         tmp = Instantiate(Clear);
-        Stop_TrapForest();
+        StartCoroutine(UP.ShowStage(13));
         StartCoroutine(GoClear());
     }
 

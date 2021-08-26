@@ -18,7 +18,7 @@ public class SetPlayer : MonoBehaviour
         GameManager.Play.Player.GetComponent<Animator>().SetBool("StartGame", true);
         Time.timeScale = 1; // OnSlow 켜진 상태일때...
         GameManager.Play.DC.pre_speed = GameManager.Play.Status.ability.SPEED.value;
-
+        
         Clear_DS();
     }
 

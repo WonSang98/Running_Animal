@@ -13,6 +13,7 @@ public class Character
         Rabbit
     }
 
+
     public short LV;
     public short STAT_POINT;
     public Ability ability;

@@ -16,7 +16,7 @@ public struct cost
 }
 public class ControlCharacter : MonoBehaviour
 {
-    string[] Ability = { "HP", "SPEED", "LUK", "JUMPP", "DOWNP", "JUMPC", "DEF" };
+    string[] Ability = { "HP", "SPEED", "LUK", "JUMPP", "JUMPC", "RESTORE", "DEF" };
     //Scene 'Character'에 사용될 SceneManager
 
     // 표시될 캐릭터들의 배열
@@ -27,20 +27,22 @@ public class ControlCharacter : MonoBehaviour
 
     Button Button_Upgrade;
     Button Button_Main;
+    Button Button_Next;
+    Button Button_Pre;
+    Button Button_Buy;
+    Button Button_Select;
 
     GameObject Panel_Upgrade; // 육성 누를때만 보이게...
     GameObject Text_Name; // 선택된 캐릭터의 이름 표시.
 
     bool flag_ON; // 육성창을 눌렀는지 안눌렀는지 확인용 
 
-    // 게이지 채우기 위한 이미지
-    Sprite Gage_None;
-    Sprite Gage_Normal;
-    Sprite Gage_Upgrade;
-    Sprite Gage_Talent;
+    // 게이지
+    RectTransform[,] Gage;
 
     // 육성 창 infomations 내용 변경하기 위한 Texts
     Text[] Text_Points = new Text[7];
+    Text[] Text_Value = new Text[7];
     Text Text_Level;
     Text Text_SP;
     Text Text_LVUP_G;
@@ -62,6 +64,14 @@ public class ControlCharacter : MonoBehaviour
                       new cost(2500, 5),
                       new cost(99999, 9999)};
 
+    public string[] CHARACTER_NAME =
+    {
+        "돼지",
+        "고양이",
+        "원숭이",
+        "토끼"
+    };
+
     short[] SP = { 2, 4, 6, 8, 10 };
 
 
@@ -79,7 +89,15 @@ public class ControlCharacter : MonoBehaviour
 
         Button_Upgrade = GameObject.Find("UI/Button_Upgrade").GetComponent<Button>();
         Button_Upgrade.onClick.AddListener(() => Click_Upgrade());
-        
+        Button_Next = GameObject.Find("UI").transform.Find("Button_Next").GetComponent<Button>();
+        Button_Next.onClick.AddListener(() => nextCharacter());
+        Button_Pre = GameObject.Find("UI").transform.Find("Button_Prev").GetComponent<Button>();
+        Button_Pre.onClick.AddListener(() => prevCharacter());
+        Button_Buy = GameObject.Find("UI").transform.Find("Button_Buy").GetComponent<Button>();
+        Button_Buy.onClick.AddListener(() => buy());
+        Button_Select = GameObject.Find("UI").transform.Find("Button_Select").GetComponent<Button>();
+        Button_Select.onClick.AddListener(() => select());
+
 
         Button_Main = GameObject.Find("UI/Button_Back").GetComponent<Button>();
         Button_Main.onClick.AddListener(() => gameObject.GetComponent<LoadScene>().OnMain());
@@ -88,20 +106,20 @@ public class ControlCharacter : MonoBehaviour
         Animator_UPanel = Panel_Upgrade.GetComponent<Animator>();
         Panel_Upgrade.SetActive(false);
 
-        //GageBar 채우기 위한 이미지 리소스 불러오기
-        Gage_None = Resources.Load<Sprite>("Image/GUI/Character_Select/Gage_None");
-        Gage_Normal = Resources.Load<Sprite>("Image/GUI/Character_Select/Gage_Normal");
-        Gage_Upgrade = Resources.Load<Sprite>("Image/GUI/Character_Select/Gage_Upgrade");
-        Gage_Talent = Resources.Load<Sprite>("Image/GUI/Character_Select/Gage_Talent");
-
         //캐릭터 이름 오브젝트 찾아서 등록..
         Text_Name = GameObject.Find("UI").transform.Find("Text_Name").gameObject;
 
         //안내를 위한 TEXT
         String info_path = "Panel_Upgrade/CONTENTS/Info/";
+        Gage = new RectTransform[Ability.Length, 3];
         for(int i = 0; i < Ability.Length; i++)
         {
             Text_Points[i] = GameObject.Find("UI").transform.Find(info_path + "POINT_" + Ability[i] + "/Text").GetComponent<Text>();
+            Text_Value[i] = GameObject.Find("UI").transform.Find("Panel_Upgrade/CONTENTS/Gage_" + Ability[i] + "/Text").GetComponent<Text>();
+            Gage[i, 0] = GameObject.Find("UI").transform.Find("Panel_Upgrade/CONTENTS/Gage_" + Ability[i] + "/Normal").GetComponent<RectTransform>();
+            Gage[i, 1] = GameObject.Find("UI").transform.Find("Panel_Upgrade/CONTENTS/Gage_" + Ability[i] + "/Talent").GetComponent<RectTransform>();
+            Gage[i, 2] = GameObject.Find("UI").transform.Find("Panel_Upgrade/CONTENTS/Gage_" + Ability[i] + "/Upgrade").GetComponent<RectTransform>();
+
         }
         Text_Level = GameObject.Find("UI").transform.Find(info_path + "Text_Level").GetComponent<Text>();
         Text_SP = GameObject.Find("UI").transform.Find(info_path + "Text_SP").GetComponent<Text>();
@@ -128,11 +146,14 @@ public class ControlCharacter : MonoBehaviour
     // 캐릭터 강화 창 OPEN!!!!!!!!!!!!!!!!!!!!!!!
     void OnUpgrade()
     {
+        Button_Pre.interactable = false;
+        Button_Next.interactable = false;
+        Button_Buy.interactable = false;
+        Button_Select.interactable = false;
         // 1. 캐릭터를 중앙에서 좌측으로 밀어넣는다.
         StartCoroutine(MoveLeft());
         // 2. 업그레이드 패널을 열어준다
         StartCoroutine(OpenPanel());
-        GameManager.Sound.SFXPlay(clip2);
         flag_ON = true;
     }
 
@@ -140,7 +161,7 @@ public class ControlCharacter : MonoBehaviour
     {
         StartCoroutine(MoveRight());
         StartCoroutine(ClosePanel());
-        GameManager.Sound.SFXPlay(clip2);
+        
         flag_ON = false;
     }
 
@@ -192,7 +213,6 @@ public class ControlCharacter : MonoBehaviour
 
             yield return null;
         }
-        Show_Character.GetComponent<SpriteRenderer>().flipX = true;
         Show_Character.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
     }
     IEnumerator OpenPanel()
@@ -205,6 +225,7 @@ public class ControlCharacter : MonoBehaviour
             Animator_UPanel.SetBool("Window_Open", true);
             yield return new WaitForSeconds(1.0f);
         }
+        GameManager.Sound.SFXPlay(clip2);
         Panel_Upgrade.transform.Find("CONTENTS").gameObject.SetActive(true);
         SetGage();
         Button_Upgrade.interactable = true;
@@ -218,107 +239,77 @@ public class ControlCharacter : MonoBehaviour
             Animator_UPanel.SetBool("Window_Open", false);
             yield return new WaitForSeconds(1.0f);
         }
+        GameManager.Sound.SFXPlay(clip2);
         Panel_Upgrade.SetActive(false);
         Button_Upgrade.interactable = true;
+        Button_Pre.interactable = true;
+        Button_Next.interactable = true;
+        Button_Buy.interactable = true;
+        Button_Select.interactable = true;
     }
 
     void SetGage() // 능력치 게이지를 현재 캐릭터 능력치에 맞추어 적용한다.
     {
         //Gage 관련
-        foreach (string s in Ability)
-        {
-            string path = "UI/Panel_Upgrade/CONTENTS/Image_Gage_" + s + "/Gage/Gage";
-            int idx_normal = 0; // 캐릭터 기본 능력치의 차지 비율.
-            int idx_upgrade = 0; // 캐릭터 업그레이드 된 능력치의 차지 비율.
-            int idx_talent = 0; // 캐릭터 재능 능력치의 차지 비율.
-            //각 옵션별 수치별로 십분화
-            switch (s)
-            {
-                case "HP":
-                    idx_normal = (int)(Character.Natural[idx].ability.MAX_HP.value / 10);
-                    idx_upgrade = idx_normal + (int)((GameManager.Data.Character_STAT[idx].ability.MAX_HP.value - Character.Natural[idx].ability.MAX_HP.value) / 10);
-                    idx_talent = idx_upgrade + (int)(GameManager.Data.Talent.HP.value / 10);
-                    break;
-                case "SPEED":
-                    idx_normal = (int)(Character.Natural[idx].ability.SPEED.value * 2);
-                    idx_upgrade = idx_normal + (int)((GameManager.Data.Character_STAT[idx].ability.SPEED.value - Character.Natural[idx].ability.SPEED.value) * 2);
-                    idx_talent = idx_upgrade;
-                    break;
-                case "LUK":
-                    idx_normal = (Character.Natural[idx].ability.LUK.value);
-                    idx_upgrade = idx_normal + (GameManager.Data.Character_STAT[idx].ability.LUK.value - Character.Natural[idx].ability.LUK.value);
-                    idx_talent = idx_upgrade + (GameManager.Data.Talent.LUK.value);
-                    break;
-                case "JUMPP":
-                    idx_normal = (int)(Character.Natural[idx].ability.JUMP.value * 2);
-                    idx_upgrade = idx_normal + (int)((GameManager.Data.Character_STAT[idx].ability.JUMP.value - Character.Natural[idx].ability.JUMP.value) * 2);
-                    idx_talent = idx_upgrade;
-                    break;
-                case "DOWNP":
-                    idx_normal = (int)(Character.Natural[idx].ability.DOWN.value * 2);
-                    idx_upgrade = idx_normal + (int)((GameManager.Data.Character_STAT[idx].ability.DOWN.value - Character.Natural[idx].ability.DOWN.value) * 2);
-                    idx_talent = idx_upgrade;
-                    break;
-                case "JUMPC":
-                    idx_normal = (Character.Natural[idx].ability.MAX_JUMP.value * 20);
-                    idx_upgrade = idx_normal + ((GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.value - Character.Natural[idx].ability.MAX_JUMP.value) * 20);
-                    idx_talent = idx_upgrade;
-                    break;
-                case "DEF":
-                    idx_normal = (int)(Character.Natural[idx].ability.DEF.value * 100);
-                    idx_upgrade = idx_normal + (int)((GameManager.Data.Character_STAT[idx].ability.DEF.value - Character.Natural[idx].ability.DEF.value) * 100);
-                    Debug.Log(GameManager.Data.Character_STAT[idx].ability.DEF.value);
-                    idx_talent = idx_upgrade + (int)(GameManager.Data.Talent.DEF.value * 100);
-                    break;
-            }
+        // 1. HP
+        Gage[0, 0].sizeDelta = new Vector2(Character.Natural[idx].ability.MAX_HP.value * 0.6f, 32);
+        Gage[0, 1].sizeDelta = new Vector2(GameManager.Data.Character_STAT[idx].ability.MAX_HP.value * 0.6f, 32);
+        Gage[0, 2].sizeDelta = new Vector2(Gage[0, 1].sizeDelta.x + GameManager.Data.Talent.HP.value * 0.6f, 32);
+        Text_Value[0].text = $"[{GameManager.Data.Character_STAT[idx].ability.MAX_HP.value + GameManager.Data.Talent.HP.value }]";
 
-            for(int i = 10; i <= 100; i += 10)
-            {
-                string gage_path = path;
-                gage_path += i.ToString();
-                for(int j = 0; j < 10; j++)
-                {
-                    if(i + j - 10 < idx_normal)
-                    {
-                        GameObject.Find(gage_path + "/Gage" + j.ToString()).GetComponent<Image>().sprite = Gage_Normal;
-                    }
-                    else if(i + j - 10 < idx_upgrade)
-                    {
-                        GameObject.Find(gage_path + "/Gage" + j.ToString()).GetComponent<Image>().sprite = Gage_Upgrade;
-                    }
-                    else if(i + j - 10 < idx_talent)
-                    {
-                        GameObject.Find(gage_path + "/Gage" + j.ToString()).GetComponent<Image>().sprite = Gage_Talent;
-                    }
-                    else
-                    {
-                        GameObject.Find(gage_path + "/Gage" + j.ToString()).GetComponent<Image>().sprite = Gage_None;
-                    }
-                }
-            }
+        // 2.SPEED
+        Gage[1, 0].sizeDelta = new Vector2(Character.Natural[idx].ability.SPEED.value * 10f, 32);
+        Gage[1, 1].sizeDelta = new Vector2(GameManager.Data.Character_STAT[idx].ability.SPEED.value * 10f, 32);
+        Gage[1, 2].sizeDelta = new Vector2(Gage[1, 1].sizeDelta.x, 32);
+        Text_Value[1].text = $"[{GameManager.Data.Character_STAT[idx].ability.SPEED.value }]";
 
-        }
+        // 3.LUK
+        Gage[2, 0].sizeDelta = new Vector2(Character.Natural[idx].ability.LUK.value * 4f, 32);
+        Gage[2, 1].sizeDelta = new Vector2(GameManager.Data.Character_STAT[idx].ability.LUK.value * 4f, 32);
+        Gage[2, 2].sizeDelta = new Vector2(Gage[2, 1].sizeDelta.x + GameManager.Data.Talent.LUK.value * 4f, 32);
+        Text_Value[2].text = $"[{GameManager.Data.Character_STAT[idx].ability.LUK.value + GameManager.Data.Talent.LUK.value }]";
+
+        // 4.JUMPP
+        Gage[3, 0].sizeDelta = new Vector2(Character.Natural[idx].ability.JUMP.value * 8f, 32);
+        Gage[3, 1].sizeDelta = new Vector2(GameManager.Data.Character_STAT[idx].ability.JUMP.value * 8f, 32);
+        Gage[3, 2].sizeDelta = new Vector2(Gage[3, 1].sizeDelta.x, 32);
+        Text_Value[3].text = $"[{GameManager.Data.Character_STAT[idx].ability.JUMP.value}]";
+
+        // 5.JUMPC
+        Gage[4, 0].sizeDelta = new Vector2(Character.Natural[idx].ability.MAX_JUMP.value * 80f, 32);
+        Gage[4, 1].sizeDelta = new Vector2(GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.value * 80f, 32);
+        Gage[4, 2].sizeDelta = new Vector2(Gage[4, 1].sizeDelta.x, 32);
+        Text_Value[4].text = $"[{GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.value}]";
+
+        // 6. RESTORE
+        Gage[5, 0].sizeDelta = new Vector2((Character.Natural[idx].ability.RESTORE.value - 1) * 200f, 32);
+        Gage[5, 1].sizeDelta = new Vector2((GameManager.Data.Character_STAT[idx].ability.RESTORE.value - 1) * 200f, 32);
+        Gage[5, 2].sizeDelta = new Vector2(Gage[5, 1].sizeDelta.x + (GameManager.Data.Talent.RESTORE.value * 200f), 32);
+        Text_Value[5].text = $"[{Math.Round((GameManager.Data.Character_STAT[idx].ability.RESTORE.value + GameManager.Data.Talent.RESTORE.value), 3)}]";
+
+        // 7. DEF
+        Gage[6, 0].sizeDelta = new Vector2(Character.Natural[idx].ability.DEF.value * 400f, 32);
+        Gage[6, 1].sizeDelta = new Vector2(GameManager.Data.Character_STAT[idx].ability.DEF.value * 400f, 32);
+        Gage[6, 2].sizeDelta = new Vector2(Gage[6, 1].sizeDelta.x + (GameManager.Data.Talent.DEF.value * 400f), 32);
+        Text_Value[6].text = $"[{Math.Round((GameManager.Data.Character_STAT[idx].ability.DEF.value + GameManager.Data.Talent.DEF.value) * 100), 3}]";
+
         //Text관련
         // 1. 업그레이드 필요 비용 설명
         // 2. 레벨업 시 레벨 재표기
         // 3. 잔여 마늘 표시
 
-        Text_Points[0].text = $"X{GameManager.Data.Character_STAT[idx].ability.MAX_HP.level}";
-        Text_Points[1].text = $"X{GameManager.Data.Character_STAT[idx].ability.SPEED.level}";
-        Text_Points[2].text = $"X{GameManager.Data.Character_STAT[idx].ability.LUK.level}";
-        Text_Points[3].text = $"X{GameManager.Data.Character_STAT[idx].ability.JUMP.level}";
-        Text_Points[4].text = $"X{GameManager.Data.Character_STAT[idx].ability.DOWN.level}";
-        Text_Points[5].text = $"X{GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level * 15}";
-        Text_Points[6].text = $"X{GameManager.Data.Character_STAT[idx].ability.DEF.level}";
+        Text_Points[0].text = $"X{GameManager.Data.Character_STAT[idx].ability.MAX_HP.level + 1}";
+        Text_Points[1].text = $"X{GameManager.Data.Character_STAT[idx].ability.SPEED.level + 1}";
+        Text_Points[2].text = $"X{GameManager.Data.Character_STAT[idx].ability.LUK.level + 1}";
+        Text_Points[3].text = $"X{GameManager.Data.Character_STAT[idx].ability.JUMP.level + 1}";
+        Text_Points[4].text = $"X{(GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level + 1) * 15}";
+        Text_Points[5].text = $"X{GameManager.Data.Character_STAT[idx].ability.RESTORE.level + 1}";
+        Text_Points[6].text = $"X{GameManager.Data.Character_STAT[idx].ability.DEF.level + 1}";
         Text_Level.text = $"{GameManager.Data.Character_STAT[idx].LV}";
         Text_SP.text = $"{GameManager.Data.Character_STAT[idx].STAT_POINT}";
-        Text_LVUP_G.text = $"X{LV_COST[GameManager.Data.Character_STAT[idx].LV].gold}";
-        Text_LVUP_S.text = $"X{LV_COST[GameManager.Data.Character_STAT[idx].LV].Money_Forest}";
-        Text_RESET_S.text = "X5";
-
-
-
-
+        Text_LVUP_G.text = (GameManager.Data.Character_STAT[idx].LV != 5) ? $"X{LV_COST[GameManager.Data.Character_STAT[idx].LV].gold}" : "-";
+        Text_LVUP_S.text = (GameManager.Data.Character_STAT[idx].LV != 5) ? $"X{LV_COST[GameManager.Data.Character_STAT[idx].LV].Money_Forest}" : "-";
+        Text_RESET_S.text = $"X{GameManager.Data.Character_STAT[idx].LV}";
     }
 
     void Change(int i)
@@ -351,7 +342,7 @@ public class ControlCharacter : MonoBehaviour
 
     public void show_info()
     {
-        Text_Name.GetComponent<Text>().text = Enum.GetName(typeof(Character.CHARACTER_CODE), idx);
+        Text_Name.GetComponent<Text>().text = CHARACTER_NAME[idx];
         if ((int)GameManager.Data.Preset.Character == idx)
         {
             GameObject.Find("UI").transform.Find("Button_Buy").gameObject.SetActive(false);
@@ -451,13 +442,13 @@ public class ControlCharacter : MonoBehaviour
 
     }
 
-    public void UP_DOWN_P()
+    public void UP_RESTORE()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.DOWN.level + 1))
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.RESTORE.level + 1))
         {
-            GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.DOWN.level + 1);
-            GameManager.Data.Character_STAT[idx].ability.DOWN.value += (GameManager.Data.Character_STAT[idx].ability.DOWN.level + 1) * 0.5f;
-            GameManager.Data.Character_STAT[idx].ability.DOWN.level += 1;
+            GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.RESTORE.level + 1);
+            GameManager.Data.Character_STAT[idx].ability.RESTORE.value += (GameManager.Data.Character_STAT[idx].ability.RESTORE.level + 1) * 0.05f;
+            GameManager.Data.Character_STAT[idx].ability.RESTORE.level += 1;
             GameManager.Sound.SFXPlay(clip3);
         }
         SetGage();
@@ -468,7 +459,7 @@ public class ControlCharacter : MonoBehaviour
     {
         if (GameManager.Data.Character_STAT[idx].STAT_POINT >= ((GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level+1) * 15))
         {
-            GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level * 15);
+            GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)((GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level+1) * 15);
             GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.value += 1;
             GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level += 1;
             GameManager.Sound.SFXPlay(clip3);
@@ -505,9 +496,9 @@ public class ControlCharacter : MonoBehaviour
 
     public void Reset_SP()
     {
-        if(GameManager.Data.Money.Speacial[0] >= (GameManager.Data.Character_STAT[idx].LV + 1))
+        if(GameManager.Data.Money.Speacial[0] >= (GameManager.Data.Character_STAT[idx].LV))
         {
-            GameManager.Data.Money.Speacial[0] -= (GameManager.Data.Character_STAT[idx].LV + 1);
+            GameManager.Data.Money.Speacial[0] -= (GameManager.Data.Character_STAT[idx].LV);
             GameManager.Data.Character_STAT[idx].STAT_POINT = 0;
             GameManager.Sound.SFXPlay(clip4);
 

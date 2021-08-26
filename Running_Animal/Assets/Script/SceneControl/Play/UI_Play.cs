@@ -10,6 +10,12 @@ public class UI_Play : MonoBehaviour
 {
     public Image Image_HpBar;
     public Image Image_ExpBar;
+    public Image Cool_Banana;
+    public Image Cool_BearTrap;
+    public Image Cool_Active;
+    public GameObject GO_Stage;
+    public Image Image_Stage;
+    public Sprite[] Stages;
 
     public GameObject combo;
     public TextMeshProUGUI Text_Combo;
@@ -55,6 +61,8 @@ public class UI_Play : MonoBehaviour
     AudioClip clip;
     AudioClip clip2;
     AudioClip clip3;
+    AudioClip clip4;
+    AudioClip clip5;
 
     private void Start()
     {
@@ -67,6 +75,17 @@ public class UI_Play : MonoBehaviour
         Active = gameObject.GetComponent<Active>();
         Image_HpBar = GameObject.Find("UI/Bar_HP/Gage_HP").GetComponent<Image>();
         Image_ExpBar = GameObject.Find("UI/Bar_EXP/Gage_EXP").GetComponent<Image>();
+        GO_Stage = GameObject.Find("UI").transform.Find("Image_Stage").gameObject;
+        GO_Stage.SetActive(false);
+        Image_Stage = GameObject.Find("UI").transform.Find("Image_Stage").GetComponent<Image>();
+        Stages = Resources.LoadAll<Sprite>("Image/GUI/Play/Stage");
+
+        Cool_Banana = GameObject.Find("UI/CoolTime/Banana").GetComponent<Image>();
+        Cool_BearTrap = GameObject.Find("UI/CoolTime/BearTrap").GetComponent<Image>();
+        Cool_Active = GameObject.Find("UI/CoolTime/Active").GetComponent<Image>();
+        Cool_Banana.fillAmount = 0;
+        Cool_BearTrap.fillAmount = 0;
+        Cool_Active.fillAmount = 0;
 
         combo = GameObject.Find("UI/Text_Combo");
         Text_Combo = combo.GetComponent<TextMeshProUGUI>();
@@ -94,6 +113,7 @@ public class UI_Play : MonoBehaviour
         Image_Skill = Skill.GetComponent<Image>();
         Image_Skill.sprite = gameObject.GetComponent<Active>().Active_Sprites[(int)GameManager.Play.Status.ACTIVE];
         Button_Skill = Skill.GetComponent<Button>();
+        Button_Skill.interactable = true;
         Button_Skill.onClick.AddListener(Use_Active);
         Button_Jump = GameObject.Find("UI/Button_Jump").GetComponent<Button>();
         Button_Down = GameObject.Find("UI/Button_Down").GetComponent<Button>();
@@ -170,6 +190,7 @@ public class UI_Play : MonoBehaviour
                 case Active.ACTIVE_CODE.Ghost:
                     StartCoroutine(Active.OnGhost());
                     StartCoroutine(CoolTime(10));
+                    StartCoroutine(Left_Active(5, (int)Active.ACTIVE_CODE.Ghost));
                     break;
                 case Active.ACTIVE_CODE.Heal:
                     Active.OnHeal();
@@ -186,6 +207,7 @@ public class UI_Play : MonoBehaviour
                 case Active.ACTIVE_CODE.The_World:
                     StartCoroutine(Active.OnSlow());
                     StartCoroutine(CoolTime(10));
+                    StartCoroutine(Left_Active(2.5f, (int)Active.ACTIVE_CODE.The_World));
                     break;
                 case Active.ACTIVE_CODE.Multiple_Combo:
                     StartCoroutine(Active.MultiCombo());
@@ -194,6 +216,7 @@ public class UI_Play : MonoBehaviour
                 case Active.ACTIVE_CODE.Fly:
                     StartCoroutine(Active.OnFly());
                     StartCoroutine(CoolTime(10));
+                    StartCoroutine(Left_Active(5, (int)Active.ACTIVE_CODE.Fly));
                     break;
 
                     /* case Active.ID.Run:
@@ -206,6 +229,31 @@ public class UI_Play : MonoBehaviour
         }
 
     }
+    public IEnumerator ShowStage(int idx)
+    {
+        //현재 스테이지가 어딘지 보여준다.
+        GO_Stage.SetActive(true);
+        Image_Stage.sprite = Stages[idx];
+        Color temp;
+        float time = 0;
+        temp = Image_Stage.color;
+        temp.a = 1;
+        Image_Stage.color = temp;
+
+        while (time < 2)
+        {
+            time += Time.deltaTime;
+            temp = Image_Stage.color;
+            temp.a -= (Time.deltaTime / 2);
+            Image_Stage.color = temp;
+
+            yield return null;
+        }
+        GO_Stage.SetActive(false);
+
+
+    }
+
     public IEnumerator CoolTime(float t)
     {
         Image_Skill.fillAmount = 0;
@@ -221,6 +269,20 @@ public class UI_Play : MonoBehaviour
         }
     }
    
+    public IEnumerator Left_Active(float t, int idx)
+    {
+        // 액티브스킬 남은시간 표시.
+        float time = 0;
+        Cool_Active.sprite = Active.Active_Sprites[idx];
+        Cool_Active.fillAmount = 1;
+        while (time <= t)
+        {
+            time += Time.deltaTime;
+            Cool_Active.fillAmount -= (Time.deltaTime / t);
+            yield return null;
+        }
+        Cool_Active.fillAmount = 0;
+    }
     //체력 바 
     public void BAR_HP()
     {
@@ -230,16 +292,25 @@ public class UI_Play : MonoBehaviour
     // 경험치 바
     public void BAR_EXP()
     {
-        Image_ExpBar.fillAmount = (GameManager.Play.DC.expNow / GameManager.Play.DC.expNeed[GameManager.Play.DC.lv]);
+        Image_ExpBar.fillAmount = (GameManager.Play.DS.expNow / GameManager.Play.DC.expNeed[GameManager.Play.DC.lv]);
     }
 
     public void OnPause()
     {
         if (SceneManager.GetActiveScene().name == "Play")
         {
-            Time.timeScale = 0;
+            GameManager.Sound.SFXPlay(clip5);
             GameObject.Find("UI").transform.Find("Panel_Pause").gameObject.SetActive(true);
 
+            Event_jump.triggers.Remove(Entry_Jump);
+            Entry_Jump.callback.RemoveAllListeners();
+
+            Event_down.triggers.Remove(Entry_Down);
+            Entry_Down.callback.RemoveAllListeners();
+
+            Button_Skill.interactable = false;
+
+            Time.timeScale = 0;
             ShowPassive();
             // 현재 획득한 패시브 아이템 내역 보여주기.
         }
@@ -248,33 +319,34 @@ public class UI_Play : MonoBehaviour
     public void OffPause()
     {
         if (SceneManager.GetActiveScene().name == "Play")
+            GameManager.Sound.SFXPlay(clip4);
         {
-            Time.timeScale = 1;
             GameObject.Find("UI").transform.Find("Panel_Pause").gameObject.SetActive(false);
             GameObject.Find("UI").transform.Find("Text_Count").gameObject.SetActive(true);
-            StartCoroutine("Count_Time");
+            StartCoroutine(Count_Time());
         }
     }
 
     public IEnumerator Count_Time()
     {
-        float temp_speed = 0.0f;
         for (int i = 3; i > -1; i--)
         {
-            if (i == 3)
-            {
-                temp_speed = GameManager.Play.Status.ability.SPEED.value;
-                GameManager.Play.Status.ability.SPEED.value = 0.0f;
-            }
             Text_Count.text = $"{i}";
+            GameManager.Sound.SFXPlay(clip3);
             if (i == 0)
             {
                 Count.SetActive(false);
-                GameManager.Play.Status.ability.SPEED.value = temp_speed;
+
+                Entry_Jump.callback.AddListener((data) => { OnJump((PointerEventData)data); });
+                Event_jump.triggers.Add(Entry_Jump);
+
+                Entry_Down.callback.AddListener((data) => { OnDown((PointerEventData)data); });
+                Event_down.triggers.Add(Entry_Down);
+
+                Button_Skill.interactable = true;
+                Time.timeScale = 1;
             }
-
-
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSecondsRealtime(1.0f);
         }
     }
 
@@ -302,6 +374,7 @@ public class UI_Play : MonoBehaviour
     {
         InterAction.MakeCoin(other.transform);
         Destroy(other.gameObject); // 그 장애물을 파! 괘!
+        GameManager.Play.DC.passTrap += 1;
         int per = Random.Range(0, 100);
         if (per < GameManager.Play.Status.ability.LUK.value) // 행운 수치에 따라 크리티컬 적용.
         {
@@ -451,5 +524,7 @@ public class UI_Play : MonoBehaviour
         clip = Resources.Load<AudioClip>("Sound/Play/006_Play");
         clip2 = Resources.Load<AudioClip>("Sound/Play/008_Play");
         clip3 = Resources.Load<AudioClip>("Sound/Common/009_Count");
+        clip4 = Resources.Load<AudioClip>("Sound/Common/000_Manu_Sound");
+        clip5 = Resources.Load<AudioClip>("Sound/Common/004_Manu_Sound2");
     }
 }

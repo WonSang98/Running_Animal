@@ -87,7 +87,6 @@ public class GameManager : MonoBehaviour
         string path = Application.persistentDataPath + "/save.xml";
         XmlManager.XmlSave<Data>(saveData, path);
 
-        Debug.Log(path);
     }
 
     public void Load() 
@@ -120,4 +119,20 @@ public class GameManager : MonoBehaviour
         Save();
     }
 
+    bool bPaused;
+    private void OnApplicationPause(bool pause)
+    {
+        if (pause)
+        {
+            s_Instance.GetComponent<UI_Play>().OnPause();
+            bPaused = true;
+        }
+        else
+        {
+            if (bPaused)
+            {
+                bPaused = false;
+            }
+        }
+    }
 }

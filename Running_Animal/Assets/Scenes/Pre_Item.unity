@@ -2875,6 +2875,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb91538d87a06a40b1ff83e3d9a4d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Info_RI:
+  - None
+  - "\uCD5C\uB300\uCCB4\uB825 15% \uC99D\uAC00"
+  - "\uCD5C\uB300\uCCB4\uB825 30% \uC99D\uAC00"
+  - "\uD589\uC6B4 5 \uC99D\uAC00"
+  - "\uD589\uC6B4 10 \uC99D\uAC00"
+  - "\uC18D\uB3C4 15% \uC99D\uAC00"
+  - "\uC18D\uB3C4 30% \uC99D\uAC00"
+  - "\uC810\uD504 20% \uC99D\uAC00"
+  - "\uC810\uD504 40% \uC99D\uAC00"
+  - "\uACE8\uB4DC \uD68D\uB4DD\uB7C9 25% \uC99D\uAC00"
+  - "\uACE8\uB4DC \uD68D\uB4DD\uB7C9 50% \uC99D\uAC00"
+  - "\uCF64\uBCF4 2\uBC30"
+  - "\uCF64\uBCF4 3\uBC30"
+  - "\uC810\uD504 \uD69F\uC218 1\uD68C \uC99D\uAC00"
+  - "\uD53C\uD574 10% \uAC10\uC18C"
+  - "\uD53C\uD574 15% \uAC10\uC18C"
+  - "\uACBD\uD5D8\uCE58 2\uBC30"
+  Info_AS:
+  - None
+  - "\uBC29\uD328"
+  - "\uC810\uBA78"
+  - "\uC720\uB839\uD654"
+  - "\uD68C\uBCF5"
+  - "\uB2E4\uC2DC, \uB610 \uD55C \uBC88"
+  - "\uD669\uAE08\uC758 \uC190"
+  - "\uC601\uAC81\uC758 \uC2DC\uAC04"
+  - "\uC138 \uB9C8\uB9AC \uAC19\uC740 \uD55C \uB9C8\uB9AC"
+  - "\uB0A0\uAC1C"
 --- !u!4 &943580259
 Transform:
   m_ObjectHideFlags: 0
@@ -5782,7 +5811,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uD53C\uD574\uB97C 1\uD68C \uBB34\uC2DC\uD560\uC218 \uC788\uC2B5\uB2C8\uB2E4."
+  m_Text: "\uD53C\uD574\uB97C 1\uD68C \uBB34\uC2DC\uD569\uB2C8\uB2E4."
 --- !u!222 &1832658382
 CanvasRenderer:
   m_ObjectHideFlags: 0

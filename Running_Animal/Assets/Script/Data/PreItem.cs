@@ -41,6 +41,7 @@ public class PreItem
         EXP2, // 경험치 2배 (스테이지 도달 속도 UP)
     }
 
+
     public ItemSet Pre_HP;
     public ItemSet Pre_Shield;
     public ItemSet Pre_100;

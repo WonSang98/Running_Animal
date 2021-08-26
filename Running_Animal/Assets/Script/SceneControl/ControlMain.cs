@@ -21,6 +21,11 @@ public class ControlMain : MonoBehaviour
     Button[] Level = new Button[10]; // Level 선택 버튼
     Button Select_Diff;
 
+    Button Button_Shop;
+    Button Button_ThemeNext;
+    Button Button_ThemePrev;
+    Button Button_Mission;
+
     // Sound 변수 선언
     AudioClip clip; //사운드 클립 <- *변수명 변경 추천* + 여러개를 넣어야한다면 배열을 사용하자.
     AudioClip clip2;
@@ -37,16 +42,25 @@ public class ControlMain : MonoBehaviour
         character.transform.localPosition = new Vector3(0, -3.5f, 0);
         character.GetComponent<Rigidbody2D>().gravityScale = 0;
 
+        Button_Shop = GameObject.Find("UI/Button_Shop").GetComponent<Button>();
+        Button_ThemeNext = GameObject.Find("UI/Image_Map/next").GetComponent<Button>();
+        Button_ThemePrev = GameObject.Find("UI/Image_Map/prev").GetComponent<Button>();
+        Button_Mission = GameObject.Find("UI/Button_Mission").GetComponent<Button>();
+
+        Button_Shop.interactable = false;
+        Button_ThemeNext.interactable = false;
+        Button_ThemePrev.interactable = false;
+        Button_Mission.interactable = false;
+
         // 기존에 선택해서 즐기고있던 테마를 로드한다.
+        /*
         theme = GameObject.Find("UI/Image_Map");
         theme.GetComponent<Image>().sprite = Resources.Load<Sprite>("Image/Select_Theme/" + GameManager.Data.Preset.Theme) as Sprite;
-
-        GameObject.Find("UI").transform.Find("Panel_Difficulty").gameObject.SetActive(false);
+        */
         temp_diff = GameManager.Data.Preset.Difficult;
-
-        GameObject.Find("UI/Button_Difficulty/Text").GetComponent<Text>().text = 
+        GameObject.Find("UI").transform.Find("Panel_Difficulty").gameObject.SetActive(false);
+        GameObject.Find("UI/Button_Difficulty/Text").GetComponent<Text>().text =
         GameObject.Find("UI").transform.Find("Panel_Difficulty/Scroll View/Viewport/Content/Button_DIff_" + GameManager.Data.Preset.Difficult.ToString() + "/Text_Diff").GetComponent<Text>().text;
-
         LoadSound();
         GameManager.Sound.BGMPlay(Clip_BGM);
     }
@@ -145,7 +159,7 @@ public class ControlMain : MonoBehaviour
                     $"[피격 데미지]\n - {Difficulty.Forest[i].DMG} 증가\n" +
                     $"[골드 획득량]\n - {Difficulty.Forest[i].COIN * 100}% 증가\n" +
                     $"[회복효율]\n - {Difficulty.Forest[i].RESTORE * 100}% 감소\n" +
-                    $"[행운]\n - {Difficulty.Forest[i].LUK} 증가\n" +
+                    $"[행운]\n - {Difficulty.Forest[i].LUK} 감소\n" +
                     $"[방어력]\n - {Difficulty.Forest[i].DEF * 100}% 감소 \n" +
                     $"[속력]\n - {Difficulty.Forest[i].SPEED * 100} 증가\n" +
                     $"[필요경험치]\n - {Difficulty.Forest[i].EXP} 증가\n";

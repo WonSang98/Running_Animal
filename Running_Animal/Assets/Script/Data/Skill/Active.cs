@@ -14,6 +14,7 @@ public class Active : MonoBehaviour
     AudioClip clip6;
     AudioClip clip7;
     AudioClip clip8;
+    AudioClip clip9;
     UI_Play UP;
     public enum ACTIVE_CODE
     {
@@ -36,7 +37,7 @@ public class Active : MonoBehaviour
         { "점멸 [액티브]", "일정 거리 앞으로 점멸합니다."},
         { "유령화 [액티브]", "3초 동안 모든 함정으로부터 피해를 입지 않습니다."  },
         { "회복 [액티브", "50만큼의 체력을 회복합니다."},
-        { "다시, 또 한번 [액티브]", "스킬 선택 시, 선택지를 1회 바꿀 수 있습니다."},
+        { "다시, 또 한 번 [액티브]", "스킬 선택 시, 선택지를 1회 바꿀 수 있습니다."},
         { "황금의 손 [액티브]", "화면에 보이는 모든 함정을 골드로 바꿔버립니다."},
         { "영겁의 시간 [액티브]", "5초 동안 시간이 느리게 흐릅니다."},
         { "세 마리 같은 한 마리[액티브]", "함정 파괴 시 콤보가 이전의 3배만큼 쌓입니다."},
@@ -74,19 +75,19 @@ public class Active : MonoBehaviour
     // Skill ID : 2 Flash
     public IEnumerator OnFlash()
     {
+        GameManager.Sound.SFXPlay(clip9);
         StartCoroutine(gameObject.GetComponent<InterAction>().OnDodge(20));
+        GameManager.Play.DC.pre_speed = GameManager.Play.Status.ability.SPEED.value;
         for (int i=0; i<2; i++)
         {
             if(i == 0)
             {
                 GameManager.Play.Status.ability.SPEED.value = 150;
-                GameManager.Play.Player.GetComponent<Rigidbody2D>().gravityScale = 0;
                 GameManager.Play.Player.transform.Find("2").gameObject.SetActive(true);
             }
             else
             {
                 GameManager.Play.Status.ability.SPEED.value = GameManager.Play.DC.pre_speed;
-                GameManager.Play.Player.GetComponent<Rigidbody2D>().gravityScale = 2;
                 GameManager.Play.Player.transform.Find("2").gameObject.SetActive(false);
             }
             yield return new WaitForSeconds(0.15f);
@@ -97,29 +98,24 @@ public class Active : MonoBehaviour
     // Skill ID : 3 Ghost
     public IEnumerator OnGhost()
     {
-        SpriteRenderer spr = GameManager.Play.Player.GetComponent<SpriteRenderer>();
         GameManager.Sound.SFXPlay(clip2);
-        for (int i = 0; i < 2; i ++)
+        Color player_opacity;
+        float time = 0;
+        SpriteRenderer spr = GameManager.Play.Player.GetComponent<SpriteRenderer>();
+        GameObject Player = GameManager.Play.Player.gameObject;
+        player_opacity = spr.color;
+        player_opacity.a = 0.5f;
+        spr.color = player_opacity;
+        while (time < 5)
         {
-            if(i == 0)
-            {
-                spr = GameManager.Play.Player.GetComponent<SpriteRenderer>();
-                Color c = spr.color;
-                c.a = 0.5f;
-                spr.color = c;
-                GameManager.Play.Player.tag = "God";
-            }
-            else if(i == 1)
-            {
-                spr = GameManager.Play.Player.GetComponent<SpriteRenderer>();
-                Color c = spr.color;
-                c.a = 1.0f;
-                spr.color = c;
-
-                GameManager.Play.Player.tag = "Player";
-            }
-            yield return new WaitForSeconds(5);
+            time += Time.deltaTime;
+            Player.tag = "God";
+            yield return null;
         }
+        player_opacity = spr.color;
+        player_opacity.a = 1.0f;
+        spr.color = player_opacity;
+        Player.tag = "Player";
     }
 
     // Skill ID : 4 Heal
@@ -145,6 +141,7 @@ public class Active : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Select_Item")
         {
+            GameManager.Play.DS.time_change += 1;
             GameObject.Find("SceneManager").GetComponent<ControlSelectSkill>().ReLoad();
             GameManager.Sound.SFXPlay(clip4);
         }
@@ -174,7 +171,7 @@ public class Active : MonoBehaviour
 
             UP.Trap_Combo(t.transform);
 
-            GameManager.Play.DC.expNow += 1;
+            GameManager.Play.DS.expNow += 1;
             UP.BAR_EXP();
         }
 
@@ -186,7 +183,7 @@ public class Active : MonoBehaviour
             
             UP.Trap_Combo(t.transform);
 
-            GameManager.Play.DC.expNow += 1;
+            GameManager.Play.DS.expNow += 1;
             UP.BAR_EXP();
         }
 
@@ -198,7 +195,7 @@ public class Active : MonoBehaviour
 
             UP.Trap_Combo(t.transform);
 
-            GameManager.Play.DC.expNow += 1;
+            GameManager.Play.DS.expNow += 1;
             UP.BAR_EXP();
         }
 
@@ -210,7 +207,7 @@ public class Active : MonoBehaviour
 
             UP.Trap_Combo(t.transform);
 
-            GameManager.Play.DC.expNow += 1;
+            GameManager.Play.DS.expNow += 1;
             UP.BAR_EXP();
         }
 
@@ -286,8 +283,13 @@ public class Active : MonoBehaviour
                 {
                     GameManager.Play.Player.tag = "Player";
                 }
-                GameManager.Play.DC.expNow += GameManager.Play.DS.expRun;
+                GameManager.Play.DS.expNow += GameManager.Play.DS.expRun;
                 GameManager.Play.DS.expRun = 0;
+                UP.BAR_EXP();
+                if (GameManager.Play.DS.expNow >= GameManager.Play.DC.expNeed[GameManager.Play.DC.lv])
+                {
+                    GameManager.Play.DS.lvup = true;
+                }
             }
             yield return new WaitForSeconds(t);
         }
@@ -308,5 +310,6 @@ public class Active : MonoBehaviour
         clip6 = Resources.Load<AudioClip>("Sound/Active_Skills/005_Skill07");
         clip7 = Resources.Load<AudioClip>("Sound/Active_Skills/006_Skill08");
         clip8 = Resources.Load<AudioClip>("Sound/Active_Skills/007_Skill09");
+        clip9 = Resources.Load<AudioClip>("Sound/Active_Skills/008_Skill02");
     }
 }

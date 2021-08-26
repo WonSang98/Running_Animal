@@ -9,9 +9,7 @@ public class DataContinue
 
     public float[] expNeed; //다음 스테이지에 넘어가는데 필요한 경험치.
     public int lv;// 현재 스테이지.
-    public bool lvup; // 다음 스테이지로 넘어 갈 수 있는지
 
-    public float expNow; // 현재 경험치
     public float expMulti; // 경험치 배율
 
     public float goldNow; //게임 중 얻은 골드
@@ -49,8 +47,6 @@ public class DataContinue
         //expNeed = new float[] { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 999999 };
         //                     0   1   2   3   4   5   6  7    8   9    10  11   12   
         lv = 1;
-        lvup = false;
-        expNow = 0;
         expMulti = 1;
         goldNow = 0;
         goldMulti = 1;
@@ -84,8 +80,6 @@ public class DataContinue
         DataContinue dc = new DataContinue();
         dc.expNeed = new float[] { 0, 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999 };
         dc.lv = 1;
-        dc.lvup = false;
-        dc.expNow = 0;
         dc.expMulti = 1;
         dc.goldNow = 0;
         dc.goldMulti = 1;
@@ -127,7 +121,8 @@ public class DataShot
     public int time_change; // 스킬 선택창에서 REROLL 횟수.
     public float expRun; // RUN 달리기 할 때 한번에 경험치 적용하려고 한 건데 이거 쓸 지 말지 좀  다시 봐야함.
     public float timer; // 장애물 생성 시간 측정 타이머, Trap_함수와 연관.
-
+    public bool lvup; // 다음 스테이지로 넘어 갈 수 있는지
+    public float expNow; // 현재 경험치
     public int AC_multicombo;
 
     public DataShot()
@@ -138,7 +133,8 @@ public class DataShot
         time_change = 1;
         expRun = 0;
         timer = 20.0f;
-
+        lvup = false;
+        expNow = 0;
         AC_multicombo = 1;
     }
 
@@ -151,6 +147,8 @@ public class DataShot
         ds.time_change = 1;
         ds.expRun = 0;
         ds.timer = 20.0f;
+        ds.lvup = false;
+        ds.expNow = 0;
         ds.AC_multicombo = 3;
 
         return ds;

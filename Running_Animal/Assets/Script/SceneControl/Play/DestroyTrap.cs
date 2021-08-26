@@ -25,13 +25,14 @@ public class DestroyTrap : MonoBehaviour
         {
             if (!other.CompareTag("NonTrap"))
             {
-                GameManager.Play.DC.expNow += GameManager.Play.DC.expMulti;
+                GameManager.Play.DS.expNow += GameManager.Play.DC.expMulti;
 
                 UI_Play.BAR_EXP();
-                if (GameManager.Play.DC.expNow >= GameManager.Play.DC.expNeed[GameManager.Play.DC.lv])
+                if (GameManager.Play.DS.expNow >= GameManager.Play.DC.expNeed[GameManager.Play.DC.lv])
                 {
-                    GameManager.Play.DC.lvup = true;
+                    GameManager.Play.DS.lvup = true;
                 }
+
             }
         }
     }

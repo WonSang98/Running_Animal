@@ -21,6 +21,41 @@ public class ControlPreItem : MonoBehaviour
     }
     static short Num_ID = 6;
 
+    public string[] Info_RI =
+    {   "None",
+        "최대체력 15% 증가",
+        "최대체력 30% 증가",
+        "행운 5 증가",
+        "행운 10 증가",
+        "속도 15% 증가",
+        "속도 30% 증가",
+        "점프 20% 증가",
+        "점프 40% 증가",
+        "골드 획득량 25% 증가",
+        "골드 획득량 50% 증가",
+        "콤보 2배",
+        "콤보 3배",
+        "점프 횟수 1회 증가",
+        "피해 10% 감소",
+        "피해 15% 감소",
+        "경험치 2배"
+    };
+
+    public string[] Info_AS =
+    {
+        "None",
+        "방패",
+        "점멸",
+        "유령화",
+        "회복",
+        "다시, 또 한 번",
+        "황금의 손",
+        "영겁의 시간",
+        "세 마리 같은 한 마리",
+        "날개"
+    };
+
+
     // 가격
     static int normal_price = 500;
     static int random_price = 1000;
@@ -29,7 +64,6 @@ public class ControlPreItem : MonoBehaviour
     Button[] Item_Button;
     GameObject[] Item_Check;
     Text[] Item_Cnt;
-
     Text Shop_Owner;
     Text Text_info;
 
@@ -85,12 +119,12 @@ public class ControlPreItem : MonoBehaviour
         }
         if (GameManager.Data.PreItem.Pre_Active != Active.ACTIVE_CODE.None)
         {
-            Text_info.text += $"쑥과 마늘을 먹었습니다.\n'{GameManager.Data.PreItem.Pre_Active}' 능력이 생겼습니다.\n";
+            Text_info.text += $"쑥과 마늘을 먹었습니다.\n'{Info_AS[(int)GameManager.Data.PreItem.Pre_Active]}' 능력이 생겼습니다.\n";
         }
 
         if (GameManager.Data.PreItem.Pre_Random != PreItem.Random_Item.None)
         {
-            Text_info.text += $"환인으로부터 선물을 받았습니다.\n'{GameManager.Data.PreItem.Pre_Random}' 가 됩니다.";
+            Text_info.text += $"환인으로부터 선물을 받았습니다.\n'{Info_RI[(int)GameManager.Data.PreItem.Pre_Random]}' 가 됩니다.";
         }
         GameManager.Instance.Save();
     }
@@ -152,12 +186,16 @@ public class ControlPreItem : MonoBehaviour
                         GameManager.Sound.SFXPlay(clip);
                         Shop_Owner.text = "여기, 맡아놨던 물건이야.";
                     }
-                    else if (GameManager.Data.Money.Gold > normal_price)
+                    else if (GameManager.Data.Money.Gold >= normal_price)
                     {
                         GameManager.Data.Money.Gold -= normal_price;
                         GameManager.Data.PreItem.Pre_HP.USE = true;
                         GameManager.Sound.SFXPlay(clip1);
                         Shop_Owner.text = "좋은 선택이야.";
+                    }
+                    else
+                    {
+                        Shop_Owner.text = "안 살거면 그만 만지고 나가주게.";
                     }
                 }
                 Item_Cnt[i].text = $"{GameManager.Data.PreItem.Pre_HP.CNT}";
@@ -179,12 +217,16 @@ public class ControlPreItem : MonoBehaviour
                         GameManager.Sound.SFXPlay(clip);
                         Shop_Owner.text = "여기, 맡아놨던 물건이야.";
                     }
-                    else if (GameManager.Data.Money.Gold > normal_price)
+                    else if (GameManager.Data.Money.Gold >= normal_price)
                     {
                         GameManager.Data.Money.Gold -= normal_price;
                         GameManager.Data.PreItem.Pre_Shield.USE = true;
                         GameManager.Sound.SFXPlay(clip1);
                         Shop_Owner.text = "좋은 선택이야.";
+                    }
+                    else
+                    {
+                        Shop_Owner.text = "뭐야, 당신 돈이 없군?";
                     }
                 }
                 Item_Cnt[i].text = $"{GameManager.Data.PreItem.Pre_Shield.CNT}";
@@ -212,12 +254,16 @@ public class ControlPreItem : MonoBehaviour
                             GameManager.Sound.SFXPlay(clip);
                             Shop_Owner.text = "여기, 맡아놨던 물건이야.";
                         }
-                        else if (GameManager.Data.Money.Gold > normal_price)
+                        else if (GameManager.Data.Money.Gold >= normal_price)
                         {
                             GameManager.Data.Money.Gold -= normal_price;
                             GameManager.Data.PreItem.Pre_100.USE = true;
                             GameManager.Sound.SFXPlay(clip1);
                             Shop_Owner.text = "좋은 선택이야.";
+                        }
+                        else
+                        {
+                            Shop_Owner.text = "축복을 받으려면, 정성을 보이라고.";
                         }
                     }
                 }
@@ -246,33 +292,47 @@ public class ControlPreItem : MonoBehaviour
                             GameManager.Sound.SFXPlay(clip);
                             Shop_Owner.text = "여기, 맡아놨던 물건이야.";
                         }
-                        else if (GameManager.Data.Money.Gold > normal_price)
+                        else if (GameManager.Data.Money.Gold >= normal_price)
                         {
                             GameManager.Data.Money.Gold -= normal_price;
                             GameManager.Data.PreItem.Pre_300.USE = true;
                             GameManager.Sound.SFXPlay(clip1);
                             Shop_Owner.text = "좋은 선택이야.";
                         }
+                        else
+                        {
+                            Shop_Owner.text = "축복을 받으려면, 정성을 보이라고.";
+                        }
                     }
                 }
                 Item_Cnt[i].text = $"{GameManager.Data.PreItem.Pre_300.CNT}";
                 break;
             case 4:
-                if (GameManager.Data.Money.Gold > normal_price)
+                if (GameManager.Data.Money.Gold >= normal_price)
                 {
                     GameManager.Data.Money.Gold -= normal_price;
                     int idx = Random.Range(1, Enum.GetNames(typeof(Active.ACTIVE_CODE)).Length);
                     GameManager.Data.PreItem.Pre_Active = (Active.ACTIVE_CODE)idx;
                     GameManager.Sound.SFXPlay(clip1);
+                    Shop_Owner.text = "우리 집 마늘맛이 어때?";
+                }
+                else
+                {
+                    Shop_Owner.text = "일하지 않는 자, 먹지도 말라.";
                 }
                 break;
             case 5:
-                if (GameManager.Data.Money.Gold > random_price)
+                if (GameManager.Data.Money.Gold >= random_price)
                 {
                     GameManager.Data.Money.Gold -= random_price;
                     int idx = Random.Range(1, Enum.GetNames(typeof(PreItem.Random_Item)).Length);
                     GameManager.Data.PreItem.Pre_Random = (PreItem.Random_Item)idx;
                     GameManager.Sound.SFXPlay(clip1);
+                    Shop_Owner.text = "좋은 것 좀 나왔나?";
+                }
+                else
+                {
+                    Shop_Owner.text = "순진하긴, 세상에 공짜는 없어.";
                 }
                 break;
 

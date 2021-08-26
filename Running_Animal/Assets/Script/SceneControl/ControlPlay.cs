@@ -27,7 +27,7 @@ public class ControlPlay : MonoBehaviour
         }
         //UI내 스크립트 지정.
         UI_Play.SetUI();
-
+        StartCoroutine(UI_Play.ShowStage(GameManager.Play.DC.lv - 1));
         // 코루틴 있는 패시브 아이템 적용
         InterAction.Apply_Passive();
         StartCoroutine(TrapForest.TrapUpdate());
