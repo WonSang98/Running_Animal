@@ -49,19 +49,47 @@ public class ControlTalent : MonoBehaviour
             switch (i)
             {
                 case 0:
-                    Upgrade.text = $"{Talent.COST[GameManager.Data.Talent.HP.level]}XG";
+                    if (GameManager.Data.Talent.HP.level == 10)
+                    {
+                        Upgrade.text = "LV.MAX";
+                    }
+                    else
+                    {
+                        Upgrade.text = $"{Talent.COST[GameManager.Data.Talent.HP.level]}XG";
+                    }
                     GameManager.Sound.SFXPlay(clip);
                     break;
                 case 1:
-                    Upgrade.text = $"{Talent.COST[GameManager.Data.Talent.DEF.level]}XG";
+                    if (GameManager.Data.Talent.DEF.level == 10)
+                    {
+                        Upgrade.text = "LV.MAX";
+                    }
+                    else
+                    {
+                        Upgrade.text = $"{Talent.COST[GameManager.Data.Talent.DEF.level]}XG";
+                    }
                     GameManager.Sound.SFXPlay(clip);
                     break;
                 case 2:
-                    Upgrade.text = $"{Talent.COST[GameManager.Data.Talent.LUK.level]}XG";
+                    if (GameManager.Data.Talent.LUK.level == 10)
+                    {
+                        Upgrade.text = "LV.MAX";
+                    }
+                    else
+                    {
+                        Upgrade.text = $"{Talent.COST[GameManager.Data.Talent.LUK.level]}XG";
+                    }
                     GameManager.Sound.SFXPlay(clip);
                     break;
                 case 3:
-                    Upgrade.text = $"{Talent.COST[GameManager.Data.Talent.RESTORE.level]}XG";
+                    if (GameManager.Data.Talent.RESTORE.level == 10)
+                    {
+                        Upgrade.text = "LV.MAX";
+                    }
+                    else
+                    {
+                        Upgrade.text = $"{Talent.COST[GameManager.Data.Talent.RESTORE.level]}XG";
+                    }
                     GameManager.Sound.SFXPlay(clip);
                     break;
 

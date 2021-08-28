@@ -132,7 +132,7 @@ public class UI_Play : MonoBehaviour
         Event_down.triggers.Add(Entry_Down);
 
         Text_gold = GameObject.Find("UI/Image_GOLD/Text_Gold").GetComponent<TextMeshProUGUI>();
-        Text_gold.text = $"{GameManager.Play.DC.goldNow}";
+        Text_gold.text = $"{GameManager.Play.DC.goldNow}G";
 
         Text_Count = Count.GetComponent<TextMeshProUGUI>();
 

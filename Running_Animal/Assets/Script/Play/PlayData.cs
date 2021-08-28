@@ -149,7 +149,7 @@ public class DataShot
         ds.timer = 20.0f;
         ds.lvup = false;
         ds.expNow = 0;
-        ds.AC_multicombo = 3;
+        ds.AC_multicombo = 1;
 
         return ds;
     }

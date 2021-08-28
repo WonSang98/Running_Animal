@@ -22,7 +22,7 @@ public class ControlSuccess : MonoBehaviour
         GameManager.Sound.SFXPlay(clip);
         Image_Success[0] = END.transform.Find("Panel_Success/Image_SUCCESS").GetComponent<Image>();
 
-        Sprite_GoodCharacter = Resources.LoadAll<Sprite>("Image/GUI/Play/CharacterDead"); //Temp
+        Sprite_GoodCharacter = Resources.LoadAll<Sprite>("Image/GUI/Play/CharacterSuccess"); //Temp
         Button_SuccessMain = END.transform.Find("Panel_Success/Button_MAIN").GetComponent<Button>();
         Button_SuccessMain.onClick.AddListener(() => LS.EndGame());
         Text_Success = new Text[8];
