@@ -136,6 +136,16 @@ public class LoadScene : MonoBehaviour
         GameManager.Sound.SFXPlay(clip4);
         GameManager.Instance.Load();
     }
+
+    public void OnTutorial()
+    {
+        GameManager.Instance.AllStop();
+        GameManager.Instance.goScene = "Tutorial";
+        GameManager.Instance.Save();
+        SceneManager.LoadScene("Loading");
+        GameManager.Sound.SFXPlay(clip4);
+        GameManager.Instance.Load();
+    } 
     public void Stop_LoadScene()
     {
         StopAllCoroutines();

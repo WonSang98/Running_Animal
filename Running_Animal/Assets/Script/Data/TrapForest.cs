@@ -192,7 +192,7 @@ public class TrapForest : MonoBehaviour
        
     }
 
-    IEnumerator MakeSpecial()
+    public IEnumerator MakeSpecial()
     {
         GameObject[] Brdige = new GameObject[9];
         GameObject[] Trap = new GameObject[9];
@@ -266,10 +266,11 @@ public class TrapForest : MonoBehaviour
         StartCoroutine(GoLevelUp());
     }
 
-    IEnumerator GoLevelUp()
+    public IEnumerator GoLevelUp()
     {
         bool flag = true;
         UP.Button_Skill.interactable= false;
+        GameManager.Play.Status.ability.SPEED.value = GameManager.Play.DC.pre_speed;
         GameManager.Play.Status.ability.SPEED.value *= 0.5f;
         float temp_Speed = GameManager.Play.Status.ability.SPEED.value;
 

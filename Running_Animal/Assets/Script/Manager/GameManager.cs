@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     SoundManager _Sound = new SoundManager();
     public static SoundManager Sound { get { return Instance._Sound; } }
 
-    public string goScene = "Main";
+    public string goScene = "Tutorial";
 
     static void Init()
     {
@@ -30,14 +30,14 @@ public class GameManager : MonoBehaviour
             if (go == null)
             {
                 //父距 Manager Object甫 积己 茄 利捞 绝促.
-                go = new GameObject { name = "@Managers" };
+                go = new GameObject { name = "@Managers"};
+                go.AddComponent<Active>();
+                go.AddComponent<Passive>();
                 go.AddComponent<GameManager>();
                 go.AddComponent<TrapForest>(); // 内风凭 
                 go.AddComponent<SetPlayer>(); // 内风凭
                 go.AddComponent<UI_Play>(); // 内风凭
                 go.AddComponent<InterAction>(); // 内风凭
-                go.AddComponent<Active>();
-                go.AddComponent<Passive>();
                 go.AddComponent<LoadScene>();
             };
             DontDestroyOnLoad(go);

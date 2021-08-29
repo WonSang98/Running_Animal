@@ -64,8 +64,12 @@ MonoBehaviour:
     - Assets/Resources/Image/GUI/Untitled-5.psd.meta
     - Assets/Resources/Image/GUI/Untitled-7.psd
     - Assets/Resources/Image/GUI/Untitled-7.psd.meta
+    - Assets/Scenes/Tutorial.unity
+    - Assets/Scenes/Tutorial.unity.meta
+    - Assets/Script/SceneControl/ControlTutorial.cs
+    - Assets/Script/SceneControl/ControlTutorial.cs.meta
     - 
-    m_Values: 010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101
+    m_Values: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 

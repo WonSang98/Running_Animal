@@ -111,7 +111,7 @@ public class UI_Play : MonoBehaviour
         
         Skill = GameObject.Find("UI/Button_Skill").gameObject;
         Image_Skill = Skill.GetComponent<Image>();
-        Image_Skill.sprite = gameObject.GetComponent<Active>().Active_Sprites[(int)GameManager.Play.Status.ACTIVE];
+        Image_Skill.sprite = Active.Active_Sprites[(int)GameManager.Play.Status.ACTIVE];
         Button_Skill = Skill.GetComponent<Button>();
         Button_Skill.interactable = true;
         Button_Skill.onClick.AddListener(Use_Active);
@@ -240,17 +240,16 @@ public class UI_Play : MonoBehaviour
         temp.a = 1;
         Image_Stage.color = temp;
 
-        while (time < 2)
+        while (time < 5)
         {
             time += Time.deltaTime;
             temp = Image_Stage.color;
-            temp.a -= (Time.deltaTime / 2);
+            temp.a -= (Time.deltaTime / 5);
             Image_Stage.color = temp;
 
             yield return null;
         }
         GO_Stage.SetActive(false);
-
 
     }
 
