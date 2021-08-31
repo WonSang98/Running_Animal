@@ -57,8 +57,8 @@ public class ControlPreItem : MonoBehaviour
 
 
     // 가격
-    static int normal_price = 500;
-    static int random_price = 1000;
+    static int normal_price = 1500;
+    static int random_price = 3500;
 
 
     Button[] Item_Button;
@@ -66,6 +66,13 @@ public class ControlPreItem : MonoBehaviour
     Text[] Item_Cnt;
     Text Shop_Owner;
     Text Text_info;
+
+    //튜토리얼 관련
+    GameObject Canvas_Tuto;
+    GameObject[] Text_Tuto;
+    GameObject Button_Tuto;
+    int cnt;
+
 
     private void Start()
     {
@@ -90,10 +97,68 @@ public class ControlPreItem : MonoBehaviour
         Shop_Owner = GameObject.Find("UI/Panel_Hi/Text").GetComponent<Text>();
         Text_info = GameObject.Find("UI/Panel_Info/Text").GetComponent<Text>();
 
+        //튜토리얼
+        Canvas_Tuto = GameObject.Find("UI-Tutorial").transform.Find("Panel").gameObject;
+        Text_Tuto = new GameObject[7];
+        Button_Tuto = GameObject.Find("UI-Tutorial").transform.Find("Button_OK").gameObject;
+        for (int i = 0; i < 7; i++)
+        {
+            Text_Tuto[i] = GameObject.Find("UI-Tutorial").transform.Find("Text" + i.ToString()).gameObject;
+        }
+        if (GameManager.Data.TutoData.tuto_preitem == false)
+        {
+            cnt = 0;
+            Canvas_Tuto.SetActive(true);
+            for (int i = 0; i < 7; i++) Text_Tuto[i].SetActive(false);
+            Text_Tuto[0].SetActive(true);
+            Button_Tuto.SetActive(true);
+            Button_Tuto.GetComponent<Button>().onClick.AddListener(() => NextTuto());
+        }
+        else
+        {
+            Canvas_Tuto.SetActive(false);
+            for (int i = 0; i < 7; i++) Text_Tuto[i].SetActive(false);
+            Button_Tuto.SetActive(false);
+        }
+
+
         Check_Select();
         Info();
         LoadSound();
 
+    }
+
+    void NextTuto()
+    {
+        cnt += 1;
+        for (int i = 0; i < 7; i++) Text_Tuto[i].SetActive(false);
+        if (cnt >= 7)
+        {
+            Canvas_Tuto.SetActive(false);
+            Button_Tuto.SetActive(false);
+            GameManager.Data.TutoData.tuto_preitem = true;
+            GameManager.Data.PreItem.Pre_HP.USE = true;
+            GameManager.Data.PreItem.Pre_100.USE = true;
+            GameManager.Data.PreItem.Pre_Shield.USE = true;
+            int idx = Random.Range(1, Enum.GetNames(typeof(Active.ACTIVE_CODE)).Length);
+            GameManager.Data.PreItem.Pre_Active = (Active.ACTIVE_CODE)idx;
+            idx = Random.Range(1, Enum.GetNames(typeof(PreItem.Random_Item)).Length);
+            GameManager.Data.PreItem.Pre_Random = (PreItem.Random_Item)idx;
+            Check_Select();
+            Info();
+        }
+        else
+        {
+            if(cnt == 3)
+            {
+                GameObject.Find("UI/Scroll View_Item/Viewport/Content").GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 640);
+            }
+            else if(cnt == 4)
+            {
+                GameObject.Find("UI/Scroll View_Item/Viewport/Content").GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 780);
+            }
+            Text_Tuto[cnt].SetActive(true);
+        }
     }
     public void Info()
     {

@@ -29,6 +29,7 @@ public class ControlSelectSkill : MonoBehaviour
     AudioClip clip;
     AudioClip clip2;
     AudioClip clip3;
+    AudioClip clip4;
     void Start()
     {
         GameManager.Instance.Load();
@@ -208,6 +209,7 @@ public class ControlSelectSkill : MonoBehaviour
             GameObject.Find("UI/Button_Item2").GetComponent<Button>().interactable = true;
             change_all();
             GameManager.Sound.SFXPlay(clip3);
+            GameManager.Sound.SFXPlay(clip4);
 
             GameManager.Play.DS.time_change -= 1;
         }
@@ -276,5 +278,6 @@ public class ControlSelectSkill : MonoBehaviour
         clip = Resources.Load<AudioClip>("Sound/Common/004_Manu_Sound2");
         clip2 = Resources.Load<AudioClip>("Sound/Common/007_Stamp");
         clip3 = Resources.Load<AudioClip>("Sound/Common/005_Cash");
+        clip4 = Resources.Load<AudioClip>("Sound/Active_Skills/003_Skill05");
     }
 }

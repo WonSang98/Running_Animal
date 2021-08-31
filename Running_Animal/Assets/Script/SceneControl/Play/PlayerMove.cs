@@ -44,6 +44,7 @@ public class PlayerMove : MonoBehaviour
             {
                 gameObject.tag = "Player";
                 gameObject.transform.Find("1").gameObject.SetActive(false);
+                GameManager.Sound.SFXPlay(clip4);
                 StartCoroutine(InterAction.OnDodge(GameManager.Play.DC.dodge));
             }
         }
@@ -94,7 +95,16 @@ public class PlayerMove : MonoBehaviour
 
         if (other.gameObject.CompareTag("HP"))
         {
-            Active.OnHeal();
+            float RESTORE_HP = (GameManager.Play.Status.ability.MAX_HP.value * 0.08f) * GameManager.Play.Status.ability.RESTORE.value;
+            if (GameManager.Play.Status.ability.HP.value + RESTORE_HP > GameManager.Play.Status.ability.MAX_HP.value)
+            {
+                GameManager.Play.Status.ability.HP.value = GameManager.Play.Status.ability.MAX_HP.value;
+            }
+            else
+            {
+                GameManager.Play.Status.ability.HP.value += RESTORE_HP;
+            }
+            UI_Play.BAR_HP();
             Destroy(other.gameObject);
         }
 
@@ -163,7 +173,7 @@ public class PlayerMove : MonoBehaviour
         clip = Resources.Load<AudioClip>("Sound/Play/002_Play");
         clip2 = Resources.Load<AudioClip>("Sound/Play/003_Play");
         clip3 = Resources.Load<AudioClip>("Sound/Play/004_Play");
-        clip4 = Resources.Load<AudioClip>("Sound/Common/008_Levelup");
+        clip4 = Resources.Load<AudioClip>("Sound/Active_Skills/000_Skill01_02");
         clip5 = Resources.Load<AudioClip>("Sound/Play/000_Play");
         clip6 = Resources.Load<AudioClip>("Sound/Play/007_Play");
         clip7 = Resources.Load<AudioClip>("Sound/Play/010_Play");

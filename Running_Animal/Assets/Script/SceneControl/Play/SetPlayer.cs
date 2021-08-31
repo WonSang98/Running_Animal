@@ -18,7 +18,6 @@ public class SetPlayer : MonoBehaviour
         GameManager.Play.Player.GetComponent<Animator>().SetBool("StartGame", true);
         Time.timeScale = 1; // OnSlow 켜진 상태일때...
         GameManager.Play.DC.pre_speed = GameManager.Play.Status.ability.SPEED.value;
-        
         Clear_DS();
     }
 
@@ -26,8 +25,8 @@ public class SetPlayer : MonoBehaviour
     {
         GetStatus();
         GetTalent();
-        GetPreItem();
         GetDiff();
+        GetPreItem();
         ForestPattern();
     }
 
@@ -89,7 +88,7 @@ public class SetPlayer : MonoBehaviour
 
                 for (int idx = 0; idx < GameManager.Play.DC.expNeed.Length; idx++)
                 {
-                    GameManager.Play.DC.expNeed[idx] += Difficulty.Forest[GameManager.Data.Preset.Difficult].EXP;
+                    GameManager.Play.DC.expNeed[idx] = (int)(GameManager.Play.DC.expNeed[idx] * Difficulty.Forest[GameManager.Data.Preset.Difficult].EXP);
                 }
 
                 break;
@@ -98,6 +97,8 @@ public class SetPlayer : MonoBehaviour
             case Theme.THEME_CODE.Arctic:
                 break;
         }
+        GameManager.Play.DC.pre_speed = GameManager.Play.Status.ability.SPEED.value;
+
     }
 
     void GetPreItem()
@@ -157,9 +158,11 @@ public class SetPlayer : MonoBehaviour
                 break;
             case PreItem.Random_Item.SPEED15:
                 GameManager.Play.Status.ability.SPEED.value *= 1.15f;
+                GameManager.Play.DC.pre_speed = GameManager.Play.Status.ability.SPEED.value;
                 break;
             case PreItem.Random_Item.SPEED30:
                 GameManager.Play.Status.ability.SPEED.value *= 1.3f;
+                GameManager.Play.DC.pre_speed = GameManager.Play.Status.ability.SPEED.value;
                 break;
             case PreItem.Random_Item.JUMP20:
                 GameManager.Play.Status.ability.JUMP.value *= 1.2f;

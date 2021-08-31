@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: d5e37f3da34434f49a6e1e2a0bf87e27
+  - enabled: 1
+    path: Assets/Scenes/Main.unity
+    guid: 68b57cc759112dd47986ac4335ac74d3
+  - enabled: 1
+    path: Assets/Scenes/Character.unity
+    guid: bf9afe78d2d0ce74fb8518072f500cc0
+  - enabled: 1
+    path: Assets/Scenes/Mission.unity
+    guid: 1b26c48f25fe0014785519117cb6f160
+  - enabled: 1
+    path: Assets/Scenes/Pre_Item.unity
+    guid: 225d4333980c9454993a2e6bcd7c7908
+  - enabled: 1
+    path: Assets/Scenes/Shop.unity
+    guid: 7883d92d870b0ea46892f12f8325d72a
+  - enabled: 1
+    path: Assets/Scenes/Talent.unity
+    guid: 66e7c03d1db698d43ab490fb85c64df9
+  - enabled: 1
+    path: Assets/Scenes/Play.unity
+    guid: eb8a759f3c9f1e04dacaa5dcff94ea77
+  - enabled: 1
+    path: Assets/Scenes/Select_Item.unity
+    guid: 578baa74cbe88ef4fb5059053d71a86e
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/End_Fail.unity
+    guid: 6d68d2567be29884cb2ccaeccf295a35
+  - enabled: 1
+    path: Assets/Scenes/End_Success.unity
+    guid: 19ac30d1d4dbd8a4bb90a4789ab41593
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 91ae91c384e52914582e79346ded8ce9
+  - enabled: 1
+    path: Assets/Scenes/Tutorial2.unity
+    guid: a01a5bbf425333344b96658cdefe1850
+  - enabled: 1
+    path: Assets/Scenes/Tutorial3.unity
+    guid: 2f2f0f4c083fa184da503450509b25d8
+  m_configObjects: {}

@@ -63,6 +63,7 @@ public class UI_Play : MonoBehaviour
     AudioClip clip3;
     AudioClip clip4;
     AudioClip clip5;
+    AudioClip clip6;
 
     private void Start()
     {
@@ -296,7 +297,7 @@ public class UI_Play : MonoBehaviour
 
     public void OnPause()
     {
-        if (SceneManager.GetActiveScene().name == "Play")
+        if (SceneManager.GetActiveScene().name == "Play" || SceneManager.GetActiveScene().name == "Tutorial" || SceneManager.GetActiveScene().name == "Tutorial3")
         {
             GameManager.Sound.SFXPlay(clip5);
             GameObject.Find("UI").transform.Find("Panel_Pause").gameObject.SetActive(true);
@@ -378,6 +379,7 @@ public class UI_Play : MonoBehaviour
         if (per < GameManager.Play.Status.ability.LUK.value) // 행운 수치에 따라 크리티컬 적용.
         {
             GameManager.Play.DC.combo += GameManager.Play.DC.comboMulti *  GameManager.Play.DS.AC_multicombo * 2;
+            GameManager.Sound.SFXPlay(clip6);
             Text_Combo.color = Color.red;
             Text_ComboCNT.color = Color.red;
             Text_Combo.text = "ComboX2";
@@ -397,6 +399,7 @@ public class UI_Play : MonoBehaviour
         else
         {
             GameManager.Play.DC.combo += GameManager.Play.DC.comboMulti * GameManager.Play.DS.AC_multicombo;
+            GameManager.Sound.SFXPlay(clip6);
             Text_Combo.color = Color.white;
             Text_ComboCNT.color = Color.white;
             Text_Combo.text = "Combo";
@@ -507,9 +510,9 @@ public class UI_Play : MonoBehaviour
             }
             else
             {
-                Color temp = GetPassives[i].color;
-                temp.a = 0;
-                GetPassives[i].color = temp;
+                //Color temp = GetPassives[i].color;
+                //temp.a = 0;
+                //GetPassives[i].color = temp;
             }
         }
     }
@@ -525,5 +528,6 @@ public class UI_Play : MonoBehaviour
         clip3 = Resources.Load<AudioClip>("Sound/Common/009_Count");
         clip4 = Resources.Load<AudioClip>("Sound/Common/000_Manu_Sound");
         clip5 = Resources.Load<AudioClip>("Sound/Common/004_Manu_Sound2");
+        clip6 = Resources.Load<AudioClip>("Sound/Play/013_Play");
     }
 }

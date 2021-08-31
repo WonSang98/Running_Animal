@@ -15,6 +15,7 @@ public class Active : MonoBehaviour
     AudioClip clip7;
     AudioClip clip8;
     AudioClip clip9;
+    AudioClip clip10;
     UI_Play UP;
     public enum ACTIVE_CODE
     {
@@ -56,7 +57,7 @@ public class Active : MonoBehaviour
     public void OnDefense()
     {
         GameManager.Play.Player.transform.Find("1").gameObject.SetActive(true);
-        GameManager.Sound.SFXPlay(clip);
+        GameManager.Sound.SFXPlay(clip10);
         GameManager.Play.Player.tag = "Shield";
         Invoke("OffDefense", 5.0f);
 
@@ -68,6 +69,7 @@ public class Active : MonoBehaviour
         {
             GameManager.Play.Player.tag = "Player";
             GameManager.Play.Player.transform.Find("1").gameObject.SetActive(false);
+            GameManager.Sound.SFXPlay(clip);
 
         }
     }
@@ -265,6 +267,8 @@ public class Active : MonoBehaviour
     public IEnumerator OnRun(float t)
     {
         bool isshield = (GameManager.Play.Player.CompareTag("Shield"));
+        GameManager.Play.DC.pre_speed = GameManager.Play.Status.ability.SPEED.value;
+
         for (int i = 0; i < 2; i++)
         {
             if (i == 0)
@@ -302,7 +306,7 @@ public class Active : MonoBehaviour
 
     void LoadSound() 
     {
-        clip = Resources.Load<AudioClip>("Sound/Active_Skills/000_Skill01");
+        clip = Resources.Load<AudioClip>("Sound/Active_Skills/000_Skill01_02");
         clip2 = Resources.Load<AudioClip>("Sound/Active_Skills/001_Skill03");
         clip3 = Resources.Load<AudioClip>("Sound/Active_Skills/002_Skill04");
         clip4 = Resources.Load<AudioClip>("Sound/Active_Skills/003_Skill05");
@@ -311,5 +315,6 @@ public class Active : MonoBehaviour
         clip7 = Resources.Load<AudioClip>("Sound/Active_Skills/006_Skill08");
         clip8 = Resources.Load<AudioClip>("Sound/Active_Skills/007_Skill09");
         clip9 = Resources.Load<AudioClip>("Sound/Active_Skills/008_Skill02");
+        clip10 = Resources.Load<AudioClip>("Sound/Active_Skills/009_Skill01_01");
     }
 }

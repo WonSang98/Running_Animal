@@ -84,7 +84,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Trap_Blood") || other.gameObject.CompareTag("Trap_Stun") || other.gameObject.CompareTag("Trap") || other.gameObject.CompareTag("Jump"))
             {
-                Destroy(other.gameObject);
+                GameManager.Sound.SFXPlay(clip6);
                 UI_Play.Trap_Combo(other.transform);
                 GameManager.Play.DS.expRun += 1 * GameManager.Play.DC.expMulti; 
             }
@@ -94,7 +94,8 @@ public class PlayerMove : MonoBehaviour
 
         if (other.gameObject.CompareTag("HP"))
         {
-            Active.OnHeal();
+            GameManager.Play.Status.ability.HP.value += (GameManager.Play.Status.ability.MAX_HP.value * 0.08f) * GameManager.Play.Status.ability.RESTORE.value;
+            UI_Play.BAR_HP();
             Destroy(other.gameObject);
         }
 
@@ -127,7 +128,7 @@ public class PlayerMove : MonoBehaviour
             GameManager.Play.DS.jumpNow = 0;
             StartCoroutine(UI_Play.Cam_ATT());
             UI_Play.Trap_Combo(collision.transform);
-            GameManager.Play.DC.expNow += GameManager.Play.DC.expMulti;
+            GameManager.Play.DS.expNow += GameManager.Play.DC.expMulti;
             GameManager.Sound.SFXPlay(clip6);
             UI_Play.BAR_EXP();
         }
@@ -152,7 +153,7 @@ public class PlayerMove : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Trap_Blood") || collision.gameObject.CompareTag("Trap_Stun") || collision.gameObject.CompareTag("Trap") || collision.gameObject.CompareTag("Jump"))
             {
-                Destroy(collision.gameObject);
+                GameManager.Sound.SFXPlay(clip6);
                 UI_Play.Trap_Combo(collision.transform);
                 GameManager.Play.DS.expRun += 1 * GameManager.Play.DC.expMulti;
             }

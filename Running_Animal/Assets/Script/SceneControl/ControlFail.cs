@@ -52,7 +52,7 @@ public class ControlFail : MonoBehaviour
         Text_Fail[7].text = $"{money_speacial}°³";
 
         Image_Fail[0].sprite = Sprite_DeadCharacter[(int)GameManager.Data.Preset.Character];
-        Image_Fail[1].sprite = Sprite_DeadCause[GameManager.Play.DC.lastHit];
+        Image_Fail[1].sprite = Sprite_DeadCause[GameManager.Play.DC.lastHit - 1];
 
         GameManager.Data.Money.Gold += (int)GameManager.Play.DC.goldNow;
         GameManager.Data.Money.Speacial[0] += money_speacial;

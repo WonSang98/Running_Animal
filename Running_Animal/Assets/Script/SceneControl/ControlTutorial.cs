@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlTutorial : MonoBehaviour
 {
     TrapForest TrapForest;
     SetPlayer SetPlayer;
     UI_Play UI_Play;
+    LoadScene LS;
     InterAction InterAction;
 
     float timer = 25;
@@ -21,10 +23,13 @@ public class ControlTutorial : MonoBehaviour
         TrapForest = GameObject.Find("@Managers").GetComponent<TrapForest>();
         SetPlayer = GameObject.Find("@Managers").GetComponent<SetPlayer>();
         UI_Play = GameObject.Find("@Managers").GetComponent<UI_Play>();
+        LS = GameManager.Instance.GetComponent<LoadScene>();
         InterAction = GameObject.Find("@Managers").GetComponent<InterAction>();
     }
     void Start()
     {
+        GameObject.Find("UI").transform.Find("Panel_Pause/Button_Yes").GetComponent<Button>().onClick.RemoveAllListeners();
+        GameObject.Find("UI").transform.Find("Panel_Pause/Button_Yes").GetComponent<Button>().onClick.AddListener(() => LS.OnStopTutorial());
         //Trap Resource 불러오기.
         TrapForest.GetResource();
         //플레이어 지정된 위치에 생성
@@ -115,7 +120,7 @@ public class ControlTutorial : MonoBehaviour
         GameObject tmp;
         tmp = Instantiate(TrapForest.LvUp);
         tmp.transform.position = new Vector3(30, -1.8f, 0);
-        StartCoroutine(TrapForest.GoLevelUp());
+        StartCoroutine(TrapForest.GoTuto2());
     }
 
     public IEnumerator ShowStage(int idx)

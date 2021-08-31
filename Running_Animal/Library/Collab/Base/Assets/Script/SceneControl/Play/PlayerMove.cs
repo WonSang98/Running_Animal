@@ -44,6 +44,7 @@ public class PlayerMove : MonoBehaviour
             {
                 gameObject.tag = "Player";
                 gameObject.transform.Find("1").gameObject.SetActive(false);
+                GameManager.Sound.SFXPlay(clip4);
                 StartCoroutine(InterAction.OnDodge(GameManager.Play.DC.dodge));
             }
         }
@@ -84,7 +85,6 @@ public class PlayerMove : MonoBehaviour
         {
             if (other.gameObject.CompareTag("Trap_Blood") || other.gameObject.CompareTag("Trap_Stun") || other.gameObject.CompareTag("Trap") || other.gameObject.CompareTag("Jump"))
             {
-                Destroy(other.gameObject);
                 GameManager.Sound.SFXPlay(clip6);
                 UI_Play.Trap_Combo(other.transform);
                 GameManager.Play.DS.expRun += 1 * GameManager.Play.DC.expMulti; 
@@ -97,26 +97,6 @@ public class PlayerMove : MonoBehaviour
         {
             Active.OnHeal();
             Destroy(other.gameObject);
-        }
-
-        if (other.gameObject.CompareTag("LevelUp"))
-        {
-            GameManager.Play.DC.expNow -= GameManager.Play.DC.expNeed[GameManager.Play.DC.lv];
-            GameManager.Play.DC.lv += 1;
-            GameManager.Play.DC.stage += 1;
-            if (GameManager.Play.DS.nohit)
-            {
-                GameManager.Play.DC.noHitStage += 1;
-            }
-            if(GameManager.Play.DC.expNow >= GameManager.Play.DC.expNeed[GameManager.Play.DC.lv])
-            {
-                GameManager.Play.DC.lvup = true;
-            }
-            else
-            {
-                GameManager.Play.DC.lvup = false;
-            }
-            LS.OnSelect();
         }
 
         if (other.gameObject.CompareTag("Coin"))
@@ -148,7 +128,7 @@ public class PlayerMove : MonoBehaviour
             GameManager.Play.DS.jumpNow = 0;
             StartCoroutine(UI_Play.Cam_ATT());
             UI_Play.Trap_Combo(collision.transform);
-            GameManager.Play.DC.expNow += GameManager.Play.DC.expMulti;
+            GameManager.Play.DS.expNow += GameManager.Play.DC.expMulti;
             GameManager.Sound.SFXPlay(clip6);
             UI_Play.BAR_EXP();
         }
@@ -173,7 +153,6 @@ public class PlayerMove : MonoBehaviour
         {
             if (collision.gameObject.CompareTag("Trap_Blood") || collision.gameObject.CompareTag("Trap_Stun") || collision.gameObject.CompareTag("Trap") || collision.gameObject.CompareTag("Jump"))
             {
-                Destroy(collision.gameObject);
                 GameManager.Sound.SFXPlay(clip6);
                 UI_Play.Trap_Combo(collision.transform);
                 GameManager.Play.DS.expRun += 1 * GameManager.Play.DC.expMulti;
@@ -185,7 +164,7 @@ public class PlayerMove : MonoBehaviour
         clip = Resources.Load<AudioClip>("Sound/Play/002_Play");
         clip2 = Resources.Load<AudioClip>("Sound/Play/003_Play");
         clip3 = Resources.Load<AudioClip>("Sound/Play/004_Play");
-        clip4 = Resources.Load<AudioClip>("Sound/Common/008_Levelup");
+        clip4 = Resources.Load<AudioClip>("Sound/Active_Skills/000_Skill01_02");
         clip5 = Resources.Load<AudioClip>("Sound/Play/000_Play");
         clip6 = Resources.Load<AudioClip>("Sound/Play/007_Play");
         clip7 = Resources.Load<AudioClip>("Sound/Play/010_Play");

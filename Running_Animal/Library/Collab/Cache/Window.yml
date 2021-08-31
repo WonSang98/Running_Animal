@@ -14,63 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
-    - Assets/Resources/Image/BackGround/Background.png
-    - Assets/Resources/Image/BackGround/Background.png.meta
-    - Assets/Resources/Image/BackGround/EGBACKGROUND.png
-    - Assets/Resources/Image/BackGround/EGBACKGROUND.png.meta
-    - Assets/Resources/Image/BackGround/HELL.jpg
-    - Assets/Resources/Image/BackGround/HELL.jpg.meta
-    - Assets/Resources/Image/BackGround/Temp.png
-    - Assets/Resources/Image/BackGround/Temp.png.meta
-    - Assets/Resources/Image/BackGround/Temp_Forest.png
-    - Assets/Resources/Image/BackGround/Temp_Forest.png.meta
-    - Assets/Resources/Image/BackGround/Temp_PRESKIL.jpeg
-    - Assets/Resources/Image/BackGround/Temp_PRESKIL.jpeg.meta
-    - Assets/Resources/Image/BackGround/anime-stores-peaceful-anime-girls-wallpaper-preview.jpg
-    - Assets/Resources/Image/BackGround/anime-stores-peaceful-anime-girls-wallpaper-preview.jpg.meta
-    - Assets/Resources/Image/Character/Character_Cat_Foot.png
-    - Assets/Resources/Image/Character/Character_Cat_Foot.png.meta
-    - Assets/Resources/Image/Character/Character_Rabbit_Foot.png
-    - Assets/Resources/Image/Character/Character_Rabbit_Foot.png.meta
-    - Assets/Resources/Image/Character/Charater_Foot.png
-    - Assets/Resources/Image/Character/Charater_Foot.png.meta
-    - Assets/Resources/Image/Character/Charater_Monkey_Foot.png
-    - Assets/Resources/Image/Character/Charater_Monkey_Foot.png.meta
-    - Assets/Resources/Image/Character/Charater_Pig_Foot.png
-    - Assets/Resources/Image/Character/Charater_Pig_Foot.png.meta
-    - Assets/Resources/Image/Character/Foot.png
-    - Assets/Resources/Image/Character/Foot.png.meta
-    - Assets/Resources/Image/GUI/Pre_Item/Button_Home.png
-    - Assets/Resources/Image/GUI/Pre_Item/Button_Home.png.meta
-    - Assets/Resources/Image/GUI/Pre_Item/Button_Start.png
-    - Assets/Resources/Image/GUI/Pre_Item/Button_Start.png.meta
-    - Assets/Resources/Image/GUI/Talent/Upgrade_DEF.png
-    - Assets/Resources/Image/GUI/Talent/Upgrade_DEF.png.meta
-    - Assets/Resources/Image/GUI/Talent/Upgrade_HP.png
-    - Assets/Resources/Image/GUI/Talent/Upgrade_HP.png.meta
-    - Assets/Resources/Image/GUI/Talent/Upgrade_LUK.png
-    - Assets/Resources/Image/GUI/Talent/Upgrade_LUK.png.meta
-    - Assets/Resources/Image/GUI/Talent/Upgrade_Restore.png
-    - Assets/Resources/Image/GUI/Talent/Upgrade_Restore.png.meta
-    - Assets/Resources/Image/GUI/UI_Sprite 1.psd
-    - Assets/Resources/Image/GUI/UI_Sprite 1.psd.meta
-    - Assets/Resources/Image/GUI/Untitled-1.psd
-    - Assets/Resources/Image/GUI/Untitled-1.psd.meta
-    - Assets/Resources/Image/GUI/Untitled-3.psd
-    - Assets/Resources/Image/GUI/Untitled-3.psd.meta
-    - Assets/Resources/Image/GUI/Untitled-4.psd
-    - Assets/Resources/Image/GUI/Untitled-4.psd.meta
-    - Assets/Resources/Image/GUI/Untitled-5.psd
-    - Assets/Resources/Image/GUI/Untitled-5.psd.meta
-    - Assets/Resources/Image/GUI/Untitled-7.psd
-    - Assets/Resources/Image/GUI/Untitled-7.psd.meta
-    - Assets/Scenes/Tutorial.unity
-    - Assets/Scenes/Tutorial.unity.meta
-    - Assets/Script/SceneControl/ControlTutorial.cs
-    - Assets/Script/SceneControl/ControlTutorial.cs.meta
     - 
-    m_Values: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  RevisionSummary: 
+    m_Values: 01
+  RevisionSummary: "\uD56B\uD53D\uC2A4"
   ChangesSearchValue: 
   SelectedHistoryRevision: 
   HistoryPageNumber: 0

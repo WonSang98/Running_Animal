@@ -34,8 +34,23 @@ public class ControlMain : MonoBehaviour
     AudioClip Clip_BGM; // BackGroundMusic
     
     int temp_diff; // 임시로 선택되어있는 난이도
+
+    //튜토리얼 관련
+    GameObject Canvas_Tuto;
+    GameObject[] Text_Tuto;
+    GameObject Button_Tuto;
+    short cnt;
+
+
+    LoadScene LS;
     void Start()
     {
+        LS = GameManager.Instance.GetComponent<LoadScene>();
+        if(GameManager.Data.TutoData.tuto0 == false)
+        {
+            LS.OnTutorial();
+        }
+
         // Data에 저장되어있는 사용하고있는 캐릭터에대한 정보를 받아온 후, 그 캐릭터를 생성.
         var path_character = Resources.Load("Character/" + (int)GameManager.Data.Preset.Character, typeof(GameObject));
         character = Instantiate(path_character) as GameObject;
@@ -63,8 +78,57 @@ public class ControlMain : MonoBehaviour
         GameObject.Find("UI").transform.Find("Panel_Difficulty/Scroll View/Viewport/Content/Button_DIff_" + GameManager.Data.Preset.Difficult.ToString() + "/Text_Diff").GetComponent<Text>().text;
         LoadSound();
         GameManager.Sound.BGMPlay(Clip_BGM);
-    }
 
+        Canvas_Tuto = GameObject.Find("UI-Tutorial").transform.Find("Panel").gameObject;
+        Text_Tuto = new GameObject[4];
+        Button_Tuto = GameObject.Find("UI-Tutorial").transform.Find("Button_OK").gameObject;
+        for (int i = 0; i < 4; i++)
+        {
+            Text_Tuto[i] = GameObject.Find("UI-Tutorial").transform.Find("Text" + i.ToString()).gameObject;
+        }
+        if (GameManager.Data.TutoData.tuto1 == false)
+        {
+            cnt = 0;
+            Canvas_Tuto.SetActive(true);
+            Text_Tuto[0].SetActive(true);
+            Text_Tuto[1].SetActive(false);
+            Text_Tuto[2].SetActive(false);
+            Text_Tuto[3].SetActive(false);
+            Button_Tuto.SetActive(true);
+            Button_Tuto.GetComponent<Button>().onClick.AddListener(() => NextTuto());
+        }
+        else
+        {
+            Canvas_Tuto.SetActive(false);
+            Text_Tuto[0].SetActive(false);
+            Text_Tuto[1].SetActive(false);
+            Text_Tuto[2].SetActive(false);
+            Text_Tuto[3].SetActive(false);
+            Button_Tuto.SetActive(false);
+        }
+    }
+    void NextTuto()
+    {
+        cnt += 1;
+        if (cnt >= 4)
+        {
+            Canvas_Tuto.SetActive(false);
+            Text_Tuto[0].SetActive(false);
+            Text_Tuto[1].SetActive(false);
+            Text_Tuto[2].SetActive(false);
+            Text_Tuto[3].SetActive(false);
+            Button_Tuto.SetActive(false);
+            GameManager.Data.TutoData.tuto1 = true;
+        }
+        else
+        {
+            for(int i=0; i<4; i++)
+            {
+                Text_Tuto[i].SetActive(false);
+            }
+            Text_Tuto[cnt].SetActive(true);
+        }
+    }
     void LoadSound() //Sound Resoucres 경로 찾아와서 불러와놓기.
     {
         clip = Resources.Load<AudioClip>("Sound/Common/000_Manu_Sound");
@@ -146,12 +210,15 @@ public class ControlMain : MonoBehaviour
 
     void SetDiff(int i) //난이도 설정.
     {
-        temp_diff = i;
+        if(temp_diff != i)
+        {
+            temp_diff = i;
+            GameManager.Sound.SFXPlay(clip3);
+        }
         string difficulty = GameObject.Find("UI/Panel_Difficulty/Scroll View/Viewport/Content/Button_DIff_" + i.ToString() + "/Text_Diff").GetComponent<Text>().text;
         Text info = GameObject.Find("UI/Panel_Difficulty/Panel_Info/Text_info").GetComponent<Text>();
         GameObject.Find("UI/Panel_Difficulty/Panel_Info/Text_Diff").GetComponent<Text>().text = difficulty;
         GameObject.Find("UI/Button_Difficulty/Text").GetComponent<Text>().text = difficulty;
-        GameManager.Sound.SFXPlay(clip3);
         switch (GameManager.Data.Preset.Theme)
         {
             case Theme.THEME_CODE.Forest:

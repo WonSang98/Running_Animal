@@ -34,6 +34,7 @@ public class ControlCharacter : MonoBehaviour
 
     GameObject Panel_Upgrade; // 육성 누를때만 보이게...
     GameObject Text_Name; // 선택된 캐릭터의 이름 표시.
+    GameObject Image_Lock; // 구매안한 캐릭터 락표시
 
     bool flag_ON; // 육성창을 눌렀는지 안눌렀는지 확인용 
 
@@ -48,6 +49,7 @@ public class ControlCharacter : MonoBehaviour
     Text Text_LVUP_G;
     Text Text_LVUP_S;
     Text Text_RESET_S;
+    Text Text_Cost;
 
     Animator Animator_UPanel; // Panel_Upgrade 관련 애니메이터
     AudioClip clip; // 메뉴사운드
@@ -56,23 +58,43 @@ public class ControlCharacter : MonoBehaviour
     AudioClip clip4; // 레벨업, 초기화 사운드
     AudioClip clip5; // 메뉴 사운드2
     AudioClip clip6; // 구매 사운드
-    // 레벨 업 비용
-    cost[] LV_COST = {new cost(500, 1),
-                      new cost(1000, 2),
-                      new cost(1500, 3),
-                      new cost(2000, 4),
-                      new cost(2500, 5),
-                      new cost(99999, 9999)};
 
-    public string[] CHARACTER_NAME =
+    const int MAX_LV = 10;
+    // 레벨 업 비용
+    cost[] LV_COST = {new cost(300, 1),
+                      new cost(2100, 2),
+                      new cost(3000, 5),
+                      new cost(6000, 9),
+                      new cost(12900, 14),
+                      new cost(28500, 20),
+                      new cost(42000, 27),
+                      new cost(45000, 35),
+                      new cost(51000, 44),
+                      new cost(60000, 54)};
+
+    //레벨 당 스테이터스.
+    float[] T_HP = { 70, 90, 100, 110, 130, 160, 200, 250, 310, 380, 460, 550, 650, 760, 880, 1010 };
+    float[] T_SPEED = { 7.7f, 7.9f, 8f, 8.1f, 8.3f, 8.6f, 9f, 9.5f, 10.1f, 10.8f, 11.6f, 12.5f, 13.5f, 14.6f, 15.8f, 17.1f };
+    short[] T_LUK = { 2, 4, 5, 6, 8, 11, 15, 20, 26, 33, 41, 50, 60, 71, 83, 96 };
+    float[] T_JUMPP = { 8.5f, 9.5f, 10, 10.5f, 11.5f, 13, 15, 17.5f, 20.5f, 24, 28, 32.5f, 37.5f, 43, 49, 55.5f };
+    int[] T_JUMPC = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+    float[] T_RESTORE = { 0.85f, 0.95f, 1, 1.05f, 1.15f, 1.3f, 1.5f, 1.75f, 2.05f, 2.4f, 2.8f, 3.25f, 3.75f, 4.3f, 4.9f, 5.55f };
+    float[] T_DEF = { -0.03f, -0.01f, 0, 0.01f, 0.03f, 0.06f, 0.1f, 0.15f, 0.21f, 0.28f, 0.36f, 0.45f, 0.55f, 0.66f, 0.78f, 0.91f };
+    string[] CHARACTER_NAME =
     {
-        "돼지",
+        "토끼",
         "고양이",
         "원숭이",
-        "토끼"
+        "돼지"
     };
 
-    short[] SP = { 2, 4, 6, 8, 10 };
+    short[] SP = { 5, 10, 10, 20, 20, 25, 25, 30, 35, 40};
+
+    //튜토리얼 관련
+    GameObject Canvas_Tuto;
+    GameObject[] Text_Tuto;
+    GameObject Button_Tuto;
+    int cnt;
 
 
     void Start()
@@ -128,7 +150,56 @@ public class ControlCharacter : MonoBehaviour
         Text_RESET_S = GameObject.Find("UI").transform.Find(info_path + "RESET_SPECIAL/Text").GetComponent<Text>();
 
         flag_ON = false;
+        //구매 안한 경우 LOCK
+        Image_Lock = GameObject.Find("UI").transform.Find("Image_Lock").gameObject;
+        Text_Cost = GameObject.Find("UI").transform.Find("Image_Lock/Text_Gold").GetComponent<Text>();
+        Image_Lock.SetActive(false);
+        //튜토리얼
+        Canvas_Tuto = GameObject.Find("UI-Tutorial").transform.Find("Panel").gameObject;
+        Text_Tuto = new GameObject[3];
+        Button_Tuto = GameObject.Find("UI-Tutorial").transform.Find("Button_OK").gameObject;
+        for (int i = 0; i < 3; i++)
+        {
+            Text_Tuto[i] = GameObject.Find("UI-Tutorial").transform.Find("Text" + i.ToString()).gameObject;
+        }
+        if (GameManager.Data.TutoData.tuto_character == false)
+        {
+            cnt = 0;
+            Canvas_Tuto.SetActive(true);
+            for (int i = 0; i < 3; i++) Text_Tuto[i].SetActive(false);
+            Text_Tuto[0].SetActive(true);
+            Button_Tuto.SetActive(true);
+            Button_Tuto.GetComponent<Button>().onClick.AddListener(() => NextTuto());
+        }
+        else
+        {
+            Canvas_Tuto.SetActive(false);
+            for (int i = 0; i < 3; i++) Text_Tuto[i].SetActive(false);
+            Button_Tuto.SetActive(false);
+        }
+
         show_info();
+    }
+
+    void NextTuto()
+    {
+        cnt += 1;
+        for (int i = 0; i < 3; i++) Text_Tuto[i].SetActive(false);
+        if (cnt >= 3)
+        {
+            Canvas_Tuto.SetActive(false);
+            Button_Tuto.SetActive(false);
+            GameManager.Data.TutoData.tuto_character = true;
+            Click_Upgrade();
+        }
+        else
+        {
+            if(cnt == 1)
+            {
+                Click_Upgrade();
+            }
+            Text_Tuto[cnt].SetActive(true);
+        }
     }
 
     void Click_Upgrade()
@@ -252,14 +323,14 @@ public class ControlCharacter : MonoBehaviour
     {
         //Gage 관련
         // 1. HP
-        Gage[0, 0].sizeDelta = new Vector2(Character.Natural[idx].ability.MAX_HP.value * 0.6f, 32);
-        Gage[0, 1].sizeDelta = new Vector2(GameManager.Data.Character_STAT[idx].ability.MAX_HP.value * 0.6f, 32);
-        Gage[0, 2].sizeDelta = new Vector2(Gage[0, 1].sizeDelta.x + GameManager.Data.Talent.HP.value * 0.6f, 32);
+        Gage[0, 0].sizeDelta = new Vector2(Character.Natural[idx].ability.MAX_HP.value * 0.4f, 32);
+        Gage[0, 1].sizeDelta = new Vector2(GameManager.Data.Character_STAT[idx].ability.MAX_HP.value * 0.4f, 32);
+        Gage[0, 2].sizeDelta = new Vector2(Gage[0, 1].sizeDelta.x + GameManager.Data.Talent.HP.value * 0.4f, 32);
         Text_Value[0].text = $"[{GameManager.Data.Character_STAT[idx].ability.MAX_HP.value + GameManager.Data.Talent.HP.value }]";
 
         // 2.SPEED
-        Gage[1, 0].sizeDelta = new Vector2(Character.Natural[idx].ability.SPEED.value * 10f, 32);
-        Gage[1, 1].sizeDelta = new Vector2(GameManager.Data.Character_STAT[idx].ability.SPEED.value * 10f, 32);
+        Gage[1, 0].sizeDelta = new Vector2(Character.Natural[idx].ability.SPEED.value * 12f, 32);
+        Gage[1, 1].sizeDelta = new Vector2(GameManager.Data.Character_STAT[idx].ability.SPEED.value * 12f, 32);
         Gage[1, 2].sizeDelta = new Vector2(Gage[1, 1].sizeDelta.x, 32);
         Text_Value[1].text = $"[{GameManager.Data.Character_STAT[idx].ability.SPEED.value }]";
 
@@ -276,15 +347,15 @@ public class ControlCharacter : MonoBehaviour
         Text_Value[3].text = $"[{GameManager.Data.Character_STAT[idx].ability.JUMP.value}]";
 
         // 5.JUMPC
-        Gage[4, 0].sizeDelta = new Vector2(Character.Natural[idx].ability.MAX_JUMP.value * 80f, 32);
-        Gage[4, 1].sizeDelta = new Vector2(GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.value * 80f, 32);
+        Gage[4, 0].sizeDelta = new Vector2(Character.Natural[idx].ability.MAX_JUMP.value * 70f, 32);
+        Gage[4, 1].sizeDelta = new Vector2(GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.value * 70f, 32);
         Gage[4, 2].sizeDelta = new Vector2(Gage[4, 1].sizeDelta.x, 32);
         Text_Value[4].text = $"[{GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.value}]";
 
         // 6. RESTORE
-        Gage[5, 0].sizeDelta = new Vector2((Character.Natural[idx].ability.RESTORE.value - 1) * 200f, 32);
-        Gage[5, 1].sizeDelta = new Vector2((GameManager.Data.Character_STAT[idx].ability.RESTORE.value - 1) * 200f, 32);
-        Gage[5, 2].sizeDelta = new Vector2(Gage[5, 1].sizeDelta.x + (GameManager.Data.Talent.RESTORE.value * 200f), 32);
+        Gage[5, 0].sizeDelta = new Vector2((Character.Natural[idx].ability.RESTORE.value - 1) * 100f, 32);
+        Gage[5, 1].sizeDelta = new Vector2((GameManager.Data.Character_STAT[idx].ability.RESTORE.value - 1) * 100f, 32);
+        Gage[5, 2].sizeDelta = new Vector2(Gage[5, 1].sizeDelta.x + (GameManager.Data.Talent.RESTORE.value * 100f), 32);
         Text_Value[5].text = $"[{Math.Round((GameManager.Data.Character_STAT[idx].ability.RESTORE.value + GameManager.Data.Talent.RESTORE.value), 3)}]";
 
         // 7. DEF
@@ -298,17 +369,17 @@ public class ControlCharacter : MonoBehaviour
         // 2. 레벨업 시 레벨 재표기
         // 3. 잔여 마늘 표시
 
-        Text_Points[0].text = $"X{GameManager.Data.Character_STAT[idx].ability.MAX_HP.level + 1}";
-        Text_Points[1].text = $"X{GameManager.Data.Character_STAT[idx].ability.SPEED.level + 1}";
-        Text_Points[2].text = $"X{GameManager.Data.Character_STAT[idx].ability.LUK.level + 1}";
-        Text_Points[3].text = $"X{GameManager.Data.Character_STAT[idx].ability.JUMP.level + 1}";
-        Text_Points[4].text = $"X{(GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level + 1) * 15}";
-        Text_Points[5].text = $"X{GameManager.Data.Character_STAT[idx].ability.RESTORE.level + 1}";
-        Text_Points[6].text = $"X{GameManager.Data.Character_STAT[idx].ability.DEF.level + 1}";
+        Text_Points[0].text = (GameManager.Data.Character_STAT[idx].ability.MAX_HP.level != MAX_LV) ? $"X{GameManager.Data.Character_STAT[idx].ability.MAX_HP.level + 1}" : "-";
+        Text_Points[1].text = (GameManager.Data.Character_STAT[idx].ability.SPEED.level != MAX_LV) ? $"X{GameManager.Data.Character_STAT[idx].ability.SPEED.level + 1}" : "-";
+        Text_Points[2].text = (GameManager.Data.Character_STAT[idx].ability.LUK.level != MAX_LV) ? $"X{GameManager.Data.Character_STAT[idx].ability.LUK.level + 1}" : "-";
+        Text_Points[3].text = (GameManager.Data.Character_STAT[idx].ability.JUMP.level != MAX_LV) ? $"X{GameManager.Data.Character_STAT[idx].ability.JUMP.level + 1}" : "-";
+        Text_Points[4].text = (GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level != MAX_LV) ? $"X{(GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level + 1) * 15}" : "-";
+        Text_Points[5].text = (GameManager.Data.Character_STAT[idx].ability.RESTORE.level != MAX_LV) ? $"X{GameManager.Data.Character_STAT[idx].ability.RESTORE.level + 1}" : "-";
+        Text_Points[6].text = (GameManager.Data.Character_STAT[idx].ability.DEF.level != MAX_LV) ? $"X{GameManager.Data.Character_STAT[idx].ability.DEF.level + 1}" : "-";
         Text_Level.text = $"{GameManager.Data.Character_STAT[idx].LV}";
         Text_SP.text = $"{GameManager.Data.Character_STAT[idx].STAT_POINT}";
-        Text_LVUP_G.text = (GameManager.Data.Character_STAT[idx].LV != 5) ? $"X{LV_COST[GameManager.Data.Character_STAT[idx].LV].gold}" : "-";
-        Text_LVUP_S.text = (GameManager.Data.Character_STAT[idx].LV != 5) ? $"X{LV_COST[GameManager.Data.Character_STAT[idx].LV].Money_Forest}" : "-";
+        Text_LVUP_G.text = (GameManager.Data.Character_STAT[idx].LV != MAX_LV) ? $"X{LV_COST[GameManager.Data.Character_STAT[idx].LV].gold}" : "-";
+        Text_LVUP_S.text = (GameManager.Data.Character_STAT[idx].LV != MAX_LV) ? $"X{LV_COST[GameManager.Data.Character_STAT[idx].LV].Money_Forest}" : "-";
         Text_RESET_S.text = $"X{GameManager.Data.Character_STAT[idx].LV}";
     }
 
@@ -342,6 +413,7 @@ public class ControlCharacter : MonoBehaviour
 
     public void show_info()
     {
+        Image_Lock.SetActive(false);
         Text_Name.GetComponent<Text>().text = CHARACTER_NAME[idx];
         if ((int)GameManager.Data.Preset.Character == idx)
         {
@@ -362,6 +434,8 @@ public class ControlCharacter : MonoBehaviour
             {
                 GameObject.Find("UI").transform.Find("Button_Select").gameObject.SetActive(false);
                 GameObject.Find("UI").transform.Find("Button_Buy").gameObject.SetActive(true);
+                Image_Lock.SetActive(true);
+                Text_Cost.text = $"{Character.COST[idx]}G";
             }
         }
         
@@ -389,7 +463,7 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_LV()
     {
-        if(GameManager.Data.Character_STAT[idx].LV < 5 &&
+        if(GameManager.Data.Character_STAT[idx].LV < MAX_LV &&
             (GameManager.Data.Money.Gold >= LV_COST[GameManager.Data.Character_STAT[idx].LV].gold &&
             GameManager.Data.Money.Speacial[0] >= LV_COST[GameManager.Data.Character_STAT[idx].LV].Money_Forest))
         {
@@ -406,10 +480,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_HP()
     {
-        if(GameManager.Data.Character_STAT[idx].STAT_POINT >= (GameManager.Data.Character_STAT[idx].ability.MAX_HP.level + 1))
+        if(GameManager.Data.Character_STAT[idx].STAT_POINT >= (GameManager.Data.Character_STAT[idx].ability.MAX_HP.level + 1) && (GameManager.Data.Character_STAT[idx].ability.MAX_HP.level < MAX_LV))
         {
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.MAX_HP.level + 1);
-            GameManager.Data.Character_STAT[idx].ability.MAX_HP.value += (GameManager.Data.Character_STAT[idx].ability.MAX_HP.level+1) * 10;
+            GameManager.Data.Character_STAT[idx].ability.MAX_HP.value = T_HP[GameManager.Data.Character_STAT[idx].ability.MAX_HP.level + GameManager.Data.Character_STAT[idx].ability.MAX_HP.setting + 1] ;
             GameManager.Data.Character_STAT[idx].ability.MAX_HP.level += 1;
             GameManager.Sound.SFXPlay(clip3);
         }
@@ -418,10 +492,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_SPEED()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (GameManager.Data.Character_STAT[idx].ability.SPEED.level + 1))
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (GameManager.Data.Character_STAT[idx].ability.SPEED.level + 1) && (GameManager.Data.Character_STAT[idx].ability.SPEED.level < MAX_LV))
         {
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.SPEED.level + 1);
-            GameManager.Data.Character_STAT[idx].ability.SPEED.value += (GameManager.Data.Character_STAT[idx].ability.SPEED.level + 1) * 0.5f;
+            GameManager.Data.Character_STAT[idx].ability.SPEED.value = T_SPEED[GameManager.Data.Character_STAT[idx].ability.SPEED.level + GameManager.Data.Character_STAT[idx].ability.SPEED.setting + 1];
             GameManager.Data.Character_STAT[idx].ability.SPEED.level += 1;
             GameManager.Sound.SFXPlay(clip3);
 
@@ -431,10 +505,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_JUMP_P()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.JUMP.level + 1))
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.JUMP.level + 1) && (GameManager.Data.Character_STAT[idx].ability.JUMP.level < MAX_LV))
         {
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.JUMP.level + 1);
-            GameManager.Data.Character_STAT[idx].ability.JUMP.value += (GameManager.Data.Character_STAT[idx].ability.JUMP.level + 1) * 0.5f;
+            GameManager.Data.Character_STAT[idx].ability.JUMP.value = T_JUMPP[GameManager.Data.Character_STAT[idx].ability.JUMP.level + GameManager.Data.Character_STAT[idx].ability.JUMP.setting + 1];
             GameManager.Data.Character_STAT[idx].ability.JUMP.level += 1;
             GameManager.Sound.SFXPlay(clip3);
         }
@@ -444,10 +518,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_RESTORE()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.RESTORE.level + 1))
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.RESTORE.level + 1) && (GameManager.Data.Character_STAT[idx].ability.RESTORE.level < MAX_LV))
         {
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.RESTORE.level + 1);
-            GameManager.Data.Character_STAT[idx].ability.RESTORE.value += (GameManager.Data.Character_STAT[idx].ability.RESTORE.level + 1) * 0.05f;
+            GameManager.Data.Character_STAT[idx].ability.RESTORE.value = T_RESTORE[GameManager.Data.Character_STAT[idx].ability.RESTORE.level + GameManager.Data.Character_STAT[idx].ability.RESTORE.setting + 1];
             GameManager.Data.Character_STAT[idx].ability.RESTORE.level += 1;
             GameManager.Sound.SFXPlay(clip3);
         }
@@ -457,10 +531,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_JUMP_C()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= ((GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level+1) * 15))
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= ((GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level+1) * 20) && (GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level < MAX_LV))
         {
-            GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)((GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level+1) * 15);
-            GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.value += 1;
+            GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)((GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level+1) * 20);
+            GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.value = T_JUMPC[GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level + GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.setting + 1];
             GameManager.Data.Character_STAT[idx].ability.MAX_JUMP.level += 1;
             GameManager.Sound.SFXPlay(clip3);
         }
@@ -470,10 +544,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_DEF()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.DEF.level + 1))
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.DEF.level + 1) && (GameManager.Data.Character_STAT[idx].ability.DEF.level < MAX_LV))
         {
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.DEF.level + 1);
-            GameManager.Data.Character_STAT[idx].ability.DEF.value += ((short)(GameManager.Data.Character_STAT[idx].ability.DEF.level + 1) * 0.01f);
+            GameManager.Data.Character_STAT[idx].ability.DEF.value = T_DEF[GameManager.Data.Character_STAT[idx].ability.DEF.level + GameManager.Data.Character_STAT[idx].ability.DEF.setting + 1];
             GameManager.Data.Character_STAT[idx].ability.DEF.level += 1;
             GameManager.Sound.SFXPlay(clip3);
         }
@@ -483,10 +557,10 @@ public class ControlCharacter : MonoBehaviour
 
     public void UP_LUK()
     {
-        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.LUK.level + 1))
+        if (GameManager.Data.Character_STAT[idx].STAT_POINT >= (short)(GameManager.Data.Character_STAT[idx].ability.LUK.level + 1) && (GameManager.Data.Character_STAT[idx].ability.LUK.level < MAX_LV))
         {
             GameManager.Data.Character_STAT[idx].STAT_POINT -= (short)(GameManager.Data.Character_STAT[idx].ability.LUK.level + 1);
-            GameManager.Data.Character_STAT[idx].ability.LUK.value += (short)((GameManager.Data.Character_STAT[idx].ability.LUK.level + 1) * 1);
+            GameManager.Data.Character_STAT[idx].ability.LUK.value = T_LUK[GameManager.Data.Character_STAT[idx].ability.LUK.level + GameManager.Data.Character_STAT[idx].ability.LUK.setting + 1];
             GameManager.Data.Character_STAT[idx].ability.LUK.level += 1;
             GameManager.Sound.SFXPlay(clip3);
         }

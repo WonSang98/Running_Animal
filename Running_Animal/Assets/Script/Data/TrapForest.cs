@@ -99,18 +99,24 @@ public class TrapForest : MonoBehaviour
     //trap_num 순서의 함정을 pos에 생성한다.
     public void MakeTrap(int trap_num, Vector3 pos)
     {
-        GameObject tmp;
-        tmp = Instantiate(traps[trap_num]);
-        tmp.transform.position = pos;
-        tmp.transform.parent = Parent.transform;
+        if (Parent != null)
+        {
+            GameObject tmp;
+            tmp = Instantiate(traps[trap_num]);
+            tmp.transform.position = pos;
+            tmp.transform.parent = Parent.transform;
+        }
     }
     //회복 아이템을 pos에 생성한다.
     public void MakeHP(Vector3 pos)
     {
-        GameObject tmp;
-        tmp = Instantiate(hp);
-        tmp.transform.position = pos;
-        tmp.transform.parent = Parent.transform;
+        if (Parent != null)
+        {
+            GameObject tmp;
+            tmp = Instantiate(hp);
+            tmp.transform.position = pos;
+            tmp.transform.parent = Parent.transform;
+        }
     }
 
     IEnumerator MakeBird()
@@ -121,7 +127,7 @@ public class TrapForest : MonoBehaviour
         float time = 0;
         bool set_warn = false;
         bool ispawn = false;
-        while (true)
+        while (true && (Parent != null))
         {
             time += GameManager.Play.Status.ability.SPEED.value * Time.deltaTime;
             if (time >= 12)
@@ -155,7 +161,7 @@ public class TrapForest : MonoBehaviour
         float time = 0;
 
         bool set_shot = false;
-        while(true)
+        while(true && (Parent != null))
         {
             time += GameManager.Play.Status.ability.SPEED.value * Time.deltaTime;
             if(time < 12)
@@ -205,6 +211,10 @@ public class TrapForest : MonoBehaviour
 
         for(int i=0; i<9; i++)
         {
+            if(Parent != null)
+            {
+                break;
+            }
             int temp = Random.Range(0, 100);
             if (i == 0)
             {
@@ -250,7 +260,7 @@ public class TrapForest : MonoBehaviour
         while (true)
         {
             MakeHP(new Vector3(36, 0.5f, 0));
-            yield return new WaitForSeconds(60.0f);
+            yield return new WaitForSeconds(5.0f);
 
         }
     }
@@ -306,6 +316,48 @@ public class TrapForest : MonoBehaviour
 
         GameManager.Play.Status.ability.SPEED.value = GameManager.Play.DC.pre_speed;
         gameObject.GetComponent<LoadScene>().OnSelect();
+    }
+
+    public IEnumerator GoTuto2()
+    {
+        bool flag = true;
+        UP.Button_Skill.interactable = false;
+        GameManager.Play.Status.ability.SPEED.value = GameManager.Play.DC.pre_speed;
+        GameManager.Play.Status.ability.SPEED.value *= 0.5f;
+        float temp_Speed = GameManager.Play.Status.ability.SPEED.value;
+
+        while (flag)
+        {
+            if (GameManager.Play.Player.transform.position.x < 22)
+            {
+                Camera.transform.Translate(temp_Speed * Time.deltaTime, 0, 0);
+                GameManager.Play.Player.transform.Translate(temp_Speed * Time.deltaTime, 0, 0);
+                yield return null;
+            }
+            else if (GameManager.Play.Player.transform.position.x < 30)
+            {
+                GameManager.Play.Status.ability.SPEED.value = 0;
+                GameManager.Play.Player.transform.Translate(temp_Speed * Time.deltaTime, 0, 0);
+                yield return null;
+            }
+            else
+            {
+                flag = false;
+                GameManager.Play.Player.GetComponent<Animator>().SetBool("StartGame", false);
+                yield return new WaitForSeconds(1);
+            }
+        }
+        GameManager.Play.DC.lv += 1;
+        GameManager.Play.DC.stage += 1;
+        if (GameManager.Play.DS.nohit)
+        {
+            GameManager.Play.DC.noHitStage += 1;
+        }
+        GameManager.Play.DS.expNow = 0;
+        GameManager.Play.DS.lvup = false;
+
+        GameManager.Play.Status.ability.SPEED.value = GameManager.Play.DC.pre_speed;
+        gameObject.GetComponent<LoadScene>().OnTutorial2();
     }
     void SetClear()
     {

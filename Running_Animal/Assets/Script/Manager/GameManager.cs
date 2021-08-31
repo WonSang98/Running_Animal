@@ -83,6 +83,8 @@ public class GameManager : MonoBehaviour
         saveData.PreItem = Data.PreItem;
         //프리셋 유저기반 데이터
         saveData.Preset = Data.Preset;
+        // 튜토리얼을 했는지
+        saveData.TutoData = Data.TutoData;
 
         string path = Application.persistentDataPath + "/save.xml";
         XmlManager.XmlSave<Data>(saveData, path);
@@ -107,6 +109,8 @@ public class GameManager : MonoBehaviour
         Data.PreItem = saveData.PreItem;
         //프리셋 유저기반 데이터
         Data.Preset = saveData.Preset;
+        // 튜토리얼을 했는지...
+        Data.TutoData = saveData.TutoData;
 
 
     }

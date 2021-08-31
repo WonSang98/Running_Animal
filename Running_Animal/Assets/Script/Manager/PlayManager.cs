@@ -8,15 +8,15 @@ public class PlayManager
     public bool Playing = false; // 게임이 진행중이였는지 아니었는지 체크.  
 
     public Character Status = new Character(0, 0, new Ability(
-            new Status<float>(0, 100),
-            new Status<float>(0, 100),
-            new Status<float>(0, 8),
-            new Status<int>(0, 2),
-            new Status<float>(0, 10),
-            new Status<float>(0, 20),
-            new Status<float>(0, 0),
-            new Status<short>(0, 5),
-            new Status<float>(0, 0))
+            new Status<float>(0 ,0, 100),
+            new Status<float>(0 ,0, 100),
+            new Status<float>(0, 0, 8),
+            new Status<int>(0, 0, 2),
+            new Status<float>(0, 0, 10),
+            new Status<float>(0, 0, 20),
+            new Status<float>(0, 0, 0),
+            new Status<short>(0, 0, 5),
+            new Status<float>(0, 0, 0))
             , Active.ACTIVE_CODE.None); // 게임을 진행할 Player의 능력치 저장.
 
     public DataContinue DC = new DataContinue(); // 계속해서 누적되는 데이터 셋.

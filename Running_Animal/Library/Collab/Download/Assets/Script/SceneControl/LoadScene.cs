@@ -119,21 +119,51 @@ public class LoadScene : MonoBehaviour
 
     public void OnSelect()
     {
+        GameManager.Instance.AllStop();
         GameManager.Instance.goScene = "Select_Item";
         GameManager.Instance.Save();
         SceneManager.LoadScene("Loading");
         GameManager.Sound.SFXPlay(clip3);
-        GameManager.Instance.AllStop();
         GameManager.Instance.Load();
     }
 
     public void OnPlay()
     {
+        GameManager.Instance.AllStop();
         GameManager.Instance.goScene = "Play";
         GameManager.Instance.Save();
         SceneManager.LoadScene("Loading");
         GameManager.Sound.SFXPlay(clip4);
+        GameManager.Instance.Load();
+    }
+
+    public void OnTutorial()
+    {
         GameManager.Instance.AllStop();
+        GameManager.Instance.goScene = "Tutorial";
+        GameManager.Instance.Save();
+        SceneManager.LoadScene("Loading");
+        GameManager.Sound.SFXPlay(clip4);
+        GameManager.Instance.Load();
+    }
+
+    public void OnTutorial2()
+    {
+        GameManager.Instance.AllStop();
+        GameManager.Instance.goScene = "Tutorial2";
+        GameManager.Instance.Save();
+        SceneManager.LoadScene("Loading");
+        GameManager.Sound.SFXPlay(clip4);
+        GameManager.Instance.Load();
+    }
+
+    public void OnTutorial3()
+    {
+        GameManager.Instance.AllStop();
+        GameManager.Instance.goScene = "Tutorial3";
+        GameManager.Instance.Save();
+        SceneManager.LoadScene("Loading");
+        GameManager.Sound.SFXPlay(clip4);
         GameManager.Instance.Load();
     }
     public void Stop_LoadScene()

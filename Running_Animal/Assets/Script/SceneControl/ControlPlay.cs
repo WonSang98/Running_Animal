@@ -35,6 +35,8 @@ public class ControlPlay : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(GameManager.Play.Status.ability.SPEED.value);
+        Debug.Log(GameManager.Play.DC.pre_speed);
         //PC내 테스트 코드
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {

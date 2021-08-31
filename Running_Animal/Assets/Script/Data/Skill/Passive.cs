@@ -37,8 +37,8 @@ public class Passive : MonoBehaviour
         { "None", "영구결번" },
         { "행운 증가 [패시브]", "행운이 증가합니다."},
         { "한 번 더 [패시브]", "액티브 스킬을 한 번 더 사용할 수 있습니다."},
-        { "방어력 증가 [패시브]", "방어력이 증가합니다."  },
-        { "하루 종일도 할 수 있어 [패시브]", $"최대 체력이 상승합니다."},
+        { "방어력 증가 [패시브]", "방어력이 15% 증가합니다."  },
+        { "하루 종일도 할 수 있어 [패시브]", $"최대 체력이 15% 상승합니다."},
         { "속도 증가 [패시브]", "속도가 증가합니다."},
         { "속도 감소 [패시브]", "속도가 감소합니다."},
         { "점프력 증가 [패시브]", "점프력이 증가합니다."},
@@ -48,13 +48,13 @@ public class Passive : MonoBehaviour
         { "난 돈이 좋아! [패시브]", "골드를 캐릭터쪽으로 끌어당깁니다."},
         { "일석이조 [패시브]", "콤보 획득량이 2배가 됩니다."},
         { "집행유예 [패시브]", "체력이 0이 됐을 시, 최대 체력의 절반을 갖고 다시 일어섭니다." },
-        { "통화팽창 [패시브]", "골드 획득량이 상승합니다." },
+        { "통화팽창 [패시브]", "골드 획득량이 10% 상승합니다." },
         { "자율 점프 신발 [패시브]", "일정 확률로 점프합니다.\n단, 언제 될지는 모릅니다. 될 수도 있고 안 될 수도 있습니다.\n이로 인한 점프는 점프 횟수에 반영되지 않습니다." },
         { "슈뢰딩거의 고양이 [패시브]", "일정 확률로 잠시간 무적이 됩니다.\n단, 언제 될지는 모릅니다. 될 수도 있고 안 될 수도 있습니다." },
         { "피격시 무적시간 증가[패시브]", "피격시에 무적이 되는 시간이 늘어납니다." },
         { "허공답보 [패시브]", "최대 점프 가능한 횟수가 1회 증가합니다."},
-        { "자가치유 [패시브]", $"10초 마다 4만큼의 체력을 회복합니다."},
-        { "체질 개선 [패시브]", "체력 회복 계열 아이템 및 스킬의 효율이 증가합니다."}
+        { "자가치유 [패시브]", $"1초 마다 전체 체력의 2% 만큼의 체력을 회복합니다."},
+        { "체질 개선 [패시브]", "체력 회복 계열 아이템 및 스킬의 효율이 10% 증가합니다."}
     };
 
     //패시브 스킬 이미지
@@ -83,13 +83,13 @@ public class Passive : MonoBehaviour
                 break;
             case 3:
                 // 방어력 증가
-                GameManager.Play.Status.ability.DEF.value *= 0.85f;
+                GameManager.Play.Status.ability.DEF.value += GameManager.Play.Status.ability.DEF.value * 0.15f;
                 save_passive(3);
                 break;
             case 4:
                 // 최대 체력 증가
-                GameManager.Play.Status.ability.MAX_HP.value += 20.0f;
-                GameManager.Play.Status.ability.HP.value += 20.0f;
+                GameManager.Play.Status.ability.MAX_HP.value += GameManager.Play.Status.ability.MAX_HP.value * 0.15f;
+                GameManager.Play.Status.ability.HP.value += GameManager.Play.Status.ability.HP.value * 0.15f;
                 save_passive(4);
                 break;
             case 5:
@@ -254,9 +254,10 @@ public class Passive : MonoBehaviour
     {
         while (true)
         {
-            GameManager.Play.Status.ability.HP.value += 4 * GameManager.Play.Status.ability.RESTORE.value;
+            //GameManager.Play.Status.ability.HP.value += 4 * GameManager.Play.Status.ability.RESTORE.value;
+            GameManager.Play.Status.ability.HP.value += GameManager.Play.Status.ability.MAX_HP.value * 0.02f;
             gameObject.GetComponent<UI_Play>().BAR_HP();
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(1f);
         }
     }
 
