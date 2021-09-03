@@ -40,7 +40,7 @@ public class ControlFail : MonoBehaviour
         Text_Fail[6] = GameObject.Find("Panel_Fail/Image_Gold/Text_Value").GetComponent<Text>();
         Text_Fail[7] = GameObject.Find("Panel_Fail/Image_Speacial/Text_Value").GetComponent<Text>();
 
-        int result = GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (GameManager.Data.Preset.Difficult + 1) + GameManager.Play.DC.comboMax * 100 + (int)GameManager.Play.DC.goldNow * 10; // 게임 결과점수.
+        int result = GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (int)Mathf.Pow(2, (GameManager.Data.Preset.Difficult + 1)) + GameManager.Play.DC.comboMax * 1000 + (int)GameManager.Play.DC.goldNow * 100;
         int money_speacial = 0; // 특수재화 얻는 갯수.
         Text_Fail[0].text = GameManager.Play.DC.stage.ToString();
         Text_Fail[1].text = $"{GameManager.Play.DC.noHitStage}";
@@ -52,7 +52,7 @@ public class ControlFail : MonoBehaviour
         Text_Fail[7].text = $"{money_speacial}개";
 
         Image_Fail[0].sprite = Sprite_DeadCharacter[(int)GameManager.Data.Preset.Character];
-        Image_Fail[1].sprite = Sprite_DeadCause[GameManager.Play.DC.lastHit];
+        Image_Fail[1].sprite = Sprite_DeadCause[GameManager.Play.DC.lastHit - 1];
 
         GameManager.Data.Money.Gold += (int)GameManager.Play.DC.goldNow;
         GameManager.Data.Money.Speacial[0] += money_speacial;

@@ -43,7 +43,7 @@ public class DataContinue
 
     public DataContinue() //DEFAULT
     {
-        expNeed = new float[]{ 0, 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999 };
+        expNeed = new float[]{ 0, 24, 24, 24, 35, 35, 56, 56, 68, 105, 105, 105, 210, 999999 };
         //expNeed = new float[] { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 999999 };
         //                     0   1   2   3   4   5   6  7    8   9    10  11   12   
         lv = 1;
@@ -78,7 +78,7 @@ public class DataContinue
     public DataContinue DeepCopy()
     {
         DataContinue dc = new DataContinue();
-        dc.expNeed = new float[] { 0, 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999 };
+        dc.expNeed = new float[] { 0, 24, 24, 24, 35, 35, 56, 56, 68, 105, 105, 105, 210, 999999 };
         dc.lv = 1;
         dc.expMulti = 1;
         dc.goldNow = 0;

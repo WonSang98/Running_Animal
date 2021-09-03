@@ -302,6 +302,7 @@ public class ControlCharacter : MonoBehaviour
         Button_Upgrade.interactable = true;
     }
 
+
     IEnumerator ClosePanel()
     {
         Panel_Upgrade.transform.Find("CONTENTS").gameObject.SetActive(false);

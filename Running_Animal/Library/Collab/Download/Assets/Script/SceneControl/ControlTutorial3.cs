@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlTutorial3 : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class ControlTutorial3 : MonoBehaviour
     SetPlayer SetPlayer;
     UI_Play UI_Play;
     InterAction InterAction;
+    LoadScene LS;
 
     private void Awake()
     {
@@ -17,9 +19,13 @@ public class ControlTutorial3 : MonoBehaviour
         SetPlayer = GameObject.Find("@Managers").GetComponent<SetPlayer>();
         UI_Play = GameObject.Find("@Managers").GetComponent<UI_Play>();
         InterAction = GameObject.Find("@Managers").GetComponent<InterAction>();
+        LS = GameManager.Instance.GetComponent<LoadScene>();
     }
     void Start()
     {
+        GameManager.Data.TutoData.tuto0 = true;
+        GameObject.Find("UI").transform.Find("Panel_Pause/Button_Yes").GetComponent<Button>().onClick.RemoveAllListeners();
+        GameObject.Find("UI").transform.Find("Panel_Pause/Button_Yes").GetComponent<Button>().onClick.AddListener(() => LS.OnStopTutorial());
         //Trap Resource 불러오기.
         TrapForest.GetResource();
         //플레이어 지정된 위치에 생성

@@ -19,6 +19,16 @@ public class Preset
         Difficult = _Difficult;
     }
 
+    public Preset DeepCopy()
+    {
+        Preset pr = new Preset();
+        pr.Character = this.Character;
+        pr.Theme = this.Theme;
+        pr.Difficult = this.Difficult;
+
+        return pr;
+    }
+
     Preset()
     {
 

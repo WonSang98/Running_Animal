@@ -76,4 +76,9 @@ public class Data
     public Preset Preset = new Preset(Character.CHARACTER_CODE.Rabbit, Theme.THEME_CODE.Forest, 0);
 
     public TutoData TutoData = new TutoData(false, false, false, false, false);
+
+    // 기록용 데이터
+    public List<Record> Recent_Data;
+    public List<Record> Best_Data;
+
 }

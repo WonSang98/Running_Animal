@@ -6,7 +6,6 @@ public class DataContinue
 {
     //스테이지가 다음으로 넘어가도 초기화 되지 않는 데이터들.
     //게임을 성공 실패하기 전에는 누적되는 데이터들 모임 
-
     public float[] expNeed; //다음 스테이지에 넘어가는데 필요한 경험치.
     public int lv;// 현재 스테이지.
 
@@ -43,7 +42,7 @@ public class DataContinue
 
     public DataContinue() //DEFAULT
     {
-        expNeed = new float[]{ 0, 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999 };
+        expNeed = new float[]{ 0, 24, 24, 24, 35, 35, 56, 56, 68, 105, 105, 105, 210, 999999 };
         //expNeed = new float[] { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 999999 };
         //                     0   1   2   3   4   5   6  7    8   9    10  11   12   
         lv = 1;
@@ -78,34 +77,43 @@ public class DataContinue
     public DataContinue DeepCopy()
     {
         DataContinue dc = new DataContinue();
-        dc.expNeed = new float[] { 0, 30, 30, 30, 43, 43, 70, 70, 85, 125, 125, 125, 256, 999999 };
-        dc.lv = 1;
-        dc.expMulti = 1;
-        dc.goldNow = 0;
-        dc.goldMulti = 1;
-        dc.combo = 0;
-        dc.comboMax = 0;
-        dc.comboMulti = 1;
+        dc.expNeed = this.expNeed;
+        dc.lv = this.lv;
+        dc.expMulti = this.expMulti;
+        dc.goldNow = this.goldNow;
+        dc.goldMulti = this.goldMulti;
+        dc.combo = this.combo;
+        dc.comboMax = this.comboMax;
+        dc.comboMulti = this.comboMulti;
 
-        dc.damage = 1.0f;
+        dc.damage = this.damage;
 
-        dc.stage = 0;
-        dc.noHitStage = 0;
-        dc.lastHit = 0;
-        dc.passTrap = 0;
+        dc.stage = this.stage;
+        dc.noHitStage = this.noHitStage;
+        dc.lastHit = this.lastHit;
+        dc.passTrap = this.passTrap;
 
-        dc.patternList = new List<int>();
-        dc.patternCnt = 0;
+        int cnt_pl = this.patternList.Count;
+        for (int i=0; i<cnt_pl; i++)
+        {
+            dc.patternList.Add(this.patternList[i]);
+        }
 
-        dc.activeMax = 1;
+        dc.patternCnt = this.patternCnt;
 
-        dc.dodge = 12;
+        dc.activeMax = this.activeMax;
 
-        dc.revive = 0;
+        dc.dodge = this.dodge;
 
-        dc.passiveGet = new List<Passive.PASSIVE_CODE>();
+        dc.revive = this.revive;
 
-        dc.pre_speed = 8;
+        int cnt_pg = this.passiveGet.Count;
+        for(int j=0; j<cnt_pg; j++)
+        {
+            dc.passiveGet.Add(this.passiveGet[j]);
+        }
+
+        dc.pre_speed = this.pre_speed;
 
         return dc;
     }

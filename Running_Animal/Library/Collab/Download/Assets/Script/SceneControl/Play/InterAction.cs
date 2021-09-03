@@ -78,7 +78,7 @@ public class InterAction : MonoBehaviour
             {
                 time_long += time_short;
                 time_short = 0;
-                GameManager.Play.Status.ability.HP.value -= 3;
+                GameManager.Play.Status.ability.HP.value -= (GameManager.Play.Status.ability.MAX_HP.value * 0.01f);
                 StartCoroutine(UP.Cam_Hit());
                 GameManager.Sound.SFXPlay(clip2);
                 UP.BAR_HP();
@@ -99,29 +99,19 @@ public class InterAction : MonoBehaviour
         Player = GameManager.Play.Player.gameObject;
         Player_Color = Player.GetComponent<SpriteRenderer>();
         UP.Cool_Banana.fillAmount = 1;
-
         float time = 0;
-
-        UP.Event_jump.triggers.Remove(UP.Entry_Jump);
-        UP.Event_down.triggers.Remove(UP.Entry_Down);
-        UP.Button_Jump.interactable = false;
-        UP.Button_Down.interactable = false;
-
-        while (time < 2)
+        UP.RemoveButton();
+        while (time < 0.5f)
         {
             if (Player.CompareTag("Die"))
             {
                 break;
             }
             time += Time.deltaTime;
-            UP.Cool_Banana.fillAmount -= (Time.deltaTime / 2);
+            UP.Cool_Banana.fillAmount -= (Time.deltaTime / 0.5f);
             yield return null;
         }
-
-        UP.Event_jump.triggers.Add(UP.Entry_Jump);
-        UP.Event_down.triggers.Add(UP.Entry_Down);
-        UP.Button_Jump.interactable = true;
-        UP.Button_Down.interactable = true;
+        UP.RemakeButton();
     }
 
 

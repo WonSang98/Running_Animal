@@ -15,6 +15,16 @@ public class Status<T>
         value = _value;
     }
 
+    public Status<T> DeepCopy()
+    {
+        Status<T> st = new Status<T>();
+        st.setting = this.setting;
+        st.level = this.level;
+        st.value = this.value;
+
+        return st;
+    }
+
     Status()
     {
 

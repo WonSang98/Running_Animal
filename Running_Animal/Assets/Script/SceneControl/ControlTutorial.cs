@@ -28,8 +28,6 @@ public class ControlTutorial : MonoBehaviour
     }
     void Start()
     {
-        GameObject.Find("UI").transform.Find("Panel_Pause/Button_Yes").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("UI").transform.Find("Panel_Pause/Button_Yes").GetComponent<Button>().onClick.AddListener(() => LS.OnStopTutorial());
         //Trap Resource 불러오기.
         TrapForest.GetResource();
         //플레이어 지정된 위치에 생성
@@ -59,6 +57,7 @@ public class ControlTutorial : MonoBehaviour
             {
                 GameManager.Instance.AllStop();
                 GameManager.Play.Status.ability.HP.value = GameManager.Play.Status.ability.MAX_HP.value;
+                UI_Play.BAR_HP();
                 cnt += 1;
                 if(cnt == 2)
                 {

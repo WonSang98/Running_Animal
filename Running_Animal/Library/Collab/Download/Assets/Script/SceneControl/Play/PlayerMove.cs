@@ -95,14 +95,23 @@ public class PlayerMove : MonoBehaviour
 
         if (other.gameObject.CompareTag("HP"))
         {
-            Active.OnHeal();
+            float RESTORE_HP = (GameManager.Play.Status.ability.MAX_HP.value * 0.1f) * GameManager.Play.Status.ability.RESTORE.value;
+            if (GameManager.Play.Status.ability.HP.value + RESTORE_HP > GameManager.Play.Status.ability.MAX_HP.value)
+            {
+                GameManager.Play.Status.ability.HP.value = GameManager.Play.Status.ability.MAX_HP.value;
+            }
+            else
+            {
+                GameManager.Play.Status.ability.HP.value += RESTORE_HP;
+            }
+            UI_Play.BAR_HP();
             Destroy(other.gameObject);
         }
 
         if (other.gameObject.CompareTag("Coin"))
         {
-            GameManager.Play.DC.goldNow += 10 * GameManager.Play.DC.goldMulti;
-            UI_Play.Text_gold.text = $"{GameManager.Play.DC.goldNow}g";
+            GameManager.Play.DC.goldNow += 2 * GameManager.Play.DC.goldMulti;
+            UI_Play.Text_gold.text = $"{(int)GameManager.Play.DC.goldNow}g";
             Destroy(other.gameObject);
             GameManager.Sound.SFXPlay(clip);
         }
@@ -142,8 +151,8 @@ public class PlayerMove : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Coin"))
         {
-            GameManager.Play.DC.goldNow += 10 * GameManager.Play.DC.goldMulti;
-            UI_Play.Text_gold.text = $"{GameManager.Play.DC.goldNow}g";
+            GameManager.Play.DC.goldNow += 2 * GameManager.Play.DC.goldMulti;
+            UI_Play.Text_gold.text = $"{(int)GameManager.Play.DC.goldNow}g";
             Destroy(collision.gameObject);
             GameManager.Sound.SFXPlay(clip);
         }

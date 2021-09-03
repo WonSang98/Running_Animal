@@ -76,7 +76,7 @@ public class TrapForest : MonoBehaviour
             GameManager.Play.DS.timer -= GameManager.Play.Status.ability.SPEED.value * Time.deltaTime;
             if (GameManager.Play.DS.timer <= 0)
             {
-                GameManager.Play.DS.timer = 25.0f;
+                GameManager.Play.DS.timer = 30.0f;
                 Invoke("pattern" + GameManager.Play.DC.patternList[GameManager.Play.DC.patternCnt++], 0); // 함정 호출
                 if (GameManager.Play.DC.patternCnt == (num_pattern + 1)) // 모든 함정이 1회씩 다 나왔을 경우.
                 {
@@ -135,7 +135,7 @@ public class TrapForest : MonoBehaviour
                 if(set_warn == false)
                 {
                     warn = Instantiate(warning_bird);
-                    warn.transform.position = new Vector3(-8, rand_y, 0);
+                    warn.transform.position = new Vector3(-5, rand_y, 0);
                     warn.transform.parent = Parent.transform;
                     set_warn = true;
                 }
@@ -211,7 +211,7 @@ public class TrapForest : MonoBehaviour
 
         for(int i=0; i<9; i++)
         {
-            if(Parent != null)
+            if(Parent == null)
             {
                 break;
             }
@@ -301,7 +301,7 @@ public class TrapForest : MonoBehaviour
             else
             {
                 flag = false;
-                GameManager.Play.Player.GetComponent<Animator>().SetBool("StartGame", false);
+                GameManager.Play.Player.GetComponent<Animator>().SetBool("Victory", true);
                 yield return new WaitForSeconds(1);
             }
         }
@@ -343,7 +343,7 @@ public class TrapForest : MonoBehaviour
             else
             {
                 flag = false;
-                GameManager.Play.Player.GetComponent<Animator>().SetBool("StartGame", false);
+                GameManager.Play.Player.GetComponent<Animator>().SetBool("Victory", true);
                 yield return new WaitForSeconds(1);
             }
         }

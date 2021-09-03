@@ -19,6 +19,8 @@ public class SetPlayer : MonoBehaviour
         Time.timeScale = 1; // OnSlow 켜진 상태일때...
         GameManager.Play.DC.pre_speed = GameManager.Play.Status.ability.SPEED.value;
         Clear_DS();
+        Animator Ani;
+        Ani = GameManager.Play.Player.GetComponent<Animator>();
     }
 
     public void FirstSet()
@@ -82,7 +84,6 @@ public class SetPlayer : MonoBehaviour
                 {
                     GameManager.Play.Status.ability.LUK.value -= Difficulty.Forest[GameManager.Data.Preset.Difficult].LUK;
                 }
-                GameManager.Play.Status.ability.LUK.value -= Difficulty.Forest[GameManager.Data.Preset.Difficult].LUK;
                 GameManager.Play.Status.ability.DEF.value += Difficulty.Forest[GameManager.Data.Preset.Difficult].DEF;
                 GameManager.Play.Status.ability.SPEED.value += Difficulty.Forest[GameManager.Data.Preset.Difficult].SPEED;
 

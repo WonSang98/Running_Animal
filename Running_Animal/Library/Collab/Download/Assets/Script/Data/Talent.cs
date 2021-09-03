@@ -13,7 +13,7 @@ public class Talent
     // 재능 최대 레벨
     public static int MAX_LEVEL = 10;
     // 재능 업그레이드 비용
-    public static int[] COST = {500, 1000, 1500, 2000, 2500, 3000, 4000, 5000, 6000, 7000 };
+    public static int[] COST = {200, 1200, 1750, 3500, 7500, 16650, 24500, 27000, 30000, 35000};
     // 재능 업그레이드 시 능력치
     public static float[,] UPGRADE_POWER =
     {

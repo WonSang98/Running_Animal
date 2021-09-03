@@ -76,7 +76,7 @@ public class TrapForest : MonoBehaviour
             GameManager.Play.DS.timer -= GameManager.Play.Status.ability.SPEED.value * Time.deltaTime;
             if (GameManager.Play.DS.timer <= 0)
             {
-                GameManager.Play.DS.timer = 25.0f;
+                GameManager.Play.DS.timer = 30.0f;
                 Invoke("pattern" + GameManager.Play.DC.patternList[GameManager.Play.DC.patternCnt++], 0); // 함정 호출
                 if (GameManager.Play.DC.patternCnt == (num_pattern + 1)) // 모든 함정이 1회씩 다 나왔을 경우.
                 {
@@ -99,18 +99,24 @@ public class TrapForest : MonoBehaviour
     //trap_num 순서의 함정을 pos에 생성한다.
     public void MakeTrap(int trap_num, Vector3 pos)
     {
-        GameObject tmp;
-        tmp = Instantiate(traps[trap_num]);
-        tmp.transform.position = pos;
-        tmp.transform.parent = Parent.transform;
+        if (Parent != null)
+        {
+            GameObject tmp;
+            tmp = Instantiate(traps[trap_num]);
+            tmp.transform.position = pos;
+            tmp.transform.parent = Parent.transform;
+        }
     }
     //회복 아이템을 pos에 생성한다.
     public void MakeHP(Vector3 pos)
     {
-        GameObject tmp;
-        tmp = Instantiate(hp);
-        tmp.transform.position = pos;
-        tmp.transform.parent = Parent.transform;
+        if (Parent != null)
+        {
+            GameObject tmp;
+            tmp = Instantiate(hp);
+            tmp.transform.position = pos;
+            tmp.transform.parent = Parent.transform;
+        }
     }
 
     IEnumerator MakeBird()
@@ -121,7 +127,7 @@ public class TrapForest : MonoBehaviour
         float time = 0;
         bool set_warn = false;
         bool ispawn = false;
-        while (true)
+        while (true && (Parent != null))
         {
             time += GameManager.Play.Status.ability.SPEED.value * Time.deltaTime;
             if (time >= 12)
@@ -129,7 +135,7 @@ public class TrapForest : MonoBehaviour
                 if(set_warn == false)
                 {
                     warn = Instantiate(warning_bird);
-                    warn.transform.position = new Vector3(-8, rand_y, 0);
+                    warn.transform.position = new Vector3(-5, rand_y, 0);
                     warn.transform.parent = Parent.transform;
                     set_warn = true;
                 }
@@ -155,7 +161,7 @@ public class TrapForest : MonoBehaviour
         float time = 0;
 
         bool set_shot = false;
-        while(true)
+        while(true && (Parent != null))
         {
             time += GameManager.Play.Status.ability.SPEED.value * Time.deltaTime;
             if(time < 12)
@@ -205,6 +211,10 @@ public class TrapForest : MonoBehaviour
 
         for(int i=0; i<9; i++)
         {
+            if(Parent == null)
+            {
+                break;
+            }
             int temp = Random.Range(0, 100);
             if (i == 0)
             {
@@ -250,7 +260,7 @@ public class TrapForest : MonoBehaviour
         while (true)
         {
             MakeHP(new Vector3(36, 0.5f, 0));
-            yield return new WaitForSeconds(60.0f);
+            yield return new WaitForSeconds(5.0f);
 
         }
     }
@@ -291,7 +301,7 @@ public class TrapForest : MonoBehaviour
             else
             {
                 flag = false;
-                GameManager.Play.Player.GetComponent<Animator>().SetBool("StartGame", false);
+                GameManager.Play.Player.GetComponent<Animator>().SetBool("Victory", true);
                 yield return new WaitForSeconds(1);
             }
         }
@@ -333,7 +343,7 @@ public class TrapForest : MonoBehaviour
             else
             {
                 flag = false;
-                GameManager.Play.Player.GetComponent<Animator>().SetBool("StartGame", false);
+                GameManager.Play.Player.GetComponent<Animator>().SetBool("Victory", true);
                 yield return new WaitForSeconds(1);
             }
         }

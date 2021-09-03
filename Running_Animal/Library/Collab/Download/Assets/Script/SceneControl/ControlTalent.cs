@@ -17,7 +17,11 @@ public class ControlTalent : MonoBehaviour
 
     AudioClip clip;
     AudioClip clip2;
-
+    //Æ©Åä¸®¾ó °ü·Ã
+    GameObject Canvas_Tuto;
+    GameObject[] Text_Tuto;
+    GameObject Button_Tuto;
+    int cnt;
     void Start()
     {
         Select = -1;
@@ -34,9 +38,51 @@ public class ControlTalent : MonoBehaviour
             Effects[i] = GameObject.Find("UI/Select_Effect").transform.Find("Effect_" + i.ToString()).gameObject;
             Effects[i].SetActive(false);
         }
+
+        //Æ©Åä¸®¾ó
+        Canvas_Tuto = GameObject.Find("UI-Tutorial").transform.Find("Panel").gameObject;
+        Text_Tuto = new GameObject[3];
+        Button_Tuto = GameObject.Find("UI-Tutorial").transform.Find("Button_OK").gameObject;
+        for (int i = 0; i < 1; i++)
+        {
+            Text_Tuto[i] = GameObject.Find("UI-Tutorial").transform.Find("Text" + i.ToString()).gameObject;
+        }
+        if (GameManager.Data.TutoData.tuto_talent == false)
+        {
+            cnt = 0;
+            Canvas_Tuto.SetActive(true);
+            for (int i = 0; i < 1; i++) Text_Tuto[i].SetActive(false);
+            Text_Tuto[0].SetActive(true);
+            Button_Tuto.SetActive(true);
+            Button_Tuto.GetComponent<Button>().onClick.AddListener(() => NextTuto());
+        }
+        else
+        {
+            Canvas_Tuto.SetActive(false);
+            for (int i = 0; i < 1; i++) Text_Tuto[i].SetActive(false);
+            Button_Tuto.SetActive(false);
+        }
+
         Show_info();
         LoadSound();
     }
+
+    void NextTuto()
+    {
+        cnt += 1;
+        for (int i = 0; i < 1; i++) Text_Tuto[i].SetActive(false);
+        if (cnt >= 1)
+        {
+            Canvas_Tuto.SetActive(false);
+            Button_Tuto.SetActive(false);
+            GameManager.Data.TutoData.tuto_talent = true;
+        }
+        else
+        {
+            Text_Tuto[cnt].SetActive(true);
+        }
+    }
+
     void Choice(int i)
     {
         if (Select == i)

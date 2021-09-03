@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControlTutorial : MonoBehaviour
 {
     TrapForest TrapForest;
     SetPlayer SetPlayer;
     UI_Play UI_Play;
+    LoadScene LS;
     InterAction InterAction;
 
     float timer = 25;
@@ -21,6 +23,7 @@ public class ControlTutorial : MonoBehaviour
         TrapForest = GameObject.Find("@Managers").GetComponent<TrapForest>();
         SetPlayer = GameObject.Find("@Managers").GetComponent<SetPlayer>();
         UI_Play = GameObject.Find("@Managers").GetComponent<UI_Play>();
+        LS = GameManager.Instance.GetComponent<LoadScene>();
         InterAction = GameObject.Find("@Managers").GetComponent<InterAction>();
     }
     void Start()
@@ -54,6 +57,7 @@ public class ControlTutorial : MonoBehaviour
             {
                 GameManager.Instance.AllStop();
                 GameManager.Play.Status.ability.HP.value = GameManager.Play.Status.ability.MAX_HP.value;
+                UI_Play.BAR_HP();
                 cnt += 1;
                 if(cnt == 2)
                 {

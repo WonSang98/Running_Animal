@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,7 +41,7 @@ public class ControlFail : MonoBehaviour
         Text_Fail[6] = GameObject.Find("Panel_Fail/Image_Gold/Text_Value").GetComponent<Text>();
         Text_Fail[7] = GameObject.Find("Panel_Fail/Image_Speacial/Text_Value").GetComponent<Text>();
 
-        int result = GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (GameManager.Data.Preset.Difficult + 1) + GameManager.Play.DC.comboMax * 100 + (int)GameManager.Play.DC.goldNow * 10; // 게임 결과점수.
+        int result = GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (int)Mathf.Pow(2, (GameManager.Data.Preset.Difficult + 1)) + GameManager.Play.DC.comboMax * 1000 + (int)GameManager.Play.DC.goldNow * 100;
         int money_speacial = 0; // 특수재화 얻는 갯수.
         Text_Fail[0].text = GameManager.Play.DC.stage.ToString();
         Text_Fail[1].text = $"{GameManager.Play.DC.noHitStage}";
@@ -56,6 +57,23 @@ public class ControlFail : MonoBehaviour
 
         GameManager.Data.Money.Gold += (int)GameManager.Play.DC.goldNow;
         GameManager.Data.Money.Speacial[0] += money_speacial;
+
+        GameManager.Data.Recent_Data.Add(new Record(System.DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"), result, money_speacial, "실패",  GameManager.Play.DC.DeepCopy(), GameManager.Play.Status.DeepCopy(), GameManager.Data.Preset.DeepCopy()));
+        GameManager.Data.Best_Data.Add(new Record(System.DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss"), result, money_speacial, "실패", GameManager.Play.DC.DeepCopy(), GameManager.Play.Status.DeepCopy(), GameManager.Data.Preset.DeepCopy()));
+
+
+        if (GameManager.Data.Recent_Data.Count == 31)
+        {
+            GameManager.Data.Recent_Data.RemoveAt(0);
+        }
+
+        GameManager.Data.Best_Data = GameManager.Data.Best_Data.OrderBy(x => x.Score).ToList();
+        if (GameManager.Data.Best_Data.Count == 31)
+        {
+            GameManager.Data.Best_Data.RemoveAt(0);
+        }
+
+        GameManager.Instance.Save();
     }
     void LoadSound() //Sound Resoucres 경로 찾아와서 불러와놓기.
     {

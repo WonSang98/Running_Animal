@@ -25,7 +25,17 @@ public class Character
         ability = _ability;
         ACTIVE = _ACTIVE;
     }
+    public Character DeepCopy()
+    {
+        Character ch = new Character();
+        ch.LV = this.LV;
+        ch.STAT_POINT = this.STAT_POINT;
+        ch.ability = this.ability.DeepCopy();
+        ch.ACTIVE = this.ACTIVE;
 
+        return ch;
+
+    }
     Character() { }
 
     public Character(Character c)

@@ -37,8 +37,9 @@ public class ControlSuccess : MonoBehaviour
         Text_Success[7] = END.transform.Find("Panel_Success/Image_Speacial/Text_Value").GetComponent<Text>();
 
 
-        int result = GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (GameManager.Data.Preset.Difficult + 1) + GameManager.Play.DC.comboMax * 100 + (int)GameManager.Play.DC.goldNow * 10; // 게임 결과점수.
-        int money_speacial = result / 10; // 특수재화 얻는 갯수.
+        int result = 
+            GameManager.Play.DC.passTrap * ((GameManager.Play.DC.stage - GameManager.Play.DC.noHitStage) + (2 * GameManager.Play.DC.noHitStage)) * (int)Mathf.Pow(2,(GameManager.Data.Preset.Difficult + 1)) + GameManager.Play.DC.comboMax * 1000 + (int)GameManager.Play.DC.goldNow * 100; // 게임 결과점수.
+        int money_speacial = (GameManager.Data.Preset.Difficult + 3) / 3;
         Text_Success[0].text = $"{GameManager.Play.DC.stage}";
         Text_Success[1].text = $"{GameManager.Play.DC.noHitStage}";
         Text_Success[2].text = Difficulty.DIFF_CODE[GameManager.Data.Preset.Difficult];

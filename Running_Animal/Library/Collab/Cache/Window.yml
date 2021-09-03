@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SimpleSelectedItems:
     m_Keys:
+    - Assets/Scenes/Record.unity
+    - Assets/Script/Data/Record.cs
+    - Assets/Script/Data/Record.cs.meta
     - 
-    m_Values: 01
-  RevisionSummary: "\uD56B\uD53D\uC2A4"
+    m_Values: 01010101
+  RevisionSummary: 
   ChangesSearchValue: 
   SelectedHistoryRevision: 
   HistoryPageNumber: 0

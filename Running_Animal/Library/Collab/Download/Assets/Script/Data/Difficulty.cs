@@ -36,15 +36,15 @@ public class Difficulty
     }
     public static Difficulty[] Forest =
     {
-        new Difficulty(20,  1.00f, 0.00f , 0 , 0.00f , 0.00f  , 0), // LEVEL 1
-        new Difficulty(25,  1.05f, 0.01f , 0 , 0.01f , 0.25f  , 0), // LEVEL 2
-        new Difficulty(30,  1.10f, 0.02f , 0 , 0.02f , 0.50f  , 0), // LEVEL 3
-        new Difficulty(40,  1.20f, 0.04f , 5 , 0.04f , 0.33f  , 10), // LEVEL 4
-        new Difficulty(50,  1.30f, 0.06f , 6 , 0.06f , 0.66f  , 10), // LEVEL 5
-        new Difficulty(60,  1.40f, 0.08f , 7 , 0.08f , 0.99f  , 10), // LEVEL 6
-        new Difficulty(75,  1.60f, 0.12f , 10, 0.12f , 1.5f  , 15), // LEVEL 7
-        new Difficulty(90,  1.80f, 0.16f , 12, 0.16f , 2.00f , 15), // LEVEL 8
-        new Difficulty(105, 2.00f, 0.20f , 14, 0.20f , 2.50f , 20), // LEVEL 9
-        new Difficulty(120, 2.20f, 0.25f , 15, 0.25f , 3.00f , 20), // LEVEL 10
+        new Difficulty(13,  1.00f, 0.00f , 0 , 0.00f , 0.00f  , 1), // LEVEL 1
+        new Difficulty(18,  1.5f, 0.04f , 1 , 0.05f , 0.00f  , 1), // LEVEL 2
+        new Difficulty(27,  2.5f, 0.06f , 2 , 0.10f , 1.00f  , 1.132f), // LEVEL 3
+        new Difficulty(38,  3.0f, 0.09f , 3 , 0.16f , 1.00f  , 1.13f), // LEVEL 4
+        new Difficulty(61,  3.5f, 0.13f , 5 , 0.22f , 1.00f  , 1.13f), // LEVEL 5
+        new Difficulty(80,  7.0f, 0.20f , 12 , 0.31f , 2.00f  , 1.23f), // LEVEL 6
+        new Difficulty(100,  7.0f, 0.26f , 18, 0.40f , 2.00f  , 1.23f), // LEVEL 7
+        new Difficulty(120,  10.0f, 0.33f , 23, 0.50f , 3.00f , 1.36f), // LEVEL 8
+        new Difficulty(150, 11.0f, 0.41f , 28, 0.61f , 3.00f , 1.36f), // LEVEL 9
+        new Difficulty(210, 14.0f, 0.48f , 34, 0.72f , 3.00f , 1.36f), // LEVEL 10
     };
 }

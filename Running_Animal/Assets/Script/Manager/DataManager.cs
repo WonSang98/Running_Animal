@@ -75,4 +75,7 @@ public class DataManager
 
     public TutoData TutoData = new TutoData(false, false, false, false, false);
 
+    // 기록용 데이터
+    public List<Record> Recent_Data;
+    public List<Record> Best_Data;
 }

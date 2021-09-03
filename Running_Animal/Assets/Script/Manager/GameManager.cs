@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     SoundManager _Sound = new SoundManager();
     public static SoundManager Sound { get { return Instance._Sound; } }
 
-    public string goScene = "Tutorial";
+    public string goScene = "Main";
 
     static void Init()
     {
@@ -85,9 +85,13 @@ public class GameManager : MonoBehaviour
         saveData.Preset = Data.Preset;
         // 튜토리얼을 했는지
         saveData.TutoData = Data.TutoData;
+        // 기록용 데이터
+        saveData.Recent_Data = Data.Recent_Data;
+        saveData.Best_Data = Data.Best_Data;
 
         string path = Application.persistentDataPath + "/save.xml";
         XmlManager.XmlSave<Data>(saveData, path);
+        Debug.Log("SAVE");
 
     }
 
@@ -112,10 +116,15 @@ public class GameManager : MonoBehaviour
         // 튜토리얼을 했는지...
         Data.TutoData = saveData.TutoData;
 
+        // 기록용 데이터
+        Data.Recent_Data = saveData.Recent_Data;
+        Data.Best_Data = saveData.Best_Data;
+        
+        Debug.Log("LOAD");
 
     }
 
-    
+
     private void OnApplicationQuit()
     {
         GameManager.Instance.AllStop();

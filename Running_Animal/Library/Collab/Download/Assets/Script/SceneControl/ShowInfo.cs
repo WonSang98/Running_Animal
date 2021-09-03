@@ -25,10 +25,10 @@ public class ShowInfo : MonoBehaviour
 
     void show()
     {
-        Text_Dia.text = $"{GameManager.Data.Money.Cash}원";
-        Text_Gold.text = $"{GameManager.Data.Money.Gold}원";
-        Text_Forest.text = $"{GameManager.Data.Money.Speacial[0]}원";
-        Text_Desert.text = $"{GameManager.Data.Money.Speacial[1]}원";
-        Text_Arctic.text = $"{GameManager.Data.Money.Speacial[2]}원";
+        Text_Dia.text = $"{GameManager.Data.Money.Cash}개";
+        Text_Gold.text = $"{GameManager.Data.Money.Gold}G";
+        Text_Forest.text = $"{GameManager.Data.Money.Speacial[0]}개";
+        Text_Desert.text = $"{GameManager.Data.Money.Speacial[1]}개";
+        Text_Arctic.text = $"{GameManager.Data.Money.Speacial[2]}개";
     }
 }

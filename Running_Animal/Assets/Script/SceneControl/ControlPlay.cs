@@ -20,13 +20,14 @@ public class ControlPlay : MonoBehaviour
         TrapForest.GetResource();
         //플레이어 지정된 위치에 생성
         SetPlayer.Spawn();
+        //UI내 스크립트 지정.
+        UI_Play.SetUI();
         if (GameManager.Play.Playing == false)
         {
             SetPlayer.FirstSet();
             GameManager.Play.Playing = true;
         }
-        //UI내 스크립트 지정.
-        UI_Play.SetUI();
+        UI_Play.show();
         StartCoroutine(UI_Play.ShowStage(GameManager.Play.DC.lv - 1));
         // 코루틴 있는 패시브 아이템 적용
         InterAction.Apply_Passive();
@@ -35,8 +36,6 @@ public class ControlPlay : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(GameManager.Play.Status.ability.SPEED.value);
-        Debug.Log(GameManager.Play.DC.pre_speed);
         //PC내 테스트 코드
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {

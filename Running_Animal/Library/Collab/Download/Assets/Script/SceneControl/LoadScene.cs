@@ -13,6 +13,7 @@ public class LoadScene : MonoBehaviour
     AudioClip clip2;
     AudioClip clip3;
     AudioClip clip4;
+
     private void Start()
     {
         LoadSound();
@@ -22,19 +23,19 @@ public class LoadScene : MonoBehaviour
     {
         GameManager.Instance.goScene = "Shop";
         GameManager.Instance.Save();
+        GameManager.Instance.Load();
         GameManager.Sound.SFXPlay(clip);
         SceneManager.LoadScene("Loading");
-        GameManager.Instance.Load();
     }
 
     public void OnCharacter()
     {
         GameManager.Instance.goScene = "Character";
         GameManager.Instance.Save();
+        GameManager.Instance.Load();
         GameManager.Sound.Clear();
         GameManager.Sound.SFXPlay(clip);
         SceneManager.LoadScene("Loading");
-        GameManager.Instance.Load();
         GameManager.Sound.BGMPlay(Clip_BGM3);
     }
 
@@ -42,30 +43,30 @@ public class LoadScene : MonoBehaviour
     {
         GameManager.Instance.goScene = "Mission";
         GameManager.Instance.Save();
+        GameManager.Instance.Load();
         GameManager.Sound.SFXPlay(clip);
         SceneManager.LoadScene("Loading");
-        GameManager.Instance.Load();
     }
 
     public void OnStart()
     {
         GameManager.Instance.goScene = "Play";
         GameManager.Instance.Save();
+        GameManager.Instance.Load();
         GameManager.Sound.Clear();
         GameManager.Sound.SFXPlay(clip);
         SceneManager.LoadScene("Loading");
-        GameManager.Instance.Load();
         GameManager.Sound.BGMPlay(Clip_BGM4);
     }
     public void OnMain()
     {
         GameManager.Instance.goScene = "Main";
         GameManager.Instance.Save();
+        GameManager.Instance.Load();
         GameManager.Sound.Clear();
         GameManager.Sound.SFXPlay(clip);
         GameManager.Instance.AllStop();
         SceneManager.LoadScene("Loading");
-        GameManager.Instance.Load();
     }
 
     public void EndGame()
@@ -76,6 +77,8 @@ public class LoadScene : MonoBehaviour
         GameManager.Sound.SFXPlay(clip);
         GameManager.Instance.AllStop();
         gameObject.GetComponent<SetPlayer>().Re_Stat();
+        GameManager.Instance.Save();
+        GameManager.Instance.Load();
         SceneManager.LoadScene("Loading");
     }
 
@@ -83,19 +86,19 @@ public class LoadScene : MonoBehaviour
     {
         GameManager.Instance.goScene = "Talent";
         GameManager.Instance.Save();
+        GameManager.Instance.Load();
         GameManager.Sound.SFXPlay(clip);
         SceneManager.LoadScene("Loading");
-        GameManager.Instance.Load();
     }
 
     public void OnPreItem()
     {
         GameManager.Instance.goScene = "Pre_Item";
         GameManager.Instance.Save();
+        GameManager.Instance.Load();
         GameManager.Sound.Clear();
         GameManager.Sound.SFXPlay(clip);
         SceneManager.LoadScene("Loading");
-        GameManager.Instance.Load();
         GameManager.Sound.BGMPlay(Clip_BGM2);
     }
 
@@ -103,8 +106,8 @@ public class LoadScene : MonoBehaviour
     {
         GameManager.Instance.goScene = "End_Fail";
         GameManager.Instance.Save();
-        SceneManager.LoadScene("Loading");
         GameManager.Instance.Load();
+        SceneManager.LoadScene("Loading");
         GameManager.Sound.SFXPlay(clip2);
     }
 
@@ -112,8 +115,8 @@ public class LoadScene : MonoBehaviour
     {
         GameManager.Instance.goScene = "End_Success";
         GameManager.Instance.Save();
-        SceneManager.LoadScene("Loading");
         GameManager.Instance.Load();
+        SceneManager.LoadScene("Loading");
         GameManager.Sound.SFXPlay(clip2);
     }
 
@@ -122,9 +125,9 @@ public class LoadScene : MonoBehaviour
         GameManager.Instance.AllStop();
         GameManager.Instance.goScene = "Select_Item";
         GameManager.Instance.Save();
+        GameManager.Instance.Load();
         SceneManager.LoadScene("Loading");
         GameManager.Sound.SFXPlay(clip3);
-        GameManager.Instance.Load();
     }
 
     public void OnPlay()
@@ -132,19 +135,31 @@ public class LoadScene : MonoBehaviour
         GameManager.Instance.AllStop();
         GameManager.Instance.goScene = "Play";
         GameManager.Instance.Save();
+        GameManager.Instance.Load();
         SceneManager.LoadScene("Loading");
         GameManager.Sound.SFXPlay(clip4);
-        GameManager.Instance.Load();
     }
-
+    public void OnStopTutorial()
+    {
+        GameManager.Data.TutoData.tuto0 = true;
+        GameManager.Instance.goScene = "Main";
+        GameManager.Instance.Save();
+        GameManager.Instance.Load();
+        Time.timeScale = 1;
+        GameManager.Sound.Clear();
+        GameManager.Sound.SFXPlay(clip);
+        GameManager.Instance.AllStop();
+        GameManager.Instance.GetComponent<SetPlayer>().Re_Stat();
+        SceneManager.LoadScene("Loading");
+    }
     public void OnTutorial()
     {
         GameManager.Instance.AllStop();
         GameManager.Instance.goScene = "Tutorial";
         GameManager.Instance.Save();
+        GameManager.Instance.Load();
         SceneManager.LoadScene("Loading");
         GameManager.Sound.SFXPlay(clip4);
-        GameManager.Instance.Load();
     }
 
     public void OnTutorial2()
@@ -152,6 +167,7 @@ public class LoadScene : MonoBehaviour
         GameManager.Instance.AllStop();
         GameManager.Instance.goScene = "Tutorial2";
         GameManager.Instance.Save();
+        GameManager.Instance.Load();
         SceneManager.LoadScene("Loading");
         GameManager.Sound.SFXPlay(clip4);
         GameManager.Instance.Load();
@@ -162,10 +178,21 @@ public class LoadScene : MonoBehaviour
         GameManager.Instance.AllStop();
         GameManager.Instance.goScene = "Tutorial3";
         GameManager.Instance.Save();
+        GameManager.Instance.Load();
         SceneManager.LoadScene("Loading");
         GameManager.Sound.SFXPlay(clip4);
-        GameManager.Instance.Load();
     }
+
+    public void OnRecord()
+    {
+        GameManager.Instance.goScene = "Record";
+        GameManager.Instance.Save();
+        GameManager.Instance.Load();
+        GameManager.Sound.Clear();
+        GameManager.Sound.SFXPlay(clip);
+        SceneManager.LoadScene("Loading");
+        GameManager.Sound.BGMPlay(Clip_BGM2);
+    } 
     public void Stop_LoadScene()
     {
         StopAllCoroutines();

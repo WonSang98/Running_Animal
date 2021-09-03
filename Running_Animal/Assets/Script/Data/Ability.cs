@@ -50,6 +50,22 @@ public class Ability
         RESTORE = a.RESTORE;
     }
 
+    public Ability DeepCopy()
+    {
+        Ability ab = new Ability();
+        ab.MAX_HP = this.MAX_HP.DeepCopy();
+        ab.HP = this.HP.DeepCopy();
+        ab.SPEED = this.SPEED.DeepCopy();
+        ab.MAX_JUMP = this.MAX_JUMP.DeepCopy();
+        ab.JUMP = this.JUMP.DeepCopy();
+        ab.DOWN = this.DOWN.DeepCopy();
+        ab.DEF = this.DEF.DeepCopy();
+        ab.LUK = this.LUK.DeepCopy();
+        ab.RESTORE = this.RESTORE.DeepCopy();
+
+        return ab;
+    }
+
     Ability()
     {
     }
